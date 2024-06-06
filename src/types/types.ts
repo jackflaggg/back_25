@@ -8,3 +8,30 @@ export enum HTTP_STATUSES {
 
     INTERNAL_SERVER_ERROR_500 = 500,
 }
+
+export type BlogDbType = {
+    id: string
+    name: string
+    description: string
+    websiteUrl: string
+}
+
+export type PostDbType = {
+    id: string
+    title: string
+    shortDescription: string
+    content: string
+    blogId: string
+    blogName: string
+}
+
+export type DBType = { // типизация базы данных (что мы будем в ней хранить)
+    blogs: BlogDbType[]
+    posts: PostDbType[]
+    // some: any[]
+}
+// export type ReadonlyDBType = { // тип для dataset
+//     blogs: Readonly<BlogDbType[]>
+//     posts: Readonly<PostDbType[]>
+//     // some: any[]
+// }
