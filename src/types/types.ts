@@ -29,10 +29,5 @@ export type PostDbType = {
 export type DBType = { // типизация базы данных (что мы будем в ней хранить)
     blogs: BlogDbType[]
     posts: PostDbType[]
-    // some: any[]
 }
-// export type ReadonlyDBType = { // тип для dataset
-//     blogs: Readonly<BlogDbType[]>
-//     posts: Readonly<PostDbType[]>
-//     // some: any[]
-// }
+
