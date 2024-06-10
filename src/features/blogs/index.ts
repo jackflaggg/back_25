@@ -5,11 +5,12 @@ import {createBlogController} from "./controllers/CreateBlog";
 import {updateBlogController} from "./controllers/UpdateBlog";
 import {deleteBlogController} from "./controllers/DelBlogId";
 import {adminMiddlewares} from "../global-middlewares/admin-middleware";
+import {blogValidator, findBlogValidator} from "./middlewares/blogValidator";
 
 export const blogsRouter: Router = Router();
 
 blogsRouter.get("/", AllBlogController);
-blogsRouter.get("/:id", OneBlogController);
-blogsRouter.post("/", createBlogController);
-blogsRouter.put("/:id", updateBlogController);
-blogsRouter.delete("/:id", adminMiddlewares, deleteBlogController);
+blogsRouter.get("/:id", findBlogValidator, OneBlogController);
+blogsRouter.post("/", ...blogValidator, createBlogController);
+blogsRouter.put("/:id", updateBlogController, findBlogValidator, ...blogValidator, updateBlogController);
+blogsRouter.delete("/:id", adminMiddlewares, findBlogValidator, deleteBlogController);

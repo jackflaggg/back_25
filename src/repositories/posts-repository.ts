@@ -17,7 +17,7 @@ export const postsRepository = {
         const post = this.giveOne(id)!;
         return this.map(post)
     },
-    create(post: PostInputModel): PostViewModel {
+    create(post: PostInputModel) {
         const newPost = {
             id: postId,
             title: post.title,
@@ -27,7 +27,7 @@ export const postsRepository = {
             blogName: blogsRepositories.getOne(post.blogId)!.name,
         }
         db.posts.push(newPost);
-        return newPost;
+        return newPost.id;
     },
     put(post: PostInputModel,id: string | number) {
         db.posts = db.posts.map(b => b.id === id ? {...b, ...post, id: b.id, blogName: blogsRepositories.getOne(b.id)!.name} : b)

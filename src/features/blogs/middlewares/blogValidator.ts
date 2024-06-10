@@ -17,6 +17,7 @@ export const findBlogValidator = (req: Request, res: Response, next: NextFunctio
     const blog = blogsRepositories.getOne(req.params.id);
     if (!blog) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
     }
     next()
 }

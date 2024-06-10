@@ -5,11 +5,13 @@ import {AllPostController} from "./controllers/getAllPosts";
 import {OnePostController} from "./controllers/getOnePost";
 import {updatePostController} from "./controllers/UpdatePost";
 import {deletePostController} from "./controllers/DelPost";
+import {blogIdValidator, findPostValidator, postValidator} from "./middlewares/postValidator";
+import {inputCheckErrorsMiddleware} from "../global-middlewares/checkErrorsValidator";
 
 export const postRouter: Router = Router();
 
 postRouter.get("/", AllPostController);
-postRouter.get("/:id", OnePostController);
-postRouter.post("/", createPostController);
-postRouter.put("/:id", updatePostController);
-postRouter.delete("/:id", adminMiddlewares, deletePostController);
+postRouter.get("/:id", findPostValidator, blogIdValidator, OnePostController);
+postRouter.post("/", inputCheckErrorsMiddleware, ...postValidator,createPostController);
+postRouter.put("/:id", findPostValidator, ...postValidator, updatePostController);
+postRouter.delete("/:id", adminMiddlewares, findPostValidator, blogIdValidator, deletePostController);

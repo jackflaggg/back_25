@@ -8,25 +8,30 @@ import {SETTINGS} from "../../settings";
 //
 // }
 export const fromUTF8ToBase64 = (code: string) => {
-    const buff2 = Buffer.from(code, 'utf8')
-    return buff2.toString('base64')
+    const buffTwo = Buffer.from(code, 'utf8')
+    return buffTwo.toString('base64')
 }
 
 export const adminMiddlewares = (req: Request, res: Response, next:NextFunction) => {
     const {authorization: auth} = req.headers;
+    console.log(auth)
 
     if (!auth){
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        return;
     }
 
     if(!auth?.startsWith('Basic')){
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        return;
     }
 
     const codedAuthorization = fromUTF8ToBase64(SETTINGS.ADMIN);
-
-    if(!auth?.startsWith(codedAuthorization)){
+    console.log(codedAuthorization)
+    if(auth.slice(6) !== (codedAuthorization)){
+        console.log('!' + auth.startsWith(codedAuthorization))
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        return;
     }
     next();
 }

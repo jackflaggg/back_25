@@ -25,7 +25,7 @@ export const blogsRepositories = {
             websiteUrl: blog.websiteUrl,
         }
         db.blogs.push(newBlog);
-        return newBlog;
+        return newBlog.id;
     },
     put(blog: BlogInputModel,id: string | number) {
         db.blogs = db.blogs.map(b => b.id === id ? {...b, ...blog, blogName: blog.name} : b)
