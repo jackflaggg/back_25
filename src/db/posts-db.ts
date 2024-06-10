@@ -1,10 +1,11 @@
 import {PostDbType} from "../types/types";
+import {blogOne} from "./blogs-db";
 
 export const postOne: PostDbType = {
-    id: String(new Date()),
+    id: String(1),
     title: 'new post!',
     shortDescription: 'this is a new post!',
     content: 'post',
-    blogId: '123',
-    blogName: 'name blog',
+    blogId: blogOne.id,
+    blogName: blogOne.name,
 }

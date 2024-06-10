@@ -14,7 +14,6 @@ export const fromUTF8ToBase64 = (code: string) => {
 
 export const adminMiddlewares = (req: Request, res: Response, next:NextFunction) => {
     const {authorization: auth} = req.headers;
-    console.log(auth)
 
     if (!auth){
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
@@ -27,9 +26,7 @@ export const adminMiddlewares = (req: Request, res: Response, next:NextFunction)
     }
 
     const codedAuthorization = fromUTF8ToBase64(SETTINGS.ADMIN);
-    console.log(codedAuthorization)
     if(auth.slice(6) !== (codedAuthorization)){
-        console.log('!' + auth.startsWith(codedAuthorization))
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
         return;
     }

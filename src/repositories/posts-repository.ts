@@ -21,16 +21,16 @@ export const postsRepository = {
         const newPost = {
             id: postId,
             title: post.title,
-            shortDescription: post.shortDescription,
             content: post.content,
-            blogId: post.blogId,
-            blogName: blogsRepositories.getOne(post.blogId)!.name,
+            shortDescription: post.shortDescription,
+            blogId: db.blogs[0].id,
+            blogName: blogsRepositories.getOne(db.blogs[0].id)!.name,
         }
         db.posts.push(newPost);
         return newPost.id;
     },
     put(post: PostInputModel,id: string | number) {
-        db.posts = db.posts.map(b => b.id === id ? {...b, ...post, id: b.id, blogName: blogsRepositories.getOne(b.id)!.name} : b)
+        db.posts = db.posts.map(b => b.id === id ? {...b, ...post, id: b.id, blogName: blogsRepositories.getOne(db.blogs[0].id)!.name} : b)
     },
     del(id: string | number): void {
         for (let i = 0; i < db.posts.length; i++) {
