@@ -24,7 +24,7 @@ export const blogsRepositories = {
         return newBlog;
     },
     put(blog: BlogInputModel,id: string | number) {
-        db.blogs = db.blogs.map(p => p.id === id ? {...p, ...blog, blogName: blog.name} : p)
+        db.blogs = db.blogs.map(b => b.id === id ? {...b, ...blog, blogName: blog.name} : b)
     },
     del(id: string | number): void {
         for (let i = 0; i < db.blogs.length; i++) {
