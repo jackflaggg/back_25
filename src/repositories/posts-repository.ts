@@ -1,18 +1,21 @@
 import {db} from "../db/db";
-import {BlogDbType, PostDbType} from "../types/types";
+import {PostDbType} from "../types/types";
 import {PostInputModel, PostViewModel} from "../input-output-types/posts-types";
 import {v4 as uuidv4} from "uuid";
 import {blogsRepositories} from "./blogs-repository";
-import {BlogInputModel, BlogViewModel} from "../input-output-types/blogs-types";
+
 const postId = uuidv4();
 
 export const postsRepository = {
     getAll() : PostDbType[]{
         return db.posts ? db.posts : [];
     },
-    giveOne(id: string) : PostDbType | null{
-        const foundElement = db.posts.find(elem => elem.id === id);
-        return foundElement ? foundElement : null;
+    giveOne(id: string)  {
+        return db.posts.find(elem => elem.id === id);
+    },
+    giveOneAndMap(id: string): PostViewModel {
+        const post = this.giveOne(id)!;
+        return this.map(post)
     },
     create(post: PostInputModel): PostViewModel {
         const newPost = {
@@ -37,13 +40,15 @@ export const postsRepository = {
             }
         }
     },
-    map(blog: BlogDbType) {
-        const blogForOutput: BlogViewModel = {
-            id: blog.id,
-            description: blog.description,
-            websiteUrl: blog.websiteUrl,
-            name: blog.name,
+    map(post: PostDbType) {
+        const postForOutput: PostViewModel = {
+            id: post.id,
+            title: post.title,
+            shortDescription: post.shortDescription,
+            content: post.content,
+            blogId: post.blogId,
+            blogName: post.blogName,
         }
-        return blogForOutput
+        return postForOutput
     }
 }

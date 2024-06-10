@@ -13,6 +13,10 @@ export const blogsRepositories = {
     getOne(id: string | number) {
         return db.blogs.find(b => b.id === id);
     },
+    getOneAndMap(id: string | number) {
+        const blog = this.getOne(id)!; // опасно
+        return this.map(blog);
+    },
     create(blog: BlogInputModel) {
         const newBlog: BlogDbType = {
             id: userId,
