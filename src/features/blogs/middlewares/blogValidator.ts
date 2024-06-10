@@ -3,6 +3,7 @@ import {Request, Response, NextFunction} from "express";
 import {blogsRepositories} from "../../../repositories/blogs-repository";
 import {HTTP_STATUSES} from "../../../types/types";
 import {adminMiddlewares} from "../../global-middlewares/admin-middleware";
+import {inputCheckErrorsMiddleware} from "../../global-middlewares/checkErrorsValidator";
 
 export const nameValidator = body('name').isString().withMessage('this is not string')
     .trim().notEmpty().withMessage('empty').isLength({max: 15}).withMessage('more then 15');
@@ -25,4 +26,5 @@ export const blogValidator = [
     nameValidator,
     descriptionValidator,
     urlValidator,
+    inputCheckErrorsMiddleware
 ]
