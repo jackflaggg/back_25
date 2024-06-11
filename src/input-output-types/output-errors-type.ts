@@ -2,8 +2,8 @@ import {BlogInputModel} from "./blogs-types";
 import {PostInputModel} from "./posts-types";
 
 export type ErrorsMessageType = {
-    field: string,
-    message: string | FieldNamesType
+    message: string | FieldNamesType,
+    field: string
 }
 export type FieldNamesType = keyof BlogInputModel | keyof PostInputModel
 
