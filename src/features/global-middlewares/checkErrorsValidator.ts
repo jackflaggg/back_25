@@ -10,11 +10,12 @@ export const inputCheckErrorsMiddleware = (req: Request, res: Response<ErrorsTyp
         // console.log(eArray)
 
         res
-            .status(HTTP_STATUSES.BAD_REQUEST_400)
+            .status(400)
             .json({
                 errorsMessages: eArray.map(x => ({ message: x.msg, field: x.path}))
             })
         return
     }
+
     next()
-}
+};

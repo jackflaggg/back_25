@@ -4,6 +4,7 @@ import {body} from "express-validator";
 import {HTTP_STATUSES} from "../../../types/types";
 import {adminMiddlewares} from "../../global-middlewares/admin-middleware";
 import {inputCheckErrorsMiddleware} from "../../global-middlewares/checkErrorsValidator";
+import {blogsRepositories} from "../../../repositories/blogs-repository";
 
 
 export const titleValidator = body('title').isString().withMessage('this is not string')
@@ -12,8 +13,15 @@ export const shortDescriptionValidator = body('shortDescription').isString().wit
     .trim().notEmpty().withMessage('empty').isLength({max: 100}).withMessage('more then 100');
 export const contentValidator = body('content').isString().withMessage('this is not string')
     .trim().notEmpty().withMessage('empty').isLength({max: 1000}).withMessage('more then 1000');
-export const blogIdValidator = body('blogId').isString().withMessage('this is not string')
-    .trim().notEmpty().withMessage('empty');
+// export const blogIdValidator = body('blogId').isString().withMessage('this is not string')
+//     .trim().notEmpty().withMessage('empty');
+
+export const blogIdValidator = body('blogId').isString().withMessage('not string')
+    .trim().custom(blogId => {
+        const blog = blogsRepositories.getOne(blogId)
+        return !!blog
+    }).withMessage('no blog')
+
 
 export const findPostValidator = (req: Request, res: Response, next: NextFunction) => {
     const post = postsRepository.giveOne(req.params.id);
