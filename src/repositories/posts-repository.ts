@@ -5,10 +5,10 @@ import {blogsRepositories} from "./blogs-repository";
 
 
 export const postsRepository = {
-    getAll() : PostDbType[]{
+    getAll(): PostDbType[] {
         return db.posts ? db.posts : [];
     },
-    giveOne(id: string)  {
+    giveOne(id: string) {
         return db.posts.find(elem => elem.id === id);
     },
     giveOneAndMap(id: string): PostViewModel {
@@ -27,19 +27,23 @@ export const postsRepository = {
         db.posts.push(newPost);
         return newPost.id;
     },
-    put(post: PostInputModel,id: string) {
-        db.posts = db.posts.map(b => b.id === id ? {...b, ...post, id: b.id, blogName: blogsRepositories.getOne(db.blogs[0].id)!.name} : b)
+    put(post: PostInputModel, id: string) {
+        db.posts = db.posts.map(b => b.id === id ? {
+            ...b, ...post,
+            id: b.id,
+            blogName: blogsRepositories.getOne(db.blogs[0].id)!.name
+        } : b)
     },
     del(id: string): void {
         for (let i = 0; i < db.posts.length; i++) {
-            if (db.posts[i].id === id){
+            if (db.posts[i].id === id) {
                 db.posts.splice(i, 1);
                 return
             }
         }
     },
-    map(post: PostDbType) {
-        const postForOutput: PostViewModel = {
+    map(post: PostDbType): PostViewModel {
+        return {
             id: post.id,
             title: post.title,
             shortDescription: post.shortDescription,
@@ -47,6 +51,5 @@ export const postsRepository = {
             blogId: post.blogId,
             blogName: post.blogName,
         }
-        return postForOutput
     }
 }
