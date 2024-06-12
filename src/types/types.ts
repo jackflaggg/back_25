@@ -1,3 +1,5 @@
+import {Request, Response} from "express";
+
 export enum HTTP_STATUSES {
     OK_200 = 200,
     CREATED_201 = 201,
@@ -31,3 +33,15 @@ export type DBType = { // типизация базы данных (что мы 
     posts: PostDbType[]
 }
 
+export type RequestWithBody<B> = Request<{}, {}, B>
+export type RequestWithParamsAndBody<T, B> = Request<T, {}, B>;
+export type RequestWithParams<T> = Request<T>
+export type ResponseBody<B> = Response<B>
+
+export type BlogParamsModel = {
+    id: string
+}
+
+export type PostParamsId = {
+    id: string
+}

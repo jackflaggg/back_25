@@ -1,8 +1,11 @@
-import {Request, Response} from "express";
+import {Response} from "express";
 import {blogsRepositories} from "../../../repositories/blogs-repository";
-import {HTTP_STATUSES} from "../../../types/types";
+import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../../types/types";
+import {BlogInputModel} from "../../../input-output-types/blogs-types";
 
-export const updateBlogController = (req: Request, res:Response) => {
-    blogsRepositories.put(req.body, req.params.id);
+export const updateBlogController = (req: RequestWithParamsAndBody<BlogParamsModel, BlogInputModel>, res:Response) => {
+    const bodyBlog: BlogInputModel = req.body;
+    const {id} = req.params;
+    blogsRepositories.put(bodyBlog, id);
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
 }
