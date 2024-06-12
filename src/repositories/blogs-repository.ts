@@ -1,10 +1,7 @@
 import {db} from "../db/db";
 import {BlogDbType} from "../types/types";
-
-import { v4 as uuidv4 } from 'uuid';
 import {BlogInputModel, BlogViewModel} from "../input-output-types/blogs-types";
 
-const userId = uuidv4();
 
 export const blogsRepositories = {
     getAll(): BlogDbType[] {
@@ -19,7 +16,7 @@ export const blogsRepositories = {
     },
     create(blog: BlogInputModel) {
         const newBlog: BlogDbType = {
-            id: userId,
+            id: crypto.randomUUID(),
             name: blog.name,
             description: blog.description,
             websiteUrl: blog.websiteUrl,

@@ -1,10 +1,8 @@
 import {db} from "../db/db";
 import {PostDbType} from "../types/types";
 import {PostInputModel, PostViewModel} from "../input-output-types/posts-types";
-import {v4 as uuidv4} from "uuid";
 import {blogsRepositories} from "./blogs-repository";
 
-const postId = uuidv4();
 
 export const postsRepository = {
     getAll() : PostDbType[]{
@@ -19,7 +17,7 @@ export const postsRepository = {
     },
     create(post: PostInputModel) {
         const newPost = {
-            id: postId,
+            id: crypto.randomUUID(),
             title: post.title,
             content: post.content,
             shortDescription: post.shortDescription,
