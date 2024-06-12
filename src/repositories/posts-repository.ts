@@ -29,10 +29,10 @@ export const postsRepository = {
         db.posts.push(newPost);
         return newPost.id;
     },
-    put(post: PostInputModel,id: string | number) {
+    put(post: PostInputModel,id: string) {
         db.posts = db.posts.map(b => b.id === id ? {...b, ...post, id: b.id, blogName: blogsRepositories.getOne(db.blogs[0].id)!.name} : b)
     },
-    del(id: string | number): void {
+    del(id: string): void {
         for (let i = 0; i < db.posts.length; i++) {
             if (db.posts[i].id === id){
                 db.posts.splice(i, 1);

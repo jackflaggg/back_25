@@ -4,8 +4,8 @@ import {postOne} from "./posts-db";
 import {ErrorsType} from "../input-output-types/output-errors-type";
 
 export const db: DBType = {
-    blogs: [blogOne],
-    posts: [postOne],
+    blogs: [],
+    posts: [],
 }
 
 export const errors: ErrorsType = {
