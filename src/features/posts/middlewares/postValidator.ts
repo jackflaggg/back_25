@@ -1,10 +1,10 @@
-import {postsRepository} from "../../../repositories/posts-repository";
+import {postsInMemoryRepository} from "../../../repositories/posts-in-memory-repository";
 import {Response, NextFunction} from "express";
 import {body} from "express-validator";
 import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../../types/types";
 import {adminMiddlewares} from "../../global-middlewares/admin-middleware";
 import {inputCheckErrorsMiddleware} from "../../global-middlewares/checkErrorsValidator";
-import {blogsRepositories} from "../../../repositories/blogs-repository";
+import {blogsRepositories} from "../../../repositories/blogs-in-memory-repository";
 
 
 export const titleValidator = body('title').isString().withMessage('this is not string')
@@ -24,7 +24,7 @@ export const blogIdValidator = body('blogId').isString().withMessage('not string
 
 
 export const findPostValidator = (req: RequestWithParams<PostParamsId>, res: Response, next: NextFunction) => {
-    const post = postsRepository.giveOne(req.params.id);
+    const post = postsInMemoryRepository.giveOne(req.params.id);
     if (!post) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;

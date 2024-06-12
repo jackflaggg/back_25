@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {blogsRepositories} from "../../../repositories/blogs-repository";
+import {blogsRepositories} from "../../../repositories/blogs-in-memory-repository";
 import {HTTP_STATUSES} from "../../../types/types";
 
 export const AllBlogController = (req: Request, res:Response) => {

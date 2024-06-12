@@ -1,10 +1,10 @@
 import {db} from "../db/db";
 import {PostDbType} from "../types/types";
 import {PostInputModel, PostViewModel} from "../input-output-types/posts-types";
-import {blogsRepositories} from "./blogs-repository";
+import {blogsRepositories} from "./blogs-in-memory-repository";
 
 
-export const postsRepository = {
+export const postsInMemoryRepository = {
     getAll(): PostDbType[] {
         return db.posts ? db.posts : [];
     },

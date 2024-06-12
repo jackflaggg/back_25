@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {blogsRepositories} from "../../../repositories/blogs-repository";
+import {blogsRepositories} from "../../../repositories/blogs-in-memory-repository";
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams} from "../../../types/types";
 
 export const deleteBlogController = (req: RequestWithParams<BlogParamsModel>, res:Response) => {

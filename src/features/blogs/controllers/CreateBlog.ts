@@ -1,4 +1,4 @@
-import {blogsRepositories} from "../../../repositories/blogs-repository";
+import {blogsRepositories} from "../../../repositories/blogs-in-memory-repository";
 import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../../types/types";
 import {BlogInputModel, BlogViewModel} from "../../../input-output-types/blogs-types";
 

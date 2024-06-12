@@ -1,6 +1,6 @@
 import {body} from "express-validator";
 import {Response, NextFunction} from "express";
-import {blogsRepositories} from "../../../repositories/blogs-repository";
+import {blogsRepositories} from "../../../repositories/blogs-in-memory-repository";
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams} from "../../../types/types";
 import {adminMiddlewares} from "../../global-middlewares/admin-middleware";
 import {inputCheckErrorsMiddleware} from "../../global-middlewares/checkErrorsValidator";

@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {blogsRepositories} from "../../../repositories/blogs-repository";
+import {blogsRepositories} from "../../../repositories/blogs-in-memory-repository";
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../../types/types";
 import {BlogInputModel} from "../../../input-output-types/blogs-types";
 
