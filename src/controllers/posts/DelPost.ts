@@ -11,11 +11,13 @@ export const deletePostController = async (req: RequestWithParams<PostParamsId>,
         return;
     }
 
-    const deletePost = await postsRepository.delPost(PostId);
-    if (!deletePost) {
+    const post = await postsRepository.giveOneToIdPost(PostId);
+
+    if (!post) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
+    await postsRepository.delPost(PostId);
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 }
