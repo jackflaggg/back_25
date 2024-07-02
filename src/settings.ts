@@ -8,8 +8,8 @@ export const SETTINGS = {
         POSTS: '/posts',
         TESTING: '/testing',
     },
-    DB_NAME: 'ClusterSprint3',
+    DB_NAME: 'hometask',
     COLLECTION_POSTS: process.env.POST_COLLECTION_NAME || '',
-    COLLECTION_BLOGS: process.env.BLOG_COLLECTION_NAME || '',
+    COLLECTION_BLOGS: process.env.BLOG_COLLECTION_NAME || 'blogs',
     ADMIN: process.env.ADMIN || 'admin:qwerty',
 }

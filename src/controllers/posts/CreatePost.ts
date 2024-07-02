@@ -10,7 +10,8 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
                                            res:ResponseBody<OutputPostModel>) => {
     const { title, shortDescription, content, blogId} = (req.body);
 
-    if (ObjectId.isValid(blogId)) {
+    if (!ObjectId.isValid(blogId)) {
+        console.log('bad!')
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return
     }
