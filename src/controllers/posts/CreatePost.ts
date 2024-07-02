@@ -11,7 +11,6 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
     const { title, shortDescription, content, blogId} = (req.body);
 
     if (!ObjectId.isValid(blogId)) {
-        console.log('bad!')
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return
     }
@@ -30,8 +29,18 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
         blogName: blog!.name,
         createdAt: new Date().toISOString()
     }
-
     const createdPost = await postsRepository.createPost(newPost);
+    if(!createdPost){
+        res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
+        return;
+    }
+    console.log(createdPost);
+    const findCreatePost = await postsRepository.giveOneToIdPost(createdPost);
 
-    res.status(HTTP_STATUSES.CREATED_201).send(createdPost);
+    if (!findCreatePost) {
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
+    }
+    console.log(findCreatePost);
+    res.status(HTTP_STATUSES.CREATED_201).send(findCreatePost);
 }

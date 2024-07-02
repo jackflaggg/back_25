@@ -11,9 +11,7 @@ export const OnePostController = async (req: RequestWithParams<PostParamsId>,
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
-    console.log(postId)
     const blog = await blogsRepositories.giveOneToIdBlog(postId);
-    console.log(blog);
 
     const getPostId = await postsRepository.giveOneToIdPost(postId);
     if (!getPostId) {

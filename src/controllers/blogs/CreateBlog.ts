@@ -2,8 +2,9 @@ import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common-
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {BlogCreateType} from "../../models/db/db.models";
+import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
 
-export const createBlogController = async (req: RequestWithBody<BlogCreateType>,
+export const createBlogController = async (req: RequestWithBody<InputCreateBlogModel>,
                                            res:ResponseBody<OutputBlogModel>) => {
     const {name, description, websiteUrl} = req.body
 
