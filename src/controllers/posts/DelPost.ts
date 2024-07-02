@@ -6,7 +6,7 @@ import {ObjectId} from "mongodb";
 export const deletePostController = async (req: RequestWithParams<PostParamsId>,
                                            res:Response) => {
     const { id: PostId } = req.params;
-    if (ObjectId.isValid(PostId)) {
+    if (!ObjectId.isValid(PostId)) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }

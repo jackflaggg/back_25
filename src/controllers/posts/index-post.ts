@@ -12,6 +12,6 @@ export const postRouter: Router = Router();
 
 postRouter.get("/", AllPostController);
 postRouter.get("/:id", blogIdValidator, OnePostController);
-postRouter.post("/", inputCheckErrorsMiddleware, ...postValidator,createPostController);
-postRouter.put("/:id", ...postValidator, updatePostController);
+postRouter.post("/", adminMiddlewares, inputCheckErrorsMiddleware, ...postValidator,createPostController);
+postRouter.put("/:id", adminMiddlewares, ...postValidator, updatePostController);
 postRouter.delete("/:id", adminMiddlewares, blogIdValidator, deletePostController);
