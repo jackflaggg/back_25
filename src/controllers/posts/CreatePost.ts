@@ -33,5 +33,5 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
 
     const createdPost = await postsRepository.createPost(newPost);
 
-    res.status(HTTP_STATUSES.CREATED_201);
+    res.status(HTTP_STATUSES.CREATED_201).send(createdPost);
 }

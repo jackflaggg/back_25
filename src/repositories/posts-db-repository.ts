@@ -19,12 +19,15 @@ export const postsRepository = {
         }
         return this.postMapper(post)
     },
-    async createPost(post: PostCreateType): Promise<string | null> {
+    async createPost(post: PostCreateType): Promise<any> {
         const newPost = await postsCollections.insertOne(post);
         if (!newPost || !newPost.insertedId) {
             return null;
         }
-        return newPost.insertedId.toString();
+        const insertedId = newPost.insertedId;
+
+        const insertedPost = await postsCollections.findOne({ _id: insertedId });
+        return insertedPost;
     },
     async putPost(post: InputUpdatePostModel, id: string): Promise<boolean> {
         const updatePost = await postsCollections.updateOne({_id: new ObjectId(id)}, {
