@@ -8,7 +8,7 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
                                            res:Response) => {
     const {id} = req.params;
 
-    if (ObjectId.isValid(id)) {
+    if (!ObjectId.isValid(id)) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
@@ -16,12 +16,12 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
     const { name, description, websiteUrl} = req.body;
 
     const blog = await blogsRepositories.giveOneToIdBlog(id);
-
+    console.log(blog)
     if (!blog) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
-    const isBlogUpdated = await blogsRepositories.putBlog(new ObjectId(id), {name, description, websiteUrl});
+    const isBlogUpdated = await blogsRepositories.putBlog(id, {name, description, websiteUrl});
     if (!isBlogUpdated) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;

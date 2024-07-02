@@ -1,4 +1,4 @@
-import {blogsCollections, postsCollections} from "../db/db";
+import {blogsCollections} from "../db/db";
 import {OutputBlogModel} from "../models/blog/output/blog.output.models";
 import {ObjectId, WithId} from "mongodb";
 import {BlogCreateType, BlogDbType} from "../models/db/db.models";
@@ -25,15 +25,21 @@ export const blogsRepositories = {
         }
         return newBlog.insertedId.toString();
     },
-    async putBlog(id: ObjectId, blog: InputUpdateBlogModel): Promise<boolean> {
-        const updateBlog = await postsCollections.updateOne({_id: id}, {
-            $set: {
-                name: blog.name,
-                description: blog.description,
-                websiteUrl: blog.websiteUrl,
-            }
-        }, {upsert: true});
-        return updateBlog.acknowledged;
+    async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
+        try {
+            const updateBlog = await blogsCollections.updateOne({_id: new ObjectId(id)}, {
+                $set: {
+                    name: blog.name,
+                    description: blog.description,
+                    websiteUrl: blog.websiteUrl,
+                }
+            }, {upsert: true})
+            return updateBlog && updateBlog.acknowledged
+        } catch(e) {
+            console.error('An error occurred while updating the blog:', e);
+            return false;
+        }
+        /*, {upsert: true})*/
     },
     async delBlog(id: ObjectId): Promise<boolean> {
         const deleteBlog = await blogsCollections.deleteOne({_id: id});
