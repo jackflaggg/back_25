@@ -1,21 +1,12 @@
-import {DBType} from "../types/types";
-import {ErrorsType} from "../input-output-types/output-errors-type";
-import {MongoClient, ServerApiVersion} from "mongodb";
+import {Db, MongoClient, ServerApiVersion} from "mongodb";
 import dotenv from 'dotenv'
+import {BlogDbType, PostDbType} from "../models/db/db.models";
+import {SETTINGS} from "../settings";
+
 dotenv.config()
 
-const mongoURI = process.env.MONGO_URL || 'mongodb://localhost:27017'
-
-export const db: DBType = {
-    blogs: [],
-    posts: [],
-}
-
-export const errors: ErrorsType = {
-    errorsMessages: []
-}
-
-const client = new MongoClient(mongoURI, {
+const mongoURI = process.env.MONGO_URL || 'mongodb+srv://jackflagg:230900@clustersprint3.g4fqcoz.mongodb.net/?retryWrites=true&w=majority&appName=ClusterSprint3'
+const client: MongoClient = new MongoClient(mongoURI, {
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
@@ -23,12 +14,18 @@ const client = new MongoClient(mongoURI, {
     }
 });
 
-export async function runDb() {
+export const database: Db = client.db(SETTINGS.DB_NAME);
+
+export const blogsCollections = database.collection<BlogDbType>(SETTINGS.COLLECTION_BLOGS);
+export const postsCollections = database.collection<PostDbType>(SETTINGS.COLLECTION_POSTS);
+
+export const connectToDB = async (port: number) => {
     try {
-        await client.connect();
-        await client.db("posts").command({ ping: 1 });
-        console.log("You successfully connected to MongoDB!");
-    } finally {
-        await client.close();
+        await client.connect()
+        console.log('connected to db')
+        console.log(`Example app listening on port ${port}`)
+    } catch (e) {
+        console.log(e)
+        await client.close()
     }
 }
