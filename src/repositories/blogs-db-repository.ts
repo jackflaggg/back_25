@@ -13,7 +13,8 @@ export const blogsRepositories = {
     },
     async giveOneToIdBlog(id: string): Promise<OutputBlogModel | null> {
         const blog = await blogsCollections.findOne({_id: new ObjectId(id)});
-        if (!blog) {
+
+        if (blog === null) {
             return null;
         }
         return this.blogMapper(blog)
@@ -41,8 +42,8 @@ export const blogsRepositories = {
         }
         /*, {upsert: true})*/
     },
-    async delBlog(id: ObjectId): Promise<boolean> {
-        const deleteBlog = await blogsCollections.deleteOne({_id: id});
+    async delBlog(id: string): Promise<boolean> {
+        const deleteBlog = await blogsCollections.deleteOne({_id: new ObjectId(id)});
         return deleteBlog.acknowledged;
     },
     blogMapper(blog: WithId<BlogDbType>) {

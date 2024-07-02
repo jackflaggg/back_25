@@ -11,10 +11,9 @@ export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
         return
     }
 
-    const blogId = await blogsRepositories.giveOneToIdBlog(id.toString());
-
+    const blogId = await blogsRepositories.giveOneToIdBlog(id);
     if (!blogId){
-        res.status(HTTP_STATUSES.NOT_FOUND_404);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
     res.status(HTTP_STATUSES.OK_200).send(blogId);
