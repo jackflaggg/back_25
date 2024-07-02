@@ -42,8 +42,8 @@ export const postsRepository = {
         }, {upsert: true});
         return updatePost.acknowledged;
     },
-    async delPost(id: ObjectId): Promise<boolean> {
-        const deletePost = await postsCollections.deleteOne({_id: id});
+    async delPost(id: string): Promise<boolean> {
+        const deletePost = await postsCollections.deleteOne({_id: new ObjectId(id)});
         return deletePost.acknowledged;
     },
     postMapper(post: WithId<PostDbType>) {

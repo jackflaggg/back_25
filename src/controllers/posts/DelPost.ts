@@ -11,7 +11,7 @@ export const deletePostController = async (req: RequestWithParams<PostParamsId>,
         return;
     }
 
-    const deletePost = await postsRepository.delPost(new ObjectId(PostId));
+    const deletePost = await postsRepository.delPost(PostId);
     if (!deletePost) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
