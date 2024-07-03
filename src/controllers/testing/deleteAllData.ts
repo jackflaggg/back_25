@@ -1,12 +1,9 @@
-import {Router} from "express";
-import {database} from "../../db/db";
 import {Request, Response} from "express";
 import {HTTP_STATUSES} from "../../models/common-types";
+import {testingDbRepositories} from "../../repositories/testing-db-repository";
 
-export const testingRouter = Router();
-
-testingRouter.delete('/all-data', async (req: Request,
+export const deleteTestingRouter = async (req: Request,
                                    res: Response) => {
-    await database.dropDatabase({})
+    await testingDbRepositories.deleteAllData()
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
-})
+}

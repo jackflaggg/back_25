@@ -1,10 +1,10 @@
 import {Router} from "express";
 import {adminMiddlewares} from "../../middlewares/admin-middleware";
-import {createPostController} from "./CreatePost";
-import {AllPostController} from "./getAllPosts";
-import {OnePostController} from "./getOnePost";
-import {updatePostController} from "./UpdatePost";
-import {deletePostController} from "./DelPost";
+import {createPostController} from "../../controllers/posts/CreatePost";
+import {AllPostController} from "../../controllers/posts/getAllPosts";
+import {OnePostController} from "../../controllers/posts/getOnePost";
+import {updatePostController} from "../../controllers/posts/UpdatePost";
+import {deletePostController} from "../../controllers/posts/DelPost";
 import {blogIdValidator, postValidator} from "../../validators/postValidator";
 import {inputCheckErrorsMiddleware} from "../../middlewares/checkErrorsValidator";
 
