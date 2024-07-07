@@ -4,8 +4,9 @@ import {HTTP_STATUSES} from "../src/models/common-types";
 import {codedAuth, createString, inCodedAuth} from "./helpers/datatests";
 import {connect, disconnect} from "./helpers/mongodb.memory.test.helper";
 import {ObjectId} from "mongodb";
-import {BlogCreateType} from "../src/models/db/db.models";
 import {InputCreateBlogModel} from "../src/models/blog/input/create.blog.input.models";
+import {InputUpdateBlogModel} from "../src/models/blog/input/update.blog.input.models";
+import {BlogCreateType} from "../src/models/db/db.models";
 
 let blog : {[key : string]: string} | undefined;
 
@@ -80,7 +81,7 @@ describe(SETTINGS.PATH.BLOGS, () => {
     });
 
     it('-Post method incorrect body and status 400', async() => {
-        const incorrectBlog ={
+        const incorrectBlog: InputCreateBlogModel ={
             name: createString(20),
             description: createString(511),
             websiteUrl: createString(122),
@@ -93,7 +94,6 @@ describe(SETTINGS.PATH.BLOGS, () => {
             .expect(HTTP_STATUSES.BAD_REQUEST_400)
     });
 
-
     it('-Post method - not authorized', async() => {
         const response = await req
             .post(`${SETTINGS.PATH.BLOGS}`)
@@ -103,8 +103,8 @@ describe(SETTINGS.PATH.BLOGS, () => {
     })
 
     it('+Put method correct id and reqbody, return status 204', async() => {
-        const updatedBlog = {
-            title: createString(2),
+        const updatedBlog: InputUpdateBlogModel = {
+            name: createString(2),
             description: createString(2),
             websiteUrl: createString(2)
         };
