@@ -7,6 +7,11 @@ export const fromUTF8ToBase64 = (code: string) => {
     return buffTwo.toString('base64')
 }
 
+export const fromHexToBase64 = (code: string) => {
+    const buffTwo = Buffer.from(code, 'hex')
+    return buffTwo.toString('base64')
+}
+
 export const adminMiddlewares = (req: Request, res: Response, next:NextFunction) => {
     const {authorization: auth} = req.headers;
 
