@@ -2,6 +2,7 @@ import {Response} from "express";
 import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/common-types";
 import {postsRepository} from "../../repositories/posts-db-repository";
 import {ObjectId} from "mongodb";
+import {postsService} from "../../domain/post/post-service";
 
 export const deletePostController = async (req: RequestWithParams<PostParamsId>,
                                            res:Response) => {
@@ -11,13 +12,13 @@ export const deletePostController = async (req: RequestWithParams<PostParamsId>,
         return;
     }
 
-    const post = await postsRepository.giveOneToIdPost(PostId);
+    const post = await postsService.giveOneToIdPost(PostId);
 
     if (!post) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
-    await postsRepository.delPost(PostId);
+    await postsService.delPost(PostId);
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 }

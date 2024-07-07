@@ -5,6 +5,8 @@ import {PostCreateType} from "../../models/db/db.models";
 import {postsRepository} from "../../repositories/posts-db-repository";
 import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {ObjectId} from "mongodb";
+import {blogsService} from "../../domain/blog/blog-service";
+import {postsService} from "../../domain/post/post-service";
 
 export const createPostController = async (req: RequestWithBody<InputCreatePostModel>,
                                            res:ResponseBody<OutputPostModel>) => {
@@ -15,7 +17,7 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
         return
     }
 
-    const blog = await blogsRepositories.giveOneToIdBlog(blogId!)
+    const blog = await blogsService.giveOneToIdBlog(blogId!)
     if (!blog){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
@@ -29,12 +31,12 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
         blogName: blog!.name,
         createdAt: new Date().toISOString()
     }
-    const createdPost = await postsRepository.createPost(newPost);
+    const createdPost = await postsService.createPost(newPost);
     if(!createdPost){
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
-    const findCreatePost = await postsRepository.giveOneToIdPost(createdPost);
+    const findCreatePost = await postsService.giveOneToIdPost(createdPost);
 
     if (!findCreatePost) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);

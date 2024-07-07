@@ -5,6 +5,8 @@ import {InputUpdatePostModel} from "../../models/post/input/update.post.input.mo
 import {ObjectId} from "mongodb";
 import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {PostUpdateType} from "../../models/db/db.models";
+import {postsService} from "../../domain/post/post-service";
+import {blogsService} from "../../domain/blog/blog-service";
 
 export const updatePostController = async (req: RequestWithParamsAndBody<PostParamsId, InputUpdatePostModel>,
                                            res:Response) => {
@@ -16,8 +18,8 @@ export const updatePostController = async (req: RequestWithParamsAndBody<PostPar
     }
 
     const { title, shortDescription, content, blogId} = req.body;
-    const post = await postsRepository.giveOneToIdPost(id);
-    const blog = await blogsRepositories.giveOneToIdBlog(blogId);
+    const post = await postsService.giveOneToIdPost(id);
+    const blog = await blogsService.giveOneToIdBlog(blogId);
 
     if (!blog){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
@@ -32,7 +34,7 @@ export const updatePostController = async (req: RequestWithParamsAndBody<PostPar
         title, shortDescription, content, blogId, blogName: blog!.name
     }
 
-    const isUpdatedPost = await postsRepository.putPost(upPost, id);
+    const isUpdatedPost = await postsService.putPost(upPost, id);
     if (!isUpdatedPost) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;

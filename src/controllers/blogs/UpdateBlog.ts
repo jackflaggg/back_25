@@ -3,6 +3,7 @@ import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../mo
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {ObjectId} from "mongodb";
+import {blogsService} from "../../domain/blog/blog-service";
 
 export const updateBlogController = async (req: RequestWithParamsAndBody<BlogParamsModel, InputUpdateBlogModel>,
                                            res:Response) => {
@@ -15,13 +16,13 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
 
     const { name, description, websiteUrl} = req.body;
 
-    const blog = await blogsRepositories.giveOneToIdBlog(id);
+    const blog = await blogsService.giveOneToIdBlog(id);
     console.log(blog)
     if (!blog) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
-    const isBlogUpdated = await blogsRepositories.putBlog(id, {name, description, websiteUrl});
+    const isBlogUpdated = await blogsService.putBlog(id, {name, description, websiteUrl});
     if (!isBlogUpdated) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
