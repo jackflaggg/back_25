@@ -4,6 +4,8 @@ import {HTTP_STATUSES} from "../src/models/common-types";
 import {codedAuth, createString, inCodedAuth} from "./helpers/datatests";
 import {connect, disconnect} from "./helpers/mongodb.memory.test.helper";
 import {ObjectId} from "mongodb";
+import {BlogCreateType} from "../src/models/db/db.models";
+import {InputCreateBlogModel} from "../src/models/blog/input/create.blog.input.models";
 
 let blog : {[key : string]: string} | undefined;
 
@@ -25,7 +27,7 @@ describe(SETTINGS.PATH.BLOGS, () => {
     });
 
     it('+Post method correct body(all data), return bodyBlog and status 201', async () => {
-        const newBlog = {
+        const newBlog: InputCreateBlogModel = {
             name: createString(2),
             description: createString(2),
             websiteUrl: "https://hz.com",
