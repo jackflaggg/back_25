@@ -16,6 +16,13 @@ describe(SETTINGS.PATH.POSTS, () => {
     beforeAll(connect);
     afterAll(disconnect);
 
+    beforeAll(async () => {
+        await req.delete(`${SETTINGS.PATH.TESTING}/all-data`)
+            .set({ 'Authorization': 'Basic ' + codedAuth })
+            .expect(HTTP_STATUSES.NO_CONTENT_204);
+    });
+
+
     it('+Get method: return status 200 and all videos', async () => {
         const response = await req
             .get(`${SETTINGS.PATH.POSTS}`)
@@ -217,4 +224,5 @@ describe(SETTINGS.PATH.POSTS, () => {
             .set('Authorization', 'Basic ' + codedAuth)
             .expect(HTTP_STATUSES.NOT_FOUND_404);
     });
+
 })

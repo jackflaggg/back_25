@@ -11,6 +11,12 @@ describe(SETTINGS.PATH.BLOGS, () => {
     beforeAll(connect);
     afterAll(disconnect);
 
+    beforeAll(async () => {
+        await req.delete(`${SETTINGS.PATH.TESTING}/all-data`)
+            .set({ 'Authorization': 'Basic ' + codedAuth })
+            .expect(HTTP_STATUSES.NO_CONTENT_204);
+    });
+
     it('+Get method: return status 200 and all videos', async () => {
         const response = await req
             .get(`${SETTINGS.PATH.BLOGS}`)
@@ -57,7 +63,7 @@ describe(SETTINGS.PATH.BLOGS, () => {
             .expect(HTTP_STATUSES.OK_200, blog)
     });
 
-    it('+Get method: incorrect reqParams - id, return status 404 and one blogs', async () => {
+    it('-Get method: incorrect reqParams - id, return status 404 and one blogs', async () => {
         const incorrectBlogId = {
             id: new ObjectId('5f826d1e6c2c8e452c9a9567'),
             name: createString(2),
