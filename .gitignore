@@ -1,6 +1,5 @@
 node_modules
 .idea
 jest.config.js
-__tests__
 dist
 .env

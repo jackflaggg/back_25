@@ -24,7 +24,6 @@ export const postsRepository = {
         if (!newPost || !newPost.insertedId) {
             return null;
         }
-        console.log(typeof newPost.insertedId);
         return newPost.insertedId.toString();
         // const insertedId = newPost.insertedId;
 

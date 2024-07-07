@@ -15,7 +15,7 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
         return
     }
 
-    const blog = await blogsRepositories.giveOneToIdBlog(blogId)
+    const blog = await blogsRepositories.giveOneToIdBlog(blogId!)
     if (!blog){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
@@ -34,13 +34,11 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
-    console.log(createdPost);
     const findCreatePost = await postsRepository.giveOneToIdPost(createdPost);
 
     if (!findCreatePost) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
-    console.log(findCreatePost);
     res.status(HTTP_STATUSES.CREATED_201).send(findCreatePost);
 }
