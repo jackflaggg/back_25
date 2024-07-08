@@ -1,12 +1,12 @@
-import {SETTINGS} from "../src/settings";
-import {req} from "./helpers/agent";
-import {HTTP_STATUSES} from "../src/models/common-types";
-import {codedAuth, createString, inCodedAuth} from "./helpers/datatests";
-import {connect, disconnect} from "./helpers/mongodb.memory.test.helper";
+import {SETTINGS} from "../../src/settings";
+import {req} from "../helpers/agent";
+import {HTTP_STATUSES} from "../../src/models/common-types";
+import {codedAuth, createString, inCodedAuth} from "../helpers/datatests";
+import {connect, disconnect} from "../helpers/mongodb.memory.test.helper";
 import {ObjectId} from "mongodb";
-import {InputCreateBlogModel} from "../src/models/blog/input/create.blog.input.models";
-import {InputUpdateBlogModel} from "../src/models/blog/input/update.blog.input.models";
-import {BlogCreateType} from "../src/models/db/db.models";
+import {InputCreateBlogModel} from "../../src/models/blog/input/create.blog.input.models";
+import {InputUpdateBlogModel} from "../../src/models/blog/input/update.blog.input.models";
+import {BlogCreateType} from "../../src/models/db/db.models";
 
 let blog : {[key : string]: string} | undefined;
 

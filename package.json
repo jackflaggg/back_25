@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "yarn nodemon --inspect dist/index.js",
     "watch": "tsc -w",
-    "jest": "jest -i"
+    "jest": "jest -i --testPathPattern=__tests__/e2e --forceExit --detectOpenHandles"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
