@@ -7,6 +7,7 @@ export const SETTINGS = {
         BLOGS: '/blogs',
         POSTS: '/posts',
         TESTING: '/testing',
+        VERCEL: '/'
     },
     DB_NAME: 'hometask',
     COLLECTION_POSTS: process.env.POST_COLLECTION_NAME || 'posts',
