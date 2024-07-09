@@ -8,6 +8,8 @@ export const blogsRepositories = {
     async getAllBlog(): Promise<OutputBlogModel[]> {
         const blogs = await blogsCollections
             .find()
+            .skip(1 )
+            .limit(10)
             .toArray();
         return blogs.map(blog => this.blogMapper(blog));
     },
@@ -27,8 +29,7 @@ export const blogsRepositories = {
         return newBlog.insertedId.toString();
     },
     async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
-        try {
-            const updateBlog = await blogsCollections.updateOne({_id: new ObjectId(id)}, {
+        const updateBlog = await blogsCollections.updateOne({_id: new ObjectId(id)}, {
                 $set: {
                     name: blog.name,
                     description: blog.description,
@@ -36,11 +37,6 @@ export const blogsRepositories = {
                 }
             }, {upsert: true})
             return updateBlog && updateBlog.acknowledged
-        } catch(e) {
-            console.error('An error occurred while updating the blog:', e);
-            return false;
-        }
-        /*, {upsert: true})*/
     },
     async delBlog(id: string): Promise<boolean> {
         const deleteBlog = await blogsCollections.deleteOne({_id: new ObjectId(id)});
