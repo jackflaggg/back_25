@@ -1,5 +1,12 @@
 import {GetQueryBlogInputModels} from "../models/blog/input/get-query.blog.input.models";
 
+export const defaultQueryParameters: GetQueryBlogInputModels = {
+    pageNumber: 1,
+    pageSize: 10,
+    sortBy: 'createdAt',
+    sortDirection: 'desc',
+    searchNameTerm: null
+}
 export const helper = (query: GetQueryBlogInputModels) => {
     return {
         pageNumber: query.pageNumber ? Number(query.pageNumber) : 1,

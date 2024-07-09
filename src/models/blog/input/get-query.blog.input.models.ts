@@ -1,5 +1,5 @@
 export type GetQueryBlogInputModels = {
-    searchNameTerm: string,
+    searchNameTerm: string | null,
     sortBy: string,
     sortDirection: string,
     pageNumber: number,
