@@ -1,9 +1,7 @@
 import {blogsCollections} from "../db/db";
-import {OutputBlogModel} from "../models/blog/output/blog.output.models";
-import {blogsRepositories} from "./blogs-db-repository";
 import {blogMapper} from "../models/blog/mapper/blog-mapper";
 import {QueryBlogInputModels} from "../models/blog/input/get-query.blog.input.models";
-import {defaultQueryParameters, helper} from "../middlewares/helper-query-get";
+import {helper} from "../middlewares/helper-query-get";
 
 
 export const blogsQueryRepositories = {
