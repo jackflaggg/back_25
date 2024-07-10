@@ -1,7 +1,6 @@
 import {SortDirection} from "mongodb";
 
-export type QueryBlogInputModels = {
-    searchNameTerm?: string | null,
+export type QueryPostInputModels = {
     sortBy?: string,
     sortDirection?: SortDirection,
     pageNumber?: number,
