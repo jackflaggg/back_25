@@ -1,7 +1,6 @@
 import {Response} from "express";
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../models/common-types";
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
-import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";
 
@@ -17,7 +16,6 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
     const { name, description, websiteUrl} = req.body;
 
     const blog = await blogsService.giveOneToIdBlog(id);
-    console.log(blog)
     if (!blog) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return

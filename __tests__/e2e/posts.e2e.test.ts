@@ -97,7 +97,6 @@ describe(SETTINGS.PATH.POSTS, () => {
     });
 
     it('+Get method: correct reqParams - id, return status 200 and one blogs', async () => {
-        console.log(post)
         const response = await req
             .get(`${SETTINGS.PATH.POSTS}/${post!.id}`)
             .expect(HTTP_STATUSES.OK_200)
@@ -120,7 +119,7 @@ describe(SETTINGS.PATH.POSTS, () => {
     it('-Post method incorrect body and status 400', async() => {
         const incorrectBlog ={
             name: createString(20),
-            description: createString(511),
+            description: createString(5112),
             websiteUrl: createString(122),
         }
 
@@ -178,7 +177,6 @@ describe(SETTINGS.PATH.POSTS, () => {
             ...post,
             title: createString(2100),
         }
-        console.log(post)
 
         const response = await req
             .put(`${SETTINGS.PATH.POSTS}/${post.id}`)
