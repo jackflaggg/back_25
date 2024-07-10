@@ -6,14 +6,14 @@ import {InputUpdateBlogModel} from "../models/blog/input/update.blog.input.model
 import {blogMapper} from "../models/blog/mapper/blog-mapper";
 
 export const blogsRepositories = {
-    async getAllBlog(): Promise<OutputBlogModel[]> {
+    /*async getAllBlog(): Promise<OutputBlogModel[]> {
         const blogs = await blogsCollections
             .find()
             .skip(1 )
             .limit(10)
             .toArray();
         return blogs.map(blog => blogMapper(blog));
-    },
+    },*/
     async giveOneToIdBlog(id: string): Promise<OutputBlogModel | null> {
         const blog = await blogsCollections.findOne({_id: new ObjectId(id)});
 
