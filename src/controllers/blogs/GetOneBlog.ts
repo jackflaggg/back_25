@@ -1,5 +1,4 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams, ResponseBody} from "../../models/common-types";
-import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";
