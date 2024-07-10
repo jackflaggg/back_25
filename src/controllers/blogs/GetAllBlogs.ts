@@ -2,11 +2,11 @@ import {HTTP_STATUSES, RequestWithQuery, ResponseBody} from "../../models/common
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
-import {helper} from "../../middlewares/helper-query-get";
+import {helperToBlog} from "../../middlewares/helper-query-get";
 
 export const AllBlogController = async (req: RequestWithQuery<QueryBlogInputModels>,
                                         res:ResponseBody<OutputBlogModel[]>) => {
-    const sortData: QueryBlogInputModels = helper(req.query)
+    const sortData: QueryBlogInputModels = helperToBlog(req.query)
     console.log(sortData)
 
     const allBlogs = await blogsQueryRepositories.getAllBlog(sortData)
