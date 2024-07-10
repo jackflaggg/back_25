@@ -2,12 +2,8 @@ import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {BlogCreateType} from "../../models/db/db.models";
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
-import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 
 export const blogsService = {
-    async getAllBlog(): Promise<OutputBlogModel[]> {
-        return await blogsQueryRepositories.getAllBlog()
-    },
     async giveOneToIdBlog(id: string): Promise<OutputBlogModel | null> {
         return await blogsRepositories.giveOneToIdBlog(id)
     },

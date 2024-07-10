@@ -31,6 +31,7 @@ export type RequestWithBody<B> = Request<{}, {}, B>
 export type RequestWithParamsAndBody<T, B> = Request<T, {}, B>;
 export type RequestWithParams<T> = Request<T>
 export type ResponseBody<B> = Response<B>
+export type RequestWithQuery<Q> = Request<{}, {}, Q>
 
 export type BlogParamsModel = {
     id: string

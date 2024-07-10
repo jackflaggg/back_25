@@ -1,18 +1,19 @@
-import {GetQueryBlogInputModels} from "../models/blog/input/get-query.blog.input.models";
+import {QueryBlogInputModels} from "../models/blog/input/get-query.blog.input.models";
+import {query} from "express";
 
-export const defaultQueryParameters: GetQueryBlogInputModels = {
+export const defaultQueryParameters: QueryBlogInputModels = {
     pageNumber: 1,
     pageSize: 10,
     sortBy: 'createdAt',
     sortDirection: 'desc',
     searchNameTerm: null
 }
-export const helper = (query: GetQueryBlogInputModels) => {
+export const helper = (query: QueryBlogInputModels) => {
     return {
-        pageNumber: query.pageNumber ? Number(query.pageNumber) : 1,
-        pageSize: query.pageSize !== undefined ? Number(query.pageSize) : 10,
-        sortBy: query.sortBy ? query.sortBy : 'createdAt',
-        sortDirection: query.sortDirection ? query.sortDirection : 'desc',
-        searchNameTerm: query.searchNameTerm ? query.searchNameTerm : null,
+        pageNumber: query.pageNumber ?? 1,
+        pageSize: query.pageSize ?? 10,
+        sortBy: query.sortBy ?? 'createdAt',
+        sortDirection: query.sortDirection ?? 'desc',
+        searchNameTerm: query.searchNameTerm ?? null,
     }
 }
