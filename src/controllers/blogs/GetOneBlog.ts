@@ -1,7 +1,7 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams, ResponseBody} from "../../models/common-types";
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {ObjectId} from "mongodb";
-import {blogsService} from "../../domain/blog/blog-service";
+import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 
 export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
                                         res:ResponseBody<OutputBlogModel>) => {
@@ -11,7 +11,7 @@ export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
         return
     }
 
-    const blogId = await blogsService.giveOneToIdBlog(id);
+    const blogId = await blogsQueryRepositories.giveOneToIdBlog(id);
     if (!blogId){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return

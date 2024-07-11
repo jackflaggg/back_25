@@ -3,6 +3,7 @@ import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {BlogCreateType} from "../../models/db/db.models";
 import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
 import {blogsService} from "../../domain/blog/blog-service";
+import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 
 export const createBlogController = async (req: RequestWithBody<InputCreateBlogModel>,
                                            res:ResponseBody<OutputBlogModel>) => {
@@ -21,7 +22,8 @@ export const createBlogController = async (req: RequestWithBody<InputCreateBlogM
         return
     }
 
-    const blog = await blogsService.giveOneToIdBlog(createdBlogId);
+    const blog = await blogsQueryRepositories.giveOneToIdBlog(createdBlogId);
+
     if (!blog) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return

@@ -7,19 +7,6 @@ import {postMapper} from "../models/post/mapper/post-mapper";
 
 
 export const postsRepository = {
-    /*async getAllPost(): Promise<OutputPostModel[]> {
-        const posts = await postsCollections
-            .find()
-            .toArray();
-        return posts.map(post => postMapper(post))
-    },*/
-    async giveOneToIdPost(id: string): Promise<OutputPostModel | null> {
-        const post = await postsCollections.findOne({_id: new ObjectId(id)});
-        if (!post) {
-            return null;
-        }
-        return postMapper(post)
-    },
     async createPost(post: PostCreateType): Promise<string | null> {
         const newPost = await postsCollections.insertOne(post);
         if (!newPost || !newPost.insertedId) {

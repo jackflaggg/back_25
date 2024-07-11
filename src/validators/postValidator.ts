@@ -1,6 +1,7 @@
 import {body} from "express-validator";
 import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
 import {blogsRepositories} from "../repositories/blogs-db-repository";
+import {blogsQueryRepositories} from "../repositories/blogs-query-repository";
 
 export const titleValidator = body('title')
     .isString()
@@ -32,7 +33,7 @@ export const blogIdValidator = body('blogId')
     .withMessage('not string')
     .trim()
     .custom(async blogId => {
-        const blog = await blogsRepositories.giveOneToIdBlog(blogId);
+        const blog = await blogsQueryRepositories.giveOneToIdBlog(blogId);
         if (!blog) {
             throw Error('Incorrect blogId')
         }

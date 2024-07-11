@@ -3,6 +3,7 @@ import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/commo
 import {postsRepository} from "../../repositories/posts-db-repository";
 import {ObjectId} from "mongodb";
 import {postsService} from "../../domain/post/post-service";
+import {postsQueryRepository} from "../../repositories/posts-query-repository";
 
 export const deletePostController = async (req: RequestWithParams<PostParamsId>,
                                            res:Response) => {
@@ -12,7 +13,7 @@ export const deletePostController = async (req: RequestWithParams<PostParamsId>,
         return;
     }
 
-    const post = await postsService.giveOneToIdPost(PostId);
+    const post = await postsQueryRepository.giveOneToIdPost(PostId);
 
     if (!post) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);

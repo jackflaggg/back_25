@@ -1,8 +1,8 @@
 import {Response} from "express";
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams} from "../../models/common-types";
-import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";
+import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 
 export const deleteBlogController = async (req: RequestWithParams<BlogParamsModel>,
                                            res:Response) => {
@@ -12,7 +12,7 @@ export const deleteBlogController = async (req: RequestWithParams<BlogParamsMode
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
-    const blog = await blogsService.giveOneToIdBlog(id);
+    const blog = await blogsQueryRepositories.giveOneToIdBlog(id);
     if (!blog){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return;
