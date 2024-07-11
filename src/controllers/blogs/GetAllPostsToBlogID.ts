@@ -1,7 +1,6 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndQuery} from "../../models/common-types";
 import {Response} from "express";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
-import {helperToPost} from "../../middlewares/helper-query-get";
 import {ObjectId} from "mongodb";
 import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 
@@ -9,7 +8,6 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
     const blogId = req.params.id;
 
     if (!ObjectId.isValid(blogId)){
-        console.log('err: not valid blogId');
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
@@ -21,13 +19,13 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
         return
     }
 
-    const sortData = helperToPost(req.query);
-    console.log(sortData)
+    const sortDataQuery = (req.query);
 
-    const allPosts = await blogsQueryRepositories.getPostsToBlogID(blogId, sortData);
+    const allPosts = await blogsQueryRepositories.getPostsToBlogID(blogId, sortDataQuery);
+    if (!allPosts){
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+        return
+    }
 
     res.status(HTTP_STATUSES.OK_200).send(allPosts);
-
-
-
 }
