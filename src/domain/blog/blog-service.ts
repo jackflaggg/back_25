@@ -1,5 +1,4 @@
 import {blogsRepositories} from "../../repositories/blogs-db-repository";
-import {BlogCreateType} from "../../models/db/db.models";
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
 
