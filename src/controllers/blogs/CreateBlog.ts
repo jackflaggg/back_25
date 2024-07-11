@@ -7,10 +7,6 @@ import {blogsQueryRepositories} from "../../repositories/blogs-query-repository"
 export const createBlogController = async (req: RequestWithBody<InputCreateBlogModel>,
                                            res:ResponseBody<OutputBlogModel>) => {
     const createdBlogId = await blogsService.createBlog(req.body)
-    /*if (!createdBlogId) {
-        res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
-        return
-    }*/
     const blog = await blogsQueryRepositories.giveOneToIdBlog(createdBlogId!);
 
     if (!blog) {

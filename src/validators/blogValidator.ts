@@ -3,12 +3,6 @@ import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
 import {ObjectId} from "mongodb";
 import {blogsCollections} from "../db/db";
 
-// name: string // max 15
-// description: string // max 500
-// websiteUrl: string // max 100 ^https://([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$
-
-// --BLOGS
-
 export const nameValidator = body('name')
     .isString()
     .withMessage('this is not string')

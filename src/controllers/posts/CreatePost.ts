@@ -3,7 +3,6 @@ import {InputCreatePostModel} from "../../models/post/input/create.post.input.mo
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {PostCreateType} from "../../models/db/db.models";
 import {ObjectId} from "mongodb";
-import {blogsService} from "../../domain/blog/blog-service";
 import {postsService} from "../../domain/post/post-service";
 import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts-query-repository";

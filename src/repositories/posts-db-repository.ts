@@ -1,10 +1,7 @@
 import {postsCollections} from "../db/db";
-import {OutputPostModel} from "../models/post/output/post.output.models";
 import {ObjectId} from "mongodb";
 import {PostCreateType} from "../models/db/db.models";
 import {InputUpdatePostModel} from "../models/post/input/update.post.input.models";
-import {postMapper} from "../models/post/mapper/post-mapper";
-
 
 export const postsRepository = {
     async createPost(post: PostCreateType): Promise<string | null> {

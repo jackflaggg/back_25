@@ -1,12 +1,9 @@
 import {Response} from "express";
 import {HTTP_STATUSES, PostParamsId, RequestWithParamsAndBody} from "../../models/common-types";
-import {postsRepository} from "../../repositories/posts-db-repository";
 import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
 import {ObjectId} from "mongodb";
-import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {PostUpdateType} from "../../models/db/db.models";
 import {postsService} from "../../domain/post/post-service";
-import {blogsService} from "../../domain/blog/blog-service";
 import {postsQueryRepository} from "../../repositories/posts-query-repository";
 import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 
