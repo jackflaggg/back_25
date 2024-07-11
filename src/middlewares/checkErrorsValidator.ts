@@ -7,6 +7,11 @@ export const inputCheckErrorsMiddleware = (req: Request, res: Response<ErrorsTyp
     if (!e.isEmpty()) {
         const eArray = e.array({onlyFirstError: true}) as { path: FieldNamesType, msg: string }[]
 
+        if (eArray.find(err => err?.path === 'id')){
+            res
+                .sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+                return;
+        }
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
             .json({

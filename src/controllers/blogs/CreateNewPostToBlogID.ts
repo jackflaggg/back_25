@@ -1,26 +1,12 @@
-/*
-    1. валидация парамса блог айди
-    2. проверка на существование
-    3. валидация тела запроса
-    4. проверка на авторизацию
-    5. корректность тела запроса
-    6. 404
-    7. 201
- */
-import {
-    BlogParamsModel,
-    ErrorsType,
-    HTTP_STATUSES,
-    RequestWithParamsAndBody,
-    ResponseBody
-} from "../../models/common-types";
+import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody, ResponseBody} from "../../models/common-types";
 import {CreatePostToBlogInputModel} from "../../models/blog/input/create.post.to.blog.input";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {ObjectId} from "mongodb";
 import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts-query-repository";
 
-export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, CreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel | any>) => {
+export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, CreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel>) => {
+    console.log(typeof req.params.id)
     const {id} = req.params;
     if (!ObjectId.isValid(id)) {
         console.log('err: not valid blog id');

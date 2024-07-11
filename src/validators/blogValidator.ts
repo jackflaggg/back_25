@@ -1,5 +1,13 @@
-import {body} from "express-validator";
+import {body, param} from "express-validator";
 import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
+import {ObjectId} from "mongodb";
+import {blogsCollections} from "../db/db";
+
+// name: string // max 15
+// description: string // max 500
+// websiteUrl: string // max 100 ^https://([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$
+
+// --BLOGS
 
 export const nameValidator = body('name')
     .isString()
@@ -27,6 +35,28 @@ export const urlValidator = body('websiteUrl')
     .withMessage('more then 100')
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage('websiteUrl must be a valid URL');
+
+export const blogIdParamsValidator = param('id')
+    .isString()
+    .withMessage('this is not string')
+    .trim()
+    .notEmpty()
+    .withMessage('is empty')
+    .isLength({max: 100})
+    .withMessage('not found id')
+    .custom( async blogId => {
+        if (!ObjectId.isValid(blogId)) {
+            throw Error('Incorrect blogId')
+        }
+
+        const blog = await blogsCollections.findOne(blogId);
+
+        if (!blog?._id) {
+            throw Error('not found blogId')
+        }
+        return !!blog;
+    })
+    .withMessage('blog not found')
 
 export const blogValidator = [
     nameValidator,

@@ -1,4 +1,4 @@
-import {body} from "express-validator";
+import {body, param} from "express-validator";
 import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
 import {blogsRepositories} from "../repositories/blogs-db-repository";
 import {blogsQueryRepositories} from "../repositories/blogs-query-repository";
@@ -40,6 +40,13 @@ export const blogIdValidator = body('blogId')
         return !!blog
     })
     .withMessage('no blog')
+
+export const blogIdParamsValidator = param('id')
+    .isString()
+    .trim()
+    .withMessage('this is not string')
+    .isLength({max: 500})
+    .withMessage('more then 500');
 
 
 export const postValidator = [

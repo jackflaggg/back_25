@@ -6,17 +6,19 @@ import {updateBlogController} from "../../controllers/blogs/UpdateBlog";
 import {deleteBlogController} from "../../controllers/blogs/DelBlogId";
 import {adminMiddlewares} from "../../middlewares/admin-middleware";
 import {blogValidator} from "../../validators/blogValidator";
-import {inputCheckErrorsMiddleware} from "../../middlewares/checkErrorsValidator";
 import {getAllPostsToBlogID} from "../../controllers/blogs/GetAllPostsToBlogID";
-import {postValidator} from "../../validators/postValidator";
+import {blogIdParamsValidator, postValidator} from "../../validators/postValidator";
 import {createNewPostToBlogID} from "../../controllers/blogs/CreateNewPostToBlogID";
+import {inputCheckErrorsMiddleware} from "../../middlewares/checkErrorsValidator";
 
 export const blogsRouter: Router = Router();
 
 blogsRouter.get("/", AllBlogController);
-blogsRouter.get("/:id", OneBlogController);
+blogsRouter.get("/:id", blogIdParamsValidator, inputCheckErrorsMiddleware, OneBlogController);
 blogsRouter.get("/:id/posts", getAllPostsToBlogID);
+
 blogsRouter.post("/", adminMiddlewares, ...blogValidator, createBlogController);
-blogsRouter.post("/:id/posts", adminMiddlewares, ...postValidator, );
-blogsRouter.put("/:id", adminMiddlewares, ...blogValidator, createNewPostToBlogID);
+blogsRouter.post("/:id/posts", adminMiddlewares, ...postValidator, createNewPostToBlogID);
+
+blogsRouter.put("/:id", adminMiddlewares, ...blogValidator, updateBlogController);
 blogsRouter.delete("/:id", adminMiddlewares, deleteBlogController);
