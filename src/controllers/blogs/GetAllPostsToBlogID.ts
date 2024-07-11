@@ -17,10 +17,17 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
         return
     }
 
-    const blogs = await blogsQueryRepositories.giveOneToIdBlog(blogId);
+    const blogPost = await blogsQueryRepositories.giveOneToIdBlog(blogId);
+
+    if(!blogPost){
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+        return
+    }
 
     const sortData = helperToPost(req.query);
+
     const allPosts = await blogsQueryRepositories.getPostsToBlogID(blogId, sortData);
+
     res.status(HTTP_STATUSES.OK_200).send(allPosts);
 
 
