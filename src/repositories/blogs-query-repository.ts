@@ -60,7 +60,13 @@ export const blogsQueryRepositories = {
             items: posts.map(post => postMapper(post))
         }
     },
-    async createPostToBlogID(blogId: any, bodyPost: any): Promise<any> {
+    async createPostToBlogID(blogId: string, bodyPost: any): Promise<any> {
+        const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
+        if (!blog){
+            return null;
+        }
+        const newPost = await postsCollections.insertOne(bodyPost);
+        return newPost.insertedId.toString();
 
     }
 }

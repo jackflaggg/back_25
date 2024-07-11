@@ -9,6 +9,7 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
     const blogId = req.params.id;
 
     if (!ObjectId.isValid(blogId)){
+        console.log('err: not valid blogId');
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
@@ -21,6 +22,7 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
     }
 
     const sortData = helperToPost(req.query);
+    console.log(sortData)
 
     const allPosts = await blogsQueryRepositories.getPostsToBlogID(blogId, sortData);
 
