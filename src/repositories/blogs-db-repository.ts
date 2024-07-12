@@ -1,4 +1,4 @@
-import {blogsCollections} from "../db/db";
+import {blogsCollections, postsCollections} from "../db/db";
 import {ObjectId} from "mongodb";
 import {InputUpdateBlogModel} from "../models/blog/input/update.blog.input.models";
 import {OutputBlogModel} from "../models/blog/output/blog.output.models";
@@ -25,5 +25,17 @@ export const blogsRepositories = {
     async delBlog(id: string): Promise<boolean> {
         const deleteBlog = await blogsCollections.deleteOne({_id: new ObjectId(id)});
         return deleteBlog.acknowledged;
+    },
+    async createPostToBlogID(blogId: string, bodyPost: any): Promise<any> {
+        const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
+
+        if (!blog){
+            return null;
+        }
+
+        const newPost = await postsCollections.insertOne(bodyPost);
+
+        return newPost.insertedId.toString();
+
     }
 }
