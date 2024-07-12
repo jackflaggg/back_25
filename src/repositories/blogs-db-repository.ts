@@ -1,10 +1,10 @@
 import {blogsCollections, postsCollections} from "../db/db";
 import {ObjectId} from "mongodb";
 import {InputUpdateBlogModel} from "../models/blog/input/update.blog.input.models";
-import {OutputBlogModel} from "../models/blog/output/blog.output.models";
+import {BlogDbType} from "../models/db/db.models";
 
 export const blogsRepositories = {
-    async createBlog(blog: OutputBlogModel): Promise<string | null>{
+    async createBlog(blog: /*OutputBlogModel*/BlogDbType): Promise<string | null>{
         const newBlog = await blogsCollections.insertOne(blog)
         if (!newBlog || !newBlog.insertedId) {
             return null;

@@ -1,6 +1,7 @@
 // инициализация типов при создании данных (блогов, постов, бд)
 
 export type BlogDbType = {
+    id?: string,
     name: string,
     description: string,
     websiteUrl: string
