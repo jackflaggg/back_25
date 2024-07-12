@@ -1,12 +1,13 @@
 import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
+import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 
 export const blogsService = {
     async createBlog(blog: InputCreateBlogModel): Promise<string | null>{
         const { title, shortDescription, content } = blog;
 
-        const newBlog = {
+        const newBlog: OutputBlogModel = {
             title,
             shortDescription,
             content,

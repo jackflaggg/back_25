@@ -7,7 +7,7 @@ import {postsQueryRepository} from "../../repositories/posts-query-repository";
 import {blogsService} from "../../domain/blog/blog-service";
 
 export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, CreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel>) => {
-    console.log(typeof req.params.id)
+
     const {id} = req.params;
     if (!ObjectId.isValid(id)) {
         console.log('err: not valid blog id');
@@ -23,14 +23,16 @@ export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogPar
         return
     }
 
-    const createdNewPost = await blogsService.createBlog(req.body)
+    const createdNewPost = await blogsService.createBlog(req.body as CreatePostToBlogInputModel)
 
 
     if (!createdNewPost) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
+
     const searchPostToId = await postsQueryRepository.giveOneToIdPost(createdNewPost);
+
     if(!searchPostToId){
         console.log('not search create post!')
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
