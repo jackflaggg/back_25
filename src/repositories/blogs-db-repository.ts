@@ -1,20 +1,13 @@
 import {blogsCollections} from "../db/db";
 import {ObjectId} from "mongodb";
-import {BlogCreateType} from "../models/db/db.models";
 import {InputUpdateBlogModel} from "../models/blog/input/update.blog.input.models";
 import {InputCreateBlogModel} from "../models/blog/input/create.blog.input.models";
 
 export const blogsRepositories = {
     async createBlog(blog: InputCreateBlogModel): Promise<string | null>{
         // не должно быть в реп
-        const bodyBlog: BlogCreateType = {
-            name: blog.name,
-            description: blog.description,
-            websiteUrl: blog.websiteUrl,
-            isMembership: false,
-            createdAt: new Date().toISOString()
-        }
-        const newBlog = await blogsCollections.insertOne(bodyBlog)
+
+        const newBlog = await blogsCollections.insertOne(blog)
         if (!newBlog || !newBlog.insertedId) {
             return null;
         }
