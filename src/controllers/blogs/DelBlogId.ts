@@ -12,13 +12,20 @@ export const deleteBlogController = async (req: RequestWithParams<BlogParamsMode
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
-    const blog = await blogsQueryRepositories.giveOneToIdBlog(id);
+    const blog = await blogsQueryRepositories.giveOneToIdBlog(id)
+
     if (!blog){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return;
     }
 
     const deleteBlog = await blogsService.delBlog(id);
+    // мб избыточно, хз?
+    if (!deleteBlog){
+        console.log(`not delete ${blog}`);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+        return
+    }
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 }
