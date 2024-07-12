@@ -1,12 +1,9 @@
 import {blogsCollections} from "../db/db";
 import {ObjectId} from "mongodb";
 import {InputUpdateBlogModel} from "../models/blog/input/update.blog.input.models";
-import {InputCreateBlogModel} from "../models/blog/input/create.blog.input.models";
 
 export const blogsRepositories = {
     async createBlog(blog: any): Promise<string | null>{
-        // не должно быть в реп
-
         const newBlog = await blogsCollections.insertOne(blog)
         if (!newBlog || !newBlog.insertedId) {
             return null;

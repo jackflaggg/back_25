@@ -1,13 +1,12 @@
 import {blogsRepositories} from "../../repositories/blogs-db-repository";
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
-import {postMapper} from "../../models/post/mapper/post-mapper";
 
 export const blogsService = {
-    async createBlog(blog: any): Promise<string | null>{
+    async createBlog(blog: InputCreateBlogModel): Promise<string | null>{
         const { title, shortDescription, content } = blog;
 
-        const newPost = {
+        const newBlog = {
             title,
             shortDescription,
             content,
@@ -15,7 +14,7 @@ export const blogsService = {
             blogName: blog.name,
             createdAt: new Date().toISOString(),
         }
-        return await blogsRepositories.createBlog(newPost);
+        return await blogsRepositories.createBlog(newBlog);
     },
     async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
         return await blogsRepositories.putBlog(id, blog);
