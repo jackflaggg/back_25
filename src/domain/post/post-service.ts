@@ -1,4 +1,4 @@
-import {PostCreateType, PostDbType} from "../../models/db/db.models";
+import {PostCreateType} from "../../models/db/db.models";
 import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
 import {postsRepository} from "../../repositories/posts-db-repository";
 
