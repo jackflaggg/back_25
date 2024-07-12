@@ -59,18 +59,5 @@ export const blogsQueryRepositories = {
             totalCount: +totalCountPosts,
             items: posts.map(post => postMapper(post))
         }
-    },
-    // неправильно !
-    async createPostToBlogID(blogId: string, bodyPost: any): Promise<any> {
-        const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
-
-        if (!blog){
-            return null;
-        }
-
-        const newPost = await postsCollections.insertOne(bodyPost);
-
-        return newPost.insertedId.toString();
-
     }
 }
