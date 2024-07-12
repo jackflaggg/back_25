@@ -23,7 +23,7 @@ export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogPar
         return
     }
 
-    const createdNewPost = await blogsService.createBlog(req.body as CreatePostToBlogInputModel)
+    const createdNewPost = await blogsService.createPostToBlogInputModel(req.body as CreatePostToBlogInputModel)
 
 
     if (!createdNewPost) {
