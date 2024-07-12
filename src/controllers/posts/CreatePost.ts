@@ -9,8 +9,7 @@ import {postsQueryRepository} from "../../repositories/posts-query-repository";
 
 export const createPostController = async (req: RequestWithBody<InputCreatePostModel>,
                                            res:ResponseBody<OutputPostModel>) => {
-    const { title, shortDescription, content, blogId} = (req.body);
-
+    const { blogId} = req.body
     if (!ObjectId.isValid(blogId)) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return
@@ -22,15 +21,7 @@ export const createPostController = async (req: RequestWithBody<InputCreatePostM
         return
     }
 
-    const newPost: PostCreateType = {
-        title,
-        shortDescription,
-        content,
-        blogId,
-        blogName: blog.name,
-        createdAt: new Date().toISOString()
-    }
-    const createdPost = await postsService.createPost(newPost);
+    const createdPost = await postsService.createPost(req.body as PostCreateType, blog);
     if(!createdPost){
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;

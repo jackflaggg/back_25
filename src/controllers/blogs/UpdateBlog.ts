@@ -20,7 +20,7 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
         return
     }
 
-    const isBlogUpdated = await blogsService.putBlog(id, req.body);
+    const isBlogUpdated = await blogsService.putBlog(id, req.body as InputUpdateBlogModel);
     if (!isBlogUpdated) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
