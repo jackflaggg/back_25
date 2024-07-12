@@ -17,13 +17,13 @@ export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogPar
 
     const blog = await blogsQueryRepositories.giveOneToIdBlog(id);
 
-    if(!blog){
+    if(!blog?.id){
         console.log('not search blog!')
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
 
-    const createdNewPost = await blogsService.createPostToBlogInputModel(req.body as CreatePostToBlogInputModel)
+    const createdNewPost = await blogsService.createPostToBlogInputModel(blog, req.body as CreatePostToBlogInputModel)
 
 
     if (!createdNewPost) {

@@ -26,6 +26,7 @@ export const blogsRepositories = {
         const deleteBlog = await blogsCollections.deleteOne({_id: new ObjectId(id)});
         return deleteBlog.acknowledged;
     },
+
     async createPostToBlogID(blogId: string, bodyPost: any): Promise<any> {
         const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
 

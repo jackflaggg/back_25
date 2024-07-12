@@ -18,8 +18,18 @@ export const blogsService = {
         }
         return await blogsRepositories.createBlog(newBlog);
     },
-    async createPostToBlogInputModel(id: any, post: any): Promise<InputCreateBlogModel> {
-        return await blogsRepositories.createPostToBlogID(id, post);
+    async createPostToBlogInputModel(blog: any, post: any): Promise<InputCreateBlogModel> {
+        const { title, shortDescription, content } = post;
+        const newPost = {
+            title,
+            shortDescription,
+            content,
+            blogId: blog.id,
+            blogName: blog.name,
+            createdAt: new Date().toISOString(),
+        }
+
+        return await blogsRepositories.createPostToBlogID(blog!.id, newPost);
     },
     async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
         return await blogsRepositories.putBlog(id, blog);
