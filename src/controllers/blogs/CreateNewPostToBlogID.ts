@@ -4,6 +4,7 @@ import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {ObjectId} from "mongodb";
 import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts-query-repository";
+import {blogsService} from "../../domain/blog/blog-service";
 
 export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, CreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel>) => {
     console.log(typeof req.params.id)
@@ -22,17 +23,9 @@ export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogPar
         return
     }
 
-    const { title, shortDescription, content } = req.body;
+    const createdNewPost = await blogsService.createBlog(id, req.body)
 
-    const newPost = {
-        title,
-        shortDescription,
-        content,
-        blogId: blog.id,
-        blogName: blog.name,
-        createdAt: new Date().toISOString(),
-    }
-    const createdNewPost = await blogsQueryRepositories.createPostToBlogID(id, newPost);
+
     if (!createdNewPost) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;

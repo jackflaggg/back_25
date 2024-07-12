@@ -4,7 +4,17 @@ import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.mo
 
 export const blogsService = {
     async createBlog(blog: InputCreateBlogModel): Promise<string | null>{
-        return await blogsRepositories.createBlog(blog);
+        const { title, shortDescription, content } = blog;
+
+        const newPost = {
+            title,
+            shortDescription,
+            content,
+            blogId: blog.id,
+            blogName: blog.name,
+            createdAt: new Date().toISOString(),
+        }
+        return await blogsRepositories.createBlog(newPost);
     },
     async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
         return await blogsRepositories.putBlog(id, blog);

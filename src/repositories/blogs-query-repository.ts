@@ -60,6 +60,7 @@ export const blogsQueryRepositories = {
             items: posts.map(post => postMapper(post))
         }
     },
+    // неправильно !
     async createPostToBlogID(blogId: string, bodyPost: any): Promise<any> {
         const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
 

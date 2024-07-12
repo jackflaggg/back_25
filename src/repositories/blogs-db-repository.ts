@@ -6,6 +6,7 @@ import {InputCreateBlogModel} from "../models/blog/input/create.blog.input.model
 
 export const blogsRepositories = {
     async createBlog(blog: InputCreateBlogModel): Promise<string | null>{
+        // не должно быть в реп
         const bodyBlog: BlogCreateType = {
             name: blog.name,
             description: blog.description,
@@ -19,6 +20,7 @@ export const blogsRepositories = {
         }
         return newBlog.insertedId.toString();
     },
+
     async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
         const updateBlog = await blogsCollections.updateOne({_id: new ObjectId(id)}, {
                 $set: {
