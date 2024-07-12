@@ -39,23 +39,23 @@ export const blogsQueryRepositories = {
         return blogMapper(blog)
     },
     async getPostsToBlogID(paramsToBlogID: string, queryParamsPosts?: any): Promise<any> {
-        const { pageNumber, pageSize, sortBy, sortDirection} = helperToPost(queryParamsPosts || {}/*queryParams*/);
+        //const { pageNumber, pageSize, sortBy, sortDirection} = helperToPost(queryParamsPosts || {}/*queryParams*/);
 
         const posts = await postsCollections
             .find({blogId: paramsToBlogID})
-            .sort(sortBy, sortDirection)
-            .skip((Number(pageNumber) - 1) * Number(pageSize))
-            .limit(Number(pageSize))
+            .sort(queryParamsPosts.sortBy, queryParamsPosts.sortDirection)
+            .skip((Number(queryParamsPosts.pageNumber) - 1) * Number(queryParamsPosts.pageSize))
+            .limit(Number(queryParamsPosts.pageSize))
             .toArray();
 
         const totalCountPosts = await postsCollections.countDocuments({blogId: paramsToBlogID});
 
-        const pagesCount = Math.ceil(totalCountPosts / Number(pageSize));
+        const pagesCount = Math.ceil(totalCountPosts / Number(queryParamsPosts.pageSize));
 
         return {
             pagesCount: +pagesCount,
-            page: +pageNumber,
-            pageSize: +pageSize,
+            page: +queryParamsPosts.pageNumber,
+            pageSize: +queryParamsPosts.pageSize,
             totalCount: +totalCountPosts,
             items: posts.map(post => postMapper(post))
         }
