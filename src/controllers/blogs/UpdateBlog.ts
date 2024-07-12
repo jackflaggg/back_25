@@ -14,14 +14,13 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
         return;
     }
 
-    const { name, description, websiteUrl} = req.body;
-
     const blog = await blogsQueryRepositories.giveOneToIdBlog(id);
     if (!blog) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
-    const isBlogUpdated = await blogsService.putBlog(id, {name, description, websiteUrl});
+
+    const isBlogUpdated = await blogsService.putBlog(id, req.body);
     if (!isBlogUpdated) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;

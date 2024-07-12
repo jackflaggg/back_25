@@ -30,6 +30,7 @@ export const blogsService = {
         return await blogsRepositories.createPostToBlogID(blog!.id, newPost);
     },
     async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
+
         return await blogsRepositories.putBlog(id, blog);
     },
     async delBlog(id: string): Promise<boolean> {

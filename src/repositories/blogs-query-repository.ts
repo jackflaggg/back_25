@@ -4,25 +4,27 @@ import {QueryBlogInputModels} from "../models/blog/input/get-query.blog.input.mo
 import {postMapper} from "../models/post/mapper/post-mapper";
 import {OutputBlogModel} from "../models/blog/output/blog.output.models";
 import {ObjectId} from "mongodb";
+import {helperToBlog, helperToPost} from "../middlewares/helper-query-get";
 
 
 export const blogsQueryRepositories = {
     async getAllBlog(queryParamsToBlog: QueryBlogInputModels): Promise<any> {
+        const {searchNameTerm, sortBy, sortDirection, pageSize, pageNumber} = helperToBlog(queryParamsToBlog);
         const blogs = await blogsCollections
-            .find(queryParamsToBlog.searchNameTerm ? {name: {$regex: queryParamsToBlog.searchNameTerm, $options: 'i'}} : {})
-            .sort(queryParamsToBlog.sortBy, queryParamsToBlog.sortDirection)
-            .skip((Number(queryParamsToBlog.pageNumber) - 1) * Number(queryParamsToBlog.pageSize))
-            .limit(Number(queryParamsToBlog.pageSize))
+            .find(searchNameTerm ? {name: {$regex: searchNameTerm, $options: 'i'}} : {})
+            .sort(sortBy, sortDirection)
+            .skip((Number(pageNumber) - 1) * Number(pageSize))
+            .limit(Number(pageSize))
             .toArray();
 
-        const totalCountBlogs = await blogsCollections.countDocuments(queryParamsToBlog.searchNameTerm ? { name: { $regex: queryParamsToBlog.searchNameTerm, $options: "i" }} : {});
+        const totalCountBlogs = await blogsCollections.countDocuments(searchNameTerm ? { name: { $regex: searchNameTerm, $options: "i" }} : {});
 
-        const pagesCount = Math.ceil(totalCountBlogs / Number(queryParamsToBlog.pageSize));
+        const pagesCount = Math.ceil(totalCountBlogs / Number(pageSize));
 
         return {
             pagesCount: +pagesCount,
-            page: +queryParamsToBlog.pageNumber,
-            pageSize: +queryParamsToBlog.pageSize,
+            page: +pageNumber,
+            pageSize: +pageSize,
             totalCount: +totalCountBlogs,
             items: blogs.map(blog => blogMapper(blog)),
         };
