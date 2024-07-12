@@ -18,6 +18,9 @@ export const blogsService = {
         }
         return await blogsRepositories.createBlog(newBlog);
     },
+    async createPostToBlogInputModel(id: any, post: any): Promise<InputCreateBlogModel> {
+        return await blogsRepositories.createPostToBlogID(id, post);
+    },
     async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
         return await blogsRepositories.putBlog(id, blog);
     },
