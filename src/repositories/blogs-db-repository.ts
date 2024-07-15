@@ -4,7 +4,7 @@ import {InputUpdateBlogModel} from "../models/blog/input/update.blog.input.model
 import {BlogDbType} from "../models/db/db.models";
 
 export const blogsRepositories = {
-    async createBlog(blog: /*OutputBlogModel*/BlogDbType): Promise<string | null>{
+    async createBlog(blog: BlogDbType): Promise<string | null>{
         const newBlog = await blogsCollections.insertOne(blog)
         if (!newBlog || !newBlog.insertedId) {
             return null;
