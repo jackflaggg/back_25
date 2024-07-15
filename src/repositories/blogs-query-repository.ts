@@ -4,7 +4,7 @@ import {QueryBlogInputModels} from "../models/blog/input/get-query.blog.input.mo
 import {postMapper} from "../models/post/mapper/post-mapper";
 import {OutputBlogModel} from "../models/blog/output/blog.output.models";
 import {ObjectId} from "mongodb";
-import {helperToBlog, helperToPost} from "../middlewares/helper-query-get";
+import {helperToBlog} from "../middlewares/helper-query-get";
 
 
 export const blogsQueryRepositories = {
