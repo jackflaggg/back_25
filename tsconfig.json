@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "noUnusedLocals": false,
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
