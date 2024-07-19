@@ -19,3 +19,14 @@ export const helperToPost = (query: QueryPostInputModels) => {
         sortDirection: query.sortDirection ?? 'desc',
     }
 }
+
+export const helperToUser = (query: any) => {
+    return {
+        sortBy: query.sortBy ?? 'createdAt',
+        sortDirection: query.sortDirection ?? 'desc',
+        pageNumber: query.pageNumber ?? 1,
+        pageSize: query.pageSize ?? 10,
+        searchLoginTerm: query.searchLoginTerm ?? null,
+        searchEmailTerm: query.searchEmailTerm ?? null,
+    }
+}
