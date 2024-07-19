@@ -1,7 +1,7 @@
-import {blogsCollections, postsCollections} from "../db/db";
+import {blogsCollections, postsCollections} from "../../db/db";
 import {ObjectId} from "mongodb";
-import {InputUpdateBlogModel} from "../models/blog/input/update.blog.input.models";
-import {BlogDbType} from "../models/db/db.models";
+import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
+import {BlogDbType} from "../../models/db/db.models";
 
 export const blogsRepositories = {
     async createBlog(blog: BlogDbType): Promise<string | null>{

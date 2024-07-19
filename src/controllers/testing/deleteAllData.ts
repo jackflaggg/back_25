@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {HTTP_STATUSES} from "../../models/common-types";
-import {testingDbRepositories} from "../../repositories/testing-db-repository";
+import {testingDbRepositories} from "../../repositories/testing/testing-db-repository";
 
 export const deleteTestingRouter = async (req: Request,
                                    res: Response) => {

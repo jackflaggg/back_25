@@ -2,8 +2,8 @@ import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody, ResponseBody} 
 import {CreatePostToBlogInputModel} from "../../models/blog/input/create.post.to.blog.input";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {ObjectId} from "mongodb";
-import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
-import {postsQueryRepository} from "../../repositories/posts-query-repository";
+import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
+import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {blogsService} from "../../domain/blog/blog-service";
 
 export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, CreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel>) => {

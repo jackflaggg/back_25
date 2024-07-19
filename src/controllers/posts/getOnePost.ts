@@ -1,7 +1,7 @@
 import {Response} from "express";
 import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/common-types";
 import {ObjectId} from "mongodb";
-import {postsQueryRepository} from "../../repositories/posts-query-repository";
+import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 
 export const OnePostController = async (req: RequestWithParams<PostParamsId>,
                                         res:Response) => {

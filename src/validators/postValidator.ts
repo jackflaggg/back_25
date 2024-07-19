@@ -1,6 +1,6 @@
 import {body, param} from "express-validator";
 import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
-import {blogsQueryRepositories} from "../repositories/blogs-query-repository";
+import {blogsQueryRepositories} from "../repositories/blogs/blogs-query-repository";
 
 export const titleValidator = body('title')
     .isString()

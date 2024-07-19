@@ -1,4 +1,4 @@
-import {database} from "../db/db";
+import {database} from "../../db/db";
 
 export const testingDbRepositories = {
     async deleteAllData(): Promise<void>{

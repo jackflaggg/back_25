@@ -1,4 +1,4 @@
-import {blogsRepositories} from "../../repositories/blogs-db-repository";
+import {blogsRepositories} from "../../repositories/blogs/blogs-db-repository";
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
 

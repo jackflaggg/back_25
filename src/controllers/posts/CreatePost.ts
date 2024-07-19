@@ -4,8 +4,8 @@ import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {PostCreateType} from "../../models/db/db.models";
 import {ObjectId} from "mongodb";
 import {postsService} from "../../domain/post/post-service";
-import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
-import {postsQueryRepository} from "../../repositories/posts-query-repository";
+import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
+import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 
 export const createPostController = async (req: RequestWithBody<InputCreatePostModel>,
                                            res:ResponseBody<OutputPostModel>) => {

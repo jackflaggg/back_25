@@ -3,8 +3,8 @@ import {HTTP_STATUSES, PostParamsId, RequestWithParamsAndBody} from "../../model
 import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
 import {ObjectId} from "mongodb";
 import {postsService} from "../../domain/post/post-service";
-import {postsQueryRepository} from "../../repositories/posts-query-repository";
-import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
+import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 
 export const updatePostController = async (req: RequestWithParamsAndBody<PostParamsId, InputUpdatePostModel>,
                                            res:Response) => {

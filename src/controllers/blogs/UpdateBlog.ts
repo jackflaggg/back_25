@@ -3,7 +3,7 @@ import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../mo
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";
-import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
+import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 
 export const updateBlogController = async (req: RequestWithParamsAndBody<BlogParamsModel, InputUpdateBlogModel>,
                                            res:Response) => {

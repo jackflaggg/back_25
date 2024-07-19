@@ -2,7 +2,7 @@ import {Response} from "express";
 import {HTTP_STATUSES, RequestWithQuery} from "../../models/common-types";
 import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
 import {helperToPost} from "../../middlewares/helper-query-get";
-import {postsQueryRepository} from "../../repositories/posts-query-repository";
+import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 
 export const AllPostController = async (req: RequestWithQuery<QueryPostInputModels>,
                                         res:Response) => {

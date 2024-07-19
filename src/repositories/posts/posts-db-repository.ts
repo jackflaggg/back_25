@@ -1,7 +1,7 @@
-import {postsCollections} from "../db/db";
+import {postsCollections} from "../../db/db";
 import {ObjectId} from "mongodb";
-import {PostCreateType} from "../models/db/db.models";
-import {InputUpdatePostModel} from "../models/post/input/update.post.input.models";
+import {PostCreateType} from "../../models/db/db.models";
+import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
 
 export const postsRepository = {
     async createPost(post: PostCreateType): Promise<string | null> {

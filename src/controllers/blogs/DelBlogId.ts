@@ -2,7 +2,7 @@ import {Response} from "express";
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams} from "../../models/common-types";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";
-import {blogsQueryRepositories} from "../../repositories/blogs-query-repository";
+import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 
 export const deleteBlogController = async (req: RequestWithParams<BlogParamsModel>,
                                            res:Response) => {

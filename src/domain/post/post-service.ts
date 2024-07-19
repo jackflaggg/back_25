@@ -1,6 +1,6 @@
 import {PostCreateType, PostUpdateType} from "../../models/db/db.models";
 import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
-import {postsRepository} from "../../repositories/posts-db-repository";
+import {postsRepository} from "../../repositories/posts/posts-db-repository";
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 
 export const postsService = {

@@ -1,8 +1,8 @@
-import {postsCollections} from "../db/db";
-import {postMapper} from "../models/post/mapper/post-mapper";
-import {QueryPostInputModels} from "../models/post/input/get-query.post.input.models";
-import {helperToPost} from "../middlewares/helper-query-get";
-import {OutputPostModel} from "../models/post/output/post.output.models";
+import {postsCollections} from "../../db/db";
+import {postMapper} from "../../models/post/mapper/post-mapper";
+import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
+import {helperToPost} from "../../middlewares/helper-query-get";
+import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {ObjectId} from "mongodb";
 
 export const postsQueryRepository = {
