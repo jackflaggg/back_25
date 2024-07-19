@@ -1,6 +1,6 @@
 // инициализация типов при создании данных (блогов, постов, бд)
 
-export type BlogDbType = {
+export interface BlogDbType {
     id?: string,
     name: string,
     description: string,
@@ -9,7 +9,7 @@ export type BlogDbType = {
     isMembership: boolean
 }
 
-export type PostDbType = {
+export interface PostDbType {
     title: string,
     shortDescription: string,
     content: string,
@@ -18,7 +18,14 @@ export type PostDbType = {
     createdAt: string
 }
 
-export type BlogCreateType = {
+export interface UserDbType {
+    id: string,
+    login: string,
+    email: string,
+    createdAt: string,
+}
+
+export interface BlogCreateType {
     name: string,
     description: string,
     websiteUrl: string
@@ -26,7 +33,7 @@ export type BlogCreateType = {
     isMembership: boolean
 }
 
-export type PostCreateType = {
+export interface PostCreateType {
     title: string,
     shortDescription: string,
     content: string,
@@ -35,7 +42,7 @@ export type PostCreateType = {
     createdAt: string
 }
 
-export type PostUpdateType = {
+export interface PostUpdateType {
     title: string,
     shortDescription: string,
     content: string,
