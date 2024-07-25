@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {adminMiddlewares} from "../../middlewares/admin-middleware";
+import {adminMiddlewares} from "../../utils/middlewares/admin-middleware";
 import {AllUsersController} from "../../controllers/users/GetAllUsers";
 import {userCreateValidator} from "../../validators/userValidator";
 import {createUserController} from "../../controllers/users/CreateUser";

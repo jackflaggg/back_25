@@ -1,5 +1,5 @@
 import {body} from "express-validator";
-import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
+import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
 
 export const loginValidator  = body('login')
     .isString()

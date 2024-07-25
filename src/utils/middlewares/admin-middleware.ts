@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from "express";
-import {HTTP_STATUSES} from "../models/common-types";
-import {SETTINGS} from "../settings";
+import {HTTP_STATUSES} from "../../models/common-types";
+import {SETTINGS} from "../../settings";
 
 export const fromUTF8ToBase64 = (code: string) => {
     const buffTwo = Buffer.from(code, 'utf8')

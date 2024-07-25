@@ -3,7 +3,7 @@ import {Response} from "express";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
 import {ObjectId} from "mongodb";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
-import {helperToPost} from "../../middlewares/helper-query-get";
+import {helperToPost} from "../../utils/helpers/helper-query-get";
 
 export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, QueryBlogInputModels>, res: Response<any>) => {
     const blogId = req.params.id;

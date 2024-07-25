@@ -1,5 +1,5 @@
 import {body, param} from "express-validator";
-import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
+import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
 import {ObjectId} from "mongodb";
 import {blogsCollections} from "../db/db";
 

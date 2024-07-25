@@ -1,4 +1,4 @@
-import {fromHexToBase64, fromUTF8ToBase64} from "../../src/middlewares/admin-middleware";
+import {fromHexToBase64, fromUTF8ToBase64} from "../../src/utils/middlewares/admin-middleware";
 import {SETTINGS} from "../../src/settings";
 
 export const codedAuth = fromUTF8ToBase64(SETTINGS.ADMIN)

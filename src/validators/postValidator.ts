@@ -1,5 +1,5 @@
 import {body, param} from "express-validator";
-import {inputCheckErrorsMiddleware} from "../middlewares/checkErrorsValidator";
+import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
 import {blogsQueryRepositories} from "../repositories/blogs/blogs-query-repository";
 
 export const titleValidator = body('title')

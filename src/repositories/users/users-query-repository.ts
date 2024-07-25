@@ -1,6 +1,6 @@
-import {helperToUser} from "../../middlewares/helper-query-get";
+import {helperToUser} from "../../utils/helpers/helper-query-get";
 import {usersCollection} from "../../db/db";
-import {userMapper} from "../../models/user/mapper/user-mapper";
+import {userMapper} from "../../utils/mappers/user-mapper";
 import {ObjectId} from "mongodb";
 
 export const usersQueryRepository = {

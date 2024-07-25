@@ -1,10 +1,10 @@
 import {blogsCollections, postsCollections} from "../../db/db";
-import {blogMapper} from "../../models/blog/mapper/blog-mapper";
+import {blogMapper} from "../../utils/mappers/blog-mapper";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
-import {postMapper} from "../../models/post/mapper/post-mapper";
+import {postMapper} from "../../utils/mappers/post-mapper";
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {ObjectId} from "mongodb";
-import {helperToBlog} from "../../middlewares/helper-query-get";
+import {helperToBlog} from "../../utils/helpers/helper-query-get";
 
 
 export const blogsQueryRepositories = {

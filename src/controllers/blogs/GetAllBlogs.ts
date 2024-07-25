@@ -2,7 +2,7 @@ import {HTTP_STATUSES, RequestWithQuery, ResponseBody} from "../../models/common
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
-import {helperToBlog} from "../../middlewares/helper-query-get";
+import {helperToBlog} from "../../utils/helpers/helper-query-get";
 
 export const AllBlogController = async (req: RequestWithQuery<QueryBlogInputModels>,
                                         res:ResponseBody<OutputBlogModel[]>) => {
