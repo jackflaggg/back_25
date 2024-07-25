@@ -1,5 +1,5 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
-import {ErrorsType} from "../../models/common-types";
+import {ErrorsType} from "../../models/common/common-types";
 import {usersCollection} from "../../db/db";
 
 export const userService = {

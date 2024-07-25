@@ -1,4 +1,4 @@
-import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common-types";
+import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
 import {userService} from "../../domain/user/user-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 

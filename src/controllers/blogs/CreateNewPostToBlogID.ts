@@ -1,4 +1,4 @@
-import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody, ResponseBody} from "../../models/common-types";
+import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody, ResponseBody} from "../../models/common/common-types";
 import {CreatePostToBlogInputModel} from "../../models/blog/input/create.post.to.blog.input";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {ObjectId} from "mongodb";

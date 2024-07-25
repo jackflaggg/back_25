@@ -1,4 +1,4 @@
-import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndQuery} from "../../models/common-types";
+import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndQuery} from "../../models/common/common-types";
 import {Response} from "express";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
 import {ObjectId} from "mongodb";

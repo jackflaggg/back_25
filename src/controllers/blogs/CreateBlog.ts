@@ -1,4 +1,4 @@
-import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common-types";
+import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
 import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
 import {blogsService} from "../../domain/blog/blog-service";

@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
-import {OutputBlogModel} from "./blog/output/blog.output.models";
-import {OutputPostModel} from "./post/output/post.output.models";
+import {OutputBlogModel} from "../blog/output/blog.output.models";
+import {OutputPostModel} from "../post/output/post.output.models";
 
 export enum HTTP_STATUSES {
     OK_200 = 200,

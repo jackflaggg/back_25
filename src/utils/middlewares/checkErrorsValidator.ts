@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import {validationResult} from "express-validator";
-import {ErrorsType, FieldNamesType, HTTP_STATUSES} from "../../models/common-types";
+import {ErrorsType, FieldNamesType, HTTP_STATUSES} from "../../models/common/common-types";
 
 export const inputCheckErrorsMiddleware = (req: Request, res: Response<ErrorsType>, next: NextFunction): void => {
     const e = validationResult(req)

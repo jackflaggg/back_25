@@ -1,6 +1,6 @@
 import {SETTINGS} from "../../src/settings";
 import {req} from "../helpers/agent";
-import {HTTP_STATUSES} from "../../src/models/common-types";
+import {HTTP_STATUSES} from "../../src/models/common/common-types";
 import {
     codedAuth,
     createString, inCodedAuth,

@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/common-types";
+import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/common/common-types";
 import {ObjectId} from "mongodb";
 import {postsService} from "../../domain/post/post-service";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";

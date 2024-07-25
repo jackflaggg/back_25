@@ -1,4 +1,4 @@
-import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common-types";
+import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
 import {InputCreatePostModel} from "../../models/post/input/create.post.input.models";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {PostCreateType} from "../../models/db/db.models";

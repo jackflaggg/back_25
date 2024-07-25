@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../models/common-types";
+import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../models/common/common-types";
 import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";

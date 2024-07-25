@@ -1,16 +1,7 @@
 import {Request, Response, NextFunction} from "express";
-import {HTTP_STATUSES} from "../../models/common-types";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 import {SETTINGS} from "../../settings";
-
-export const fromUTF8ToBase64 = (code: string) => {
-    const buffTwo = Buffer.from(code, 'utf8')
-    return buffTwo.toString('base64')
-}
-
-export const fromHexToBase64 = (code: string) => {
-    const buffTwo = Buffer.from(code, 'hex')
-    return buffTwo.toString('base64')
-}
+import {fromUTF8ToBase64} from "../features/UTF8ToBase64";
 
 export const adminMiddlewares = (req: Request, res: Response, next:NextFunction) => {
     const {authorization: auth} = req.headers;

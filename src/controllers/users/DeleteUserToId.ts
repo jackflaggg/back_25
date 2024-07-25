@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {HTTP_STATUSES, RequestWithParams} from "../../models/common-types";
+import {HTTP_STATUSES, RequestWithParams} from "../../models/common/common-types";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
