@@ -10,7 +10,7 @@ export const loginValidator  = body('login')
     .isLength({min: 3, max: 10})
     .withMessage('more then 10 or min 3')
     .matches(/^[a-zA-Z0-9_-]*$/)
-    .withMessage('login must be a valid');
+    .withMessage('login length should be from 3 to 10 symbols');
 
 export const passwordValidator  = body('password')
     .isString()
@@ -19,7 +19,7 @@ export const passwordValidator  = body('password')
     .notEmpty()
     .withMessage('empty')
     .isLength({min: 6, max: 20})
-    .withMessage('more then 20 or min 3');
+    .withMessage('password length should be from 6 to 20 symbols');
 
 export const emailValidator  = body('email')
     .isString()
@@ -27,8 +27,8 @@ export const emailValidator  = body('email')
     .trim()
     .notEmpty()
     .withMessage('empty')
-    .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/)
-    .withMessage('email must be a valid');
+    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+    .withMessage('email should follow the pattern: example@example.com');
 
 export const userCreateValidator = [
     loginValidator,
