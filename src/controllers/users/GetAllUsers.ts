@@ -3,12 +3,13 @@ import {QueryPostInputModels} from "../../models/post/input/get-query.post.input
 import {Response} from "express";
 import {helperToPost, helperToUser} from "../../middlewares/helper-query-get";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 
 export const AllUsersController = async (req: RequestWithQuery<any>,
                                         res:Response) => {
-    const queryPost = helperToUser(req.query);
+    const queryUser = helperToUser(req.query);
 
-    const getAllPosts = await postsQueryRepository.getAllPost(queryPost)
+    const getAllUsers = await usersQueryRepository.getAllUsers(queryUser)
 
     res.status(HTTP_STATUSES.OK_200).send(getAllPosts);
 }
