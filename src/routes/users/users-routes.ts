@@ -1,8 +1,12 @@
 import {Router} from "express";
-import {postRouter} from "../posts/posts-router";
 import {adminMiddlewares} from "../../middlewares/admin-middleware";
 import {AllUsersController} from "../../controllers/users/GetAllUsers";
+import {userCreateValidator} from "../../validators/userValidator";
+import {createUserController} from "../../controllers/users/CreateUser";
+import {deleteUserController} from "../../controllers/users/DeleteUserToId";
 
 export const usersRoutes: Router = Router();
 
-usersRoutes.get('/', adminMiddlewares, AllUsersController)
+usersRoutes.get('/', adminMiddlewares, AllUsersController);
+usersRoutes.post('/', adminMiddlewares, ...userCreateValidator, createUserController);
+usersRoutes.del('/:id', adminMiddlewares, deleteUserController);

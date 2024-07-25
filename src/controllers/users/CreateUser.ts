@@ -1,3 +1,3 @@
-export const createUser = async (req: Request, res: Response) => {
+export const createUserController = async (req: Request, res: Response) => {
 
 }
