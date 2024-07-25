@@ -1,4 +1,4 @@
-import express from 'express'
+import express, {Express} from 'express'
 import cors from 'cors'
 import {SETTINGS} from "./settings";
 import {blogsRouter} from "./routes/blogs/blogs-router";
@@ -7,7 +7,7 @@ import {testingRouter} from "./routes/testing/testing-routes";
 import {vercelRouter} from "./routes/vercel/vercel-router";
 import {usersRoutes} from "./routes/users/users-routes";
 
-export const app = express();
+export const app: Express = express();
 app.use(express.json());
 app.use(cors());
 
