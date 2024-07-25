@@ -27,7 +27,7 @@ export const emailValidator  = body('email')
     .trim()
     .notEmpty()
     .withMessage('empty')
-    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+    .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .withMessage('email should follow the pattern: example@example.com');
 
 export const userCreateValidator = [
