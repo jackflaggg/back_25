@@ -1,6 +1,6 @@
-export interface CreateInputModel {
+export interface CreateOutputModel {
     id: string,
     login: string,
-    password: string,
-    email: string
+    email: string,
+    createdAt: string,
 }
