@@ -11,6 +11,7 @@ export const nameValidator = body('name')
     .withMessage('empty')
     .isLength({max: 15})
     .withMessage('more then 15');
+
 export const descriptionValidator = body('description')
     .isString()
     .withMessage('this is not string')
@@ -19,6 +20,7 @@ export const descriptionValidator = body('description')
     .withMessage('empty')
     .isLength({max: 500})
     .withMessage('more then 500');
+
 export const urlValidator = body('websiteUrl')
     .isString()
     .withMessage('this is not string')
