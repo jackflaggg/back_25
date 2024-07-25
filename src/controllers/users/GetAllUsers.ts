@@ -1,8 +1,6 @@
 import {HTTP_STATUSES, RequestWithQuery} from "../../models/common-types";
-import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
 import {Response} from "express";
-import {helperToPost, helperToUser} from "../../middlewares/helper-query-get";
-import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {helperToUser} from "../../middlewares/helper-query-get";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 
 export const AllUsersController = async (req: RequestWithQuery<any>,
@@ -11,5 +9,5 @@ export const AllUsersController = async (req: RequestWithQuery<any>,
 
     const getAllUsers = await usersQueryRepository.getAllUsers(queryUser)
 
-    res.status(HTTP_STATUSES.OK_200).send(getAllPosts);
+    res.status(HTTP_STATUSES.OK_200).send(getAllUsers);
 }
