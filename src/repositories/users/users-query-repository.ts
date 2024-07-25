@@ -6,14 +6,20 @@ import {ObjectId} from "mongodb";
 export const usersQueryRepository = {
     async getAllUsers(query: any): Promise<any> {
         const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = helperToUser(query);
+
+        const filter = {
+            ...(searchLoginTerm && { login: { $regex: searchLoginTerm, $options: 'i' } }),
+            ...(searchEmailTerm && { email: { $regex: searchEmailTerm, $options: 'i' } })
+        };
+
         const AllUsers = await usersCollection
-            .find()
-            .sort(sortBy, sortDirection)
+            .find(filter)
+            .sort({ [sortBy]: sortDirection })
             .skip((Number(pageNumber) - 1) * Number(pageSize))
             .limit(Number(pageSize))
             .toArray();
 
-        const totalCountsUsers = await usersCollection.countDocuments();
+        const totalCountsUsers = await usersCollection.countDocuments(filter);
 
         const pagesCount = Math.ceil(totalCountsUsers / Number(pageSize));
 
