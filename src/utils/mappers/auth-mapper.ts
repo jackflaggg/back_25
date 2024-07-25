@@ -1,5 +1,5 @@
 
-export const userMapper = (user: any) => {
+export const authMapper = (user: any) => {
     return {
         id: user._id.toString(),
         login: user.login,
