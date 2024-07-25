@@ -6,7 +6,7 @@ export const createUserController = async (req: RequestWithBody<any>,
                                            res:ResponseBody<any>) => {
     const createdUserId = await userService.createUser(req.body);
 
-    const user = await usersQueryRepository.getUserById(createdUserId!.id)
+    const user = await usersQueryRepository.getUserById(createdUserId)
 
     if (!user) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
