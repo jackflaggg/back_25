@@ -3,6 +3,7 @@ import {HTTP_STATUSES, RequestWithParams} from "../../models/common/common-types
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../domain/blog/blog-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {userService} from "../../domain/user/user-service";
 
 export const deleteUserController = async (req: RequestWithParams<{id: string}>, res: Response): Promise<void> => {
     const { id } = req.params;
@@ -19,7 +20,7 @@ export const deleteUserController = async (req: RequestWithParams<{id: string}>,
         return
     }
 
-    const deleteBlog = await blogsService.delBlog(id);
+    const deleteBlog = await userService.delUser(user);
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 }
