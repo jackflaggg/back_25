@@ -8,13 +8,25 @@ export const usersQueryRepository = {
         const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = helperToUser(query);
 
         const filter = {
-            ...(searchLoginTerm && { login: { $regex: searchLoginTerm, $options: 'i' } }),
-            ...(searchEmailTerm && { email: { $regex: searchEmailTerm, $options: 'i' } })
-        };
+            $or: [
+                {
+                    login: {
+                        $regex: query.searchLoginTerm,
+                        $options: 'i'
+                    }
+                },
+                {
+                    email: {
+                        $regex: query.searchEmailTerm,
+                        $options: 'i'
+                    }
+                },
+            ]
+        }
 
         const AllUsers = await usersCollection
             .find(filter)
-            .sort({ [sortBy]: sortDirection })
+            .sort(sortBy , sortDirection )
             .skip((Number(pageNumber) - 1) * Number(pageSize))
             .limit(Number(pageSize))
             .toArray();
