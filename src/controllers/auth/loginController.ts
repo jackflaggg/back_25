@@ -8,7 +8,7 @@ export const loginController = async (req: Request, res: Response) => {
         res.sendStatus(400);
         return
     }
-    const result = await authService.loginUser(req.body)
+    const result = await authService.loginUser(loginOrEmail, password)
     if (result.status === ResultStatus.Unauthorized) {
         res
             .status(HTTP_STATUSES.NOT_AUTHORIZATION)
