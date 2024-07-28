@@ -1,14 +1,13 @@
 import {Response} from "express";
 import {HTTP_STATUSES, RequestWithParams} from "../../models/common/common-types";
-import {ObjectId} from "mongodb";
-import {blogsService} from "../../domain/blog/blog-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {userService} from "../../domain/user/user-service";
+import {validateId} from "../../utils/helpers/helper-validate-id";
 
 export const deleteUserController = async (req: RequestWithParams<{id: string}>, res: Response): Promise<void> => {
     const { id } = req.params;
 
-    if (!ObjectId.isValid(id)){
+    if (!validateId(id)){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }

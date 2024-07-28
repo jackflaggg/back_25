@@ -1,13 +1,13 @@
 import {Response} from "express";
 import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/common/common-types";
-import {ObjectId} from "mongodb";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {validateId} from "../../utils/helpers/helper-validate-id";
 
 export const OnePostController = async (req: RequestWithParams<PostParamsId>,
                                         res:Response) => {
     const { id: postId } = req.params;
 
-    if (!ObjectId.isValid(postId)) {
+    if (!validateId(postId)) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }

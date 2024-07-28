@@ -1,15 +1,15 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody, ResponseBody} from "../../models/common/common-types";
 import {CreatePostToBlogInputModel} from "../../models/blog/input/create.post.to.blog.input";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
-import {ObjectId} from "mongodb";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {blogsService} from "../../domain/blog/blog-service";
+import {validateId} from "../../utils/helpers/helper-validate-id";
 
 export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, CreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel>) => {
 
     const {id} = req.params;
-    if (!ObjectId.isValid(id)) {
+    if (!validateId(id)) {
         console.log('err: not valid blog id');
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return

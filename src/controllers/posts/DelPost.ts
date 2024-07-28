@@ -1,13 +1,13 @@
 import {Response} from "express";
 import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/common/common-types";
-import {ObjectId} from "mongodb";
 import {postsService} from "../../domain/post/post-service";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {validateId} from "../../utils/helpers/helper-validate-id";
 
 export const deletePostController = async (req: RequestWithParams<PostParamsId>,
                                            res:Response) => {
     const { id: PostId } = req.params;
-    if (!ObjectId.isValid(PostId)) {
+    if (!validateId(PostId)) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }

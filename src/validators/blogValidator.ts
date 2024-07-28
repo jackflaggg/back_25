@@ -1,7 +1,7 @@
 import {body, param} from "express-validator";
 import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
-import {ObjectId} from "mongodb";
 import {blogsCollections} from "../db/db";
+import {validateId} from "../utils/helpers/helper-validate-id";
 
 export const nameValidator = body('name')
     .isString()
@@ -42,7 +42,7 @@ export const blogIdParamsValidator = param('id')
     .withMessage('more then 100')
     .custom( async blogId => {
 
-        if (!ObjectId.isValid(blogId)) {
+        if (!validateId(blogId)) {
             throw Error('Incorrect blogId')
         }
 

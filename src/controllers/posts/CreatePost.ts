@@ -2,15 +2,15 @@ import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/
 import {InputCreatePostModel} from "../../models/post/input/create.post.input.models";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {PostCreateType} from "../../models/db/db.models";
-import {ObjectId} from "mongodb";
 import {postsService} from "../../domain/post/post-service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {validateId} from "../../utils/helpers/helper-validate-id";
 
 export const createPostController = async (req: RequestWithBody<InputCreatePostModel>,
                                            res:ResponseBody<OutputPostModel>) => {
     const { blogId} = req.body
-    if (!ObjectId.isValid(blogId)) {
+    if (!validateId(blogId)) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return
     }
