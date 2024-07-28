@@ -19,7 +19,7 @@ export interface PostDbType {
 }
 
 export interface UserDbType {
-    id: string,
+    id?: string,
     login: string,
     email: string,
     createdAt: string,

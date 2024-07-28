@@ -1,6 +1,7 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {ErrorsType, ResultStatus} from "../../models/common/common-types";
 import {hashService} from "../../utils/helpers/helper-hash";
+import {UserDbType} from "../../models/db/db.models";
 
 export const userService = {
     async createUser(user: any): Promise<string | null | ErrorsType | any> {
