@@ -6,11 +6,11 @@ export const createUserController = async (req: RequestWithBody<any>,
                                            res:ResponseBody<any>) => {
     const createdUserId = await userService.createUser(req.body);
     if (createdUserId.status !== ResultStatus.Success) {
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send({errorsMessages: createdUserId.extensions || []})
+        res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)//.send({errorsMessages: createdUserId.extensions || []})
         return
     }
 
-    const user = await usersQueryRepository.getUserById(createdUserId as string)
+    const user = await usersQueryRepository.getUserById(createdUserId.data.id)
 
     res.status(HTTP_STATUSES.CREATED_201).send(user);
 }

@@ -17,7 +17,7 @@ export const userService = {
 
         const existingUser = await UsersDbRepository.findByLoginOrEmail({
             loginOrEmail: login || email,
-            password: password
+           // password: password
             // изменить!
         })
 
