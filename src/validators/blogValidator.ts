@@ -1,7 +1,5 @@
-import {body, param} from "express-validator";
+import {body} from "express-validator";
 import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
-import {blogsCollections} from "../db/db";
-import {validateId} from "../utils/helpers/helper-validate-id";
 
 export const nameValidator = body('name')
     .isString()
@@ -31,29 +29,6 @@ export const urlValidator = body('websiteUrl')
     .withMessage('more then 100')
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage('websiteUrl must be a valid URL');
-
-export const blogIdParamsValidator = param('id')
-    .isString()
-    .withMessage('this is not string')
-    .trim()
-    .notEmpty()
-    .withMessage('is empty')
-    .isLength({max: 100})
-    .withMessage('more then 100')
-    .custom( async blogId => {
-
-        if (!validateId(blogId)) {
-            throw Error('Incorrect blogId')
-        }
-
-        const blog = await blogsCollections.findOne(blogId);
-
-        if (!blog?._id) {
-            throw Error('not found blogId')
-        }
-        return !!blog;
-    })
-    .withMessage('blog not found')
 
 export const blogValidator = [
     nameValidator,
