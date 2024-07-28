@@ -39,7 +39,7 @@ export const blogIdParamsValidator = param('id')
     .notEmpty()
     .withMessage('is empty')
     .isLength({max: 100})
-    .withMessage('not found id')
+    .withMessage('more then 100')
     .custom( async blogId => {
 
         if (!ObjectId.isValid(blogId)) {

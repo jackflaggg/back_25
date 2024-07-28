@@ -1,6 +1,7 @@
 import {body, param} from "express-validator";
 import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
 import {blogsQueryRepositories} from "../repositories/blogs/blogs-query-repository";
+import {blogIdParamsValidator} from "./blogValidator";
 
 export const titleValidator = body('title')
     .isString()
@@ -10,6 +11,7 @@ export const titleValidator = body('title')
     .withMessage('empty')
     .isLength({max: 30})
     .withMessage('more then 30');
+
 export const shortDescriptionValidator = body('shortDescription')
     .isString()
     .withMessage('this is not string')
@@ -18,6 +20,7 @@ export const shortDescriptionValidator = body('shortDescription')
     .withMessage('empty')
     .isLength({max: 100})
     .withMessage('more then 100');
+
 export const contentValidator = body('content')
     .isString()
     .withMessage('this is not string')
@@ -40,12 +43,12 @@ export const blogIdValidator = body('blogId')
     })
     .withMessage('no blog')
 
-export const blogIdParamsValidator = param('id')
-    .isString()
-    .trim()
-    .withMessage('this is not string')
-    .isLength({max: 500})
-    .withMessage('more then 500');
+// export const blogIdParamsValidator = param('id')
+//     .isString()
+//     .trim()
+//     .withMessage('this is not string')
+//     .isLength({max: 500})
+//     .withMessage('more then 500');
 
 
 export const postValidator = [
