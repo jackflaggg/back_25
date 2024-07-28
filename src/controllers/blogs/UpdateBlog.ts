@@ -8,7 +8,6 @@ import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repos
 export const updateBlogController = async (req: RequestWithParamsAndBody<BlogParamsModel, InputUpdateBlogModel>,
                                            res:Response) => {
     const {id} = req.params;
-
     if (!ObjectId.isValid(id)) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
