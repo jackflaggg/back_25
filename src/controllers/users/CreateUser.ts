@@ -9,8 +9,6 @@ export const createUserController = async (req: RequestWithBody<any>,
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)//.send({errorsMessages: createdUserId.extensions || []})
         return
     }
-
-    const user = await usersQueryRepository.getUserById(createdUserId.data.id)
-
+    const user = await usersQueryRepository.getUserById(createdUserId.data)
     res.status(HTTP_STATUSES.CREATED_201).send(user);
 }

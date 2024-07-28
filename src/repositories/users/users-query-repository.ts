@@ -5,7 +5,7 @@ import {ObjectId} from "mongodb";
 
 export const usersQueryRepository = {
     async getAllUsers(query: any): Promise<any> {
-        const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = helperToUser(query);
+        const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = (query);
         const filter = {
             $or: [
                 {
