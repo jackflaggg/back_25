@@ -1,5 +1,4 @@
-import {body} from "express-validator";
-import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
+import {body, ValidationChain} from "express-validator";
 
 export const loginValidator  = body('login')
     .isString()
@@ -31,9 +30,8 @@ export const emailValidator  = body('email')
     .withMessage('email should follow the pattern: example@example.com');
 
 
-export const authCreateValidator = [
+export const authCreateValidator: ValidationChain[] = [
     loginValidator,
     passwordValidator,
-    emailValidator,
-    inputCheckErrorsMiddleware
+    emailValidator
 ]

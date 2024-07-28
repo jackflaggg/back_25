@@ -1,5 +1,4 @@
-import {body, param} from "express-validator";
-import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
+import {body, param, ValidationChain} from "express-validator";
 import {blogsQueryRepositories} from "../repositories/blogs/blogs-query-repository";
 
 export const titleValidator = body('title')
@@ -50,18 +49,16 @@ export const blogIdParamsValidator = param('id')
     .withMessage('more then 500');
 
 
-export const postValidator = [
+export const postValidator: ValidationChain[] = [
     titleValidator,
     shortDescriptionValidator,
     contentValidator,
-    blogIdValidator,
-    inputCheckErrorsMiddleware
+    blogIdValidator
 ]
 
-export const postCreateWithBlogIdValidator = [
+export const postCreateWithBlogIdValidator: ValidationChain[] = [
     titleValidator,
     shortDescriptionValidator,
     contentValidator,
-    blogIdParamsValidator,
-    inputCheckErrorsMiddleware
+    blogIdParamsValidator
 ]

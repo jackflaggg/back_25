@@ -1,5 +1,4 @@
-import {body} from "express-validator";
-import {inputCheckErrorsMiddleware} from "../utils/middlewares/checkErrorsValidator";
+import {body, ValidationChain} from "express-validator";
 
 export const nameValidator = body('name')
     .isString()
@@ -30,9 +29,8 @@ export const urlValidator = body('websiteUrl')
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage('websiteUrl must be a valid URL');
 
-export const blogValidator = [
+export const blogValidator: ValidationChain[] = [
     nameValidator,
     descriptionValidator,
-    urlValidator,
-    inputCheckErrorsMiddleware
+    urlValidator
 ]

@@ -17,8 +17,8 @@ blogsRouter.get("/", AllBlogController);
 blogsRouter.get("/:id", blogIdParamsValidator, inputCheckErrorsMiddleware, OneBlogController);
 blogsRouter.get("/:id/posts", getAllPostsToBlogID);
 
-blogsRouter.post("/", adminMiddlewares, ...blogValidator, createBlogController);
-blogsRouter.post("/:id/posts", adminMiddlewares, ...postCreateWithBlogIdValidator, createNewPostToBlogID);
+blogsRouter.post("/", adminMiddlewares, [...blogValidator, inputCheckErrorsMiddleware], createBlogController);
+blogsRouter.post("/:id/posts", adminMiddlewares, [...postCreateWithBlogIdValidator, inputCheckErrorsMiddleware], createNewPostToBlogID);
 
-blogsRouter.put("/:id", adminMiddlewares, blogIdParamsValidator,...blogValidator, updateBlogController);
+blogsRouter.put("/:id", adminMiddlewares, blogIdParamsValidator, [...blogValidator, inputCheckErrorsMiddleware], updateBlogController);
 blogsRouter.delete("/:id", adminMiddlewares, blogIdParamsValidator, deleteBlogController);

@@ -33,6 +33,5 @@ export const emailValidator  = body('email')
 export const userCreateValidator = [
     loginValidator,
     passwordValidator,
-    emailValidator,
-    inputCheckErrorsMiddleware
+    emailValidator
 ]
