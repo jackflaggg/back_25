@@ -5,7 +5,6 @@ import {usersQueryRepository} from "../../repositories/users/users-query-reposit
 
 export const AllUsersController = async (req: RequestWithQuery<any>,
                                         res:Response) => {
-    console.log(req.query)
     const queryUser = helperToUser(req.query);
     const getAllUsers = await usersQueryRepository.getAllUsers(queryUser)
 

@@ -6,27 +6,20 @@ import {ObjectId} from "mongodb";
 export const usersQueryRepository = {
     async getAllUsers(query: any): Promise<any> {
         const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = helperToUser(query);
-
         const filter = {
             $or: [
                 {
-                    login: {
-                        $regex: query.searchLoginTerm,
-                        $options: 'i'
-                    }
+                    login: { $regex: new RegExp(`^${searchLoginTerm || ""}`, "i") },
                 },
                 {
-                    email: {
-                        $regex: query.searchEmailTerm,
-                        $options: 'i'
-                    }
+                    email: { $regex: new RegExp(`^${searchEmailTerm || ""}`, "i") },
                 },
-            ]
-        }
+            ],
+        };
 
         const AllUsers = await usersCollection
             .find(filter)
-            .sort(sortBy , sortDirection )
+            .sort({[sortBy]: sortDirection} )
             .skip((Number(pageNumber) - 1) * Number(pageSize))
             .limit(Number(pageSize))
             .toArray();
