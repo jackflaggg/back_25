@@ -5,7 +5,7 @@ import {HTTP_STATUSES, ResultStatus} from "../../models/common/common-types";
 export const loginController = async (req: Request, res: Response) => {
     const {loginOrEmail, password} = req.body;
     if (!loginOrEmail || !password) {
-        res.sendStatus(400);
+        res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return
     }
     const result = await authService.loginUser(loginOrEmail, password)
@@ -17,7 +17,7 @@ export const loginController = async (req: Request, res: Response) => {
     }
     if (result.status === ResultStatus.Success) {
         res
-            .status(HTTP_STATUSES.OK_200)
+            .status(HTTP_STATUSES.NO_CONTENT_204)
             .send(result.data)
         return
     }
