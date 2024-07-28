@@ -1,33 +1,46 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
-import {ErrorsType} from "../../models/common/common-types";
-import {usersCollection} from "../../db/db";
+import {ErrorsType, ResultStatus} from "../../models/common/common-types";
+import {hashService} from "../../utils/helpers/helper-hash";
 
 export const userService = {
-    async createUser(user: any): Promise<string | null | ErrorsType> {
+    async createUser(user: any): Promise<string | null | ErrorsType | any> {
         const { login, password, email} = user;
 
-        const errors: ErrorsType = {
-            errorsMessages: []
+        if (!login || !password || !email) {
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: [{field: 'login,password,email', message: 'All fields are required'}],
+                data: null
+            }
         }
 
-        const loginTest = await usersCollection.findOne({login});
-        if (loginTest) {
-            errors.errorsMessages.push({message: 'login should be unique', field: "login"});
-            return errors
+        const existingUser = await UsersDbRepository.findByLoginOrEmail({
+            loginOrEmail: login || email,
+            password: password
+            // изменить!
+        })
+
+        if (existingUser) {
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: [{field: 'login or email', message: 'Login or email is not unique'}],
+                data: null
+            }
         }
 
-        const emailTest = await usersCollection.findOne({email});
-        if (emailTest) {
-            errors.errorsMessages.push({message: 'email should be unique', field: "email"});
-            return errors
-        }
+        const passwordHash = await hashService._generateHash(password);
 
         const newUser: any = {
             login,
-            password,
-            email
+            password: passwordHash,
+            email,
+            createdAt: new Date().toISOString()
         }
-        return await UsersDbRepository.createUser(newUser);
+        const userCreate = await UsersDbRepository.createUser(newUser);
+        return {
+            status: ResultStatus.Success,
+            data: userCreate
+        }
     },
     async delUser(id: string): Promise<boolean> {
         return await UsersDbRepository.deleteUser(id);
