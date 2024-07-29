@@ -31,7 +31,6 @@ export const emailValidator  = body('email')
 
 
 export const authCreateValidator: ValidationChain[] = [
-    loginValidator,
     passwordValidator,
-    emailValidator
+    emailValidator || loginValidator,
 ]
