@@ -5,16 +5,13 @@ import {ObjectId} from "mongodb";
 
 export const usersQueryRepository = {
     async getAllUsers(query: any): Promise<any> {
-        const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = (query);
+        const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = helperToUser(query);
+
         const filter = {
             $or: [
-                {
-                    login: { $regex: new RegExp(`^${searchLoginTerm || ""}`, "i") },
-                },
-                {
-                    email: { $regex: new RegExp(`^${searchEmailTerm || ""}`, "i") },
-                },
-            ],
+                searchLoginTerm ? { login: { $regex: searchLoginTerm, $options: 'i' }} : {},
+                searchEmailTerm ? { email: { $regex: searchEmailTerm, $options: 'i' }} : {}
+            ]
         };
 
         const AllUsers = await usersCollection

@@ -12,7 +12,7 @@ export const database: Db = client.db(SETTINGS.DB_NAME);
 
 export const blogsCollections = database.collection<BlogDbType>(SETTINGS.COLLECTION_BLOGS!);
 export const postsCollections = database.collection<PostDbType>(SETTINGS.COLLECTION_POSTS!);
-export const usersCollection = database.collection<UserDbType>(SETTINGS.COLLECTION_BLOGS!);
+export const usersCollection = database.collection<UserDbType>(SETTINGS.COLLECTION_USERS!);
 
 export const connectToDB = async (port: number) => {
     try {

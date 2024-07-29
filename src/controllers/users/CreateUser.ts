@@ -1,14 +1,15 @@
-import {HTTP_STATUSES, RequestWithBody, ResponseBody, ResultStatus} from "../../models/common/common-types";
+import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
 import {userService} from "../../domain/user/user-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 
 export const createUserController = async (req: RequestWithBody<any>,
                                            res:ResponseBody<any>) => {
     const createdUserId = await userService.createUser(req.body);
-    if (createdUserId.status !== ResultStatus.Success) {
-        res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)//.send({errorsMessages: createdUserId.extensions || []})
+
+    const user = await usersQueryRepository.getUserById(createdUserId)
+    if (!user) {
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
-    const user = await usersQueryRepository.getUserById(createdUserId.data)
     res.status(HTTP_STATUSES.CREATED_201).send(user);
 }

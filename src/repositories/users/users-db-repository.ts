@@ -4,6 +4,7 @@ import {ObjectId} from "mongodb";
 export const UsersDbRepository = {
     async createUser(body: any): Promise<any> {
         const newUser = await usersCollection.insertOne(body)
+
         if (!newUser || !newUser.insertedId) {
             return null;
         }
