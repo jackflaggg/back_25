@@ -1,6 +1,7 @@
 import {body, ValidationChain} from "express-validator";
 
 export const loginValidator  = body('login')
+    .optional({ nullable: true })
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -21,6 +22,7 @@ export const passwordValidator  = body('password')
     .withMessage('password length should be from 6 to 20 symbols');
 
 export const emailValidator  = body('email')
+    .optional({ nullable: true })
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -29,8 +31,23 @@ export const emailValidator  = body('email')
     .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     .withMessage('email should follow the pattern: example@example.com');
 
+export const uniqueLoginOrEmailValidator = body().custom((value, { req }) => {
+    const { login, email } = value;
+
+    // Проверяем, что одно из полей присутствует, но не оба
+    if (!login && !email) {
+        throw new Error('Either login or email must be provided');
+    }
+    if (login && email) {
+        throw new Error('Please provide only one of login or email');
+    }
+
+    return true; // Валидация прошла успешно
+});
 
 export const authCreateValidator: ValidationChain[] = [
+    loginValidator,
+    emailValidator,
     passwordValidator,
-    emailValidator || loginValidator,
+    //uniqueLoginOrEmailValidator
 ]
