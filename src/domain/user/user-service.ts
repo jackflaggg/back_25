@@ -17,7 +17,7 @@ export const userService = {
             } as ResultError
         }
 
-        const passwordHash = await hashService._generateHash({password});
+        const passwordHash = await hashService._generateHash(password);
 
         const newUser: any = {
             login,
