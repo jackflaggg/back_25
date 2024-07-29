@@ -18,5 +18,6 @@ export const errorsValidate =  async (email: string, login: string) => {
         errors.errorsMessages.push({message: `not unique ${existingUserByLogin.login}`, field: "login"})
     }
 
+    console.log(typeof errors)
     return  errors.errorsMessages.length > 0 ? errors : false;
 }

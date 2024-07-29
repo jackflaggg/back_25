@@ -10,12 +10,12 @@ export const createUserController = async (req: RequestWithBody<any>,
                                            res:ResponseBody<any>) => {
     const createdUserId = await userService.createUser(req.body);
 
-    // if (createdUserId.errorsMessages.length > 1) {
-    //     res
-    //         .status(HTTP_STATUSES.BAD_REQUEST_400)
-    //         .send(createdUserId);
-    //     return;
-    // }
+    if (createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
+        res
+            .status(HTTP_STATUSES.BAD_REQUEST_400)
+            .send(createdUserId.data);
+        return;
+    }
 
     const user = await usersQueryRepository.getUserById(createdUserId)
     if (!user) {

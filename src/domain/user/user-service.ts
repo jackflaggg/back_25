@@ -1,5 +1,5 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
-import {ErrorsType} from "../../models/common/common-types";
+import {ErrorsType, HTTP_STATUSES} from "../../models/common/common-types";
 import {hashService} from "../../utils/helpers/helper-hash";
 import {errorsValidate} from "../../utils/features/errors-validate";
 
@@ -7,11 +7,13 @@ export const userService = {
     async createUser(user: any): Promise<string | null | ErrorsType | any> {
         const { login, password, email} = user;
 
-        const errors: ErrorsType | boolean = await errorsValidate( email, login );
+        const errors = await errorsValidate( email, login );
 
-        console.log(errors)
         if (errors){
-            return errors
+            return {
+                status: HTTP_STATUSES.BAD_REQUEST_400,
+                data: errors
+            }
         }
 
         const passwordHash = await hashService._generateHash(password);
