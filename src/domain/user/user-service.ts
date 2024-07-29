@@ -7,8 +7,9 @@ export const userService = {
     async createUser(user: any): Promise<string | null | ErrorsType | any> {
         const { login, password, email} = user;
 
-        const errors = await errorsValidate(login , email);
+        const errors: ErrorsType | boolean = await errorsValidate( email, login );
 
+        console.log(errors)
         if (errors){
             return errors
         }

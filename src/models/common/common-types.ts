@@ -14,9 +14,9 @@ export enum HTTP_STATUSES {
     INTERNAL_SERVER_ERROR_500 = 500,
 }
 
-export const errors: ErrorsType = {
-    errorsMessages: []
-}
+// export const errors: ErrorsType = {
+//     errorsMessages: []
+// }
 export type ErrorsMessageType = {
     message: string | FieldNamesType,
     field: string

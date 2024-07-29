@@ -15,9 +15,9 @@ export const UsersDbRepository = {
         return deleteUser.acknowledged;
     },
     async findByLogin(login: any): Promise<any | null> {
-        return await usersCollection.findOne({ login: login })
+        return await usersCollection.findOne({login: login})
     },
-    async findByEmail(email: any): Promise<any | null> {
-        return await usersCollection.findOne({ email: email})
+    async findByEmail(email: string): Promise<any | null> {
+        return await usersCollection.findOne({email: email})
     },
 }
