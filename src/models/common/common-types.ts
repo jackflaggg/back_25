@@ -14,20 +14,6 @@ export enum HTTP_STATUSES {
     INTERNAL_SERVER_ERROR_500 = 500,
 }
 
-export enum ResultStatus {
-    Success = 'Success',
-    BadRequest = 'BadRequest',
-    Unauthorized = 'Unauthorized',
-    Forbidden = 'Forbidden',
-    NotFound = 'NotFound'
-}
-
-export type Result<T = null> = {
-    status: ResultStatus,
-    extensions?: [{ field: string, message: string }],
-    data: T
-}
-
 export const errors: ErrorsType = {
     errorsMessages: []
 }
