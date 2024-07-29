@@ -1,6 +1,5 @@
-import {authService} from "../../domain/auth/auth-service";
 import {Request, Response} from "express";
-import {HTTP_STATUSES, ResultStatus} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 
 export const loginController = async (req: Request, res: Response) => {
     const {loginOrEmail, password} = req.body;

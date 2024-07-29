@@ -14,13 +14,12 @@ export const UsersDbRepository = {
         const deleteUser = await usersCollection.deleteOne({_id: new ObjectId(id)});
         return deleteUser.acknowledged;
     },
-    async findByLoginOrEmail(loginOrEmail: any): Promise<any | null> {
-        const filter = {
-            $or: [
-                {login: loginOrEmail},
-                {email: loginOrEmail},
-            ]
-        }
-        return await usersCollection.findOne(filter)
-    }
+    async findByLogin(login: any): Promise<any | null> {
+        const filterLogin = {login: { $regex: login, $options: 'i' }} ;
+        return await usersCollection.findOne(filterLogin)
+    },
+    async findByEmail(email: any): Promise<any | null> {
+        const filterEmail = { email: { $regex: email, $options: 'i' }};
+        return await usersCollection.findOne(filterEmail)
+    },
 }

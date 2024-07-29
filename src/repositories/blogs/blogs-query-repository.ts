@@ -6,7 +6,6 @@ import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
 import {ObjectId} from "mongodb";
 import {helperToBlog} from "../../utils/helpers/helper-query-get";
 
-
 export const blogsQueryRepositories = {
     async getAllBlog(queryParamsToBlog: QueryBlogInputModels): Promise<any> {
         const {searchNameTerm, sortBy, sortDirection, pageSize, pageNumber} = helperToBlog(queryParamsToBlog);
