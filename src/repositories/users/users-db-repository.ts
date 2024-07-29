@@ -15,11 +15,9 @@ export const UsersDbRepository = {
         return deleteUser.acknowledged;
     },
     async findByLogin(login: any): Promise<any | null> {
-        const filterLogin = {login: { $regex: login, $options: 'i' }} ;
-        return await usersCollection.findOne(filterLogin)
+        return await usersCollection.findOne({ login: login })
     },
     async findByEmail(email: any): Promise<any | null> {
-        const filterEmail = { email: { $regex: email, $options: 'i' }};
-        return await usersCollection.findOne(filterEmail)
+        return await usersCollection.findOne({ email: email})
     },
 }

@@ -6,4 +6,4 @@ import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsVal
 export const authRouter: Router = Router();
 
 
-authRouter.post('/login', [...authCreateValidator, inputCheckErrorsMiddleware],loginController);
+authRouter.post('/login', loginController);

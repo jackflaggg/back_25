@@ -7,11 +7,11 @@ export const userService = {
     async createUser(user: any): Promise<string | null | ErrorsType | any> {
         const { login, password, email} = user;
 
-        // if (await errorsValidate(login , email)){
-        //     return null
-        // }
-        // вынести в функцию!
+        const errors = await errorsValidate(login , email);
 
+        if (errors){
+            return errors
+        }
 
         const passwordHash = await hashService._generateHash(password);
 
@@ -24,7 +24,7 @@ export const userService = {
         return await UsersDbRepository.createUser(newUser);
 
     },
-    async delUser(id: string): Promise<boolean> {
-        return await UsersDbRepository.deleteUser(id);
+    async delUser(idUser: string): Promise<boolean> {
+        return await UsersDbRepository.deleteUser(idUser);
     }
 }

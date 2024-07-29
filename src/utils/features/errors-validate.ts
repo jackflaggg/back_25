@@ -12,13 +12,11 @@ export const errorsValidate =  async (email: string, login: string) => {
 
     if (existingUserByEmail) {
         errors.errorsMessages.push({message: `not unique ${existingUserByEmail.email}`, field: "email"})
-        return errors
     }
 
     if (existingUserByLogin) {
         errors.errorsMessages.push({message: `not unique ${existingUserByLogin.login}`, field: "login"})
-        return true
     }
 
-    return false
+    return  errors.errorsMessages.length > 0 ? errors : false;
 }

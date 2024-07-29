@@ -5,7 +5,7 @@ import {usersQueryRepository} from "../../repositories/users/users-query-reposit
 export const createUserController = async (req: RequestWithBody<any>,
                                            res:ResponseBody<any>) => {
     const createdUserId = await userService.createUser(req.body);
-
+    console.log(createdUserId);
     if (!createdUserId) {
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
