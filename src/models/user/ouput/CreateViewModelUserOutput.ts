@@ -1,4 +1,4 @@
-export interface CreateOutputModel {
+export interface CreateUserOutputModel {
     id: string,
     login: string,
     email: string,

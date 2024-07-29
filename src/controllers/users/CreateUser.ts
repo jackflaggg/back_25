@@ -1,23 +1,25 @@
 import {
     HTTP_STATUSES,
     RequestWithBody,
-    ResponseBody
+    ResponseBody, ResultError
 } from "../../models/common/common-types";
 import {userService} from "../../domain/user/user-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {CreateUserInputModel} from "../../models/user/input/CreateViewModelUser";
 
-export const createUserController = async (req: RequestWithBody<any>,
-                                           res:ResponseBody<any>) => {
+export const createUserController = async (req: RequestWithBody<CreateUserInputModel>,
+                                           res:ResponseBody<ResultError| void | any>) => {
     const createdUserId = await userService.createUser(req.body);
 
-    if (createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
+    if (typeof createdUserId !== "string" && +createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
             .send(createdUserId.data);
         return;
     }
 
-    const user = await usersQueryRepository.getUserById(createdUserId)
+    const user = await usersQueryRepository.getUserById(createdUserId as string)
+
     if (!user) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
