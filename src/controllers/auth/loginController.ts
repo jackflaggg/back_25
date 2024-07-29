@@ -8,6 +8,7 @@ export const loginController = async (req: Request, res: Response) => {
     const {login, email, password} = req.body;
 
     const searchElem = await authQueryRepository.findUserByLoginOrEmail(login || email)
+
     if (!searchElem) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
         return
@@ -19,6 +20,7 @@ export const loginController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
         return
     }
+
     return res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
 
 }
