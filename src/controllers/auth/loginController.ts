@@ -4,9 +4,9 @@ import {authQueryRepository} from "../../repositories/auth/auth-query-repository
 import {hashService} from "../../utils/helpers/helper-hash";
 
 export const loginController = async (req: Request, res: Response) => {
-    console.log(req.body)
+
     const {loginOrEmail, password} = req.body;
-    console.log(loginOrEmail)
+
     const searchElem = await authQueryRepository.findUserByLoginOrEmail(loginOrEmail)
 
     if (!searchElem) {

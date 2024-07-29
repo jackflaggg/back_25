@@ -7,7 +7,6 @@ export const createUserController = async (req: RequestWithBody<any>,
     const createdUserId = await userService.createUser(req.body);
 
     if (!createdUserId) {
-        console.log(errors.errorsMessages)
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
             .send(errors);
