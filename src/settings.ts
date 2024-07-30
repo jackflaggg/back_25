@@ -16,4 +16,5 @@ export const SETTINGS = {
     COLLECTION_BLOGS: process.env.BLOG_COLLECTION_NAME || 'blogs',
     COLLECTION_USERS: process.env.COLLECTION_USERS || 'users',
     ADMIN: process.env.ADMIN || 'admin:qwerty',
+    SECRET_KEY: 'envelope'
 }
