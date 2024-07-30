@@ -1,11 +1,12 @@
-import {Request, Response} from "express";
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {Response} from "express";
+import {HTTP_STATUSES, RequestWithBody} from "../../models/common/common-types";
 import {authQueryRepository} from "../../repositories/auth/auth-query-repository";
 import {hashService} from "../../utils/helpers/helper-hash";
+import {loginControllerModels} from "../../models/auth/input/login-post-controller";
 
-export const loginController = async (req: Request, res: Response) => {
+export const loginController = async (req: RequestWithBody<loginControllerModels>, res: Response) => {
 
-    const {loginOrEmail, password} = req.body;
+    const {loginOrEmail, password} = req.body
 
     const searchElem = await authQueryRepository.findUserByLoginOrEmail(loginOrEmail)
 

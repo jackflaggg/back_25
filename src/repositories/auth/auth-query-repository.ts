@@ -1,11 +1,12 @@
 import {usersCollection} from "../../db/db";
 
 export const authQueryRepository = {
-    async findUserByLoginOrEmail(loginOrEmail: string): Promise<any> {
+    async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | any> {
+
         const filter = {
             $or: [
-                {login: {$regex: loginOrEmail}} ,
-                {email: {$regex: loginOrEmail}}
+                {login: loginOrEmail} ,
+                {email: loginOrEmail}
                 ]
         }
 

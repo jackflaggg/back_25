@@ -21,6 +21,7 @@ export interface PostDbType {
 export interface UserDbType {
     id?: string,
     login: string,
+    password?: string,
     email: string,
     createdAt: string,
 }
