@@ -8,16 +8,16 @@ export const loginController = async (req: RequestWithBody<loginControllerModels
 
     const {loginOrEmail, password} = req.body
 
-    const searchElem = await authService.findUserByLoginOrEmail(loginOrEmail)
+    const credentialLoginOrEmail = await authService.findUserByLoginOrEmail(loginOrEmail)
 
-    if (!searchElem) {
+    if (!credentialLoginOrEmail) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
         return
     }
 
-    const hashPassword = await hashService.comparePassword(password, searchElem.password)
+    const checkPassword = await hashService.comparePassword(password, credentialLoginOrEmail.password)
 
-    if (!hashPassword){
+    if (!checkPassword){
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
         return
     }
