@@ -4,7 +4,7 @@ import {UserDbType} from "../db/db.models";
 declare global {
     namespace Express {
         export interface Request {
-            user: JwtPayload
+            userId: UserDbType | null //JwtPayload
         }
     }
 }
