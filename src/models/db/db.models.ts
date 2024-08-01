@@ -26,6 +26,19 @@ export interface UserDbType {
     createdAt: string,
 }
 
+export interface CommentatorInfo {
+    userId: string;
+    userLogin: string;
+}
+
+export interface CommentDbType {
+    id?: string;
+    content: string;
+    commentatorInfo: CommentatorInfo; // Используем новый интерфейс
+    createdAt: string;
+}
+
+
 export interface BlogCreateType {
     name: string,
     description: string,

@@ -1,6 +1,6 @@
 import {Response} from "express";
 import {HTTP_STATUSES, RequestWithBody} from "../../models/common/common-types";
-import {hashService} from "../../utils/helpers/helper-hash";
+import {hashService} from "../../utils/application/hash-service";
 import {loginControllerModels} from "../../models/auth/input/login-post-controller";
 import {authService} from "../../domain/auth/auth-service";
 

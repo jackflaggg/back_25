@@ -1,6 +1,6 @@
 import {Db, MongoClient} from "mongodb";
 import dotenv from 'dotenv'
-import {BlogDbType, PostDbType, UserDbType} from "../models/db/db.models";
+import {BlogDbType, CommentDbType, PostDbType, UserDbType} from "../models/db/db.models";
 import {SETTINGS} from "../settings";
 
 dotenv.config()
@@ -13,6 +13,7 @@ export const database: Db = client.db(SETTINGS.DB_NAME);
 export const blogsCollections = database.collection<BlogDbType>(SETTINGS.COLLECTION_BLOGS!);
 export const postsCollections = database.collection<PostDbType>(SETTINGS.COLLECTION_POSTS!);
 export const usersCollection = database.collection<UserDbType>(SETTINGS.COLLECTION_USERS!);
+export const commentsCollection = database.collection<CommentDbType>(SETTINGS.COLLECTION_COMMENTS!);
 
 export const connectToDB = async (port: number) => {
     try {

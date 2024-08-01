@@ -1,6 +1,6 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {HTTP_STATUSES, ResultError} from "../../models/common/common-types";
-import {hashService} from "../../utils/helpers/helper-hash";
+import {hashService} from "../../utils/application/hash-service";
 import {errorsValidate} from "../../utils/features/errors-validate";
 import {CreateUserServiceModel} from "../../models/user/input/CreateServiceModelUser";
 import {UserServiceOutputModel} from "../../models/user/ouput/CreateViewModelUserOutput";

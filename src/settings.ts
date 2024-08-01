@@ -8,6 +8,7 @@ export const SETTINGS = {
         POSTS: '/posts',
         USERS: '/users',
         AUTH: '/auth',
+        COMMENTS: '/comments',
         TESTING: '/testing',
         VERCEL: '/'
     },
@@ -15,6 +16,8 @@ export const SETTINGS = {
     COLLECTION_POSTS: process.env.POST_COLLECTION_NAME || 'posts',
     COLLECTION_BLOGS: process.env.BLOG_COLLECTION_NAME || 'blogs',
     COLLECTION_USERS: process.env.COLLECTION_USERS || 'users',
+    COLLECTION_COMMENTS: process.env.COMMENTS_COLLECTION_NAME || 'comments',
     ADMIN: process.env.ADMIN || 'admin:qwerty',
-    SECRET_KEY: 'envelope'
+    SECRET_KEY: process.env.SECRET_KEY || '',
+    TOKEN_DURATION: process.env.TOKEN_DURATION || '',
 }
