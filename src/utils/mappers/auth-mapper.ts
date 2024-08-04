@@ -1,9 +1,12 @@
 
-export const authMapper = (user: any) => {
+export const commentMapper = (user: any) => {
     return {
         id: user._id.toString(),
-        login: user.login,
-        email: user.email,
-        createdAt: user.createdAt,
+        content: user.content,
+        commentatorInfo: {
+            userId: user._id.toString(),
+            userLogin: user.login.toString()
+        },
+        createdAt: new Date().toISOString(),
     }
 }

@@ -1,5 +1,5 @@
 export const commentService = {
-    async createComment(existingCommentId: string){
+    async createComment(existingCommentId: string, userId: string, commentId: string) {
 
     },
     async updateComment(commentId: string){

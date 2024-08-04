@@ -48,7 +48,6 @@ export const blogIdParamsValidator = param('id')
     .isLength({max: 500})
     .withMessage('more then 500');
 
-
 export const postValidator: ValidationChain[] = [
     titleValidator,
     shortDescriptionValidator,

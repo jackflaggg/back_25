@@ -23,6 +23,19 @@ export type FieldNamesType = keyof OutputBlogModel | keyof OutputPostModel
 export type ErrorsType = {
     errorsMessages: ErrorsMessageType[]
 }
+export enum ResultStatus {
+    Success = 'Success',
+    BadRequest = 'BadRequest',
+    Unauthorized = 'Unauthorized',
+    Forbidden = 'Forbidden',
+    NotFound = 'NotFound'
+}
+
+export type Result<T = null> = {
+    status: ResultStatus,
+    extensions?: [{ field: string, message: string }],
+    data: T
+}
 
 export type ResultError = {
     status: string
