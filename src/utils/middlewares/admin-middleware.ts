@@ -6,7 +6,7 @@ import {fromUTF8ToBase64} from "../features/UTF8ToBase64";
 export const adminMiddlewares = (req: Request, res: Response, next:NextFunction) => {
     const {authorization: auth} = req.headers;
 
-
+    console.log(auth)
     if (!auth){
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
         return;
