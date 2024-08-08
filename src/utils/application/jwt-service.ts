@@ -3,11 +3,16 @@ import jwt from "jsonwebtoken";
 
 export const jwtService = {
     async createToken(userId: string | null): Promise<any> {
-        return jwt.sign(
-            {userId: userId},
-            SETTINGS.SECRET_KEY,
-            {expiresIn: SETTINGS.TOKEN_DURATION}
-        )
+        try {
+            return jwt.sign(
+                {userId: userId},
+                SETTINGS.SECRET_KEY,
+                {expiresIn: SETTINGS.TOKEN_DURATION}
+            )
+        }catch (error) {
+            console.error('error create Token');
+            return null;
+        }
     },
 
     async decodeToken(token: string): Promise<any>  {
