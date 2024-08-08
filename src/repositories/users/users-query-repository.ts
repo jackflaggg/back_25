@@ -39,5 +39,6 @@ export const usersQueryRepository = {
             return null;
         }
         return userMapper(user);
-    }
+    },
+
 }
