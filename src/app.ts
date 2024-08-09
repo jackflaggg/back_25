@@ -7,6 +7,7 @@ import {testingRouter} from "./routes/testing/testing-routes";
 import {vercelRouter} from "./routes/vercel/vercel-router";
 import {userRouter} from "./routes/users/users-routes";
 import {authRouter} from "./routes/auth/auth-router";
+import {commentsRouter} from "./routes/comments/comments-router";
 
 export const app: Express = express();
 app.use(express.json());
@@ -18,4 +19,5 @@ app.use(SETTINGS.PATH.TESTING, testingRouter);
 app.use(SETTINGS.PATH.BLOGS, blogsRouter);
 app.use(SETTINGS.PATH.POSTS, postRouter);
 app.use(SETTINGS.PATH.USERS, userRouter);
-app.use(SETTINGS.PATH.AUTH, authRouter)
+app.use(SETTINGS.PATH.AUTH, authRouter);
+app.use(SETTINGS.PATH.COMMENTS, commentsRouter);
