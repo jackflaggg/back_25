@@ -3,7 +3,7 @@ import {HTTP_STATUSES, ResultError} from "../../models/common/common-types";
 import {hashService} from "../../utils/application/hash-service";
 import {errorsValidate} from "../../utils/features/errors-validate";
 import {CreateUserServiceModel} from "../../models/user/input/CreateServiceModelUser";
-import {UserServiceOutputModel} from "../../models/user/ouput/CreateViewModelUserOutput";
+import {userMapperToCreate} from "../../utils/mappers/user-mapper";
 
 export const userService = {
     async createUser(user: CreateUserServiceModel): Promise<string | ResultError | null> {
@@ -20,12 +20,8 @@ export const userService = {
 
         const passwordHash = await hashService._generateHash(password);
 
-        const newUser: UserServiceOutputModel = {
-            login,
-            password: passwordHash,
-            email,
-            createdAt: new Date().toISOString()
-        }
+        const newUser = userMapperToCreate(login, email, passwordHash);
+
         return await UsersDbRepository.createUser(newUser);
 
     },
