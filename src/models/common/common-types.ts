@@ -66,3 +66,6 @@ export interface Paginator<T> {
     items: T
 }
 
+export type AccessToken = {
+    accessToken: string
+}
