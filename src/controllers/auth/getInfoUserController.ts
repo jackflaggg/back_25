@@ -5,12 +5,17 @@ import {HTTP_STATUSES} from "../../models/common/common-types";
 export const getInfoUserController = async (req: Request, res: Response) => {
     const existingId = req.userId;
 
-    const user = await usersQueryRepository.getUserById(existingId as string);
-    const mapUser = {
-        email: user.email,
-        login: user.login,
-        userId: user.id
+    if (!existingId) {
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        return
     }
-    res.status(HTTP_STATUSES.OK_200).send(mapUser);
+
+    const user = await usersQueryRepository.LoginMapByUser(existingId as string)
+    if (!user) {
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        return;
+    }
+
+    res.status(HTTP_STATUSES.OK_200).send(user);
     return
 }

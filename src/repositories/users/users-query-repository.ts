@@ -2,6 +2,8 @@ import {helperToUser} from "../../utils/helpers/helper-query-get";
 import {usersCollection} from "../../db/db";
 import {userMapper} from "../../utils/mappers/user-mapper";
 import {ObjectId} from "mongodb";
+import {CreateUserOutputModel} from "../../models/user/ouput/CreateViewModelUserOutput";
+import {loginUserMapper} from "../../utils/mappers/login-mapper";
 
 export const usersQueryRepository = {
     async getAllUsers(query: any): Promise<any> {
@@ -40,5 +42,12 @@ export const usersQueryRepository = {
         }
         return userMapper(user);
     },
+    async LoginMapByUser(userId: string) {
+        const loginUser = await this.getUserById(userId);
+        if (!loginUser) {
+            return null;
+        }
+        return loginUserMapper(loginUser);
+    }
 
 }
