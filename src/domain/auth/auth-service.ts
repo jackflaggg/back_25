@@ -9,11 +9,13 @@ export const authService = {
 
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
         if (!credentialLoginOrEmail) {
+            console.log('Пользователь не найден!')
             return null;
         }
 
         const checkPassword = await hashService.comparePassword(password, credentialLoginOrEmail.password);
         if (!checkPassword) {
+            console.log('Пароль не прошел проверку!')
             return null;
         }
         return credentialLoginOrEmail._id;
@@ -22,11 +24,13 @@ export const authService = {
         const userId = await this.authenticationUser(inputDataUser);
 
         if (!userId) {
+            console.log('Аутентификация рухнула!')
             return null;
         }
 
         const generateToken = await jwtService.createToken(userId);
         if (!generateToken) {
+            console.log('Проблема при генерации токена!')
             return null;
         }
 
