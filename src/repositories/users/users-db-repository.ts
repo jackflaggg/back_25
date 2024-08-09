@@ -19,7 +19,6 @@ export const UsersDbRepository = {
         return await usersCollection.findOne({ login: login })
     },
     async findByEmail(email: string): Promise<any | null> {
-        console.log(await usersCollection.findOne({ email: email }))
         return await usersCollection.findOne({ email: email })
     },
     async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | any> {
