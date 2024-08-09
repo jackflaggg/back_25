@@ -4,7 +4,6 @@ import {ErrorsType, FieldNamesType, HTTP_STATUSES} from "../../models/common/com
 
 export const inputCheckErrorsMiddleware = (req: Request, res: Response<ErrorsType>, next: NextFunction): void => {
     const e = validationResult(req);
-    console.log(e)
     if (!e.isEmpty()) {
         const eArray = e.array({onlyFirstError: true}) as { path: FieldNamesType, msg: string }[]
 
