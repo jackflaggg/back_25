@@ -6,9 +6,9 @@ export const errorsValidate =  async (email: string, login: string) => {
         errorsMessages: []
     }
 
-    const existingUserByEmail = await UsersDbRepository.findByEmail(email);
+    const existingUserByEmail = await UsersDbRepository.findByEmailUser(email);
 
-    const existingUserByLogin = await UsersDbRepository.findByLogin(login);
+    const existingUserByLogin = await UsersDbRepository.findByLoginUser(login);
 
     if (existingUserByEmail) {
         errors.errorsMessages.push({message: `not unique ${existingUserByEmail.email}`, field: "email"})

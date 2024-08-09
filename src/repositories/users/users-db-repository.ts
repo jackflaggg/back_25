@@ -15,10 +15,10 @@ export const UsersDbRepository = {
         const deleteUser = await usersCollection.deleteOne({_id: new ObjectId(id)});
         return deleteUser.acknowledged;
     },
-    async findByLogin(login: string): Promise<UserDbType | null> {
+    async findByLoginUser(login: string): Promise<UserDbType | null> {
         return await usersCollection.findOne({ login: login })
     },
-    async findByEmail(email: string): Promise<any | null> {
+    async findByEmailUser(email: string): Promise<any | null> {
         return await usersCollection.findOne({ email: email })
     },
     async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | any> {
