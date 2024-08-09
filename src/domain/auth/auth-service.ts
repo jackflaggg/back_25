@@ -16,9 +16,21 @@ export const authService = {
         if (!checkPassword) {
             return null;
         }
+        return credentialLoginOrEmail._id;
     },
     async loginUser(inputDataUser: any) {
-        const userLogin = await this.authenticationUser(inputDataUser);
+        const userId = await this.authenticationUser(inputDataUser);
+
+        if (!userId) {
+            return null;
+        }
+
+        const generateToken = await jwtService.createToken(userId);
+        if (!generateToken) {
+            return null;
+        }
+
+        return generateToken;
     }
 }
 

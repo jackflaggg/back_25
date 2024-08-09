@@ -9,8 +9,8 @@ export const jwtService = {
                 SETTINGS.SECRET_KEY,
                 {expiresIn: SETTINGS.TOKEN_DURATION}
             )
-        }catch (error) {
-            console.error('error create Token');
+        }catch (error: unknown) {
+            console.error('Ошибка при создании токена:', error);
             return null;
         }
     },
@@ -18,8 +18,8 @@ export const jwtService = {
     async decodeToken(token: string): Promise<any>  {
         try {
             return jwt.decode(token)
-        } catch (error) {
-            console.error('Can`t decode token')
+        } catch (error: unknown) {
+            console.error('Ошибка при декодировании токена: ', error)
             return null
         }
     },
@@ -27,8 +27,8 @@ export const jwtService = {
     async verifyToken(token: string): Promise<any>  {
         try {
             return jwt.verify(token, SETTINGS.SECRET_KEY)
-        } catch (error) {
-            console.error('Token verify some error')
+        } catch (error: unknown) {
+            console.error('Ошибка при верификации токена: ', error)
             return null
         }
     }
