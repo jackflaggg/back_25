@@ -8,9 +8,9 @@ export const loginController = async (req: RequestWithBody<loginControllerModels
 
     if (!loginUser) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
-        return
+        return;
     }
 
-    return res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser} as AccessToken)
-
+    res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser} as AccessToken)
+    return;
 }
