@@ -3,7 +3,7 @@ import {loginControllerModels} from "../../models/auth/input/login-post-controll
 import {authService} from "../../domain/auth/auth-service";
 
 export const loginController = async (req: RequestWithBody<loginControllerModels>, res: ResponseBody<AccessToken>) => {
-    console.log(req.body);
+
     const loginUser = await authService.loginUser(req.body);
 
     if (!loginUser) {
