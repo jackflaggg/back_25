@@ -3,9 +3,10 @@ import {blogMapper} from "../../utils/mappers/blog-mapper";
 import {postMapper} from "../../utils/mappers/post-mapper";
 import {OutGetAllBlogs, OutputBlogModel} from "../../models/blog/output/output-type-blogs";
 import {ObjectId} from "mongodb";
-import {queryHelperToBlog} from "../../utils/helpers/helper-query-get";
+import {queryHelperToBlog, queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 import {OutGetAllPosts} from "../../models/post/output/output-type-posts";
+import {QueryHelperPost} from "../../models/post/helper-query-post/helper-post";
 
 export const blogsQueryRepositories = {
     async getAllBlog(queryParamsToBlog: InQueryBlogModel): Promise<OutGetAllBlogs> {
@@ -37,22 +38,24 @@ export const blogsQueryRepositories = {
         }
         return blogMapper(blog)
     },
-    async getPostsToBlogID(paramsToBlogID: string, queryParamsPosts?: any): Promise<OutGetAllPosts> {
+    async getPostsToBlogID(paramsToBlogID: string, queryParamsPosts: QueryHelperPost): Promise<OutGetAllPosts> {
+        const {pageNumber, pageSize, sortBy, sortDirection} = queryHelperToPost(queryParamsPosts);
+
         const posts = await postsCollections
             .find({blogId: paramsToBlogID})
-            .sort(queryParamsPosts.sortBy, queryParamsPosts.sortDirection)
-            .skip((Number(queryParamsPosts.pageNumber) - 1) * Number(queryParamsPosts.pageSize))
-            .limit(Number(queryParamsPosts.pageSize))
+            .sort(sortBy, sortDirection)
+            .skip((Number(pageNumber) - 1) * Number(pageSize))
+            .limit(Number(pageSize))
             .toArray();
 
         const totalCountPosts = await postsCollections.countDocuments({blogId: paramsToBlogID});
 
-        const pagesCount = Math.ceil(totalCountPosts / Number(queryParamsPosts.pageSize));
+        const pagesCount = Math.ceil(totalCountPosts / Number(pageSize));
 
         return {
             pagesCount: +pagesCount,
-            page: +queryParamsPosts.pageNumber,
-            pageSize: +queryParamsPosts.pageSize,
+            page: +pageNumber,
+            pageSize: +pageSize,
             totalCount: +totalCountPosts,
             items: posts.map(post => postMapper(post))
         }
