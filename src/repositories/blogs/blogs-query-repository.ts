@@ -5,6 +5,7 @@ import {OutGetAllBlogs, OutputBlogModel} from "../../models/blog/output/output-t
 import {ObjectId} from "mongodb";
 import {queryHelperToBlog} from "../../utils/helpers/helper-query-get";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
+import {OutGetAllPosts} from "../../models/post/output/output-type-posts";
 
 export const blogsQueryRepositories = {
     async getAllBlog(queryParamsToBlog: InQueryBlogModel): Promise<OutGetAllBlogs> {
@@ -36,7 +37,7 @@ export const blogsQueryRepositories = {
         }
         return blogMapper(blog)
     },
-    async getPostsToBlogID(paramsToBlogID: string, queryParamsPosts?: any): Promise<any> {
+    async getPostsToBlogID(paramsToBlogID: string, queryParamsPosts?: any): Promise<OutGetAllPosts> {
         const posts = await postsCollections
             .find({blogId: paramsToBlogID})
             .sort(queryParamsPosts.sortBy, queryParamsPosts.sortDirection)
