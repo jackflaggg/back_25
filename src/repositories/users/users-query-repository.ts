@@ -1,7 +1,6 @@
 import {usersCollection} from "../../db/db";
 import {userMapper} from "../../utils/mappers/user-mapper";
 import {ObjectId} from "mongodb";
-import {CreateUserOutputModel} from "../../models/user/ouput/CreateViewModelUserOutput";
 import {loginUserMapper} from "../../utils/mappers/login-mapper";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
 
