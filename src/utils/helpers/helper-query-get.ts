@@ -1,8 +1,9 @@
-import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
-import {QueryHelperResponse} from "../../models/blog/helper-query-blog/helper-blog";
+import {QueryHelperBlog} from "../../models/blog/helper-query-blog/helper-blog";
+import {InQueryPostModel} from "../../models/post/input/input-type-posts";
+import {QueryHelperPost} from "../../models/post/helper-query-post/helper-post";
 
-export const queryHelperToBlog = (queryBlog: InQueryBlogModel): QueryHelperResponse => {
+export const queryHelperToBlog = (queryBlog: InQueryBlogModel): QueryHelperBlog => {
     return {
         pageNumber: queryBlog.pageNumber ?? 1,
         pageSize: queryBlog.pageSize ?? 10,
@@ -12,7 +13,7 @@ export const queryHelperToBlog = (queryBlog: InQueryBlogModel): QueryHelperRespo
     }
 }
 
-export const queryHelperToPost = (queryPost: QueryPostInputModels) => {
+export const queryHelperToPost = (queryPost: InQueryPostModel): QueryHelperPost => {
     return {
         pageNumber: queryPost.pageNumber ?? 1,
         pageSize: queryPost.pageSize ?? 10,

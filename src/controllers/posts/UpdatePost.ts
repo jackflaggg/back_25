@@ -1,12 +1,12 @@
 import {Response} from "express";
 import {HTTP_STATUSES, PostParamsId, RequestWithParamsAndBody} from "../../models/common/common-types";
-import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
 import {postsService} from "../../domain/post/post-service";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
+import {InUpdatePostModel} from "../../models/post/input/input-type-posts";
 
-export const updatePostController = async (req: RequestWithParamsAndBody<PostParamsId, InputUpdatePostModel>,
+export const updatePostController = async (req: RequestWithParamsAndBody<PostParamsId, InUpdatePostModel>,
                                            res:Response) => {
     const { id } = req.params;
 

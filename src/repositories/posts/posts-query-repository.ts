@@ -1,14 +1,14 @@
 import {postsCollections} from "../../db/db";
 import {postMapper} from "../../utils/mappers/post-mapper";
-import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
-import {queryHelperToBlog, queryHelperToPost} from "../../utils/helpers/helper-query-get";
-import {OutputPostModel} from "../../models/post/output/post.output.models";
+import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {ObjectId} from "mongodb";
+import {InQueryPostModel} from "../../models/post/input/input-type-posts";
+import {OutPostModel} from "../../models/post/output/output-type-posts";
 
 export const postsQueryRepository = {
-    async getAllPost(queryParamsToPost: QueryPostInputModels): Promise<any> {
+    async getAllPost(queryParamsToPost: InQueryPostModel): Promise<any> {
 
-        const {pageNumber, pageSize, sortBy, sortDirection} = queryHelperToPost(queryParamsToPost || {})
+        const {pageNumber, pageSize, sortBy, sortDirection} = queryHelperToPost(queryParamsToPost)
 
         const posts = await postsCollections
             .find()
@@ -29,7 +29,7 @@ export const postsQueryRepository = {
             items: posts.map(post => postMapper(post)),
         };
     },
-    async giveOneToIdPost(id: string): Promise<OutputPostModel | null> {
+    async giveOneToIdPost(id: string): Promise<OutPostModel | null> {
         const post = await postsCollections.findOne({_id: new ObjectId(id)});
         if (!post) {
             return null;

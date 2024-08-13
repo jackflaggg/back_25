@@ -1,14 +1,14 @@
 import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
-import {InputCreatePostModel} from "../../models/post/input/create.post.input.models";
-import {OutputPostModel} from "../../models/post/output/post.output.models";
+import {OutPostModel} from "../../models/post/output/output-type-posts";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsService} from "../../domain/post/post-service";
 import {PostCreateType} from "../../models/db/db.models";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {InCreatePostModel} from "../../models/post/input/input-type-posts";
 
-export const getCommentController = async (req: RequestWithBody<InputCreatePostModel>,
-                                           res:ResponseBody<OutputPostModel>) => {
+export const getCommentController = async (req: RequestWithBody<InCreatePostModel>,
+                                           res:ResponseBody<OutPostModel>) => {
     const { blogId} = req.body
     if (!validateId(blogId)) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);

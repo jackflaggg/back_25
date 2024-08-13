@@ -1,7 +1,7 @@
 import {postsCollections} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {PostCreateType} from "../../models/db/db.models";
-import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
+import {InUpdatePostModel} from "../../models/post/input/input-type-posts";
 
 export const postsRepository = {
     async createPost(post: PostCreateType): Promise<string | null> {
@@ -11,7 +11,7 @@ export const postsRepository = {
         }
         return newPost.insertedId.toString();
     },
-    async putPost(post: InputUpdatePostModel, id: string): Promise<boolean> {
+    async putPost(post: InUpdatePostModel, id: string): Promise<boolean> {
         const updatePost = await postsCollections.updateOne({_id: new ObjectId(id)}, {
             $set: {
                 title: post.title,

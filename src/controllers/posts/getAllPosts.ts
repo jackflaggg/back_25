@@ -1,10 +1,10 @@
 import {Response} from "express";
 import {HTTP_STATUSES, RequestWithQuery} from "../../models/common/common-types";
-import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
 import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
+import {InQueryPostModel} from "../../models/post/input/input-type-posts";
 
-export const AllPostController = async (req: RequestWithQuery<QueryPostInputModels>,
+export const AllPostController = async (req: RequestWithQuery<InQueryPostModel>,
                                         res:Response) => {
     const queryPost = queryHelperToPost(req.query);
     const getAllPosts = await postsQueryRepository.getAllPost(queryPost)

@@ -1,7 +1,7 @@
 import {PostCreateType, PostUpdateType} from "../../models/db/db.models";
-import {InputUpdatePostModel} from "../../models/post/input/update.post.input.models";
 import {postsRepository} from "../../repositories/posts/posts-db-repository";
 import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
+import {InUpdatePostModel} from "../../models/post/input/input-type-posts";
 
 export const postsService = {
     async createPost(post: PostCreateType, blog: OutputBlogModel): Promise<string | null> {
@@ -17,7 +17,7 @@ export const postsService = {
         }
         return await postsRepository.createPost(newPost);
     },
-    async putPost(post: InputUpdatePostModel, blog: OutputBlogModel, id: string): Promise<boolean> {
+    async putPost(post: InUpdatePostModel, blog: OutputBlogModel, id: string): Promise<boolean> {
         const { title, shortDescription, content, blogId} = post;
 
         const upPost: PostUpdateType = {
