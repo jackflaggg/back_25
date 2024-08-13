@@ -21,4 +21,5 @@ export const deletePostController = async (req: RequestWithParams<PostParamsId>,
     const delPost = await postsService.delPost(PostId);
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
+    return;
 }

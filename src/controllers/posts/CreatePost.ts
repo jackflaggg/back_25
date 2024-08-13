@@ -33,4 +33,5 @@ export const createPostController = async (req: RequestWithBody<InCreatePostMode
         return;
     }
     res.status(HTTP_STATUSES.CREATED_201).send(findCreatePost);
+    return;
 }
