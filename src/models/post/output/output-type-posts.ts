@@ -7,3 +7,11 @@ export type OutPostModel = {
     blogName: string,
     createdAt: string
 }
+
+export interface OutGetAllPosts {
+    pagesCount: number,
+    page: number,
+    pageSize: number,
+    totalCount: number,
+    items: OutPostModel[],
+}
