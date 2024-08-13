@@ -1,9 +1,8 @@
 import {blogsRepositories} from "../../repositories/blogs/blogs-db-repository";
-import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
-import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
+import {InCreateBlogModel, InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
 
 export const blogsService = {
-    async createBlog(blog: InputCreateBlogModel): Promise<string | null>{
+    async createBlog(blog: InCreateBlogModel): Promise<string | null>{
         const { name, description, websiteUrl } = blog;
 
         const newBlog = {
@@ -29,7 +28,7 @@ export const blogsService = {
 
         return await blogsRepositories.createPostToBlogID(blog!.id, newPost);
     },
-    async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
+    async putBlog(id: string, blog: InUpdateBlogModel): Promise<boolean> {
         return await blogsRepositories.putBlog(id, blog);
     },
     async delBlog(id: string): Promise<boolean> {
