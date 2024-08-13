@@ -1,8 +1,8 @@
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import { Request, Response} from 'express';
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {AsyncVoid, HTTP_STATUSES} from "../../models/common/common-types";
 
-export const getInfoUserController = async (req: Request, res: Response) => {
+export const getInfoUserController = async (req: Request, res: Response): AsyncVoid => {
     const existingId = req.userId;
 
     if (!existingId) {

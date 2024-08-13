@@ -69,3 +69,5 @@ export interface Paginator<T> {
 export type AccessToken = {
     accessToken: string
 }
+
+export type AsyncVoid = Promise<void>
