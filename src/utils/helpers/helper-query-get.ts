@@ -2,32 +2,32 @@ import {QueryPostInputModels} from "../../models/post/input/get-query.post.input
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 import {QueryHelperResponse} from "../../models/blog/helper-query-blog/helper-blog";
 
-export const queryHelperToBlog = (query: InQueryBlogModel): QueryHelperResponse => {
+export const queryHelperToBlog = (queryBlog: InQueryBlogModel): QueryHelperResponse => {
     return {
-        pageNumber: query.pageNumber ?? 1,
-        pageSize: query.pageSize ?? 10,
-        sortBy: query.sortBy ?? 'createdAt',
-        sortDirection: query.sortDirection ?? 'desc',
-        searchNameTerm: query.searchNameTerm ?? null,
+        pageNumber: queryBlog.pageNumber ?? 1,
+        pageSize: queryBlog.pageSize ?? 10,
+        sortBy: queryBlog.sortBy ?? 'createdAt',
+        sortDirection: queryBlog.sortDirection ?? 'desc',
+        searchNameTerm: queryBlog.searchNameTerm ?? null,
     }
 }
 
-export const queryHelperToPost = (query: QueryPostInputModels) => {
+export const queryHelperToPost = (queryPost: QueryPostInputModels) => {
     return {
-        pageNumber: query.pageNumber ?? 1,
-        pageSize: query.pageSize ?? 10,
-        sortBy: query.sortBy ?? 'createdAt',
-        sortDirection: query.sortDirection ?? 'desc',
+        pageNumber: queryPost.pageNumber ?? 1,
+        pageSize: queryPost.pageSize ?? 10,
+        sortBy: queryPost.sortBy ?? 'createdAt',
+        sortDirection: queryPost.sortDirection ?? 'desc',
     }
 }
 
-export const queryHelperToUser = (query: any) => {
+export const queryHelperToUser = (queryUser: any) => {
     return {
-        sortBy: query.sortBy ?? 'createdAt',
-        sortDirection: query.sortDirection ?? 'desc',
-        pageNumber: query.pageNumber ?? 1,
-        pageSize: query.pageSize ?? 10,
-        searchLoginTerm: query.searchLoginTerm ?? null,
-        searchEmailTerm: query.searchEmailTerm ?? null,
+        sortBy: queryUser.sortBy ?? 'createdAt',
+        sortDirection: queryUser.sortDirection ?? 'desc',
+        pageNumber: queryUser.pageNumber ?? 1,
+        pageSize: queryUser.pageSize ?? 10,
+        searchLoginTerm: queryUser.searchLoginTerm ?? null,
+        searchEmailTerm: queryUser.searchEmailTerm ?? null,
     }
 }
