@@ -1,13 +1,13 @@
 import {blogsCollections, postsCollections} from "../../db/db";
 import {blogMapper} from "../../utils/mappers/blog-mapper";
-import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
 import {postMapper} from "../../utils/mappers/post-mapper";
 import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
 import {ObjectId} from "mongodb";
 import {helperToBlog} from "../../utils/helpers/helper-query-get";
+import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 
 export const blogsQueryRepositories = {
-    async getAllBlog(queryParamsToBlog: QueryBlogInputModels): Promise<any> {
+    async getAllBlog(queryParamsToBlog: InQueryBlogModel): Promise<any> {
         const {searchNameTerm, sortBy, sortDirection, pageSize, pageNumber} = helperToBlog(queryParamsToBlog);
         const blogs = await blogsCollections
             .find(searchNameTerm ? {name: {$regex: searchNameTerm, $options: 'i'}} : {})
