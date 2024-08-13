@@ -1,7 +1,8 @@
 import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
+import {QueryHelperResponse} from "../../models/blog/helper-query-blog/helper-blog";
 
-export const queryHelperToBlog = (query: InQueryBlogModel) => {
+export const queryHelperToBlog = (query: InQueryBlogModel): QueryHelperResponse => {
     return {
         pageNumber: query.pageNumber ?? 1,
         pageSize: query.pageSize ?? 10,
