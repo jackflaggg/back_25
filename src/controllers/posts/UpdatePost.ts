@@ -34,4 +34,5 @@ export const updatePostController = async (req: RequestWithParamsAndBody<PostPar
     }
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    return;
 }
