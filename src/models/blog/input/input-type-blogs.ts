@@ -1,6 +1,6 @@
 import {SortDirection} from "mongodb";
 
-export type queryParamsName = string //| boolean;
+export type queryParamsName = string | null;
 
 export interface InCreateBlogModel {
     name: string
