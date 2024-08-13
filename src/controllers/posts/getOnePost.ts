@@ -1,10 +1,10 @@
-import {Response} from "express";
-import {HTTP_STATUSES, PostParamsId, RequestWithParams} from "../../models/common/common-types";
+import {HTTP_STATUSES, PostParamsId, RequestWithParams, ResponseBody} from "../../models/common/common-types";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
+import {OutPostModel} from "../../models/post/output/output-type-posts";
 
 export const OnePostController = async (req: RequestWithParams<PostParamsId>,
-                                        res:Response) => {
+                                        res:ResponseBody<OutPostModel>) => {
     const { id: postId } = req.params;
 
     if (!validateId(postId)) {
@@ -19,4 +19,5 @@ export const OnePostController = async (req: RequestWithParams<PostParamsId>,
         return;
     }
     res.status(HTTP_STATUSES.OK_200).send(getPostId);
+    return;
 }
