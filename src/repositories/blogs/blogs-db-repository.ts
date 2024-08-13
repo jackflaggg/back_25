@@ -12,8 +12,8 @@ export const blogsRepositories = {
         return newBlog.insertedId.toString();
     },
 
-    async putBlog(id: string, blog: InUpdateBlogModel): Promise<boolean> {
-        const updateBlog = await blogsCollections.updateOne({_id: new ObjectId(id)}, {
+    async putBlog(blogId: string, blog: InUpdateBlogModel): Promise<boolean> {
+        const updateBlog = await blogsCollections.updateOne({_id: new ObjectId(blogId)}, {
                 $set: {
                     name: blog.name,
                     description: blog.description,
@@ -22,8 +22,8 @@ export const blogsRepositories = {
             }, {upsert: true})
             return updateBlog && updateBlog.acknowledged
     },
-    async delBlog(id: string): Promise<boolean> {
-        const deleteBlog = await blogsCollections.deleteOne({_id: new ObjectId(id)});
+    async delBlog(blogId: string): Promise<boolean> {
+        const deleteBlog = await blogsCollections.deleteOne({_id: new ObjectId(blogId)});
         return deleteBlog.acknowledged;
     },
 
