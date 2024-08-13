@@ -1,13 +1,12 @@
 import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
-import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
-import {InputCreateBlogModel} from "../../models/blog/input/create.blog.input.models";
+import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
 import {blogsService} from "../../domain/blog/blog-service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
-import {CreatePostToBlogInputModel} from "../../models/blog/input/create.post.to.blog.input";
+import {InCreateBlogModel} from "../../models/blog/input/input-type-blogs";
 
-export const createBlogController = async (req: RequestWithBody<CreatePostToBlogInputModel | InputCreateBlogModel>,
+export const createBlogController = async (req: RequestWithBody<InCreateBlogModel>,
                                            res:ResponseBody<OutputBlogModel>) => {
-    const createdBlogId = await blogsService.createBlog(req.body as InputCreateBlogModel);
+    const createdBlogId = await blogsService.createBlog(req.body);
 
     const blog = await blogsQueryRepositories.giveOneToIdBlog(createdBlogId!);
 

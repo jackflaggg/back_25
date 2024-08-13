@@ -1,5 +1,5 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams, ResponseBody} from "../../models/common/common-types";
-import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
+import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 

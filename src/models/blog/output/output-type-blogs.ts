@@ -1,4 +1,4 @@
-export type OutputBlogModel = {
+export interface OutputBlogModel {
     id: string,
     name: string,
     description: string,

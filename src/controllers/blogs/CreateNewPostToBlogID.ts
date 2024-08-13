@@ -1,14 +1,15 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody, ResponseBody} from "../../models/common/common-types";
-import {CreatePostToBlogInputModel} from "../../models/blog/input/create.post.to.blog.input";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {blogsService} from "../../domain/blog/blog-service";
 import {validateId} from "../../utils/helpers/helper-validate-id";
+import {InCreatePostToBlogInputModel} from "../../models/blog/input/input-type-blogs";
 
-export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, CreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel>) => {
+export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, InCreatePostToBlogInputModel>, res: ResponseBody<OutputPostModel>) => {
 
     const {id} = req.params;
+
     if (!validateId(id)) {
         console.log('err: not valid blog id');
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
@@ -23,8 +24,7 @@ export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogPar
         return
     }
 
-    const createdNewPost = await blogsService.createPostToBlogInputModel(blog, req.body as CreatePostToBlogInputModel)
-
+    const createdNewPost = await blogsService.createPostToBlogInputModel(blog, req.body as InCreatePostToBlogInputModel)
 
     if (!createdNewPost) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);

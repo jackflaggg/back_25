@@ -2,7 +2,7 @@ import {blogsCollections, postsCollections} from "../../db/db";
 import {blogMapper} from "../../utils/mappers/blog-mapper";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
 import {postMapper} from "../../utils/mappers/post-mapper";
-import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
+import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
 import {ObjectId} from "mongodb";
 import {helperToBlog} from "../../utils/helpers/helper-query-get";
 

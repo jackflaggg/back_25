@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {OutputBlogModel} from "../blog/output/blog.output.models";
+import {OutputBlogModel} from "../blog/output/output-type-blogs";
 import {OutputPostModel} from "../post/output/post.output.models";
 
 export enum HTTP_STATUSES {

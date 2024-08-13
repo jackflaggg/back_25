@@ -1,5 +1,5 @@
 import {HTTP_STATUSES, RequestWithQuery, ResponseBody} from "../../models/common/common-types";
-import {OutputBlogModel} from "../../models/blog/output/blog.output.models";
+import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
 import {helperToBlog} from "../../utils/helpers/helper-query-get";
