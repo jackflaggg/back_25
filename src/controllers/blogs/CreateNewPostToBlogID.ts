@@ -38,5 +38,7 @@ export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogPar
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
+
     res.status(HTTP_STATUSES.CREATED_201).send(searchPostToId);
+    return;
 }
