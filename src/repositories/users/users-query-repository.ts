@@ -1,13 +1,13 @@
-import {helperToUser} from "../../utils/helpers/helper-query-get";
 import {usersCollection} from "../../db/db";
 import {userMapper} from "../../utils/mappers/user-mapper";
 import {ObjectId} from "mongodb";
 import {CreateUserOutputModel} from "../../models/user/ouput/CreateViewModelUserOutput";
 import {loginUserMapper} from "../../utils/mappers/login-mapper";
+import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
 
 export const usersQueryRepository = {
     async getAllUsers(query: any): Promise<any> {
-        const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = helperToUser(query);
+        const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = queryHelperToUser(query);
 
         const filter = {
             $or: [

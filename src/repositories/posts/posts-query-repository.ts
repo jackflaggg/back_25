@@ -1,14 +1,14 @@
 import {postsCollections} from "../../db/db";
 import {postMapper} from "../../utils/mappers/post-mapper";
 import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
-import {helperToPost} from "../../utils/helpers/helper-query-get";
+import {queryHelperToBlog, queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {OutputPostModel} from "../../models/post/output/post.output.models";
 import {ObjectId} from "mongodb";
 
 export const postsQueryRepository = {
     async getAllPost(queryParamsToPost: QueryPostInputModels): Promise<any> {
 
-        const {pageNumber, pageSize, sortBy, sortDirection} = helperToPost(queryParamsToPost || {})
+        const {pageNumber, pageSize, sortBy, sortDirection} = queryHelperToPost(queryParamsToPost || {})
 
         const posts = await postsCollections
             .find()

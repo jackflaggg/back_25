@@ -1,9 +1,9 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndQuery} from "../../models/common/common-types";
 import {Response} from "express";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
-import {helperToPost} from "../../utils/helpers/helper-query-get";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
+import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
 
 export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, InQueryBlogModel>, res: Response<any>) => {
     const blogId = req.params.id;
@@ -20,7 +20,7 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
         return
     }
 
-    const sortDataQuery = helperToPost(req.query);
+    const sortDataQuery = queryHelperToPost(req.query);
 
     const allPosts = await blogsQueryRepositories.getPostsToBlogID(blogId, sortDataQuery);
     if (!allPosts){

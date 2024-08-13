@@ -1,7 +1,7 @@
 import {QueryPostInputModels} from "../../models/post/input/get-query.post.input.models";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 
-export const helperToBlog = (query: InQueryBlogModel) => {
+export const queryHelperToBlog = (query: InQueryBlogModel) => {
     return {
         pageNumber: query.pageNumber ?? 1,
         pageSize: query.pageSize ?? 10,
@@ -11,7 +11,7 @@ export const helperToBlog = (query: InQueryBlogModel) => {
     }
 }
 
-export const helperToPost = (query: QueryPostInputModels) => {
+export const queryHelperToPost = (query: QueryPostInputModels) => {
     return {
         pageNumber: query.pageNumber ?? 1,
         pageSize: query.pageSize ?? 10,
@@ -20,7 +20,7 @@ export const helperToPost = (query: QueryPostInputModels) => {
     }
 }
 
-export const helperToUser = (query: any) => {
+export const queryHelperToUser = (query: any) => {
     return {
         sortBy: query.sortBy ?? 'createdAt',
         sortDirection: query.sortDirection ?? 'desc',
