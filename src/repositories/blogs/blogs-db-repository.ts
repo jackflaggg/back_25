@@ -1,7 +1,7 @@
 import {blogsCollections, postsCollections} from "../../db/db";
 import {ObjectId} from "mongodb";
-import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {BlogDbType} from "../../models/db/db.models";
+import {InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
 
 export const blogsRepositories = {
     async createBlog(blog: BlogDbType): Promise<string | null>{
@@ -12,7 +12,7 @@ export const blogsRepositories = {
         return newBlog.insertedId.toString();
     },
 
-    async putBlog(id: string, blog: InputUpdateBlogModel): Promise<boolean> {
+    async putBlog(id: string, blog: InUpdateBlogModel): Promise<boolean> {
         const updateBlog = await blogsCollections.updateOne({_id: new ObjectId(id)}, {
                 $set: {
                     name: blog.name,
