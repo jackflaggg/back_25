@@ -24,7 +24,7 @@ export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogPar
         return
     }
 
-    const createdNewPost = await blogsService.createPostToBlogInputModel(blog, req.body as InCreatePostToBlogInputModel)
+    const createdNewPost = await blogsService.createPostToBlogInputModel(blog, req.body)
 
     if (!createdNewPost) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);

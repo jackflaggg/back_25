@@ -1,11 +1,11 @@
 import {Response} from "express";
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndBody} from "../../models/common/common-types";
-import {InputUpdateBlogModel} from "../../models/blog/input/update.blog.input.models";
 import {blogsService} from "../../domain/blog/blog-service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
+import {InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
 
-export const updateBlogController = async (req: RequestWithParamsAndBody<BlogParamsModel, InputUpdateBlogModel>,
+export const updateBlogController = async (req: RequestWithParamsAndBody<BlogParamsModel, InUpdateBlogModel>,
                                            res:Response) => {
     const {id} = req.params;
     if (!validateId(id)) {
@@ -19,7 +19,7 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
         return
     }
 
-    const isBlogUpdated = await blogsService.putBlog(id, req.body as InputUpdateBlogModel);
+    const isBlogUpdated = await blogsService.putBlog(id, req.body);
     if (!isBlogUpdated) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;

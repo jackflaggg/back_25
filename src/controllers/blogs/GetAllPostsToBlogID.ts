@@ -1,11 +1,11 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParamsAndQuery} from "../../models/common/common-types";
 import {Response} from "express";
-import {QueryBlogInputModels} from "../../models/blog/input/get-query.blog.input.models";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {helperToPost} from "../../utils/helpers/helper-query-get";
 import {validateId} from "../../utils/helpers/helper-validate-id";
+import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 
-export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, QueryBlogInputModels>, res: Response<any>) => {
+export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, InQueryBlogModel>, res: Response<any>) => {
     const blogId = req.params.id;
 
     if (!validateId(blogId)){
