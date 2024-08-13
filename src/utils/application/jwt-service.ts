@@ -1,8 +1,8 @@
 import {SETTINGS} from "../../settings";
-import jwt from "jsonwebtoken";
+import jwt, {JwtPayload} from "jsonwebtoken";
 
 export const jwtService = {
-    async createToken(userId: string | null): Promise<string | null> {
+    async createToken(userId: string | null): Promise<null | string> {
         try {
             return jwt.sign(
                 {userId: userId},
@@ -15,18 +15,18 @@ export const jwtService = {
         }
     },
 
-    async decodeToken(token: string): Promise<any>  {
+    async decodeToken(token: string): Promise<null | JwtPayload>  {
         try {
-            return jwt.decode(token)
+            return jwt.decode(token) as JwtPayload | null
         } catch (error: unknown) {
             console.error('Ошибка при декодировании токена: ', error)
             return null
         }
     },
 
-    async verifyToken(token: string): Promise<any>  {
+    async verifyToken(token: string): Promise<null | JwtPayload >  {
         try {
-            return jwt.verify(token, SETTINGS.SECRET_KEY)
+            return jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload | null
         } catch (error: unknown) {
             console.error('Ошибка при верификации токена: ', error)
             return null
