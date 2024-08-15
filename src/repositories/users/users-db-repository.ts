@@ -1,9 +1,10 @@
 import {usersCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
+import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 
 export const UsersDbRepository = {
-    async createUser(body: CreateMapperUser): Promise<string | null> {
+    async createUser(body: OutUserServiceModel): Promise<string | null> {
         const newUser = await usersCollection.insertOne(body)
 
         if (!newUser || !newUser.insertedId) {
