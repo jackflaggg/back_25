@@ -23,13 +23,14 @@ export const UsersDbRepository = {
         return await usersCollection.findOne({ email: email })
     },
     async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | any> {
-
+        console.log(loginOrEmail);
         const filter = {
             $or: [
                 {login: loginOrEmail} ,
                 {email: loginOrEmail}
             ]
         }
+        console.log(filter)
         console.log(await usersCollection.findOne(filter))
 
         return await usersCollection.findOne(filter);

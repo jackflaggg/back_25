@@ -7,6 +7,7 @@ export const authService = {
     async authenticationUser(inputDataUser: any): Promise<null | any> {
 
         const {loginOrEmail, password} = inputDataUser;
+        console.log(loginOrEmail, password);
 
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
         if (!credentialLoginOrEmail) {
