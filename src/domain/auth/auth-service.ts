@@ -21,6 +21,7 @@ export const authService = {
         }
         return credentialLoginOrEmail._id;
     },
+
     async loginUser(inputDataUser: loginControllerModels) {
         const userId = await this.authenticationUser(inputDataUser);
 
