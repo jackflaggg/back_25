@@ -30,6 +30,7 @@ export const UsersDbRepository = {
                 {email: loginOrEmail}
             ]
         }
+        console.log(await usersCollection.findOne(filter))
 
         return await usersCollection.findOne(filter);
     },
