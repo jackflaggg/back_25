@@ -1,4 +1,4 @@
-import {OutCreateUserModel} from "../../models/user/ouput/output-type-users";
+import {OutCreateUserModel, OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 
 
 export const userMapper = (user: any): OutCreateUserModel=> {
@@ -10,7 +10,7 @@ export const userMapper = (user: any): OutCreateUserModel=> {
     }
 }
 
-export const userMapperToCreate = (login: string, email: string, password: string): CreateMapperUserOutputModel => {
+export const userMapperToCreate = (login: string, email: string, password: string): OutUserServiceModel => {
     return {
         login,
         email,
