@@ -10,12 +10,13 @@ export const authService = {
         console.log(loginOrEmail, password);
 
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
+
         if (!credentialLoginOrEmail) {
             console.log('Пользователь не найден!')
             return null;
         }
 
-        const checkPassword = await hashService.comparePassword(password, credentialLoginOrEmail.password);
+        const checkPassword = await hashService.comparePassword(password, credentialLoginOrEmail.password as string);
         if (!checkPassword) {
             console.log('Пароль не прошел проверку!')
             return null;

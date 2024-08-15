@@ -22,11 +22,13 @@ export interface OutUserServiceModel {
     createdAt: string,
 }
 
-export interface OutUserFindLoginOrEmailRepository {
+export interface OutUserFindLoginOrEmail {
     _id?: ObjectId,
     login: string,
-    password: string,
     email: string,
+    password?: string,
     createdAt: string
 }
+
+
 

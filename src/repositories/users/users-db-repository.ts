@@ -1,7 +1,7 @@
 import {usersCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
-import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
+import {OutUserFindLoginOrEmail, OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 
 export const UsersDbRepository = {
     async createUser(body: OutUserServiceModel): Promise<string | null> {
@@ -22,7 +22,7 @@ export const UsersDbRepository = {
     async findByEmailUser(email: string): Promise<any | null> {
         return await usersCollection.findOne({ email: email })
     },
-    async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | any> {
+    async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | OutUserFindLoginOrEmail> {
         console.log(loginOrEmail);
         const filter = {
             $or: [
@@ -30,9 +30,7 @@ export const UsersDbRepository = {
                 {email: loginOrEmail}
             ]
         }
-        console.log(filter)
-        console.log(await usersCollection.findOne(filter))
-
-        return await usersCollection.findOne(filter);
+        const findUser = await usersCollection.findOne(filter)
+        return findUser;
     },
 }
