@@ -5,9 +5,9 @@ import {
 } from "../../models/common/common-types";
 import {userService} from "../../domain/user/user-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
-import {CreateUserInputModel} from "../../models/user/input/CreateViewModelUser";
+import {InCreateUserModel} from "../../models/user/input/input-type-users";
 
-export const createUserController = async (req: RequestWithBody<CreateUserInputModel>,
+export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
                                            res:ResponseBody<ResultError| void | any>) => {
     const createdUserId = await userService.createUser(req.body);
 

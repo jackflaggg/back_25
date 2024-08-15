@@ -2,11 +2,11 @@ import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {HTTP_STATUSES, ResultError} from "../../models/common/common-types";
 import {hashService} from "../../utils/application/hash-service";
 import {errorsValidate} from "../../utils/features/errors-validate";
-import {CreateUserServiceModel} from "../../models/user/input/CreateServiceModelUser";
 import {userMapperToCreate} from "../../utils/mappers/user-mapper";
+import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 
 export const userService = {
-    async createUser(user: CreateUserServiceModel): Promise<string | ResultError | null> {
+    async createUser(user: Omit<OutUserServiceModel, 'createdAt'>): Promise<string | ResultError | null> {
         const { login, password, email} = user;
 
         const errors = await errorsValidate( email, login );

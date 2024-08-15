@@ -1,9 +1,7 @@
-import {CreateUserOutputModel} from "../../models/user/ouput/CreateViewModelUserOutput";
-import {
-    CreateMapperUserOutputModel,
-} from "../../models/user/input/CreateServiceModelUser";
+import {OutCreateUserModel} from "../../models/user/ouput/output-type-users";
 
-export const userMapper = (user: any): CreateUserOutputModel => {
+
+export const userMapper = (user: any): OutCreateUserModel=> {
     return {
         id: user._id.toString(),
         login: user.login,
