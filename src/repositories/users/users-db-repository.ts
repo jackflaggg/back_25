@@ -1,7 +1,6 @@
 import {usersCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
-import {CreateMapperUser} from "../../models/user/input/CreateServiceModelUser";
 
 export const UsersDbRepository = {
     async createUser(body: CreateMapperUser): Promise<string | null> {
