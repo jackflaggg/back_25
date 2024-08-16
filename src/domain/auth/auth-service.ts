@@ -1,7 +1,7 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {hashService} from "../../utils/application/hash-service";
 import {jwtService} from "../../utils/application/jwt-service";
-import {loginControllerModels} from "../../models/auth/input/login-post-controller";
+import {InLoginModels, loginControllerModels} from "../../models/auth/input/login-post-controller";
 
 export const authService = {
     async authenticationUser(inputDataUser: any): Promise<null | any> {
@@ -24,7 +24,7 @@ export const authService = {
         return credentialLoginOrEmail._id;
     },
 
-    async loginUser(inputDataUser: loginControllerModels) {
+    async loginUser(inputDataUser: InLoginModels) {
         const userId = await this.authenticationUser(inputDataUser);
 
         if (!userId) {
