@@ -1,4 +1,4 @@
-export type loginControllerModels = {
+export type InLoginModels = {
     loginOrEmail: string,
     password: string
 }
