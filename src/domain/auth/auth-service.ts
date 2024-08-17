@@ -28,7 +28,7 @@ export const authService = {
         const userId = await this.authenticationUser(inputDataUser);
 
         if (!userId) {
-            console.log('Аутентификация рухнула!')
+            console.log('Аутентификация рухнула!');
             return null;
         }
 
