@@ -53,6 +53,6 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
         return
     }
 
-    res.status(HTTP_STATUSES.OK_200).send(newPost);
+    res.status(HTTP_STATUSES.OK_200).send(findCreateComment);
     return;
 }
