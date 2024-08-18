@@ -1,18 +1,14 @@
 import {SETTINGS} from "../../settings";
 import jwt, {JwtPayload} from "jsonwebtoken";
 import {config} from 'dotenv'
+import {secretErrorCheck} from "../features/secret-error";
 
 config()
 
 export const jwtService = {
     async createToken(userId: string | null): Promise<null | string> {
         try {
-            console.log(SETTINGS.SECRET_KEY)
-
-            if (!SETTINGS.SECRET_KEY) {
-                console.error('SECRET_KEY не установлен');
-                return null;
-            }
+            if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
                 {userId: userId},
                 SETTINGS.SECRET_KEY,
