@@ -6,6 +6,7 @@ import {usersQueryRepository} from "../../repositories/users/users-query-reposit
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;
+    console.log(authHeaders);
 
     if(!authHeaders){
         console.log('Что то с заголовком: ' + authHeaders);
