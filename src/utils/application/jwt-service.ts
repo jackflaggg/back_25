@@ -12,7 +12,6 @@ export const jwtService = {
             if (!SETTINGS.SECRET_KEY) {
                 console.error('SECRET_KEY не установлен');
                 return null;
-                //throw new Error('SECRET_KEY не установлен');
             }
             return jwt.sign(
                 {userId: userId},
