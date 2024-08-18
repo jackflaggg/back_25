@@ -4,6 +4,7 @@ import jwt, {JwtPayload} from "jsonwebtoken";
 export const jwtService = {
     async createToken(userId: string | null): Promise<null | string> {
         try {
+            console.log(SETTINGS.SECRET_KEY)
             return jwt.sign(
                 {userId: userId},
                 SETTINGS.SECRET_KEY,
