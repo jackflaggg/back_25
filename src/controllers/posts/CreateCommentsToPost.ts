@@ -6,19 +6,21 @@ import {postsQueryRepository} from "../../repositories/posts/posts-query-reposit
 export const createCommentByPostIdController = async (req: Request, res: Response) => {
 
     const userId = req.userId;
-    const { content, id : idPost} = req.body;
-    console.log(userId)
-    if (!userId || !content || idPost) {
+    const { content} = req.body;
+    const { postId } = req.params;
+
+    if (!userId || !content || !postId) {
         res.status(400).send({error: 'User || content not valid'});
         return
     }
-    const findUser = await usersQueryRepository.getUserById(userId as string);
+    const findUser = await usersQueryRepository.getUserById(userId.toString());
     if (!findUser) {
         res.status(400).send({error: 'not user'});
         return
     }
 
-    const findPost = await postsQueryRepository.giveOneToIdPost(idPost);
+    const findPost = await postsQueryRepository.giveOneToIdPost(postId);
+    console.log(findPost)
     if (!findPost) {
         res.status(404).send({error: 'not found post'});
         return
