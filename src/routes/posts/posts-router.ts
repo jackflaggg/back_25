@@ -9,6 +9,7 @@ import {blogIdValidator, postValidator} from "../../validators/postValidator";
 import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsValidator";
 import {authBearerMiddlewares} from "../../utils/middlewares/auth-bearer-middleware";
 import {contentValidator} from "../../validators/commentValidator";
+import {createCommentByPostIdController} from "../../controllers/posts/CreateCommentsToPost";
 
 export const postRouter: Router = Router();
 
@@ -17,7 +18,7 @@ postRouter.get("/:id", blogIdValidator, OnePostController);
 
 
 postRouter.post("/", adminMiddlewares, [...postValidator, inputCheckErrorsMiddleware],createPostController);
-postRouter.post(':/postId', authBearerMiddlewares, contentValidator, inputCheckErrorsMiddleware, )
+postRouter.post(':/postId/comments', authBearerMiddlewares, contentValidator, inputCheckErrorsMiddleware, createCommentByPostIdController);
 
 postRouter.put("/:id", adminMiddlewares, [...postValidator, inputCheckErrorsMiddleware], updatePostController);
 postRouter.delete("/:id", adminMiddlewares, blogIdValidator, deletePostController);
