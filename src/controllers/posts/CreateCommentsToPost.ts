@@ -30,7 +30,7 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
         return
     }
     const newPost = {
-        id: findPost.id,
+        //id: findPost.id,
         content: content,
         commentatorInfo: {
             id: findUser.id,

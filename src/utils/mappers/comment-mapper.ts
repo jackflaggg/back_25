@@ -4,8 +4,8 @@ export const commentMapper = (user: any) => {
         id: user._id.toString(),
         content: user.content,
         commentatorInfo: {
-            userId: user._id.toString(),
-            userLogin: user.login.toString()
+            userId: user.commentatorInfo.id,
+            userLogin: user.commentatorInfo.login
         },
         createdAt: new Date().toISOString(),
     }
