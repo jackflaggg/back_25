@@ -8,9 +8,10 @@ export const getCommentIdController = async (req: Request,
     const {id} = req.params;
 
     if (!validateId(id)){
-        res.sendStatus(403)
+        res.sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403)
         return
     }
+
     const comment = await CommentsQueryRepository.getComment(id);
 
     if (!comment) {

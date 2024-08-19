@@ -19,6 +19,7 @@ export const deleteCommentController = async (req: Request, res: Response) => {
     const statusCode = statusMap[deleteComment.status];
 
     if (statusCode && deleteComment.extensions) {
+        console.log('вошел в плохой статус! ' + statusCode)
         res.status(statusCode).send({ errorsMessages: deleteComment.extensions });
         return
     }
