@@ -30,9 +30,7 @@ export const postsQueryRepository = {
         };
     },
     async giveOneToIdPost(id: string): Promise<OutPostModel | null> {
-        console.log(id)
         const post = await postsCollections.findOne({_id: new ObjectId(id)});
-        console.log(post)
         if (!post) {
             return null;
         }
