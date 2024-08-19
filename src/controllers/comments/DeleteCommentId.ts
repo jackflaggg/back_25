@@ -1,32 +1,35 @@
-import { Request, Response } from "express";
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
-import {validateId} from "../../utils/helpers/helper-validate-id";
-import {HTTP_STATUSES} from "../../models/common/common-types";
-import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
+import {Request, Response} from "express";
 import {commentService} from "../../domain/comment/comment-service";
+import {HTTP_STATUSES, ResultStatus} from "../../models/common/common-types";
 
 export const deleteCommentController = async (req: Request, res: Response) => {
     const { commentId } = req.params;
 
     const { userId } = req;
-    if (!validateId(userId as string)){
-        res.sendStatus(403)
-        return
-    }
-    const deleteComment = await commentService.deleteComment(commentId)
 
-    const user = await usersQueryRepository.getUserById(userId as string);
+    const deleteComment = await commentService.deleteComment(commentId, userId as string)
 
-    if (!user){
-        console.log('не найден пользователь!')
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+    if (deleteComment.status === ResultStatus.BadRequest) {
+        res
+            .status(HTTP_STATUSES.BAD_REQUEST_400)
+            .send({errorsMessages: deleteComment.extensions || []})
         return
     }
 
-    const comment = await CommentsQueryRepository.getComment(commentId);
-    if (!comment){
-        console.log('не найден коммент!')
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+    if (deleteComment.status === ResultStatus.NotFound) {
+        res
+            .status(HTTP_STATUSES.NOT_FOUND_404)
+            .send({errorsMessages: deleteComment.extensions || []})
         return
     }
+
+    if (deleteComment.status === ResultStatus.Forbidden) {
+        res
+            .status(HTTP_STATUSES.NOT_FORBIDDEN)
+            .send({errorsMessages: deleteComment.extensions || []})
+        return
+    }
+
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    return;
 }

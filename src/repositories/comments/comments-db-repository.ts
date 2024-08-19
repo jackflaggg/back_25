@@ -1,4 +1,5 @@
 import {commentsCollection, usersCollection} from "../../db/db";
+import {ObjectId} from "mongodb";
 
 export const CommentsDbRepository = {
     async CreateComment(inputComment: any) {
@@ -16,8 +17,8 @@ export const CommentsDbRepository = {
     //     }
     //     return updateComment.insertedId.toString();
     // },
-    // async deleteComment(id: string): Promise<any> {
-    //     const deleteComment = await usersCollection.deleteOne({_id: new ObjectId(id)});
-    //     return deleteComment.acknowledged;
-    // },
+    async deleteComment(id: string): Promise<any> {
+        const deleteComment = await usersCollection.deleteOne({_id: new ObjectId(id)});
+        return deleteComment.acknowledged;
+    },
 }
