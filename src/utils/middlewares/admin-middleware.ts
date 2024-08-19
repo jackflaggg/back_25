@@ -6,19 +6,14 @@ import {fromUTF8ToBase64} from "../features/UTF8ToBase64";
 export const adminMiddlewares = (req: Request, res: Response, next:NextFunction) => {
     const {authorization: auth} = req.headers;
 
-    if (!auth){
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
-        return;
-    }
-
-    if(!auth?.startsWith('Basic')){
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+    if (!auth || !auth?.startsWith('Basic')){
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
 
     const codedAuthorization = fromUTF8ToBase64(SETTINGS.ADMIN);
     if(auth.slice(6) !== (codedAuthorization)){
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
     next();
