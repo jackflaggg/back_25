@@ -6,14 +6,14 @@ export const getInfoUserController = async (req: Request, res: Response): AsyncV
     const existingId = req.userId as string;
 
     if (!existingId) {
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return
     }
 
     const user = await usersQueryRepository.LoginMapByUser(existingId);
 
     if (!user) {
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
 

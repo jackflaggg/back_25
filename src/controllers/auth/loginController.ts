@@ -7,7 +7,7 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
     const loginUser = await authService.loginUser(req.body);
 
     if (!loginUser) {
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION);
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
 

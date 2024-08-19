@@ -9,24 +9,16 @@ export const deleteCommentController = async (req: Request, res: Response) => {
 
     const deleteComment = await commentService.deleteComment(commentId, userId as string)
 
-    if (deleteComment.status === ResultStatus.BadRequest) {
-        res
-            .status(HTTP_STATUSES.BAD_REQUEST_400)
-            .send({errorsMessages: deleteComment.extensions || []})
-        return
-    }
+    const statusMap = {
+        [ResultStatus.BadRequest]: HTTP_STATUSES.BAD_REQUEST_400,
+        [ResultStatus.NotFound]: HTTP_STATUSES.NOT_FOUND_404,
+        [ResultStatus.Forbidden]: HTTP_STATUSES.NOT_FORBIDDEN,
+    };
 
-    if (deleteComment.status === ResultStatus.NotFound) {
-        res
-            .status(HTTP_STATUSES.NOT_FOUND_404)
-            .send({errorsMessages: deleteComment.extensions || []})
-        return
-    }
+    const statusCode = statusMap[deleteComment.status];
 
-    if (deleteComment.status === ResultStatus.Forbidden) {
-        res
-            .status(HTTP_STATUSES.NOT_FORBIDDEN)
-            .send({errorsMessages: deleteComment.extensions || []})
+    if (statusCode) {
+        res.status(statusCode).send({ errorsMessages: deleteComment.extensions || [] });
         return
     }
 
