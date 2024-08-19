@@ -8,7 +8,7 @@ import {CommentsQueryRepository} from "../../repositories/comments/comments-quer
 
 
 export const createCommentByPostIdController = async (req: Request, res: Response) => {
-
+    // ПЕРЕДЕЛАТЬ НА СЕРВИС!
     const userId = req.userId;
     const { content} = req.body;
     const { postId } = req.params;
