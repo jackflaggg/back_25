@@ -19,4 +19,5 @@ export const getCommentIdController = async (req: Request,
     }
 
     res.status(HTTP_STATUSES.OK_200).send(comment);
+    return;
 }
