@@ -32,7 +32,7 @@ export const getCommentsToPostId = async (req: Request/*RequestWithParamsAndQuer
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
-    res.status(200).send(allComments);
+    res.status(HTTP_STATUSES.OK_200).send(allComments);
     return
 
 }
