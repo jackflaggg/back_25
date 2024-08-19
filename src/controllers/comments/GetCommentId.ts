@@ -1,18 +1,22 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {Request, Response} from "express";
-import {blogsService} from "../../domain/blog/blog-service";
-import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
+import {validateId} from "../../utils/helpers/helper-validate-id";
+import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
 
 export const getCommentIdController = async (req: Request,
                                            res: Response) => {
-    const createdBlogId = await blogsService.createBlog(req.body);
+    const {id} = req.params;
 
-    const blog = await blogsQueryRepositories.giveOneToIdBlog(createdBlogId!);
+    if (!validateId(id)){
+        res.sendStatus(403)
+        return
+    }
+    const comment = await CommentsQueryRepository.getComment(id);
 
-    if (!blog) {
+    if (!comment) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
 
-    res.status(HTTP_STATUSES.CREATED_201).send(blog);
+    res.status(HTTP_STATUSES.OK_200).send(comment);
 }
