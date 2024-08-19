@@ -17,6 +17,7 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
         res.status(HTTP_STATUSES.BAD_REQUEST_400).send({error: 'User || content not valid'});
         return
     }
+
     const findUser = await usersQueryRepository.getUserById(userId.toString());
     if (!findUser) {
         res.status(HTTP_STATUSES.BAD_REQUEST_400).send({error: 'not user'});
