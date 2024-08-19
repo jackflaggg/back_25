@@ -1,11 +1,10 @@
-import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
-import {InCreateBlogModel} from "../../models/blog/input/input-type-blogs";
-import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
+import {HTTP_STATUSES} from "../../models/common/common-types";
+import {Request, Response} from "express";
 import {blogsService} from "../../domain/blog/blog-service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 
-export const getCommentIdController = async (req: RequestWithBody<InCreateBlogModel>,
-                                           res:ResponseBody<OutputBlogModel>) => {
+export const getCommentIdController = async (req: Request,
+                                           res: Response) => {
     const createdBlogId = await blogsService.createBlog(req.body);
 
     const blog = await blogsQueryRepositories.giveOneToIdBlog(createdBlogId!);

@@ -8,6 +8,6 @@ import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsVal
 
 export const commentsRouter = Router();
 
-commentsRouter.get("/:id", authBearerMiddlewares, getCommentIdController)
+commentsRouter.get("/:id", getCommentIdController)
 commentsRouter.put("/:commentId", authBearerMiddlewares, contentValidator, inputCheckErrorsMiddleware, updateCommentController)
 commentsRouter.delete("/:commentId", authBearerMiddlewares, deleteCommentController)
