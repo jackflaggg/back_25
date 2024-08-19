@@ -1,13 +1,9 @@
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {ResultStatus} from "../../models/common/common-types";
 import {CommentsDbRepository} from "../../repositories/comments/comments-db-repository";
 
 export const commentService = {
-    async getComment(commentId: string) {
-
-    },
     async updateComment(commentId: string, userId: string, inputComment: string){
 
         if (!validateId(commentId)){
