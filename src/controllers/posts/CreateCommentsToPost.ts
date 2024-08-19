@@ -42,7 +42,7 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
     const newComment = await CommentsDbRepository.CreateComment(newPost);
 
     if (!newComment) {
-        res.status(403).send({error: 'error on create comment!'});
+        res.status(HTTP_STATUSES.NOT_FORBIDDEN_403).send({error: 'error on create comment!'});
         return;
     }
 
@@ -53,6 +53,6 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
         return
     }
 
-    res.status(HTTP_STATUSES.OK_200).send(findCreateComment);
+    res.status(HTTP_STATUSES.CREATED_201).send(findCreateComment);
     return;
 }
