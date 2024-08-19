@@ -29,4 +29,5 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
     }
 
     res.status(HTTP_STATUSES.OK_200).send(allPosts);
+    return
 }

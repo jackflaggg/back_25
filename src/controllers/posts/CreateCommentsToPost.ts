@@ -25,7 +25,6 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
     }
 
     const findPost = await postsQueryRepository.giveOneToIdPost(postId);
-    console.log(findPost)
     if (!findPost) {
         res.status(HTTP_STATUSES.NOT_FOUND_404).send({error: 'not found post'});
         return

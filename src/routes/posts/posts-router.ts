@@ -10,12 +10,13 @@ import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsVal
 import {authBearerMiddlewares} from "../../utils/middlewares/auth-bearer-middleware";
 import {contentValidator} from "../../validators/commentValidator";
 import {createCommentByPostIdController} from "../../controllers/posts/CreateCommentsToPost";
+import {getCommentsToPostId} from "../../controllers/posts/GetAllCommentsToPost";
 
 export const postRouter: Router = Router();
 
 postRouter.get("/", AllPostController);
 postRouter.get("/:id", blogIdValidator, OnePostController);
-
+postRouter.get('/:postId/comments', getCommentsToPostId);
 
 postRouter.post("/", adminMiddlewares, [...postValidator, inputCheckErrorsMiddleware],createPostController);
 postRouter.post('/:postId/comments', authBearerMiddlewares, contentValidator, inputCheckErrorsMiddleware, createCommentByPostIdController);
