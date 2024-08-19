@@ -1,53 +1,30 @@
 import {Request, Response} from "express"
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
-import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
-import {HTTP_STATUSES} from "../../models/common/common-types";
-import {CommentsDbRepository} from "../../repositories/comments/comments-db-repository";
+import {HTTP_STATUSES, ResultStatus, ResultStatusType} from "../../models/common/common-types";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
+import {postsService} from "../../domain/post/post-service";
 
 
 
 export const createCommentByPostIdController = async (req: Request, res: Response) => {
     // ПЕРЕДЕЛАТЬ НА СЕРВИС!
-    const userId = req.userId;
-    const { content} = req.body;
-    const { postId } = req.params;
+    const createComment = await postsService.createCommentToPost(req.params.postId, req.userId as string, req.body.content)
 
-    if (!userId || !content || !postId) {
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send({error: 'User || content not valid'});
+    const statusMap: Record<ResultStatusType, HTTP_STATUSES> = {
+        [ResultStatus.BadRequest]: HTTP_STATUSES.BAD_REQUEST_400,
+        [ResultStatus.NotFound]: HTTP_STATUSES.NOT_FOUND_404,
+        [ResultStatus.Forbidden]: HTTP_STATUSES.NOT_FORBIDDEN_403,
+        [ResultStatus.NotContent]: HTTP_STATUSES.NO_CONTENT_204,
+    };
+
+    const statusCode = statusMap[createComment.status];
+
+    if (statusCode && createComment.extensions) {
+        console.log('вошел в плохой статус! ' + statusCode)
+        res.status(statusCode).send({ errorsMessages: createComment.extensions });
         return
     }
 
-    const findUser = await usersQueryRepository.getUserById(userId.toString());
-    if (!findUser) {
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send({error: 'not user'});
-        return
-    }
-
-    const findPost = await postsQueryRepository.giveOneToIdPost(postId);
-    if (!findPost) {
-        res.status(HTTP_STATUSES.NOT_FOUND_404).send({error: 'not found post'});
-        return
-    }
-    const newPost = {
-        //id: findPost.id,
-        content: content,
-        commentatorInfo: {
-            id: findUser.id,
-            login: findUser.login
-        },
-        postId: findPost.id,
-        createdAt: new Date().toISOString(),
-    }
-
-    const newComment = await CommentsDbRepository.CreateComment(newPost);
-
-    if (!newComment) {
-        res.status(HTTP_STATUSES.NOT_FORBIDDEN_403).send({error: 'error on create comment!'});
-        return;
-    }
-
-    const findCreateComment = await CommentsQueryRepository.getComment(newComment);
+    const findCreateComment = await CommentsQueryRepository.getComment(createComment.data as string);
 
     if (!findCreateComment) {
         res.status(HTTP_STATUSES.NOT_FOUND_404).send({error: 'not found comment'});

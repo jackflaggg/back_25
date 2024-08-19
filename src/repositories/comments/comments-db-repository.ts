@@ -1,8 +1,9 @@
-import {commentsCollection, usersCollection} from "../../db/db";
+import {commentsCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
+import {CommentDbType} from "../../models/db/db.models";
 
 export const CommentsDbRepository = {
-    async CreateComment(inputComment: any) {
+    async CreateComment(inputComment: CommentDbType) {
         const comment = await commentsCollection.insertOne(inputComment);
         if (!comment || !comment.insertedId) {
             return null;
