@@ -5,7 +5,7 @@ import {postsService} from "../../domain/post/post-service";
 
 export const createCommentByPostIdController = async (req: Request, res: Response) => {
     const createComment = await postsService.createCommentToPost(req.params.postId, req.body.content, req.userId as string, )
-    console.log(createComment)
+
     if (createComment.status === ResultStatus.NotFound){
         res.status(HTTP_STATUSES.NOT_FOUND_404).send({error: createComment.extensions});
         return
