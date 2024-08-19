@@ -9,10 +9,12 @@ export const deleteCommentController = async (req: Request, res: Response) => {
 
     const deleteComment = await commentService.deleteComment(commentId, userId as string)
 
-    const statusMap = {
+    const statusMap: Record<ResultStatus, HTTP_STATUSES> = {
         [ResultStatus.BadRequest]: HTTP_STATUSES.BAD_REQUEST_400,
         [ResultStatus.NotFound]: HTTP_STATUSES.NOT_FOUND_404,
         [ResultStatus.Forbidden]: HTTP_STATUSES.NOT_FORBIDDEN_403,
+        [ResultStatus.Success]: HTTP_STATUSES.OK_200,
+        [ResultStatus.Unauthorized]: HTTP_STATUSES.NOT_AUTHORIZATION_401
     };
 
     const statusCode = statusMap[deleteComment.status];

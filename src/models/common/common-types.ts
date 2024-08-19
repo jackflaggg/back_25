@@ -24,13 +24,15 @@ export type FieldNamesType = keyof OutputBlogModel | keyof OutPostModel
 export type ErrorsType = {
     errorsMessages: ErrorsMessageType[]
 }
-export enum ResultStatus {
-    Success = 'Success',
-    BadRequest = 'BadRequest',
-    Unauthorized = 'Unauthorized',
-    Forbidden = 'Forbidden',
-    NotFound = 'NotFound'
-}
+export const ResultStatus = {
+    BadRequest: 'BadRequest',
+    Forbidden: 'Forbidden',
+    NotFound: 'NotFound',
+    Success: 'Success',
+    Unauthorized: 'Unauthorized',
+} as const;
+
+export type ResultStatus = typeof ResultStatus[keyof typeof ResultStatus];
 
 export type Result<T = null> = {
     status: ResultStatus,
