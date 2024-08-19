@@ -9,7 +9,7 @@ export const updateCommentController = async (req: Request, res: Response) => {
 
     const {content} = req.body;
 
-    const deleteComment = await commentService.updateComment(commentId, userId as string, content)
+    const updateComment = await commentService.updateComment(commentId, userId as string, content)
 
     const statusMap: Record<ResultStatusType, HTTP_STATUSES> = {
         [ResultStatus.BadRequest]: HTTP_STATUSES.BAD_REQUEST_400,
@@ -18,11 +18,11 @@ export const updateCommentController = async (req: Request, res: Response) => {
         [ResultStatus.NotContent]: HTTP_STATUSES.NO_CONTENT_204,
     };
 
-    const statusCode = statusMap[deleteComment.status];
+    const statusCode = statusMap[updateComment.status];
 
-    if (statusCode && deleteComment.extensions) {
+    if (statusCode && updateComment.extensions) {
         console.log('вошел в плохой статус! ' + statusCode)
-        res.status(statusCode).send({ errorsMessages: deleteComment.extensions });
+        res.status(statusCode).send({ errorsMessages: updateComment.extensions });
         return
     }
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
