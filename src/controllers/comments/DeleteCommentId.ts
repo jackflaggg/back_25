@@ -12,7 +12,7 @@ export const deleteCommentController = async (req: Request, res: Response) => {
     const statusMap = {
         [ResultStatus.BadRequest]: HTTP_STATUSES.BAD_REQUEST_400,
         [ResultStatus.NotFound]: HTTP_STATUSES.NOT_FOUND_404,
-        [ResultStatus.Forbidden]: HTTP_STATUSES.NOT_FORBIDDEN,
+        [ResultStatus.Forbidden]: HTTP_STATUSES.NOT_FORBIDDEN_403,
     };
 
     const statusCode = statusMap[deleteComment.status];
