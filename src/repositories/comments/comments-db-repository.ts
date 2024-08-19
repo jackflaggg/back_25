@@ -9,14 +9,14 @@ export const CommentsDbRepository = {
         }
         return comment.insertedId.toString();
     },
-    // async UpdateComment(findComment: any, updateDataComment: any): Promise<string | null> {
-    //     const updateComment = await commentsCollection.updateOne(findComment, {$set: updateDataComment})
-    //
-    //     if (!updateComment || !updateComment.insertedId) {
-    //         return null;
-    //     }
-    //     return updateComment.insertedId.toString();
-    // },
+    async UpdateComment(commentId: string, updateDataComment: string): Promise<string | null> {
+        const updateComment = await commentsCollection.updateOne({_id: new ObjectId(commentId)}, {$set: { content: updateDataComment} })
+
+        if (!updateComment || !updateComment.upsertedId) {
+            return null;
+        }
+        return updateComment.upsertedId.toString();
+    },
     async deleteComment(id: string): Promise<any> {
         const deleteComment = await usersCollection.deleteOne({_id: new ObjectId(id)});
         return deleteComment.acknowledged;
