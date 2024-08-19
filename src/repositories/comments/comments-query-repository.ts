@@ -21,7 +21,7 @@ export const CommentsQueryRepository = {
             .skip((Number(pageNumber) - 1) * Number(pageSize))
             .limit(Number(pageSize))
             .toArray();
-
+        console.log(comments);
         const totalCountPosts = await postsCollections.countDocuments({postId: paramsToPostId});
 
         const pagesCount = Math.ceil(totalCountPosts / Number(pageSize));

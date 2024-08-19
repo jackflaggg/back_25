@@ -14,5 +14,6 @@ export const createBlogController = async (req: RequestWithBody<InCreateBlogMode
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
+
     res.status(HTTP_STATUSES.CREATED_201).send(blog);
 }
