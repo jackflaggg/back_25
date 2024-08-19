@@ -9,7 +9,7 @@ import {CommentsQueryRepository} from "../../repositories/comments/comments-quer
 export const getCommentsToPostId = async (req: Request/*RequestWithParamsAndQuery<BlogParamsModel, InQueryPostModel>*/, res: Response) => {
 
     const { postId } = req.params
-
+    console.log(postId)
     if(!validateId(postId)){
         console.log('рухнула валидация!')
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
@@ -17,7 +17,7 @@ export const getCommentsToPostId = async (req: Request/*RequestWithParamsAndQuer
     }
 
     const existingPost = await postsQueryRepository.giveOneToIdPost(postId);
-
+    console.log(existingPost)
     if(!existingPost){
         console.log('нет поста!')
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)

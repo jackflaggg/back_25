@@ -36,6 +36,7 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
             id: findUser.id,
             login: findUser.login
         },
+        postId: findPost.id,
         createdAt: new Date().toISOString(),
     }
 

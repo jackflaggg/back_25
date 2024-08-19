@@ -36,6 +36,7 @@ export interface CommentDbType {
     content: string;
     commentatorInfo: CommentatorInfo; // Используем новый интерфейс
     createdAt: string;
+    postId: string;
 }
 
 

@@ -18,7 +18,8 @@ export const CommentsDbRepository = {
         return updateComment.upsertedId.toString();
     },
     async deleteComment(id: string): Promise<any> {
-        const deleteComment = await usersCollection.deleteOne({_id: new ObjectId(id)});
+        const deleteComment = await commentsCollection.deleteOne({_id: new ObjectId(id)});
+        console.log(deleteComment)
         return deleteComment.acknowledged;
     },
 }

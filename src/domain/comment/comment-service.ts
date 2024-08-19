@@ -65,7 +65,9 @@ export const commentService = {
             }
         }
 
+        console.log(comment)
         const deleteComment = await CommentsDbRepository.deleteComment(comment.id);
+        console.log(deleteComment)
         return {
             status: ResultStatus.NotContent,
             data: deleteComment
