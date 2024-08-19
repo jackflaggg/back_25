@@ -1,4 +1,4 @@
-import {commentsCollection, postsCollections} from "../../db/db";
+import {commentsCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {InQueryPostModel} from "../../models/post/input/input-type-posts";
 import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
@@ -22,16 +22,15 @@ export const CommentsQueryRepository = {
             .limit(Number(pageSize))
             .toArray();
 
-        console.log(comments);
-        const totalCountPosts = await postsCollections.countDocuments({postId: paramsToPostId});
+        const totalCountComments = await commentsCollection.countDocuments({postId: paramsToPostId});
 
-        const pagesCount = Math.ceil(totalCountPosts / Number(pageSize));
+        const pagesCount = Math.ceil(totalCountComments / Number(pageSize));
 
         return {
             pagesCount: +pagesCount,
             page: +pageNumber,
             pageSize: +pageSize,
-            totalCount: +totalCountPosts,
+            totalCount: +totalCountComments,
             items: comments.map(comments => commentMapper(comments))
         }
     },
