@@ -40,7 +40,7 @@ export const commentService = {
 
         const deleteComment = await CommentsDbRepository.deleteComment(comment.id);
         return {
-            status: ResultStatus.Success,
+            status: ResultStatus.NotContent,
             data: deleteComment
         }
     },

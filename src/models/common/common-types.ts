@@ -28,14 +28,15 @@ export const ResultStatus = {
     BadRequest: 'BadRequest',
     Forbidden: 'Forbidden',
     NotFound: 'NotFound',
-    Success: 'Success',
-    Unauthorized: 'Unauthorized',
+    // NotAuthorized: 'NotAuthorized',
+    //Success: 'Success',
+    NotContent: 'NotContent',
 } as const;
 
-export type ResultStatus = typeof ResultStatus[keyof typeof ResultStatus];
+export type ResultStatusType = typeof ResultStatus[keyof typeof ResultStatus];
 
 export type Result<T = null> = {
-    status: ResultStatus,
+    status: ResultStatusType,
     extensions?: [{ field: string, message: string }],
     data: T
 }
