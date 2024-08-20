@@ -4,8 +4,7 @@ import {HTTP_STATUSES} from "../../src/models/common/common-types";
 import {codedAuth, createString, inCodedAuth} from "../helpers/datatests";
 import {connect, disconnect} from "../helpers/mongodb.memory.test.helper";
 import {ObjectId} from "mongodb";
-import {InputCreateBlogModel} from "../../src/models/blog/input/create.blog.input.models";
-import {InputUpdateBlogModel} from "../../src/models/blog/input/update.blog.input.models";
+import {InCreateBlogModel, InUpdateBlogModel} from "../../src/models/blog/input/input-type-blogs";
 
 let blog : {[key : string]: string} | undefined;
 
@@ -27,7 +26,7 @@ describe(SETTINGS.PATH.BLOGS, () => {
     });
 
     it('+Post method correct body(all data), return bodyBlog and status 201', async () => {
-        const newBlog: InputCreateBlogModel = {
+        const newBlog: InCreateBlogModel = {
             name: createString(2),
             description: createString(2),
             websiteUrl: "https://hz.com",
@@ -80,7 +79,7 @@ describe(SETTINGS.PATH.BLOGS, () => {
     });
 
     it('-Post method incorrect body and status 400', async() => {
-        const incorrectBlog: InputCreateBlogModel ={
+        const incorrectBlog: InCreateBlogModel ={
             name: createString(20),
             description: createString(511),
             websiteUrl: createString(122),
@@ -98,11 +97,11 @@ describe(SETTINGS.PATH.BLOGS, () => {
             .post(`${SETTINGS.PATH.BLOGS}`)
             .set({'Authorization': 'Basic ' + inCodedAuth})
             .send(blog)
-            .expect(HTTP_STATUSES.NOT_AUTHORIZATION)
+            .expect(HTTP_STATUSES.NOT_AUTHORIZATION_401)
     })
 
     it('+Put method correct id and reqbody, return status 204', async() => {
-        const updatedBlog: InputUpdateBlogModel = {
+        const updatedBlog: InUpdateBlogModel = {
             name: createString(2),
             description: createString(2),
             websiteUrl: createString(2)
@@ -145,7 +144,7 @@ describe(SETTINGS.PATH.BLOGS, () => {
             .put(`${SETTINGS.PATH.BLOGS}/${blog.id}`)
             .set({'Authorization': 'Basic ' + inCodedAuth + 'error!'})
             .send(blog)
-            .expect(HTTP_STATUSES.NOT_AUTHORIZATION);
+            .expect(HTTP_STATUSES.NOT_AUTHORIZATION_401);
     });
 
     it('-Put method incorrect id and reqbody, return status 404', async() => {
@@ -175,7 +174,7 @@ describe(SETTINGS.PATH.BLOGS, () => {
         const response = await req
             .delete(`${SETTINGS.PATH.BLOGS}/${blog!.id}`)
             .set('Authorization', 'Basic ' + inCodedAuth)
-            .expect(HTTP_STATUSES.NOT_AUTHORIZATION);
+            .expect(HTTP_STATUSES.NOT_AUTHORIZATION_401);
     });
 
     it('-Delete method incorrect id, return status 404', async() => {

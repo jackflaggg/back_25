@@ -135,7 +135,7 @@ describe(SETTINGS.PATH.POSTS, () => {
             .post(`${SETTINGS.PATH.POSTS}`)
             .set({'Authorization': 'Basic ' + inCodedAuth})
             .send(post)
-            .expect(HTTP_STATUSES.NOT_AUTHORIZATION)
+            .expect(HTTP_STATUSES.NOT_AUTHORIZATION_401)
     })
 
     it('+Put method correct id and reqbody, return status 204', async() => {
@@ -162,9 +162,6 @@ describe(SETTINGS.PATH.POSTS, () => {
             websiteUrl: createString(2)
         }
 
-        //updatedBlog = {...blog, ...updatedBlog}
-        //db.blogs.push(updatedBlog)
-
         const response = await req
             .put(`${SETTINGS.PATH.POSTS}/${updatedBlog!.id}`)
             .set({'Authorization': 'Basic ' + codedAuth})
@@ -182,7 +179,7 @@ describe(SETTINGS.PATH.POSTS, () => {
             .put(`${SETTINGS.PATH.POSTS}/${post.id}`)
             .set({'Authorization': 'Basic ' + inCodedAuth + 'error!'})
             .send(post)
-            .expect(HTTP_STATUSES.NOT_AUTHORIZATION);
+            .expect(HTTP_STATUSES.NOT_AUTHORIZATION_401);
     });
 
     it('-Put method incorrect id and reqbody, return status 404', async() => {
@@ -213,7 +210,7 @@ describe(SETTINGS.PATH.POSTS, () => {
         const response = await req
             .delete(`${SETTINGS.PATH.POSTS}/${post!.id}`)
             .set('Authorization', 'Basic ' + inCodedAuth)
-            .expect(HTTP_STATUSES.NOT_AUTHORIZATION);
+            .expect(HTTP_STATUSES.NOT_AUTHORIZATION_401);
     });
 
     it('-Delete method incorrect id, return status 404', async() => {
