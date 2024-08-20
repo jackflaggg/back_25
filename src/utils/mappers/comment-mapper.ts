@@ -9,6 +9,6 @@ export const commentMapper = (user: WithId<Omit<CommentDbType, 'postId'>>) => {
             userId: user.commentatorInfo.userId,
             userLogin: user.commentatorInfo.userLogin,
         },
-        createdAt: new Date().toISOString(),
+        createdAt: user.createdAt,
     }
 }
