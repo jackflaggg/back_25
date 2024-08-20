@@ -15,8 +15,8 @@ export const authRouter: Router = Router();
 
 
 authRouter.post('/login', [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
-authRouter.post('/registration-confirmation', codeValidator, inputCheckErrorsMiddleware);
-authRouter.post('/registration', [...registrationPostValidator, inputCheckErrorsMiddleware]);
-authRouter.post('/registration-email', emailValidator, inputCheckErrorsMiddleware);
+authRouter.post('/registration-confirmation', codeValidator, inputCheckErrorsMiddleware, );
+authRouter.post('/registration', [...registrationPostValidator, inputCheckErrorsMiddleware], );
+authRouter.post('/registration-email', emailValidator, inputCheckErrorsMiddleware, );
 
 authRouter.get('/me', authBearerMiddlewares, getInfoUserController);
