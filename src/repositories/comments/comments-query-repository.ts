@@ -7,7 +7,7 @@ import {commentMapper} from "../../utils/mappers/comment-mapper";
 export const CommentsQueryRepository = {
     async getComment(idComment: string) {
         const comment = await commentsCollection.findOne({ _id: new ObjectId(idComment)});
-        console.log('query: ' + JSON.stringify(comment))
+
         if (!comment) {
             return null;
         }
@@ -27,7 +27,7 @@ export const CommentsQueryRepository = {
         const totalCountComments = await commentsCollection.countDocuments({postId: paramsToPostId});
 
         const pagesCount = Math.ceil(totalCountComments / Number(pageSize));
-        console.log(comments)
+
         return {
             pagesCount: +pagesCount,
             page: +pageNumber,

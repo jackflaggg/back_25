@@ -39,7 +39,6 @@ export interface CommentDbType {
     postId: string;
 }
 
-
 export interface BlogCreateType {
     name: string,
     description: string,

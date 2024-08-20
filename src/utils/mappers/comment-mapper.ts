@@ -1,6 +1,7 @@
 import {CommentDbType} from "../../models/db/db.models";
+import {WithId} from "mongodb";
 
-export const commentMapper = (user: any /*Omit<CommentDbType, 'postId'>*/) => {
+export const commentMapper = (user: WithId<Omit<CommentDbType, 'postId'>>) => {
     return {
         id: user._id.toString(),
         content: user.content,
