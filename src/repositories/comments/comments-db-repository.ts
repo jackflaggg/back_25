@@ -4,7 +4,9 @@ import {CommentDbType} from "../../models/db/db.models";
 
 export const CommentsDbRepository = {
     async CreateComment(inputComment: CommentDbType) {
+        console.log(inputComment);
         const comment = await commentsCollection.insertOne(inputComment);
+        console.log(comment);
         if (!comment || !comment.insertedId) {
             return null;
         }

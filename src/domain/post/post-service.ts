@@ -33,7 +33,7 @@ export const postsService = {
         return await postsRepository.delPost(id);
     },
     async createCommentToPost(postId: string, inputData: string, userId: string) {
-        console.log(postId, userId);
+
         const findUser = await usersQueryRepository.getUserById(userId);
         console.log(findUser);
         if (!findUser) {
@@ -45,7 +45,7 @@ export const postsService = {
         }
 
         const findPost = await postsQueryRepository.giveOneToIdPost(postId);
-        console.log(findPost);
+
         if (!findPost) {
             return {
                 status: ResultStatus.NotFound,
@@ -65,7 +65,7 @@ export const postsService = {
         }
         console.log(createComment);
         const newComment = await CommentsDbRepository.CreateComment(createComment);
-        console.log(newComment);
+
         return {
             status: ResultStatus.NotContent,
             data: newComment
