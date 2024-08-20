@@ -35,7 +35,7 @@ export const postsService = {
     async createCommentToPost(postId: string, inputData: string, userId: string) {
 
         const findUser = await usersQueryRepository.getUserById(userId);
-        console.log(findUser);
+
         if (!findUser) {
             return {
                 status: ResultStatus.NotFound,
@@ -63,8 +63,11 @@ export const postsService = {
             postId: findPost.id,
             createdAt: new Date().toISOString(),
         }
-        console.log(createComment);
+        console.log('создаю коммент: ' + createComment);
+
         const newComment = await CommentsDbRepository.CreateComment(createComment);
+
+        console.log('id: ' + newComment)
 
         return {
             status: ResultStatus.NotContent,

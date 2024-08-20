@@ -7,9 +7,11 @@ import {commentMapper} from "../../utils/mappers/comment-mapper";
 export const CommentsQueryRepository = {
     async getComment(idComment: string) {
         const comment = await commentsCollection.findOne({ _id: new ObjectId(idComment)});
+        console.log('query: ' + JSON.stringify(comment))
         if (!comment) {
             return null;
         }
+
         return commentMapper(comment);
     },
     async getAllCommentsToPostId(paramsToPostId: string, queryComments: InQueryPostModel) {

@@ -12,7 +12,7 @@ export const createCommentByPostIdController = async (req: Request, res: Respons
     }
 
     const findCreateComment = await CommentsQueryRepository.getComment(createComment.data as string);
-
+    console.log(findCreateComment)
     if (!findCreateComment) {
         res.status(HTTP_STATUSES.NOT_FOUND_404).send({error: 'not found comment'});
         return
