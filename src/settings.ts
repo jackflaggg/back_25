@@ -20,4 +20,7 @@ export const SETTINGS = {
     ADMIN: process.env.ADMIN || 'admin:qwerty',
     SECRET_KEY: process.env.SECRET_KEY || '',
     TOKEN_DURATION: process.env.TOKEN_DURATION || '',
+    EMAIL_NAME: process.env.EMAIL_USER_ACCOUNT || '',
+    PASS: process.env.PASS_USER_ACCOUNT || '',
+    HOST: process.env.HOST || '',
 }
