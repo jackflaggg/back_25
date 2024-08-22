@@ -20,7 +20,7 @@ export const loginValidator  = body('login')
     .isLength({min: 3, max: 10})
     .withMessage('password length should be from 3 to 10 symbols');
 
-export const emailValidator  = body('password')
+export const emailValidator  = body('email')
     .isString()
     .withMessage('this is not a string')
     .trim()
