@@ -38,7 +38,7 @@ export const userMapToCreateAdmin = (login: string, email: string, password: str
     }
 }
 
-export const userMapperToOutput = (user: MapperCreateUserModel)=> {
+export const userMapperToOutput = (user: any)=> {
     return {
         id: user._id.toString(),
         login: user.login,
