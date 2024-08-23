@@ -20,6 +20,7 @@ export const authService = {
             console.log('Пользователь не найден!')
             return null;
         }
+
         console.log(password, credentialLoginOrEmail.password);
         const checkPassword = await hashService.comparePassword(password, credentialLoginOrEmail.password as string);
         console.log(checkPassword);

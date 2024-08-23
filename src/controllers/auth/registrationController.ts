@@ -6,7 +6,8 @@ export const registrationController = async (req: Request, res: Response) => {
     const checkRegistrationUser = await authService.registrationUser(req.body);
     if (!checkRegistrationUser) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
+        return;
     }
-    res.sendStatus(HTTP_STATUSES.CREATED_201);
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     return
 }
