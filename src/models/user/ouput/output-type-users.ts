@@ -1,5 +1,4 @@
 import {ObjectId} from "mongodb";
-import {randomUUID} from "node:crypto";
 import {UUID} from "crypto";
 
 export interface OutCreateUserModel {
@@ -28,7 +27,7 @@ export interface OutUserServiceModel {
     password: string,
     email: string,
     createdAt: string,
-    emailConfirmation?: emailInfo
+    //emailConfirmation?: emailInfo
 }
 
 export interface OutUserFindLoginOrEmail {
