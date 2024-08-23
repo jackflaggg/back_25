@@ -4,6 +4,7 @@ import {hashService} from "../../utils/application/hash-service";
 import {errorsValidate} from "../../utils/features/errors-validate";
 import {userMapToCreateAdmin} from "../../utils/mappers/user-mapper";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
+import {emailConfirmation} from "../../utils/features/emailConfirmation";
 
 export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt'>): Promise<string | ResultError | null> {
@@ -20,7 +21,13 @@ export const userService = {
 
         const passwordHash = await hashService._generateHash(password);
 
-        const newUser = userMapToCreateAdmin(login, email, passwordHash);
+        const newUser = {
+            login,
+            email,
+            password,
+            createdAt: new Date().toISOString(),
+            emailConfirmation: emailConfirmation
+        }
 
         return await UsersDbRepository.createUser(newUser);
 
