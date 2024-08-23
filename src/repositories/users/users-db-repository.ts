@@ -18,10 +18,18 @@ export const UsersDbRepository = {
         return deleteUser.acknowledged;
     },
     async findByLoginUser(login: string): Promise<UserDbType | null> {
-        return await usersCollection.findOne({ login: login })
+        const searchUser = await usersCollection.findOne({login});
+        if (!searchUser || !searchUser.id) {
+            return null;
+        }
+        return searchUser;
     },
     async findByEmailUser(email: string): Promise<any | null> {
-        return await usersCollection.findOne({ email: email })
+        const searchEmail =  await usersCollection.findOne({ email: email });
+        if (!searchEmail || !searchEmail.id) {
+            return null;
+        }
+        return searchEmail;
     },
     async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | OutUserFindLoginOrEmail> {
 

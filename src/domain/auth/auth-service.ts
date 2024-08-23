@@ -124,6 +124,9 @@ export const authService = {
         }
         return true
     },
-    async registrationEmailResending(inputData: any) {}
+    async registrationEmailResending(inputData: string) {
+        const searchEmail = await UsersDbRepository.findByEmailUser(inputData);
+
+    }
 }
 
