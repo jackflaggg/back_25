@@ -23,4 +23,5 @@ export const SETTINGS = {
     EMAIL_NAME: process.env.EMAIL_USER_ACCOUNT || '',
     PASS: process.env.PASS_USER_ACCOUNT || '',
     HOST: process.env.HOST || '',
+    NAME_SUBJECT: process.env.NAME_SUBJECT || '',
 }
