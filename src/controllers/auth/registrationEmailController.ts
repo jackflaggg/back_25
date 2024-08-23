@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {emailAdapter} from "../../adapters/email-adapter";
+import {emailAdapter} from "../../utils/adapters/email-adapter";
 import {emailManagers} from "../../managers/email-managers";
 
 export const registrationEmailController = async (req: Request, res: Response) => {

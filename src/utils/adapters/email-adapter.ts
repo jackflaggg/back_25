@@ -1,8 +1,9 @@
 import nodemailer from "nodemailer";
-import {SETTINGS} from "../settings";
+import {SETTINGS} from "../../settings";
+import {emailTemplates} from "../templates/email-templates";
 
 export const emailAdapter = {
-    async sendEmail(emailFrom: string, subject: string, message: string) {
+    async sendEmail(emailFrom: string, subject: string, messageCode: string) {
         try {
             const transport = nodemailer.createTransport({
                 service: 'Mail.ru',
@@ -16,7 +17,7 @@ export const emailAdapter = {
                 to: `${emailFrom}`,
                 subject: subject,
                 text: 'Тестовое сообщение. Проверка сервера',
-                html: message
+                html: emailTemplates.registrationEmailTemplate(messageCode)
             });
             return result;
 

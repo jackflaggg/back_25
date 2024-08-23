@@ -1,4 +1,4 @@
-import {emailAdapter} from "../adapters/email-adapter";
+import {emailAdapter} from "../utils/adapters/email-adapter";
 
 export const emailManagers = {
     async sendEmailRecoveryMessage(user: any) {
