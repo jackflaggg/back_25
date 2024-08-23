@@ -2,6 +2,7 @@ import {usersCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
 import {OutUserFindLoginOrEmail, OutUserServiceModel} from "../../models/user/ouput/output-type-users";
+import {emailConfirmation} from "../../utils/features/emailConfirmation";
 
 export const UsersDbRepository = {
     async createUser(body: OutUserServiceModel): Promise<string | null> {
@@ -33,4 +34,15 @@ export const UsersDbRepository = {
         const findUser = await usersCollection.findOne(filter)
         return findUser;
     },
+    async findCodeUser(code: string) {
+
+        const findUser = await usersCollection.findOne({
+            'emailConfirmation.confirmationCode': code
+        });
+
+        if (!findUser || !findUser.id){
+            return null;
+        }
+        return findUser;
+    }
 }

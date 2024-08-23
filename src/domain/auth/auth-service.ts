@@ -8,6 +8,7 @@ import {emailManagers} from "../../managers/email-managers";
 import {errorsValidate} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
 import {SETTINGS} from "../../settings";
+import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -93,7 +94,7 @@ export const authService = {
 
         const createUser = await UsersDbRepository.createUser(newUser);
         try {
-            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(newUser.email, SETTINGS.NAME_SUBJECT, newUser.emailConfirmation.confirmationCode)
+            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(newUser.email, newUser.emailConfirmation.confirmationCode)
             if (!existingSendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
@@ -109,7 +110,20 @@ export const authService = {
             data: null
         }
     },
-    async confirmationRegistrationUser(inputData: any) {},
+    async confirmationRegistrationUser(inputData: string) {
+        const searchCode = await UsersDbRepository.findCodeUser(inputData);
+        if (searchCode){
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {field: searchCode, message: `${searchCode} is error`},
+                data: null
+            }
+        }
+        if (searchCode!.createdAt <= new Date().toISOString()) {
+
+        }
+        return true
+    },
     async registrationEmailResending(inputData: any) {}
 }
 
