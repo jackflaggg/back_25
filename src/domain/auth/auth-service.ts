@@ -69,8 +69,9 @@ export const authService = {
         if (errors){
             return {
                 status: String(HTTP_STATUSES.BAD_REQUEST_400),
-                data: errors
-            } as ResultError
+                errors
+            }
+            //as ResultError
         }
 
         const passUser = await hashService._generateHash(password);
