@@ -9,4 +9,5 @@ export const AllUsersController = async (req: RequestWithQuery<any>,
     const getAllUsers = await usersQueryRepository.getAllUsers(queryUser)
 
     res.status(HTTP_STATUSES.OK_200).send(getAllUsers);
+    return;
 }
