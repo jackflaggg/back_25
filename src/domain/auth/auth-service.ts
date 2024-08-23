@@ -6,7 +6,7 @@ import {HTTP_STATUSES, ResultError, ResultStatus, ResultSuccess} from "../../mod
 import {randomUUID} from "node:crypto";
 import {emailManagers} from "../../managers/email-managers";
 import {errorsValidate} from "../../utils/features/errors-validate";
-import add from "date-fns/add";
+import { add } from "date-fns/add";
 import {SETTINGS} from "../../settings";
 
 export const authService = {
@@ -83,7 +83,7 @@ export const authService = {
                 expirationDate: add(new Date(), {
                     hours: 1,
                     minutes: 30,
-                }),
+                }).toISOString(),
                 isConfirmed: false
             }
         }
