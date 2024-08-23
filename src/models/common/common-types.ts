@@ -33,6 +33,10 @@ export const ResultStatus = {
     NotContent: 'NotContent',
 } as const;
 
+export const ResultSuccess = {
+    Success: 'Success'
+}
+
 export type ResultStatusType = typeof ResultStatus[keyof typeof ResultStatus];
 
 export type Result<T = null> = {

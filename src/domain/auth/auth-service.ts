@@ -2,9 +2,10 @@ import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {hashService} from "../../utils/application/hash-service";
 import {jwtService} from "../../utils/application/jwt-service";
 import {InLoginModels, InRegistrationModels} from "../../models/auth/input/login-post-controller";
-import {ResultStatus} from "../../models/common/common-types";
-import {ObjectId} from "mongodb";
+import {HTTP_STATUSES, ResultError, ResultStatus, ResultSuccess} from "../../models/common/common-types";
 import {randomUUID} from "node:crypto";
+import {emailManagers} from "../../managers/email-managers";
+import {errorsValidate} from "../../utils/features/errors-validate";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -44,8 +45,11 @@ export const authService = {
     },
 
     async registrationUser(inputData: InRegistrationModels) {
+
         const { login, password, email } = inputData;
+
         const requiredFields = new Object([login, password, email]);
+
         for (const [key, value] of Object.entries(requiredFields)) {
             if (!value) {
                 return {
@@ -55,30 +59,21 @@ export const authService = {
                 }
             }
         }
-        // дублирование кода
-        const existingUserLogin = await UsersDbRepository.findUserByLoginOrEmail(login);
-        if (existingUserLogin) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: { field: existingUserLogin.login, message: `${existingUserLogin} is not unique` },
-                data: null
-            }
-        }
 
-        const existingUserEmail = await UsersDbRepository.findUserByLoginOrEmail(email);
-        if (existingUserEmail) {
+        const errors = await errorsValidate( email, login );
+
+        if (errors){
             return {
-                status: ResultStatus.BadRequest,
-                extensions: { field: existingUserEmail.email, message: `${existingUserEmail} is not unique` },
-                data: null
-            }
+                status: String(HTTP_STATUSES.BAD_REQUEST_400),
+                data: errors
+            } as ResultError
         }
 
         const passUser = await hashService._generateHash(password);
+
         const createdUser = {
             ...inputData,
             password: passUser,
-            _id: new ObjectId(),
             createdAt: new Date().toISOString(),
             emailConfirmation: {
                 confirmationCode: randomUUID(),
@@ -87,6 +82,20 @@ export const authService = {
             }
         }
 
+        const createUser = await UsersDbRepository.createUser(createdUser);
+
+        const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(createdUser.email, 'Rasul', createdUser.emailConfirmation.confirmationCode)
+        if (!existingSendEmail) {
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {field: existingSendEmail, message: `${existingSendEmail} is error`},
+                data: null
+            }
+        }
+        return {
+            status: ResultSuccess.Success,
+            data: null
+        }
     },
     async confirmationRegistrationUser(inputData: any) {},
     async registrationEmailResending(inputData: any) {}
