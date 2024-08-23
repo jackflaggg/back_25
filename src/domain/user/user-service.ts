@@ -2,7 +2,7 @@ import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {HTTP_STATUSES, ResultError} from "../../models/common/common-types";
 import {hashService} from "../../utils/application/hash-service";
 import {errorsValidate} from "../../utils/features/errors-validate";
-import {userMapperToCreate} from "../../utils/mappers/user-mapper";
+import {userMapToCreateAdmin} from "../../utils/mappers/user-mapper";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 
 export const userService = {
@@ -20,7 +20,7 @@ export const userService = {
 
         const passwordHash = await hashService._generateHash(password);
 
-        const newUser = userMapperToCreate(login, email, passwordHash);
+        const newUser = userMapToCreateAdmin(login, email, passwordHash);
 
         return await UsersDbRepository.createUser(newUser);
 

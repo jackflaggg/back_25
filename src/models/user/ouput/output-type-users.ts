@@ -8,6 +8,13 @@ export interface OutCreateUserModel {
     createdAt: string,
 }
 
+export interface MapperCreateUserModel {
+    _id: string,
+    login: string,
+    email: string,
+    createdAt: string,
+}
+
 export interface OutQueryCreateUsersModel {
     pagesCount: number,
     page: number,

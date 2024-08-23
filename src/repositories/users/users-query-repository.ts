@@ -1,7 +1,6 @@
 import {usersCollection} from "../../db/db";
-import {userMapper} from "../../utils/mappers/user-mapper";
+import {loginUserMapper, userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {ObjectId} from "mongodb";
-import {loginUserMapper} from "../../utils/mappers/login-mapper";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
 
 export const usersQueryRepository = {
@@ -31,16 +30,18 @@ export const usersQueryRepository = {
             page: +pageNumber,
             pageSize: +pageSize,
             totalCount: +totalCountsUsers,
-            items: AllUsers.map(user => userMapper(user)),
+            items: AllUsers.map(user => userMapperToOutput(user)),
         };
     },
+
     async getUserById(id: string): Promise<any> {
         const user = await usersCollection.findOne({_id: new ObjectId(id)});
         if (!user) {
             return null;
         }
-        return userMapper(user);
+        return userMapperToOutput(user);
     },
+
     async LoginMapByUser(userId: string) {
         const loginUser = await this.getUserById(userId);
         if (!loginUser) {
