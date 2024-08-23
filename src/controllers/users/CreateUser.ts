@@ -25,4 +25,5 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
         return
     }
     res.status(HTTP_STATUSES.CREATED_201).send(user);
+    return;
 }
