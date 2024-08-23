@@ -3,9 +3,8 @@ import {hashService} from "../../utils/application/hash-service";
 import {jwtService} from "../../utils/application/jwt-service";
 import {InLoginModels, InRegistrationModels} from "../../models/auth/input/login-post-controller";
 import {ResultStatus} from "../../models/common/common-types";
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
-import {userService} from "../user/user-service";
 import {ObjectId} from "mongodb";
+import {randomUUID} from "node:crypto";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -76,16 +75,14 @@ export const authService = {
         }
 
         const passUser = await hashService._generateHash(password);
-        const createUser = {
+        const createdUser = {
             ...inputData,
             password: passUser,
             _id: new ObjectId(),
             createdAt: new Date().toISOString(),
             emailConfirmation: {
-                confirmationCode: '',
-                expirationDate: add(new Date(), {
-                    hours: 1
-                }),
+                confirmationCode: randomUUID(),
+                expirationDate: new Date(Date.parse(new Date().toISOString()) + 36_00_000).toISOString(),
                 isConfirmed: false
             }
         }
