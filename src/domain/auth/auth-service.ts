@@ -6,6 +6,7 @@ import {HTTP_STATUSES, ResultError, ResultStatus, ResultSuccess} from "../../mod
 import {randomUUID} from "node:crypto";
 import {emailManagers} from "../../managers/email-managers";
 import {errorsValidate} from "../../utils/features/errors-validate";
+import add from "date-fns/add";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -71,26 +72,33 @@ export const authService = {
 
         const passUser = await hashService._generateHash(password);
 
-        const createdUser = {
-            ...inputData,
+        const newUser = {
+            login,
+            email,
             password: passUser,
             createdAt: new Date().toISOString(),
             emailConfirmation: {
                 confirmationCode: randomUUID(),
-                expirationDate: new Date(Date.parse(new Date().toISOString()) + 36_00_000).toISOString(),
+                expirationDate: add(new Date(), {
+                    hours: 1,
+                    minutes: 30,
+                }),
                 isConfirmed: false
             }
         }
 
-        const createUser = await UsersDbRepository.createUser(createdUser);
-
-        const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(createdUser.email, 'Rasul', createdUser.emailConfirmation.confirmationCode)
-        if (!existingSendEmail) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {field: existingSendEmail, message: `${existingSendEmail} is error`},
-                data: null
+        const createUser = await UsersDbRepository.createUser(newUser);
+        try {
+            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(newUser.email, 'Rasul', newUser.emailConfirmation.confirmationCode)
+            if (!existingSendEmail) {
+                return {
+                    status: ResultStatus.BadRequest,
+                    extensions: {field: existingSendEmail, message: `${existingSendEmail} is error`},
+                    data: null
+                }
             }
+        } catch( e: unknown) {
+            console.error('Send email error', e);
         }
         return {
             status: ResultSuccess.Success,
