@@ -23,7 +23,7 @@ export const userService = {
         const newUser = {
             login,
             email,
-            password,
+            password: passwordHash,
             createdAt: new Date().toISOString(),
             emailConfirmation: emailConfirmation()
         }
