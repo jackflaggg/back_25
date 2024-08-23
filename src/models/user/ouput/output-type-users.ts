@@ -34,7 +34,7 @@ export interface OutUserServiceModel {
     password: string,
     email: string,
     createdAt: string,
-    //emailConfirmation?: emailInfo
+    emailConfirmation?: emailInfo
 }
 
 export interface OutUserFindLoginOrEmail {
