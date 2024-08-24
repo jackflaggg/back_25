@@ -6,7 +6,7 @@ export const emailAdapter = {
     async sendEmail(emailFrom: string, messageCode: string) {
         // TODO: изменить логику, ибо пароль тогда нужен от разных почт!
         try {
-            const transport = nodemailer.createTransport({
+            let transporter = nodemailer.createTransport({
                 service: 'Mail.ru',
                 auth: {
                     user: SETTINGS.EMAIL_NAME,
@@ -17,9 +17,9 @@ export const emailAdapter = {
                 }
             });
 
-            const result = await transport.sendMail({
-                from: `HELLO<messageCode Hello>`,
-                to: `${emailFrom}`,
+            let result = await transporter.sendMail({
+                from: `"Rasul" <${SETTINGS.EMAIL_NAME}>`,
+                to: emailFrom,
                 subject: 'hello world!',
                 html: emailTemplates.registrationEmailTemplate(messageCode)
             });
