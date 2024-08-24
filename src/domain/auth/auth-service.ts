@@ -151,7 +151,7 @@ export const authService = {
         if (user.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: { errorsMessages: {field: 'isConfirmed', message: 'isConfirmed is true!'}},
+                extensions: { errorsMessages: {message: 'isConfirmed is true!', field: 'code'}},
                 data: null
             }
         }
