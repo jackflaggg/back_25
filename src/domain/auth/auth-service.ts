@@ -127,7 +127,7 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'error code 1', field: 'code'}]},
+                extensions: {errorsMessages: [{message: 'code 1', field: 'code'}]},
                 data: null
             }
         }
@@ -135,6 +135,7 @@ export const authService = {
         if (user.emailConfirmation.confirmationCode !== code) {
             return {
                 status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{message: 'confirmationCode', field: 'confirmationCode'}]},
                 data: null
             }
         }
@@ -142,6 +143,7 @@ export const authService = {
         if (user.emailConfirmation.expirationDate < new Date()) {
             return {
                 status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{message: 'expirationDate', field: 'expirationDate'}]},
                 data: null
             }
         }
@@ -155,15 +157,6 @@ export const authService = {
         }
 
         const updateUser = await UsersDbRepository.updateEmailConfirmation(userMapperToOutput(user).id);
-        if (updateUser === undefined) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'Update result is undefined', field: 'code'}]},
-                data: null
-            };
-        }
-
-        console.log('Обнова: ' + updateUser);
 
         if (!updateUser) {
             return {
@@ -174,7 +167,7 @@ export const authService = {
         }
 
         return {
-            status: ResultSuccess,
+            status: ResultSuccess.Success,
             data: updateUser
         }
     },
