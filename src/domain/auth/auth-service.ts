@@ -194,7 +194,7 @@ export const authService = {
             minutes: 30
         })
 
-        const updateInfoUser = await UsersDbRepository.updateCodeAndDateConfirmation(searchEmail.id, newCode, newExpirationDate);
+        const updateInfoUser = await UsersDbRepository.updateCodeAndDateConfirmation(userMapperToOutput(searchEmail).id, newCode, newExpirationDate);
         try {
             const sendEmail = await emailManagers.sendEmailRecoveryMessage(email, newCode);
             if (!sendEmail) {
