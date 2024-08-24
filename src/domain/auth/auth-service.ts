@@ -53,7 +53,7 @@ export const authService = {
         const { login, password, email } = inputData;
 
         const requiredFields = new Object([login, password, email]);
-
+        console.log(requiredFields)
         // проверяю на тело
         for (const [key, value] of Object.entries(requiredFields)) {
             if (!value) {

@@ -25,8 +25,6 @@ export const usersQueryRepository = {
 
         const pagesCount = Math.ceil(totalCountsUsers / Number(pageSize));
 
-        console.log('что лежит в юзерах: ' + AllUsers)
-
         return {
             pagesCount: +pagesCount,
             page: +pageNumber,
