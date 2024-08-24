@@ -119,18 +119,23 @@ export const authService = {
         }
     },
     async confirmationEmailByCode(code: string) {
-        const searchCode = await UsersDbRepository.findCodeUser(code);
-        if (searchCode){
+        const user = await UsersDbRepository.findCodeUser(code);
+        if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {field: searchCode, message: `${searchCode} is error`},
+                extensions: {field: user, message: `${user} is error`},
                 data: null
             }
         }
-        if (searchCode!.createdAt <= new Date().toISOString()) {
-
+        if (user.emailConfirmation.confirmationCode === code && user.emailConfirmation.expirationDate > new Date()) {
+            const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
+            return updateUser
         }
-        return true
+        return {
+            status: ResultStatus.BadRequest,
+            extensions: {field: user, message: `${user} is error`},
+            data: null
+        }
     },
     async registrationEmailResending(inputData: string) {
         const searchEmail = await UsersDbRepository.findByEmailUser(inputData);

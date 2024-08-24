@@ -56,11 +56,11 @@ export const UsersDbRepository = {
         }
         return findUser;
     },
-    async updateEmailConfirmation(id: string, isConfirmed: boolean): Promise<any> {
+    async updateEmailConfirmation(id: string): Promise<boolean> {
         const updateEmail = await usersCollection.updateOne(
             {id},
-            {$set: {'emailConfirmation.isConfirmed': isConfirmed}});
-        return true
+            {$set: {'emailConfirmation.isConfirmed': true}});
+        return updateEmail.modifiedCount === 1;
     },
     async updateRegistrationConfirmation(userId: string, code: string, expirationDate: string) {
         const result = await usersCollection.updateOne(
