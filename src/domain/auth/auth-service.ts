@@ -176,7 +176,7 @@ export const authService = {
         if (!searchEmail) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {field: 'email', message: `${searchEmail} error find`},
+                extensions: {message: `${searchEmail} error find`, field: 'email'},
                 data: searchEmail
             }
         }
@@ -184,7 +184,7 @@ export const authService = {
         if (searchEmail.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {field: 'isConfirmed', message: 'The account has already been confirmed'},
+                extensions: {message: 'The account has already been confirmed', field: 'isConfirmed'},
                 data: searchEmail
             }
         }
@@ -201,7 +201,7 @@ export const authService = {
             if (!sendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {field: 'sendEmail', message: 'error on sendEmail'},
+                    extensions: {message: 'error on sendEmail', field: 'email'},
                     data: null
                 }
             }
@@ -209,7 +209,7 @@ export const authService = {
             console.error(e);
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {field: 'isConfirmed', message: e},
+                extensions: {message: e, field: 'email grock!!!!'},
                 data: null
             }
         }
