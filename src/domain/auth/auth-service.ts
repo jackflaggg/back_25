@@ -151,7 +151,7 @@ export const authService = {
                 data: null
             }
         }
-        console.log(user._id, user.id)
+
         const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
 
         if (!updateUser) {
