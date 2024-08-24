@@ -123,18 +123,37 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {field: user, message: `${user} is error`},
+                extensions: {field: user, message: `${user} not found`},
                 data: null
             }
         }
-        if (user.emailConfirmation.confirmationCode === code && user.emailConfirmation.expirationDate > new Date()) {
-            const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
-            return updateUser
-        }
-        return {
+
+        if (user.emailConfirmation.confirmationCode !== code) return {
             status: ResultStatus.BadRequest,
-            extensions: {field: user, message: `${user} is error`},
             data: null
+        }
+
+        if (user.emailConfirmation.expirationDate < new Date()) return {
+            status: ResultStatus.BadRequest,
+            data: null
+        }
+
+        if (user.emailConfirmation.isConfirmed) return {
+            status: ResultStatus.BadRequest,
+            data: null
+        }
+
+        const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
+
+        if (!updateUser) return {
+            status: ResultStatus.BadRequest,
+            extensions: {field: user, message: `${user} error update`},
+            data: null
+        }
+
+        return {
+            status: ResultSuccess,
+            data: updateUser
         }
     },
     async registrationEmailResending(inputData: string) {
