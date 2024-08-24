@@ -5,7 +5,7 @@ export const errorsValidate =  async (email: string, login: string) => {
     const errors: ErrorsType = {
         errorsMessages: []
     }
-
+    console.log('провалился в ошибки, вот данные: ' + email + ' : ' + login)
     const existingUserByEmail = await UsersDbRepository.findByEmailUser(email);
 
     const existingUserByLogin = await UsersDbRepository.findByLoginUser(login);

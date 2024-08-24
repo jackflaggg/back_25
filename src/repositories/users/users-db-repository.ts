@@ -18,14 +18,15 @@ export const UsersDbRepository = {
     },
     async findByLoginUser(login: string): Promise<UserDbType | null> {
         const searchUser = await usersCollection.findOne({login});
-        if (!searchUser || !searchUser.id) {
+        if (!searchUser || !searchUser._id) {
             return null;
         }
         return searchUser;
     },
     async findByEmailUser(email: string): Promise<any | null> {
         const searchEmail =  await usersCollection.findOne({ email: email });
-        if (!searchEmail || !searchEmail.id) {
+        console.log(searchEmail)
+        if (!searchEmail || !searchEmail._id) {
             return null;
         }
         return searchEmail;
@@ -39,7 +40,7 @@ export const UsersDbRepository = {
             ]
         }
         const findUser = await usersCollection.findOne(filter)
-        if (!findUser || !findUser.id) {
+        if (!findUser || !findUser._id) {
             return null;
         }
         return findUser;
@@ -50,7 +51,7 @@ export const UsersDbRepository = {
             'emailConfirmation.confirmationCode': code
         });
 
-        if (!findUser || !findUser.id){
+        if (!findUser || !findUser._id){
             return null;
         }
         return findUser;

@@ -66,10 +66,10 @@ export const authService = {
 
         // проверка уникальности
         const errors = await errorsValidate( email, login );
-
+        console.log(errors)
         if (errors){
             return {
-                status: String(HTTP_STATUSES.BAD_REQUEST_400),
+                status: ResultStatus.BadRequest,
                 errors
             }
         }
