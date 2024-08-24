@@ -184,17 +184,25 @@ export const authService = {
         const updateInfoUser = await UsersDbRepository.updateCodeAndDateConfirmation(searchEmail.id, newCode, newExpirationDate);
         try {
             const sendEmail = await emailManagers.sendEmailRecoveryMessage(email, newCode);
-            return {
-                status: ResultSuccess.Success,
-                data: sendEmail
+            if (!sendEmail) {
+                return {
+                    status: ResultStatus.BadRequest,
+                    extensions: {field: 'sendEmail', message: 'error on sendEmail'},
+                    data: null
+                }
             }
-        } catch (e){
+        } catch (e: unknown){
             console.error(e);
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {field: 'isConfirmed', message: e},
                 data: null
             }
+        }
+
+        return {
+            status: ResultSuccess.Success,
+            data: updateInfoUser
         }
     }
 }
