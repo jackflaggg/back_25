@@ -1,7 +1,7 @@
 import {ErrorsType} from "../../models/common/common-types";
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 
-export const errorsValidate =  async (email: string, login: string) => {
+export const errorsUnique =  async (email: string, login: string) => {
     const errors: ErrorsType = {
         errorsMessages: []
     }

@@ -1,7 +1,7 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {HTTP_STATUSES, ResultError} from "../../models/common/common-types";
 import {hashService} from "../../utils/application/hash-service";
-import {errorsValidate} from "../../utils/features/errors-validate";
+import {errorsUnique} from "../../utils/features/errors-validate";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 import {emailConfirmation} from "../../utils/features/emailConfirmation";
 
@@ -9,7 +9,7 @@ export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<string | ResultError | null> {
         const { login, password, email} = user;
 
-        const errors = await errorsValidate( email, login );
+        const errors = await errorsUnique( email, login );
 
         if (errors){
             return {

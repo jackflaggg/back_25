@@ -5,8 +5,9 @@ import {InLoginModels, InRegistrationModels} from "../../models/auth/input/login
 import {HTTP_STATUSES, ResultError, ResultStatus, ResultSuccess} from "../../models/common/common-types";
 import {randomUUID} from "node:crypto";
 import {emailManagers} from "../../managers/email-managers";
-import {errorsValidate} from "../../utils/features/errors-validate";
+import {errorsUnique} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
+import {helperError} from "../../utils/helpers/helper-error";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -20,9 +21,8 @@ export const authService = {
             return null;
         }
 
-        console.log(password, credentialLoginOrEmail.password);
         const checkPassword = await hashService.comparePassword(password, credentialLoginOrEmail.password as string);
-        console.log(checkPassword);
+
         if (!checkPassword) {
             console.log('Пароль не прошел проверку!')
             return null;
@@ -65,12 +65,12 @@ export const authService = {
         }
 
         // проверка уникальности
-        const errors = await errorsValidate( email, login );
-        console.log(errors)
+        const errors = await errorsUnique( email, login );
+
         if (errors){
             return {
                 status: ResultStatus.BadRequest,
-                errors
+                errors: helperError(errors)
             }
         }
 
