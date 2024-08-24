@@ -25,7 +25,7 @@ export const UsersDbRepository = {
     },
     async findByEmailUser(email: string): Promise<any | null> {
         const searchEmail =  await usersCollection.findOne({ email: email });
-        console.log(searchEmail)
+
         if (!searchEmail || !searchEmail._id) {
             return null;
         }
