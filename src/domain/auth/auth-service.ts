@@ -121,6 +121,7 @@ export const authService = {
     },
     async confirmationEmailByCode(code: string) {
         const user = await UsersDbRepository.findCodeUser(code);
+
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
@@ -129,23 +130,30 @@ export const authService = {
             }
         }
 
-        if (user.emailConfirmation.confirmationCode !== code) return {
-            status: ResultStatus.BadRequest,
-            data: null
+        if (user.emailConfirmation.confirmationCode !== code) {
+            return {
+                status: ResultStatus.BadRequest,
+                data: null
+            }
         }
 
-        if (user.emailConfirmation.expirationDate < new Date()) return {
-            status: ResultStatus.BadRequest,
-            data: null
+        if (user.emailConfirmation.expirationDate < new Date()) {
+            return {
+                status: ResultStatus.BadRequest,
+                data: null
+            }
         }
 
-        if (user.emailConfirmation.isConfirmed) return {
-            status: ResultStatus.BadRequest,
-            data: null
+        if (user.emailConfirmation.isConfirmed) {
+            return {
+                status: ResultStatus.BadRequest,
+                data: null
+            }
         }
 
         const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
 
+        console.log(updateUser)
         if (!updateUser) return {
             status: ResultStatus.BadRequest,
             extensions: {field: user, message: `${user} error update`},
