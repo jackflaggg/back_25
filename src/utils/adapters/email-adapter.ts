@@ -9,13 +9,16 @@ export const emailAdapter = {
             const transport = nodemailer.createTransport({
                 service: 'Mail.ru',
                 auth: {
-                    user: emailFrom,
+                    user: SETTINGS.EMAIL_NAME,
                     pass: SETTINGS.PASS,
+                },
+                tls: {
+                    rejectUnauthorized: false,
                 }
             });
 
             const result = await transport.sendMail({
-                from: `"Rasul" <${emailFrom}>`,
+                from: `HELLO<messageCode Hello>`,
                 to: `${emailFrom}`,
                 subject: 'hello world!',
                 html: emailTemplates.registrationEmailTemplate(messageCode)
