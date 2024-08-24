@@ -125,7 +125,7 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'error code', field: 'code'}]},
+                extensions: {errorsMessages: [{message: 'error code 1', field: 'code'}]},
                 data: null
             }
         }
@@ -147,17 +147,17 @@ export const authService = {
         if (user.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
+                extensions: { errorsMessages: {field: 'isConfirmed', message: 'isConfirmed is true!'}},
                 data: null
             }
         }
-
+        console.log(user._id, user.id)
         const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
 
-        console.log(updateUser)
         if (!updateUser) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'error code', field: 'code'}]},
+                extensions: {errorsMessages: [{message: 'error code 2', field: 'code'}]},
                 data: updateUser
             }
         }
