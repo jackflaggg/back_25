@@ -7,8 +7,6 @@ import {randomUUID} from "node:crypto";
 import {emailManagers} from "../../managers/email-managers";
 import {errorsValidate} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
-import {SETTINGS} from "../../settings";
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
