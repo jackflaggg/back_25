@@ -156,7 +156,7 @@ export const authService = {
         }
 
         const updateUser = await UsersDbRepository.updateEmailConfirmation(userMapperToOutput(user).id);
-
+        console.log('обнова : ' + updateUser)
         if (!updateUser) {
             return {
                 status: ResultStatus.BadRequest,

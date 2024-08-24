@@ -55,6 +55,7 @@ export const UsersDbRepository = {
         if (!findUser || !findUser._id){
             return null;
         }
+        console.log('найденный пользователь по коду: ' + findUser)
         return findUser;
     },
     async updateEmailConfirmation(id: string): Promise<boolean> {
