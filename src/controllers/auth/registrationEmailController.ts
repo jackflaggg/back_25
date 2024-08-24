@@ -5,7 +5,7 @@ import {emailManagers} from "../../managers/email-managers";
 import {authService} from "../../domain/auth/auth-service";
 
 export const registrationEmailController = async (req: Request, res: Response) => {
-    const findEmail = await authService.registrationEmailResending(req.params.email);
+    const findEmail = await authService.registrationEmailResending(req.body.email);
     if (findEmail.status !== ResultSuccess.Success) {
         res.status(HTTP_STATUSES.BAD_REQUEST_400).send(JSON.parse(JSON.stringify(findEmail.extensions)));
         return;
