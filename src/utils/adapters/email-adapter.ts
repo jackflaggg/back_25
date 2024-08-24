@@ -18,7 +18,7 @@ export const emailAdapter = {
             });
 
             let result = await transporter.sendMail({
-                from: `"Rasul" <${SETTINGS.EMAIL_NAME}>`,
+                from: `"Incubator" <${SETTINGS.EMAIL_NAME}>`,
                 to: emailFrom,
                 subject: 'hello world!',
                 html: emailTemplates.registrationEmailTemplate(messageCode)
