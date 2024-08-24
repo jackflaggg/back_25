@@ -125,7 +125,7 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {field: user, message: `${user} not found`},
+                extensions: {errorsMessages: [{message: 'error code', field: 'code'}]},
                 data: null
             }
         }
@@ -157,7 +157,7 @@ export const authService = {
         if (!updateUser) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'error code'}, {field: 'code'}]},
+                extensions: {errorsMessages: [{message: 'error code', field: 'code'}]},
                 data: updateUser
             }
         }
