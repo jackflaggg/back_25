@@ -8,7 +8,6 @@ import {emailManagers} from "../../managers/email-managers";
 import {errorsUnique} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper-error";
-import {ObjectId} from "mongodb";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 
 export const authService = {
@@ -61,7 +60,7 @@ export const authService = {
             if (!value) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: { field: key, message: `${key} is required` },
+                    extensions: {errorsMessages: [{ field: key, message: `${key} is required` }]},
                     data: null
                 }
             }
@@ -102,7 +101,7 @@ export const authService = {
             if (!existingSendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {field: existingSendEmail, message: `${existingSendEmail} is error`},
+                    extensions:  {errorsMessages: [{field: existingSendEmail, message: `${existingSendEmail} is error`}]},
                     data: null
                 }
             }
@@ -112,7 +111,7 @@ export const authService = {
 
             return {
                 status: ResultSuccess.Success,
-                extensions: {field: e, message: `Delete user`},
+                extensions: {errorsMessages: [{field: e, message: `Delete user`}]},
                 data: deleteUser
             }
         }
@@ -151,7 +150,7 @@ export const authService = {
         if (user.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: { errorsMessages: {message: 'isConfirmed is true!', field: 'code'}},
+                extensions: { errorsMessages: [{message: 'isConfirmed is true!', field: 'code'}]},
                 data: null
             }
         }
@@ -176,7 +175,7 @@ export const authService = {
         if (!searchEmail) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: `${searchEmail} error find`, field: 'email'},
+                extensions: {errorsMessages: [{message: `${searchEmail} error find`, field: 'email'}]},
                 data: searchEmail
             }
         }
@@ -184,7 +183,7 @@ export const authService = {
         if (searchEmail.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'The account has already been confirmed', field: 'isConfirmed'},
+                extensions: {errorsMessages: [{message: 'The account has already been confirmed', field: 'isConfirmed'}]},
                 data: searchEmail
             }
         }
@@ -201,7 +200,7 @@ export const authService = {
             if (!sendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {message: 'error on sendEmail', field: 'email'},
+                    extensions: {errorsMessages: [{message: 'error on sendEmail', field: 'email'}]},
                     data: null
                 }
             }
