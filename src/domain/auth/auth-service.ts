@@ -2,7 +2,7 @@ import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {hashService} from "../../utils/application/hash-service";
 import {jwtService} from "../../utils/application/jwt-service";
 import {InLoginModels, InRegistrationModels} from "../../models/auth/input/login-post-controller";
-import {HTTP_STATUSES, ResultError, ResultStatus, ResultSuccess} from "../../models/common/common-types";
+import {ResultStatus, ResultSuccess} from "../../models/common/common-types";
 import {randomUUID} from "node:crypto";
 import {emailManagers} from "../../managers/email-managers";
 import {errorsUnique} from "../../utils/features/errors-validate";
@@ -16,6 +16,7 @@ export const authService = {
 
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
 
+        //TODO: Вернись сюда и сделай проверку isConfirmed!
         if (!credentialLoginOrEmail) {
             console.log('Пользователь не найден!')
             return null;
