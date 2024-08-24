@@ -2,7 +2,6 @@ import {usersCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
 import {OutUserFindLoginOrEmail, OutUserServiceModel} from "../../models/user/ouput/output-type-users";
-import {emailConfirmation} from "../../utils/features/emailConfirmation";
 
 export const UsersDbRepository = {
     async createUser(body: OutUserServiceModel): Promise<string | null> {
@@ -58,13 +57,13 @@ export const UsersDbRepository = {
     },
     async updateEmailConfirmation(id: string, isConfirmed: boolean): Promise<any> {
         const updateEmail = await usersCollection.updateOne(
-            {_id: id},
+            {id},
             {$set: {'emailConfirmation.isConfirmed': isConfirmed}});
         return true
     },
     async updateRegistrationConfirmation(userId: string, code: string, expirationDate: string) {
         const result = await usersCollection.updateOne(
-            {_id: userId},
+            {id: userId},
             {
                 $set: {
                     'emailConfirmation.confirmationCode': code,
