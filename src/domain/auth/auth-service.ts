@@ -70,7 +70,6 @@ export const authService = {
                 status: String(HTTP_STATUSES.BAD_REQUEST_400),
                 errors
             }
-            //as ResultError
         }
 
         const passUser = await hashService._generateHash(password);
@@ -92,7 +91,8 @@ export const authService = {
 
         const createUser = await UsersDbRepository.createUser(newUser);
         try {
-            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(newUser.email, newUser.emailConfirmation.confirmationCode)
+            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(newUser.email, newUser.emailConfirmation.confirmationCode);
+
             if (!existingSendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
