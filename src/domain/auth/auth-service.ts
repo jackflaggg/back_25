@@ -53,6 +53,7 @@ export const authService = {
 
         const requiredFields = new Object([login, password, email]);
 
+        // проверяю на тело
         for (const [key, value] of Object.entries(requiredFields)) {
             if (!value) {
                 return {
@@ -63,6 +64,7 @@ export const authService = {
             }
         }
 
+        // проверка уникальности
         const errors = await errorsValidate( email, login );
 
         if (errors){
@@ -90,6 +92,7 @@ export const authService = {
         }
 
         const createUser = await UsersDbRepository.createUser(newUser);
+
         try {
             const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(newUser.email, newUser.emailConfirmation.confirmationCode);
 
@@ -102,10 +105,17 @@ export const authService = {
             }
         } catch( e: unknown) {
             console.error('Send email error', e);
+            const deleteUser = await UsersDbRepository.deleteUser(createUser as string);
+
+            return {
+                status: ResultSuccess.Success,
+                extensions: {field: e, message: `Delete user`},
+                data: deleteUser
+            }
         }
         return {
             status: ResultSuccess.Success,
-            data: null
+            data: createUser
         }
     },
     async confirmationRegistrationUser(inputData: string) {
