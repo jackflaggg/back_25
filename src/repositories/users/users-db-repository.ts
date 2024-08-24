@@ -62,7 +62,7 @@ export const UsersDbRepository = {
             {$set: {'emailConfirmation.isConfirmed': true}});
         return updateEmail.modifiedCount === 1;
     },
-    async updateRegistrationConfirmation(userId: string, code: string, expirationDate: string) {
+    async updateCodeAndDateConfirmation(userId: string, code: string, expirationDate: Date) {
         const result = await usersCollection.updateOne(
             {id: userId},
             {
@@ -72,6 +72,6 @@ export const UsersDbRepository = {
                 }
             }
         )
-        return true;
+        return result.modifiedCount === 1;
     }
 }

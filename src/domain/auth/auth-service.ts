@@ -149,7 +149,7 @@ export const authService = {
         if (!updateUser) return {
             status: ResultStatus.BadRequest,
             extensions: {field: user, message: `${user} error update`},
-            data: null
+            data: updateUser
         }
 
         return {
@@ -157,9 +157,45 @@ export const authService = {
             data: updateUser
         }
     },
-    async registrationEmailResending(inputData: string) {
-        const searchEmail = await UsersDbRepository.findByEmailUser(inputData);
-        const updateDataUser = true;
+    async registrationEmailResending(email: string) {
+        const searchEmail = await UsersDbRepository.findByEmailUser(email);
+        if (!searchEmail) {
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {field: 'email', message: `${searchEmail} error find`},
+                data: searchEmail
+            }
+        }
+
+        if (searchEmail.emailConfirmation.isConfirmed) {
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {field: 'isConfirmed', message: 'The account has already been confirmed'},
+                data: searchEmail
+            }
+        }
+
+        const newCode = randomUUID();
+        const newExpirationDate = add(new Date(), {
+            hours: 1,
+            minutes: 30
+        })
+
+        const updateInfoUser = await UsersDbRepository.updateCodeAndDateConfirmation(searchEmail.id, newCode, newExpirationDate);
+        try {
+            const sendEmail = await emailManagers.sendEmailRecoveryMessage(email, newCode);
+            return {
+                status: ResultSuccess.Success,
+                data: sendEmail
+            }
+        } catch (e){
+            console.error(e);
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {field: 'isConfirmed', message: e},
+                data: null
+            }
+        }
     }
 }
 
