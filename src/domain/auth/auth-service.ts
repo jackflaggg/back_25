@@ -8,6 +8,8 @@ import {emailManagers} from "../../managers/email-managers";
 import {errorsUnique} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper-error";
+import {ObjectId} from "mongodb";
+import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -152,7 +154,16 @@ export const authService = {
             }
         }
 
-        const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
+        const updateUser = await UsersDbRepository.updateEmailConfirmation(userMapperToOutput(user).id);
+        if (updateUser === undefined) {
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{message: 'Update result is undefined', field: 'code'}]},
+                data: null
+            };
+        }
+
+        console.log('Обнова: ' + updateUser);
 
         if (!updateUser) {
             return {
