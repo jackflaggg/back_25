@@ -154,10 +154,12 @@ export const authService = {
         const updateUser = await UsersDbRepository.updateEmailConfirmation(user.id as string);
 
         console.log(updateUser)
-        if (!updateUser) return {
-            status: ResultStatus.BadRequest,
-            extensions: {field: user, message: `${user} error update`},
-            data: updateUser
+        if (!updateUser) {
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{message: 'error code'}, {field: 'code'}]},
+                data: updateUser
+            }
         }
 
         return {
