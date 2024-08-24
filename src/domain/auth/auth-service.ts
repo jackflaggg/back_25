@@ -183,7 +183,7 @@ export const authService = {
         if (searchEmail.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'The account has already been confirmed', field: 'isConfirmed'}]},
+                extensions: {errorsMessages: [{message: 'The account has already been confirmed', field: 'email'}]},
                 data: searchEmail
             }
         }
