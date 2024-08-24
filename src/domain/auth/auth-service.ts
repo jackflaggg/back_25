@@ -86,7 +86,7 @@ export const authService = {
                 expirationDate: add(new Date(), {
                     hours: 1,
                     minutes: 30,
-                }).toISOString(),
+                }),
                 isConfirmed: false
             }
         }
@@ -118,8 +118,8 @@ export const authService = {
             data: createUser
         }
     },
-    async confirmationRegistrationUser(inputData: string) {
-        const searchCode = await UsersDbRepository.findCodeUser(inputData);
+    async confirmationEmailByCode(code: string) {
+        const searchCode = await UsersDbRepository.findCodeUser(code);
         if (searchCode){
             return {
                 status: ResultStatus.BadRequest,

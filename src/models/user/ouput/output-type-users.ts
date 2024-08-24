@@ -25,7 +25,7 @@ export interface OutQueryCreateUsersModel {
 
 export interface emailInfo {
     confirmationCode: UUID,
-    expirationDate: string,
+    expirationDate: Date,
     isConfirmed: boolean
 }
 

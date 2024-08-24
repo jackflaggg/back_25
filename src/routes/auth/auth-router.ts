@@ -11,7 +11,6 @@ import {registrationEmailController} from "../../controllers/auth/registrationEm
 
 export const authRouter: Router = Router();
 
-
 authRouter.post('/login', [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
 authRouter.post('/registration-confirmation', codeValidator, inputCheckErrorsMiddleware, registrationConfirmationController);
 authRouter.post('/registration', [...registrationPostValidator, inputCheckErrorsMiddleware], registrationController);

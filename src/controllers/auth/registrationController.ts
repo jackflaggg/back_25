@@ -10,7 +10,6 @@ export const registrationController = async (req: Request, res: Response) => {
         return;
     }
 
-    console.log(checkRegistrationUser)
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     return
 }
