@@ -15,11 +15,11 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     try {
         const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
 
-        if (verifyToken.expired || !verifyToken) {
-            console.log('истек: ' +verifyToken.expired);
-            res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
-            return;
-        }
+        // if (verifyToken.expired || !verifyToken) {
+        //     console.log('истек: ' +verifyToken.expired);
+        //     res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+        //     return;
+        // }
 
         const tokenExists = await blackListTokenCollection.findOne({ token: refreshToken });
 
