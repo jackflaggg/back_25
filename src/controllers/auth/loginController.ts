@@ -16,6 +16,7 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
+
     res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data});
     return;
 }
