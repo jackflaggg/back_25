@@ -15,7 +15,6 @@ export const RefreshService = {
     },
     async generateAnyToken(userId: string, timeToString: string): Promise<any>  {
         try {
-
             return jwt.sign(
                 {userId: userId},
                 SETTINGS.SECRET_KEY,
