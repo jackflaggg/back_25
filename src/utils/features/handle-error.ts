@@ -3,5 +3,6 @@ import { Response} from "express";
 
 export const handleError = (res: Response, message: string) => {
     console.log(message);
-    return  res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+    res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+    return;
 };
