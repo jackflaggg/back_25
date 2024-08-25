@@ -11,6 +11,7 @@ import {commentsRouter} from "./routes/comments/comments-router";
 import cookieParser from "cookie-parser";
 
 export const app: Express = express();
+
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser())
