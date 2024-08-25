@@ -3,6 +3,7 @@ import {jwtService} from "../application/jwt-service";
 import {JwtPayload} from "jsonwebtoken";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {handleError} from "../features/handle-error";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;
@@ -22,7 +23,8 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     const payload = await jwtService.verifyAccessToken(token) as JwtPayload;
 
     if (!payload){
-        handleError(res, 'Что то с данными: ' + payload)
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401)
+        //handleError(res, 'Что то с данными: ' + payload)
         return;
     }
 
