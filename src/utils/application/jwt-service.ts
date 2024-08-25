@@ -6,13 +6,14 @@ config()
 
 export const jwtService = {
     // Этот метод создает JWT на основе идентификатора пользователя
-    async createToken(userId: string | null): Promise<null | string> {
+    async createToken(userId: string | null, expiresInData: string = SETTINGS.TOKEN_DURATION): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
+            console.log('вот твое время токена: ' + expiresInData);
             return jwt.sign(
                 {userId: userId},
                 SETTINGS.SECRET_KEY,
-                {expiresIn: SETTINGS.TOKEN_DURATION}
+                {expiresIn: expiresInData}
             )
         }catch (error: unknown) {
             console.error('Ошибка при создании токена:', error);
