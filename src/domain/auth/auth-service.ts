@@ -20,15 +20,21 @@ export const authService = {
 
         //TODO: Вернись сюда и сделай проверку isConfirmed!
         if (!credentialLoginOrEmail) {
-            console.log('Пользователь не найден!')
-            return null;
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{field: 'user', message: 'Пользователь не найден!'}]},
+                data: null
+            }
         }
 
         const checkPassword = await hashService.comparePassword(password, credentialLoginOrEmail.password as string);
 
         if (!checkPassword) {
-            console.log('Пароль не прошел проверку!')
-            return null;
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{field: 'hashService', message: 'Пароль не прошел проверку!'}]},
+                data: null
+            }
         }
         return credentialLoginOrEmail._id;
     },
