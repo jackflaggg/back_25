@@ -9,7 +9,7 @@ import {errorsUnique} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper-error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
-import {RefreshService} from "../../utils/application/refresh-service";
+import {refreshService} from "../../utils/application/refresh-service";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -47,7 +47,7 @@ export const authService = {
             console.log('Проблема при генерации Access токена!')
             return null;
         }
-        const generateRefreshToken = await RefreshService.generateRefreshToken(generateAccessToken);
+        const generateRefreshToken = await refreshService.generateRefreshToken(generateAccessToken);
 
         if (!generateRefreshToken) {
             console.log('Проблема при генерации Refresh токена!')

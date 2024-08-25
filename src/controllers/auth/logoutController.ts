@@ -1,10 +1,12 @@
-import {HTTP_STATUSES} from "../../models/common/common-types";
 import {Request, Response} from "express";
 import {refreshService} from "../../utils/application/refresh-service";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 import {blackListTokenCollection} from "../../db/db";
 
-export const refreshTokenController = async (req: Request, res: Response) => {
+export const logoutController = async (req: Request, res: Response) => {
+
     const {refreshToken} = req.cookies;
+
     const verifiedRefreshToken = await refreshService.generateRefreshToken(refreshToken);
 
     if (!verifiedRefreshToken) {
@@ -15,11 +17,6 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     //TODO: Непонятно с датой
     const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken, maxAge: new Date() });
 
-    const newAccessToken = await refreshService.generateAnyToken(String(verifiedRefreshToken), '10s');
-    const newRefreshToken = await refreshService.generateAnyToken(String(verifiedRefreshToken), '20s');
-
-    res.cookie('refreshToken', newRefreshToken, {httpOnly: true, secure: true});
-
-    res.status(HTTP_STATUSES.OK_200).send({accessToken: newAccessToken});
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     return;
 }

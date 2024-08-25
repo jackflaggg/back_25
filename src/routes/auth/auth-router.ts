@@ -9,6 +9,7 @@ import {registrationController} from "../../controllers/auth/registrationControl
 import {registrationEmailController} from "../../controllers/auth/registrationEmailController";
 import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
 import {refreshTokenController} from "../../controllers/auth/refreshToken";
+import {logoutController} from "../../controllers/auth/logoutController";
 
 
 export const authRouter: Router = Router();
@@ -18,5 +19,5 @@ authRouter.post('/registration-confirmation', codeValidator, inputCheckErrorsMid
 authRouter.post('/registration', [...registrationPostValidator, inputCheckErrorsMiddleware], registrationController);
 authRouter.post('/registration-email-resending', emailValidator, inputCheckErrorsMiddleware, registrationEmailController);
 authRouter.post('/refresh-token', verifyTokenInCookie, refreshTokenController)
-authRouter.post('/logout', verifyTokenInCookie, )
+authRouter.post('/logout', verifyTokenInCookie, logoutController)
 authRouter.get('/me', authBearerMiddlewares, getInfoUserController);

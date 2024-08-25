@@ -3,7 +3,7 @@ import jwt, {JwtPayload} from "jsonwebtoken";
 import {SETTINGS} from "../../settings";
 config()
 
-export const RefreshService = {
+export const refreshService = {
     async generateRefreshToken(refreshToken: string): Promise<JwtPayload | null>  {
         try {
             return jwt.verify(refreshToken, SETTINGS.SECRET_KEY) as JwtPayload;
