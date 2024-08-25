@@ -15,5 +15,6 @@ authRouter.post('/login', [...loginPostValidator, inputCheckErrorsMiddleware], l
 authRouter.post('/registration-confirmation', codeValidator, inputCheckErrorsMiddleware, registrationConfirmationController);
 authRouter.post('/registration', [...registrationPostValidator, inputCheckErrorsMiddleware], registrationController);
 authRouter.post('/registration-email-resending', emailValidator, inputCheckErrorsMiddleware, registrationEmailController);
-
+authRouter.post('/refresh-token',)
+authRouter.post('/logout',)
 authRouter.get('/me', authBearerMiddlewares, getInfoUserController);
