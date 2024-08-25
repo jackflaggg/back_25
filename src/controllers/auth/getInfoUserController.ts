@@ -1,7 +1,6 @@
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import { Request, Response} from 'express';
 import {AsyncVoid, HTTP_STATUSES} from "../../models/common/common-types";
-import {jwtService} from "../../utils/application/jwt-service";
 
 export const getInfoUserController = async (req: Request, res: Response): AsyncVoid => {
     const existingId = req.userId as string;
