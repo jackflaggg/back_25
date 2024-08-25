@@ -36,7 +36,10 @@ export const authService = {
                 data: null
             }
         }
-        return credentialLoginOrEmail._id;
+        return {
+            status: ResultSuccess.Success,
+            data: credentialLoginOrEmail._id
+        };
     },
 
     async loginUser(inputDataUser: InLoginModels) {
@@ -68,7 +71,10 @@ export const authService = {
                 data: null
             }
         }
-        return {data: [{ generateAccessToken, generateRefreshToken }]};
+        return {
+            status: ResultSuccess.Success,
+            data: generateAccessToken
+        }
     },
 
     async registrationUser(inputData: InRegistrationModels) {
