@@ -7,7 +7,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
     const verifiedRefreshToken = await jwtService.verifyRefreshToken(refreshToken);
 
-    if (!verifiedRefreshToken) {
+    if (!verifiedRefreshToken || verifiedRefreshToken.expired) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
