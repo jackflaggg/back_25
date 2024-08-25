@@ -9,6 +9,7 @@ import {errorsUnique} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper-error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
+import {RefreshService} from "../../utils/application/refresh-service";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -41,11 +42,17 @@ export const authService = {
         }
 
         const generateAccessToken = await jwtService.createToken(userId);
+
         if (!generateAccessToken) {
-            console.log('Проблема при генерации токена!')
+            console.log('Проблема при генерации Access токена!')
             return null;
         }
+        const generateRefreshToken = await RefreshService.generateRefreshToken(generateAccessToken);
 
+        if (!generateRefreshToken) {
+            console.log('Проблема при генерации Refresh токена!')
+            return null;
+        }
         return generateAccessToken;
     },
 
