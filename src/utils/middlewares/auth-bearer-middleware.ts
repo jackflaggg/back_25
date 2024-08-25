@@ -26,7 +26,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         return;
     }
 
-    const existingUser = await usersQueryRepository.getUserById(token);
+    const existingUser = await usersQueryRepository.getUserById(payload.userId.toString());
 
     if (!existingUser){
         handleError(res, 'Что то с пользователем: ' + existingUser)
