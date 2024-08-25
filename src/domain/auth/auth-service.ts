@@ -72,7 +72,8 @@ export const authService = {
         if (errors){
             return {
                 status: ResultStatus.BadRequest,
-                errors: helperError(errors)
+                errors: helperError(errors),
+                data: null
             }
         }
 
