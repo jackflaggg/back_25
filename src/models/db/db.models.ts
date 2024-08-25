@@ -42,6 +42,11 @@ export interface CommentDbType {
     postId: string;
 }
 
+export interface BlackListDbType {
+    token: string,
+    maxAge: Date
+}
+
 export interface BlogCreateType {
     name: string,
     description: string,
