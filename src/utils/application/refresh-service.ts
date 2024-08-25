@@ -13,12 +13,12 @@ export const refreshService = {
             return null
         }
     },
-    async generateAnyToken(userId: string, timeToString: string): Promise<any>  {
+    async generateAnyToken(userId: string, expiresInData: string = SETTINGS.TOKEN_DURATION): Promise<any>  {
         try {
             return jwt.sign(
                 {userId: userId},
                 SETTINGS.SECRET_KEY,
-                {expiresIn: timeToString});
+                {expiresIn: expiresInData});
 
         } catch (e: unknown) {
             //TODO: как обработать ошибку токена, истечение токена!

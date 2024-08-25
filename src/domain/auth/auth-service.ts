@@ -53,7 +53,7 @@ export const authService = {
             }
         }
 
-        const generateAccessToken = await jwtService.createToken(userId.data);
+        const generateAccessToken = await jwtService.createToken(userId.data, '10s');
 
         if (!generateAccessToken) {
             return {
@@ -62,7 +62,7 @@ export const authService = {
                 data: null
             }
         }
-        const generateRefreshToken = await refreshService.verifyRefreshToken(generateAccessToken);
+        const generateRefreshToken = await refreshService.verifyRefreshToken(generateAccessToken, '20s');
 
         if (!generateRefreshToken) {
             return {
