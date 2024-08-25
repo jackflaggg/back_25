@@ -25,4 +25,6 @@ export const SETTINGS = {
     PASS: process.env.PASS_USER_ACCOUNT || '',
     HOST: process.env.HOST || '',
     NAME_SUBJECT: process.env.NAME_SUBJECT || '',
+    EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN,
+    EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN,
 }

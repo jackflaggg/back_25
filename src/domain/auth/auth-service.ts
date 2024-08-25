@@ -9,6 +9,7 @@ import {errorsUnique} from "../../utils/features/errors-validate";
 import { add } from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper-error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
+import {SETTINGS} from "../../settings";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {
@@ -52,7 +53,7 @@ export const authService = {
             }
         }
 
-        const generateAccessToken = await jwtService.createAnyToken(userId.data, '10s');
+        const generateAccessToken = await jwtService.createAnyToken(userId.data, SETTINGS.EXPIRES_IN_ACCESS_TOKEN);
 
         if (!generateAccessToken) {
             return {
@@ -61,7 +62,7 @@ export const authService = {
                 data: null
             }
         }
-        const generateRefreshToken = await jwtService.createAnyToken(generateAccessToken, '20s');
+        const generateRefreshToken = await jwtService.createAnyToken(generateAccessToken, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
 
         if (!generateRefreshToken) {
             return {
