@@ -15,7 +15,7 @@ export const logoutController = async (req: Request, res: Response) => {
     }
 
     //TODO: Непонятно с датой
-    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken, maxAge: new Date() });
+    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     return;
