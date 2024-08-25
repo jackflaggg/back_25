@@ -22,7 +22,8 @@ export const jwtService = {
         }
     },
 
-    //
+    // Этот метод просто декодирует JWT. Он не проверяет его действительность или подпись
+    // Извлекает и возвращает полезные данные
     async decodeToken(token: string): Promise<null | JwtPayload>  {
         try {
             return jwt.decode(token) as JwtPayload | null
