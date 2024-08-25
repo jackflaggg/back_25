@@ -53,7 +53,7 @@ export const authService = {
             }
         }
 
-        const generateAccessToken = await jwtService.createToken(userId);
+        const generateAccessToken = await jwtService.createToken(userId.data);
 
         if (!generateAccessToken) {
             return {
