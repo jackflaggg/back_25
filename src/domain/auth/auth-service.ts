@@ -62,7 +62,7 @@ export const authService = {
                 data: null
             }
         }
-        const generateRefreshToken = await refreshService.generateRefreshToken(generateAccessToken);
+        const generateRefreshToken = await refreshService.verifyRefreshToken(generateAccessToken);
 
         if (!generateRefreshToken) {
             return {
