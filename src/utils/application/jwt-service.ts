@@ -10,8 +10,6 @@ export const jwtService = {
     async createAnyToken(userId: string | null, expiresInData: string = SETTINGS.TOKEN_DURATION): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
-            console.log(userId)
-            console.log('вот твое время токена: ' + expiresInData);
             return jwt.sign(
                 {userId: userId},
                 SETTINGS.SECRET_KEY,

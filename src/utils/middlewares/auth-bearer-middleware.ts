@@ -1,6 +1,5 @@
 import {NextFunction, Request, Response} from "express";
 import {jwtService} from "../application/jwt-service";
-import {JwtPayload} from "jsonwebtoken";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {handleError} from "../features/handle-error";
 
@@ -21,7 +20,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
 
 
     const payload = await jwtService.verifyAccessToken(token)// as JwtPayload;
-    console.log('проверь тут ошибку: ' + authHeaders, token, JSON.stringify(payload));
+    console.log('проверь тут ошибку: ' + Object.assign({}, payload));
     if (!payload || payload.expired){
         handleError(res, 'Что то с данными: ' + payload)
         return;
