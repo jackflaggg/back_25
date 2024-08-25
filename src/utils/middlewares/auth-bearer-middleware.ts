@@ -19,7 +19,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         return;
     }
 
-    const payload = await jwtService.verifyToken(token) as JwtPayload;
+    const payload = await jwtService.verifyAccessToken(token) as JwtPayload;
 
     if (!payload){
         handleError(res, 'Что то с данными: ' + payload)

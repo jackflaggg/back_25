@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {blackListTokenCollection} from "../../db/db";
-import {refreshService} from "../application/refresh-service";
+import {jwtService} from "../application/jwt-service";
 
 export const verifyTokenInCookie = async (req: Request, res: Response, next: NextFunction) => {
     const {refreshToken} = req.cookies;
@@ -12,7 +12,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     }
 
     try {
-        const verifyToken = await refreshService.verifyRefreshToken(refreshToken);
+        const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
         if (!verifyToken) {
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
             return;
