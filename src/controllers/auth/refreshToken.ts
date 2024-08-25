@@ -5,7 +5,7 @@ import {blackListTokenCollection} from "../../db/db";
 
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
-    const verifiedRefreshToken = await refreshService.generateRefreshToken(refreshToken);
+    const verifiedRefreshToken = await refreshService.verifyRefreshToken(refreshToken);
 
     if (!verifiedRefreshToken) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
