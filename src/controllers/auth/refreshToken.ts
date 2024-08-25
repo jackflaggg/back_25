@@ -6,12 +6,12 @@ import {jwtService} from "../../utils/application/jwt-service";
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
     const verifiedRefreshToken = await jwtService.verifyRefreshToken(refreshToken);
-    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
 
     if (!verifiedRefreshToken) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
+    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
 
     //TODO: Непонятно с датой
 
