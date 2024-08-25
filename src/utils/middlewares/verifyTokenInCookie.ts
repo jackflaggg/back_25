@@ -15,12 +15,8 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     try {
         const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
 
-        if (verifyToken.expired) {
-            res.status(HTTP_STATUSES.NOT_AUTHORIZATION_401).send({ errorsMessages: [{ field: 'middleware refresh', message: 'Refresh token expired' }] });
-            return;
-        }
-
-        if (!verifyToken) {
+        if (verifyToken.expired || !verifyToken) {
+            console.log('истек: ' +verifyToken.expired);
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
             return;
         }
