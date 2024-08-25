@@ -208,7 +208,7 @@ export const authService = {
             console.error(e);
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: e, field: 'email grock!!!!'},
+                extensions: {errorsMessages: [{message: e, field: 'email grock!!!!'}]},
                 data: null
             }
         }
