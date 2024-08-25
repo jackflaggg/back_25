@@ -19,14 +19,15 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         return;
     }
 
-    const payload = await jwtService.verifyAccessToken(token)// as JwtPayload;
 
+    const payload = await jwtService.verifyAccessToken(token)// as JwtPayload;
+    console.log('проверь тут ошибку: ' + authHeaders, token, JSON.stringify(payload));
     if (!payload || payload.expired){
         handleError(res, 'Что то с данными: ' + payload)
         return;
     }
 
-    const existingUser = await usersQueryRepository.getUserById(payload.userId);
+    const existingUser = await usersQueryRepository.getUserById(token);
 
     if (!existingUser){
         handleError(res, 'Что то с пользователем: ' + existingUser)
