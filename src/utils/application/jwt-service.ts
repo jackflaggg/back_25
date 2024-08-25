@@ -33,6 +33,8 @@ export const jwtService = {
         }
     },
 
+    // этот метод проверяет действительность токена + проверка на срок действия
+    // Если токен действителен, метод возвращает объект с данными JwtPayload (payload)
     async verifyToken(token: string): Promise<null | JwtPayload >  {
         try {
             return jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload | null
