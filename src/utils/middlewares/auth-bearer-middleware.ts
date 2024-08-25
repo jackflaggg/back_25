@@ -18,7 +18,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         handleError(res, 'Нет токена: ' + token);
         return;
     }
-
+    console.log('внутри ми: ' + token)
     const payload = await jwtService.verifyAccessToken(token) as JwtPayload;
 
     if (!payload){
