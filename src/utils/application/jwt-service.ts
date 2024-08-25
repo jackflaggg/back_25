@@ -7,7 +7,7 @@ config()
 export const jwtService = {
     // Этот метод создает JWT на основе идентификатора пользователя и времени
     // В случае успеха возвращает созданный токен в виде строки
-    async createAnyToken(userId: string | null, expiresInData: string = SETTINGS.TOKEN_DURATION): Promise<null | string> {
+    async createAnyToken(userId: string, expiresInData: string = SETTINGS.TOKEN_DURATION): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
