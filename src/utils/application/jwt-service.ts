@@ -5,7 +5,8 @@ import {secretErrorCheck} from "../features/secret-error";
 config()
 
 export const jwtService = {
-    // Этот метод создает JWT на основе идентификатора пользователя
+    // Этот метод создает JWT на основе идентификатора пользователя и времени
+    // В случае успеха возвращает созданный токен в виде строки
     async createToken(userId: string | null, expiresInData: string = SETTINGS.TOKEN_DURATION): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
@@ -21,6 +22,7 @@ export const jwtService = {
         }
     },
 
+    //
     async decodeToken(token: string): Promise<null | JwtPayload>  {
         try {
             return jwt.decode(token) as JwtPayload | null
