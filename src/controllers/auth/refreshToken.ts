@@ -13,7 +13,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     }
 
     //TODO: Непонятно с датой
-    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken, maxAge: new Date() });
+    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken, maxAge: refreshToken });
 
     const newAccessToken = await refreshService.generateAnyToken(String(verifiedRefreshToken), '10s');
     const newRefreshToken = await refreshService.generateAnyToken(String(verifiedRefreshToken), '20s');

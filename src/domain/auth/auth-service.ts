@@ -37,21 +37,30 @@ export const authService = {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
         if (!userId) {
-            console.log('Аутентификация рухнула!');
-            return null;
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{field: 'userId', message: 'Аутентификация рухнула!'}]},
+                data: null
+            }
         }
 
         const generateAccessToken = await jwtService.createToken(userId);
 
         if (!generateAccessToken) {
-            console.log('Проблема при генерации Access токена!')
-            return null;
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{field: 'jwtService', message: 'Проблема при генерации Access токена!'}]},
+                data: null
+            }
         }
         const generateRefreshToken = await refreshService.generateRefreshToken(generateAccessToken);
 
         if (!generateRefreshToken) {
-            console.log('Проблема при генерации Refresh токена!')
-            return null;
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {errorsMessages: [{field: 'refreshService', message: 'Проблема при генерации Refresh токена!'}]},
+                data: null
+            }
         }
         return {data: [{ generateAccessToken, generateRefreshToken }]};
     },

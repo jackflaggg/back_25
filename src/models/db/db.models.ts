@@ -43,8 +43,8 @@ export interface CommentDbType {
 }
 
 export interface BlackListDbType {
-    token: string,
-    maxAge: Date
+    token: string
+   // maxAge: Date
 }
 
 export interface BlogCreateType {
