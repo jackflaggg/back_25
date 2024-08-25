@@ -37,13 +37,11 @@ export const jwtService = {
     // этот метод проверяет действительность токена + проверка на срок действия
     // Если токен действителен, метод возвращает объект с данными JwtPayload (payload)
     async verifyAccessToken(token: string): Promise<null | JwtPayload >  {
-        console.log('начало 500 :' + SETTINGS.EXPIRES_IN_ACCESS_TOKEN)
-        console.log('че пришло в 500: ' + token);
+
         try {
             return jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload | null
         } catch (error: unknown) {
             if (error instanceof jwt.TokenExpiredError) {
-                console.log('Refresh token expired');
                 return { expired: true };
             }
             console.error('Ошибка при верификации токена: ', error)
@@ -56,7 +54,6 @@ export const jwtService = {
             return jwt.verify(refreshToken, SETTINGS.SECRET_KEY)
         } catch (e: unknown) {
             if (e instanceof jwt.TokenExpiredError) {
-                console.log('Refresh token expired');
                 return { expired: true };
             }
             console.log(e);
