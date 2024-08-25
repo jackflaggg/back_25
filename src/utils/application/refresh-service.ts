@@ -9,7 +9,7 @@ export const refreshService = {
             return jwt.verify(refreshToken, SETTINGS.SECRET_KEY) as JwtPayload;
         } catch (e: unknown) {
             //TODO: как обработать ошибку токена, истечение токена!
-            console.error(e);
+            console.log(e);
             return null
         }
     },
