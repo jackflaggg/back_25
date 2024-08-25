@@ -45,7 +45,7 @@ export const authService = {
     async loginUser(inputDataUser: InLoginModels) {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
-        if (!userId) {
+        if (userId.status !== ResultSuccess.Success || userId.extensions) {
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {errorsMessages: [{field: 'userId', message: 'Аутентификация рухнула!'}]},
