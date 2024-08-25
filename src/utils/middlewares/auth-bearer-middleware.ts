@@ -20,7 +20,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
 
 
     const payload = await jwtService.verifyAccessToken(token)// as JwtPayload;
-    console.log('проверь тут ошибку: ' + Object.assign({}, payload));
+    console.log('проверь тут ошибку: ' + JSON.stringify(Object.assign({}, payload)));
     if (!payload || payload.expired){
         handleError(res, 'Что то с данными: ' + payload)
         return;
