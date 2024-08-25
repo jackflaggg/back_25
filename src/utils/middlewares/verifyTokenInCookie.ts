@@ -12,7 +12,6 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     }
 
     try {
-        console.log('я вошел!')
         const verifyToken = await refreshService.verifyRefreshToken(refreshToken);
         if (!verifyToken) {
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
