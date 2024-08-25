@@ -5,6 +5,7 @@ import {secretErrorCheck} from "../features/secret-error";
 config()
 
 export const jwtService = {
+    // Этот метод создает JWT на основе идентификатора пользователя
     async createToken(userId: string | null): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
