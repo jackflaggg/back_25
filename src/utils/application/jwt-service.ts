@@ -39,7 +39,7 @@ export const jwtService = {
     async verifyAccessToken(token: string): Promise<null | JwtPayload >  {
         console.log('начало:' + SETTINGS.EXPIRES_IN_ACCESS_TOKEN)
         try {
-            return jwt.verify(token, SETTINGS.EXPIRES_IN_ACCESS_TOKEN!) as JwtPayload | null
+            return jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload | null
         } catch (error: unknown) {
             console.error('Ошибка при верификации токена: ', error)
             return null
@@ -49,7 +49,7 @@ export const jwtService = {
     async verifyRefreshToken(refreshToken: string): Promise<any | JwtPayload | null>  {
         console.log('начало:' + SETTINGS.EXPIRES_IN_REFRESH_TOKEN)
         try {
-            return jwt.verify(refreshToken, SETTINGS.EXPIRES_IN_REFRESH_TOKEN!) //as JwtPayload;
+            return jwt.verify(refreshToken, SETTINGS.SECRET_KEY) //as JwtPayload;
         } catch (e: unknown) {
             //TODO: как обработать ошибку токена, истечение токена!
             console.log('провал!')
