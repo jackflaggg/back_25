@@ -53,7 +53,7 @@ export const authService = {
             console.log('Проблема при генерации Refresh токена!')
             return null;
         }
-        return generateAccessToken;
+        return {data: [{ generateAccessToken, generateRefreshToken }]};
     },
 
     async registrationUser(inputData: InRegistrationModels) {

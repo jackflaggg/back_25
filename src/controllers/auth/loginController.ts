@@ -10,7 +10,7 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-
-    res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser} as AccessToken)
+    res.cookie('refreshToken', loginUser.data[0].generateRefreshToken, {httpOnly: true,secure: true})
+    res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data[0].generateAccessToken} as AccessToken)
     return;
 }
