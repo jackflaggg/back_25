@@ -17,6 +17,9 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         return;
     }
 
-    res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data[0]});
+    const [accessToken, refreshToken] = loginUser.data;
+
+    res.cookie('refreshToken', refreshToken, {httpOnly: true, secure: true});
+    res.status(HTTP_STATUSES.OK_200).send({accessToken: accessToken});
     return;
 }
