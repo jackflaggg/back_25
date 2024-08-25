@@ -17,6 +17,6 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         return;
     }
 
-    res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data});
+    res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data[0]});
     return;
 }

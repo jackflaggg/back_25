@@ -62,7 +62,7 @@ export const authService = {
                 data: null
             }
         }
-        const generateRefreshToken = await refreshService.verifyRefreshToken(generateAccessToken, '20s');
+        const generateRefreshToken = await refreshService.generateAnyToken(generateAccessToken, '20s');
 
         if (!generateRefreshToken) {
             return {
@@ -73,7 +73,7 @@ export const authService = {
         }
         return {
             status: ResultSuccess.Success,
-            data: generateAccessToken
+            data: [generateAccessToken, generateRefreshToken]
         }
     },
 
