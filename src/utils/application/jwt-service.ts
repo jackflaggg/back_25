@@ -37,19 +37,22 @@ export const jwtService = {
     // этот метод проверяет действительность токена + проверка на срок действия
     // Если токен действителен, метод возвращает объект с данными JwtPayload (payload)
     async verifyAccessToken(token: string): Promise<null | JwtPayload >  {
+        console.log('начало:' + SETTINGS.EXPIRES_IN_ACCESS_TOKEN)
         try {
-            return jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload | null
+            return jwt.verify(token, SETTINGS.EXPIRES_IN_ACCESS_TOKEN!) as JwtPayload | null
         } catch (error: unknown) {
             console.error('Ошибка при верификации токена: ', error)
             return null
         }
     },
 
-    async verifyRefreshToken(refreshToken: string): Promise<JwtPayload | null>  {
+    async verifyRefreshToken(refreshToken: string): Promise<any | JwtPayload | null>  {
+        console.log('начало:' + SETTINGS.EXPIRES_IN_REFRESH_TOKEN)
         try {
-            return jwt.verify(refreshToken, SETTINGS.SECRET_KEY) as JwtPayload;
+            return jwt.verify(refreshToken, SETTINGS.EXPIRES_IN_REFRESH_TOKEN!) //as JwtPayload;
         } catch (e: unknown) {
             //TODO: как обработать ошибку токена, истечение токена!
+            console.log('провал!')
             console.log(e);
             return null
         }

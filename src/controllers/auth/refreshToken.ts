@@ -6,7 +6,7 @@ import {jwtService} from "../../utils/application/jwt-service";
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
     const verifiedRefreshToken = await jwtService.verifyRefreshToken(refreshToken);
-
+    console.log(verifiedRefreshToken);
     if (!verifiedRefreshToken) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
@@ -17,7 +17,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
 
     const newAccessToken = await jwtService.createAnyToken(String(verifiedRefreshToken), '10s');
     const newRefreshToken = await jwtService.createAnyToken(String(verifiedRefreshToken), '20s');
-
+    console.log(newAccessToken, newRefreshToken);
     res.cookie('refreshToken', newRefreshToken, {httpOnly: true, secure: true});
 
     res.status(HTTP_STATUSES.OK_200).send({accessToken: newAccessToken});
