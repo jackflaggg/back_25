@@ -55,7 +55,6 @@ export const jwtService = {
                 // Можно вернуть специальный объект или ошибку
                 return { expired: true };
             }
-
             console.log(e);
             return null
         }
