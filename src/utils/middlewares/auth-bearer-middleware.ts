@@ -21,7 +21,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     console.log('внутри ми: ' + token)
     const payload = await jwtService.verifyAccessToken(token) as JwtPayload;
 
-    if (!payload){
+    if (!payload || payload.expired){
         handleError(res, 'Что то с данными: ' + payload)
         return;
     }
