@@ -14,7 +14,6 @@ export const logoutController = async (req: Request, res: Response) => {
         return;
     }
     const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
-
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     return;
 }
