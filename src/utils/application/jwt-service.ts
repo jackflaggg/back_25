@@ -50,7 +50,12 @@ export const jwtService = {
         try {
             return jwt.verify(refreshToken, SETTINGS.SECRET_KEY) //as JwtPayload;
         } catch (e: unknown) {
-            //TODO: как обработать ошибку токена, истечение токена!
+            if (e instanceof jwt.TokenExpiredError) {
+                console.log('Refresh token expired');
+                // Можно вернуть специальный объект или ошибку
+                return { expired: true };
+            }
+
             console.log(e);
             return null
         }
