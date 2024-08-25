@@ -47,12 +47,10 @@ export const jwtService = {
     },
 
     async verifyRefreshToken(refreshToken: string): Promise<any | JwtPayload | null>  {
-        console.log('начало:' + SETTINGS.EXPIRES_IN_REFRESH_TOKEN)
         try {
             return jwt.verify(refreshToken, SETTINGS.SECRET_KEY) //as JwtPayload;
         } catch (e: unknown) {
             //TODO: как обработать ошибку токена, истечение токена!
-            console.log('провал!')
             console.log(e);
             return null
         }

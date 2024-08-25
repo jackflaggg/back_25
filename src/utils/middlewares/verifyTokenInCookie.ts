@@ -10,9 +10,10 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-
+    console.log(refreshToken);
     try {
         const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
+        console.log(verifyToken)
         if (!verifyToken) {
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
             return;
