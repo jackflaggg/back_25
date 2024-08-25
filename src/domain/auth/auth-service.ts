@@ -40,13 +40,13 @@ export const authService = {
             return null;
         }
 
-        const generateToken = await jwtService.createToken(userId);
-        if (!generateToken) {
+        const generateAccessToken = await jwtService.createToken(userId);
+        if (!generateAccessToken) {
             console.log('Проблема при генерации токена!')
             return null;
         }
 
-        return generateToken;
+        return generateAccessToken;
     },
 
     async registrationUser(inputData: InRegistrationModels) {
