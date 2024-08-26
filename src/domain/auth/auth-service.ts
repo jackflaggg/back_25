@@ -72,6 +72,7 @@ export const authService = {
                 data: null
             }
         }
+
         console.log([generateAccessToken, generateRefreshToken])
         return {
             status: ResultSuccess.Success,
