@@ -11,7 +11,7 @@ export const jwtService = {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
-                {userId: userId},
+                {userId: String(userId)},
                 SETTINGS.SECRET_KEY,
                 {expiresIn: expiresInData}
             )
@@ -26,7 +26,7 @@ export const jwtService = {
     async decodeToken(token: string): Promise<null | JwtPayload>  {
         console.log('тип токена: ' + typeof token + ': сам токен: ' + token)
         try {
-            return jwt.decode(token) as JwtPayload | null
+            return jwt.decode(String(token)) as JwtPayload | null
         } catch (error: unknown) {
             console.error('Ошибка при декодировании токена: ', error)
             return null
@@ -38,7 +38,7 @@ export const jwtService = {
     async verifyAccessToken(token: any): Promise<any >  {
         console.log('тип токена: ' + typeof token + ': сам токен: ' + token)
         try {
-            return jwt.verify(token, SETTINGS.SECRET_KEY)// as JwtPayload | null
+            return jwt.verify(String(token), SETTINGS.SECRET_KEY)// as JwtPayload | null
         } catch (error: unknown) {
             if (error instanceof jwt.TokenExpiredError) {
                 return { expired: true };

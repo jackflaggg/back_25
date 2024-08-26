@@ -28,6 +28,14 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         handleError(res, 'Что то с декод данными: ' + JSON.stringify(decodedToken))
         return;
     }
+
+    const userId = decodedToken.userId; // Убедитесь, что здесь используется правильное поле
+
+    if (typeof userId !== 'string') {
+        handleError(res, 'Неверный формат userId: ' + userId);
+        return;
+    }
+
     const payload = await jwtService.verifyAccessToken(token)// as JwtPayload;
 
     if (!payload || payload.expired){
@@ -35,8 +43,8 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         return;
     }
 
-    const existingUser = await usersQueryRepository.getUserById(decodedToken!.userId);
-    console.log('я продвинулся дальше: ' + existingUser);
+    const existingUser = await usersQueryRepository.getUserById(userId);
+
     if (!existingUser){
         handleError(res, 'Что то с пользователем: ' + existingUser)
         return;
