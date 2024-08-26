@@ -20,37 +20,5 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     }
 
 
-    const decodedToken = await jwtService.decodeToken(token);
-
-    console.log('вот декод данные: ' + JSON.stringify(decodedToken))
-
-    if (!decodedToken) {
-        handleError(res, 'Что то с декод данными: ' + JSON.stringify(decodedToken))
-        return;
-    }
-
-    const userId = decodedToken.userId; // Убедитесь, что здесь используется правильное поле
-
-    if (typeof userId !== 'string') {
-        handleError(res, 'Неверный формат userId: ' + userId);
-        return;
-    }
-
-    const payload = await jwtService.verifyAccessToken(token)// as JwtPayload;
-
-    if (!payload || payload.expired){
-        handleError(res, 'Что то с данными: ' + payload)
-        return;
-    }
-
-    const existingUser = await usersQueryRepository.getUserById(userId);
-
-    if (!existingUser){
-        handleError(res, 'Что то с пользователем: ' + existingUser)
-        return;
-    }
-
-    req.userId = existingUser.id;
-
     next();
 }

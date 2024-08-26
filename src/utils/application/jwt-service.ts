@@ -58,5 +58,19 @@ export const jwtService = {
             console.log(e);
             return null
         }
+    },
+
+    async getUserIdByToken(token: string) {
+        try {
+            const user = jwt.verify(token, SETTINGS.SECRET_KEY);
+            if (!user){
+                console.log('что то пошло не так при верификации токена ' + String(user))
+                return null;
+            }
+            return user
+        } catch (error: unknown){
+            console.log(error);
+            return null
+        }
     }
 }
