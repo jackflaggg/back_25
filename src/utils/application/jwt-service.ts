@@ -24,6 +24,7 @@ export const jwtService = {
     // Этот метод просто декодирует JWT. Он не проверяет его действительность или подпись
     // Извлекает и возвращает полезные данные
     async decodeToken(token: string): Promise<null | JwtPayload>  {
+        console.log('тип токена: ' + typeof token + ': сам токен: ' + token)
         try {
             return jwt.decode(token) as JwtPayload | null
         } catch (error: unknown) {
@@ -34,9 +35,10 @@ export const jwtService = {
 
     // этот метод проверяет действительность токена + проверка на срок действия
     // Если токен действителен, метод возвращает объект с данными JwtPayload (payload)
-    async verifyAccessToken(token: string): Promise<null | JwtPayload >  {
+    async verifyAccessToken(token: any): Promise<any >  {
+        console.log('тип токена: ' + typeof token + ': сам токен: ' + token)
         try {
-            return jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload | null
+            return jwt.verify(token, SETTINGS.SECRET_KEY)// as JwtPayload | null
         } catch (error: unknown) {
             if (error instanceof jwt.TokenExpiredError) {
                 return { expired: true };
