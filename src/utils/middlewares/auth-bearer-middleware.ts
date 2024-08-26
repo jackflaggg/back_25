@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {jwtService} from "../application/jwt-service";
 import {handleError} from "../features/handle-error";
+import {isValidObjectId} from "../features/formatUserIdToAuth";
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;
@@ -22,8 +23,13 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     console.log('Формат existingUserId: ', existingUserId);
     console.log('преобразование existingUserId: ', JSON.stringify(existingUserId));
 
-    if (!existingUserId || existingUserId.expired) {
-        console.log(existingUserId);
+    if (!isValidObjectId(existingUserId)) {
+        console.log('Некорректный userId: ' + existingUserId);
+        handleError(res, 'Неверный формат userId: ' + existingUserId);
+        return;
+    }
+
+    if (!existingUserId) {
         handleError(res, 'проблема с айди пользователем, мб невалиден: ' + existingUserId);
         return;
     }

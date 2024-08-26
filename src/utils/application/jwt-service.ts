@@ -73,7 +73,7 @@ export const jwtService = {
             return user.userId
         } catch (error: unknown){
             if (error instanceof jwt.TokenExpiredError) {
-                return { expired: true };
+                return null// { expired: true };
             }
             console.log(error);
             return null
