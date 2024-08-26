@@ -3,7 +3,6 @@ import {jwtService} from "../application/jwt-service";
 import {handleError} from "../features/handle-error";
 import {isValidObjectIdToVerifyToken} from "../features/formatUserIdToAuth";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
-import {userMapperToOutput} from "../mappers/user-mapper";
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;
@@ -28,18 +27,17 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         return;
     }
 
-    if (!isValidObjectIdToVerifyToken(existingUserId.toHexString())) {
+    if (!isValidObjectIdToVerifyToken(existingUserId)) {
         handleError(res, 'Неверный формат userId: ' + existingUserId);
         return;
     }
 
-    const user = await usersQueryRepository.getUserById(String(existingUserId))
-    console.log('че пришло в пользователе: ' + user)
+    const user = await usersQueryRepository.getUserById(existingUserId)
+    console.log('че пришло в пользователе: ' + JSON.stringify(user))
     if (!user) {
         handleError(res, 'Пользователь не найден.');
         return;
     }
-    const userMap = userMapperToOutput(user)
 
     req.userId = user;
     next();
