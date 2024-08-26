@@ -64,7 +64,6 @@ export const jwtService = {
         // TODO: ошибка с которой можно столкнуться:
         // может вернуть объект типа JwtPayload, если токен валиден, или строку, если токен недействителен
         try {
-            // ВОПРОС!
             const user = jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload;
             if (!user || !user.userId){
                 console.log('что то пошло не так при верификации токена ' + JSON.stringify(user))
