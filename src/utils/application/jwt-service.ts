@@ -2,6 +2,7 @@ import {SETTINGS} from "../../settings";
 import jwt, {JwtPayload} from "jsonwebtoken";
 import {config} from 'dotenv'
 import {secretErrorCheck} from "../features/secret-error";
+import {ObjectId} from "mongodb";
 config()
 
 export const jwtService = {
@@ -69,7 +70,7 @@ export const jwtService = {
                 console.log('что то пошло не так при верификации токена ' + JSON.stringify(user))
                 return null;
             }
-            return user.userId
+            return new ObjectId(user.userId)
         } catch (error: unknown){
             if (error instanceof jwt.TokenExpiredError) {
                 return null// { expired: true };

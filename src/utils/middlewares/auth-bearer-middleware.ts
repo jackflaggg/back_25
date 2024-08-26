@@ -2,6 +2,8 @@ import {NextFunction, Request, Response} from "express";
 import {jwtService} from "../application/jwt-service";
 import {handleError} from "../features/handle-error";
 import {isValidObjectIdToVerifyToken} from "../features/formatUserIdToAuth";
+import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {userMapperToOutput} from "../mappers/user-mapper";
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;
@@ -21,16 +23,24 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     const existingUserId = await jwtService.getUserIdByToken(token);
     console.log('Полученный айди: ', existingUserId);
 
-    if (!isValidObjectIdToVerifyToken(existingUserId)) {
-        handleError(res, 'Неверный формат userId: ' + existingUserId);
-        return;
-    }
-
     if (!existingUserId) {
         handleError(res, 'проблема с айди пользователем, мб невалиден: ' + existingUserId);
         return;
     }
 
-    req.userId = existingUserId;
+    if (!isValidObjectIdToVerifyToken(existingUserId.toHexString())) {
+        handleError(res, 'Неверный формат userId: ' + existingUserId);
+        return;
+    }
+
+    const user = await usersQueryRepository.getUserById(String(existingUserId))
+
+    if (!user) {
+        handleError(res, 'Пользователь не найден.');
+        return;
+    }
+    const userMap = userMapperToOutput(user)
+
+    req.userId = userMap.id;
     next();
 }
