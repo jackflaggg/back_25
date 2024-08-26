@@ -58,7 +58,7 @@ export const authService = {
         if (!generateAccessToken) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{field: 'jwtService', message: 'Проблема при генерации Access токена!'}]},
+                extensions: {errorsMessages: [{field: 'jwt', message: 'Проблема при генерации Access токена!'}]},
                 data: null
             }
         }
@@ -68,7 +68,7 @@ export const authService = {
         if (!generateRefreshToken) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{field: 'refreshService', message: 'Проблема при генерации Refresh токена!'}]},
+                extensions: {errorsMessages: [{field: 'refresh', message: 'Проблема при генерации Refresh токена!'}]},
                 data: null
             }
         }

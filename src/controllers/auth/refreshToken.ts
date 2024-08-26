@@ -13,8 +13,6 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     }
     const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
 
-    //TODO: Непонятно с датой
-
     const newAccessToken = await jwtService.createAnyToken(String(verifiedRefreshToken), '10s');
     const newRefreshToken = await jwtService.createAnyToken(String(verifiedRefreshToken), '20s');
 
