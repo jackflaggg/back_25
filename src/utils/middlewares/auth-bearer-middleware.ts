@@ -22,7 +22,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     console.log('Формат existingUserId: ', existingUserId);
     console.log('преобразование existingUserId: ', JSON.stringify(existingUserId));
 
-    if (!existingUserId) {
+    if (!existingUserId || existingUserId.expired) {
         console.log(existingUserId);
         handleError(res, 'проблема с айди пользователем, мб невалиден: ' + existingUserId);
         return;
