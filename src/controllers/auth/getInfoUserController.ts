@@ -3,14 +3,15 @@ import { Request, Response} from 'express';
 import {AsyncVoid, HTTP_STATUSES} from "../../models/common/common-types";
 
 export const getInfoUserController = async (req: Request, res: Response): AsyncVoid => {
-    const existingId = req.userId as string;
+    console.log(req.userId, typeof req.userId)
+    const existingId = req.userId;
 
     if (!existingId) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return
     }
 
-    const user = await usersQueryRepository.LoginMapByUser(existingId);
+    const user = await usersQueryRepository.LoginMapByUser(existingId as string);
 
     if (!user) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
