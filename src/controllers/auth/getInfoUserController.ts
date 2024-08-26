@@ -3,7 +3,7 @@ import { Request, Response} from 'express';
 import {AsyncVoid, HTTP_STATUSES} from "../../models/common/common-types";
 
 export const getInfoUserController = async (req: Request, res: Response): AsyncVoid => {
-    console.log(req.userId, typeof req.userId)
+    console.log('я вошел в контроллер ми: ' + req.userId, typeof req.userId)
     const existingId = req.userId;
 
     if (!existingId) {

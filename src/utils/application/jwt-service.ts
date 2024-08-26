@@ -66,17 +66,22 @@ export const jwtService = {
         // может вернуть объект типа JwtPayload, если токен валиден, или строку, если токен недействителен
         try {
             const user = jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload;
+
             if (!user || !user.userId){
                 console.log('что то пошло не так при верификации токена ' + JSON.stringify(user))
                 return null;
             }
+
             return user.userId
         } catch (error: unknown){
             console.log('я попал в блок catch , видимо что-то пошло не так при преобразовании!')
+
             if (error instanceof jwt.TokenExpiredError) {
                 return null// { expired: true };
             }
+
             console.log(error);
+
             return null
         }
     }
