@@ -70,7 +70,7 @@ export const jwtService = {
                 console.log('что то пошло не так при верификации токена ' + JSON.stringify(user))
                 return null;
             }
-            return new ObjectId(user.userId)
+            return new ObjectId(String(user.userId))
         } catch (error: unknown){
             console.log('я попал в блок catch , видимо что-то пошло не так при преобразовании!')
             if (error instanceof jwt.TokenExpiredError) {
