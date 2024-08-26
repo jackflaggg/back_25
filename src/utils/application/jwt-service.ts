@@ -72,6 +72,7 @@ export const jwtService = {
             }
             return new ObjectId(user.userId)
         } catch (error: unknown){
+            console.log('я попал в блок catch , видимо что-то пошло не так при преобразовании!')
             if (error instanceof jwt.TokenExpiredError) {
                 return null// { expired: true };
             }
