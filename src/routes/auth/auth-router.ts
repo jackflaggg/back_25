@@ -15,9 +15,11 @@ import {logoutController} from "../../controllers/auth/logoutController";
 export const authRouter: Router = Router();
 
 authRouter.post('/login', [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
+authRouter.post('/refresh-token', verifyTokenInCookie, refreshTokenController)
+authRouter.post('/logout', verifyTokenInCookie, logoutController)
+
 authRouter.post('/registration-confirmation', codeValidator, inputCheckErrorsMiddleware, registrationConfirmationController);
 authRouter.post('/registration', [...registrationPostValidator, inputCheckErrorsMiddleware], registrationController);
 authRouter.post('/registration-email-resending', emailValidator, inputCheckErrorsMiddleware, registrationEmailController);
-authRouter.post('/refresh-token', verifyTokenInCookie, refreshTokenController)
-authRouter.post('/logout', verifyTokenInCookie, logoutController)
+
 authRouter.get('/me', authBearerMiddlewares, getInfoUserController);
