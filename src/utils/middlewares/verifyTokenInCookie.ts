@@ -6,7 +6,6 @@ import {jwtService} from "../application/jwt-service";
 export const verifyTokenInCookie = async (req: Request, res: Response, next: NextFunction) => {
     const {refreshToken} = req.cookies;
 
-
     if(!refreshToken){
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
@@ -14,12 +13,6 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
 
     try {
         const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
-
-        // if (verifyToken.expired || !verifyToken) {
-        //     console.log('истек: ' +verifyToken.expired);
-        //     res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
-        //     return;
-        // }
 
         const tokenExists = await blackListTokenCollection.findOne({ token: refreshToken });
 
