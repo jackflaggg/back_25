@@ -34,13 +34,13 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     }
 
     const user = await usersQueryRepository.getUserById(String(existingUserId))
-
+    console.log('че пришло в пользователе: ' + user)
     if (!user) {
         handleError(res, 'Пользователь не найден.');
         return;
     }
     const userMap = userMapperToOutput(user)
 
-    req.userId = userMap.id;
+    req.userId = user;
     next();
 }
