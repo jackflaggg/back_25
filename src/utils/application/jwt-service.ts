@@ -67,7 +67,7 @@ export const jwtService = {
             // ВОПРОС!
             const user = jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload;
             if (!user || !user.userId){
-                console.log('что то пошло не так при верификации токена ' + String(user))
+                console.log('что то пошло не так при верификации токена ' + JSON.stringify(user))
                 return null;
             }
             return user.userId
