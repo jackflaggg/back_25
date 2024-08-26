@@ -35,6 +35,12 @@ export const usersQueryRepository = {
     },
 
     async getUserById(id: string): Promise<any> {
+        // Проверяем, является ли id валидным ObjectId
+        if (!ObjectId.isValid(id)) {
+            console.log('Ошибка: Неверный формат ObjectId', id);
+            return null;
+        }
+
         const user = await usersCollection.findOne({_id: new ObjectId(id)});
         if (!user) {
             return null;
@@ -43,11 +49,12 @@ export const usersQueryRepository = {
     },
 
     async LoginMapByUser(userId: string) {
+        console.log('ID пользователя при входе:', userId);
+        console.log('ID валидация:', ObjectId.isValid(userId));
         const loginUser = await this.getUserById(userId);
         if (!loginUser) {
             return null;
         }
         return loginUserMapper(loginUser);
     }
-
 }
