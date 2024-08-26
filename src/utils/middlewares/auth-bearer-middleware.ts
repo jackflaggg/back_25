@@ -2,6 +2,7 @@ import {NextFunction, Request, Response} from "express";
 import {jwtService} from "../application/jwt-service";
 import {handleError} from "../features/handle-error";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;
@@ -20,11 +21,14 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
 
     const existingUserId = await jwtService.getUserIdByToken(token);
 
+    console.log(typeof existingUserId, existingUserId);
+
     if (!existingUserId) {
+        console.log(existingUserId);
         handleError(res, 'проблема с айди пользователем, мб невалиден: ' + existingUserId);
         return;
     }
-    const user = await usersQueryRepository.getUserById(existingUserId);
-    req.userId = user.id;
+
+    req.userId = existingUserId;
     next();
 }
