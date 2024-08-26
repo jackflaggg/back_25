@@ -2,6 +2,7 @@ import {NextFunction, Request, Response} from "express";
 import {jwtService} from "../application/jwt-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {handleError} from "../features/handle-error";
+import jwt from "jsonwebtoken";
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;
@@ -19,15 +20,23 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     }
 
 
+    const decodedToken = await jwtService.decodeToken(token);
+
+    console.log('вот декод данные: ' + JSON.stringify(decodedToken))
+
+    if (!decodedToken) {
+        handleError(res, 'Что то с декод данными: ' + JSON.stringify(decodedToken))
+        return;
+    }
     const payload = await jwtService.verifyAccessToken(token)// as JwtPayload;
-    console.log('проверь тут ошибку: ' + JSON.stringify(Object.assign({}, payload)));
+
     if (!payload || payload.expired){
         handleError(res, 'Что то с данными: ' + payload)
         return;
     }
 
-    const existingUser = await usersQueryRepository.getUserById(payload.userId.toString());
-
+    const existingUser = await usersQueryRepository.getUserById(decodedToken!.userId);
+    console.log('я продвинулся дальше: ' + existingUser);
     if (!existingUser){
         handleError(res, 'Что то с пользователем: ' + existingUser)
         return;
