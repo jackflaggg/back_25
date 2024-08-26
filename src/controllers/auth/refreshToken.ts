@@ -11,10 +11,11 @@ export const refreshTokenController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
+
     const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
 
-    const newAccessToken = await jwtService.createAnyToken(String(verifiedRefreshToken), '10s');
-    const newRefreshToken = await jwtService.createAnyToken(String(verifiedRefreshToken), '20s');
+    const newAccessToken = await jwtService.createAnyToken(verifiedRefreshToken.userId, '10s');
+    const newRefreshToken = await jwtService.createAnyToken(verifiedRefreshToken.userId, '20s');
 
     res.cookie('refreshToken', newRefreshToken, {httpOnly: true, secure: true});
 
