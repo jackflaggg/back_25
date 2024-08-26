@@ -19,6 +19,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     }
 
     const existingUserId = await jwtService.getUserIdByToken(token);
+    console.log('Полученный айди: ', existingUserId);
 
     if (!isValidObjectIdToVerifyToken(existingUserId)) {
         handleError(res, 'Неверный формат userId: ' + existingUserId);
