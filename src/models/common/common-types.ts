@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {OutputBlogModel} from "../blog/output/output-type-blogs";
+import {OutBlogModel} from "../blog/output/output-type-blogs";
 import {OutPostModel} from "../post/output/output-type-posts";
 
 export enum HTTP_STATUSES {
@@ -19,7 +19,7 @@ export type ErrorsMessageType = {
     message: string | FieldNamesType,
     field: string
 }
-export type FieldNamesType = keyof OutputBlogModel | keyof OutPostModel
+export type FieldNamesType = keyof OutBlogModel | keyof OutPostModel
 
 export type ErrorsType = {
     errorsMessages: ErrorsMessageType[]
