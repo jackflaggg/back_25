@@ -1,4 +1,4 @@
-import {CommentDbType, PostUpdateType} from "../../models/db/db.models";
+import {CommentDbType} from "../../models/db/db.models";
 import {postsRepository} from "../../repositories/posts/posts-db-repository";
 import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
 import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/input-type-posts";

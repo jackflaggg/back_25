@@ -51,11 +51,3 @@ export interface APICollection {
     URL: string,
     date:Date
 }
-
-export interface PostUpdateType {
-    title: string,
-    shortDescription: string,
-    content: string,
-    blogId: string,
-    blogName: string,
-}
