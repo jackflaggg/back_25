@@ -66,14 +66,6 @@ export type PostParamsId = {
     id: string
 }
 
-export interface Paginator<T> {
-    pagesCount: number
-    page: number
-    pageSize: number
-    totalCount: number
-    items: T
-}
-
 export type AccessToken = {
     accessToken: string
 }
