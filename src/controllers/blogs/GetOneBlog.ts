@@ -23,4 +23,5 @@ export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
         return
     }
     res.status(HTTP_STATUSES.OK_200).send(blogId);
+    return;
 }
