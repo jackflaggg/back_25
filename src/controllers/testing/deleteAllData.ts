@@ -6,4 +6,5 @@ export const deleteTestingRouter = async (req: Request,
                                    res: Response) => {
     await testingDbRepositories.deleteAllData()
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
+    //return;
 }
