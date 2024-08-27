@@ -1,6 +1,6 @@
 import {CommentDbType} from "../../models/db/db.models";
 import {postsRepository} from "../../repositories/posts/posts-db-repository";
-import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
+import {OutBlogModel} from "../../models/blog/output/output-type-blogs";
 import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/input-type-posts";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {ResultStatus} from "../../models/common/common-types";
@@ -8,7 +8,7 @@ import {postsQueryRepository} from "../../repositories/posts/posts-query-reposit
 import {CommentsDbRepository} from "../../repositories/comments/comments-db-repository";
 
 export const postsService = {
-    async createPost(post: InCreatePostModel, blog: OutputBlogModel): Promise<string | null> {
+    async createPost(post: InCreatePostModel, blog: OutBlogModel): Promise<string | null> {
         const { title, shortDescription, content, blogId} = post;
 
         const newPost: InCreatePostModel = {
@@ -21,7 +21,7 @@ export const postsService = {
         }
         return await postsRepository.createPost(newPost);
     },
-    async putPost(post: Omit<InUpdatePostModel, 'blogName'>, blog: OutputBlogModel, id: string): Promise<boolean> {
+    async putPost(post: Omit<InUpdatePostModel, 'blogName'>, blog: OutBlogModel, id: string): Promise<boolean> {
         const { title, shortDescription, content, blogId} = post;
 
         const upPost: InUpdatePostModel = {
