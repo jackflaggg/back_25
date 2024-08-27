@@ -1,11 +1,11 @@
 import {HTTP_STATUSES, RequestWithQuery, ResponseBody} from "../../models/common/common-types";
-import {OutGetAllBlogs, OutputBlogModel} from "../../models/blog/output/output-type-blogs";
+import {OutGetAllBlogsModel} from "../../models/blog/output/output-type-blogs";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {queryHelperToBlog} from "../../utils/helpers/helper-query-get";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 
 export const AllBlogController = async (req: RequestWithQuery<InQueryBlogModel>,
-                                        res:ResponseBody<OutGetAllBlogs>) => {
+                                        res:ResponseBody<OutGetAllBlogsModel>) => {
     const sortData = queryHelperToBlog(req.query);
     const allBlogs = await blogsQueryRepositories.getAllBlog(sortData)
 
