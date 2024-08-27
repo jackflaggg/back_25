@@ -5,8 +5,9 @@ import {validateId} from "../../utils/helpers/helper-validate-id";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {BlogParamsModel, RequestWithParamsAndQuery} from "../../models/common/req_res_params/request-response-params";
+import {OutGetAllPosts} from "../../models/post/output/output-type-posts";
 
-export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, InQueryBlogModel>, res: Response<any>) => {
+export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, InQueryBlogModel>, res: Response<OutGetAllPosts>) => {
     const blogId = req.params.id;
 
     if (!validateId(blogId)){
