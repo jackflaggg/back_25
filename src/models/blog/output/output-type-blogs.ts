@@ -13,5 +13,5 @@ export interface OutGetAllBlogsModel {
     page: number,
     pageSize: number,
     totalCount: number,
-    items: OutputBlogModel[],
+    items: OutBlogModel[],
 }
