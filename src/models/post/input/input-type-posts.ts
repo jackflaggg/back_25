@@ -1,12 +1,5 @@
 import {SortDirection} from "mongodb";
 
-export type InCreatePostModel = {
-    title: string,
-    shortDescription: string,
-    content: string,
-    blogId: string,
-}
-
 export type InQueryPostModel = {
     sortBy?: string,
     sortDirection?: SortDirection,
@@ -19,4 +12,13 @@ export type InUpdatePostModel = {
     shortDescription: string,
     content: string,
     blogId: string,
+}
+
+export interface InCreatePostModel {
+    title: string,
+    shortDescription: string,
+    content: string,
+    blogId: string,
+    blogName: string,
+    createdAt: string
 }

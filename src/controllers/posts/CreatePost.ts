@@ -7,7 +7,7 @@ import {validateId} from "../../utils/helpers/helper-validate-id";
 import {OutPostModel} from "../../models/post/output/output-type-posts";
 import {InCreatePostModel} from "../../models/post/input/input-type-posts";
 
-export const createPostController = async (req: RequestWithBody<InCreatePostModel>,
+export const createPostController = async (req: RequestWithBody<Omit<InCreatePostModel, 'blogName, createdAt'>>,
                                            res:ResponseBody<OutPostModel>) => {
     const { blogId} = req.body
     if (!validateId(blogId)) {
