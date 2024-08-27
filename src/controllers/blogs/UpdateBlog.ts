@@ -26,5 +26,6 @@ export const updateBlogController = async (req: RequestWithParamsAndBody<BlogPar
         return;
     }
 
-    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
+    return;
 }
