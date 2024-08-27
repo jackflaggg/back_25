@@ -30,7 +30,7 @@ export const blogsQueryRepositories = {
             items: blogs.map(blog => blogMapper(blog)),
         };
     },
-    async giveOneToIdBlog(blogId: string): Promise<OutputBlogModel | null> {
+    async giveOneToIdBlog(blogId: string): Promise<OutBlogModel | null> {
         const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
 
         if (blog === null) {
