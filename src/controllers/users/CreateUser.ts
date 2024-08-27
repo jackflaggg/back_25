@@ -1,12 +1,12 @@
 import {
     HTTP_STATUSES,
-    RequestWithBody,
-    ResponseBody, ResultError
 } from "../../models/common/common-types";
 import {userService} from "../../domain/user/user-service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {InCreateUserModel} from "../../models/user/input/input-type-users";
 import {helperError} from "../../utils/helpers/helper-error";
+import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";
+import {ResultError} from "../../models/common/errors/errors-type";
 
 export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
                                            res:ResponseBody<ResultError| void | any>) => {

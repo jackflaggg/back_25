@@ -4,7 +4,7 @@ import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repos
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
-import {BlogParamsModel, RequestWithParamsAndQuery} from "../../models/req_res_params/request-response-params";
+import {BlogParamsModel, RequestWithParamsAndQuery} from "../../models/common/req_res_params/request-response-params";
 
 export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, InQueryBlogModel>, res: Response<any>) => {
     const blogId = req.params.id;

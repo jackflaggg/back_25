@@ -9,7 +9,7 @@ import { add } from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper-error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {SETTINGS} from "../../settings";
-import {ResultStatus, ResultSuccess} from "../../models/errors/errors-type";
+import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: any): Promise<null | any> {

@@ -3,7 +3,7 @@ import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {InQueryPostModel} from "../../models/post/input/input-type-posts";
 import {OutGetAllPosts} from "../../models/post/output/output-type-posts";
-import {RequestWithQuery, ResponseBody} from "../../models/req_res_params/request-response-params";
+import {RequestWithQuery, ResponseBody} from "../../models/common/req_res_params/request-response-params";
 
 export const AllPostController = async (req: RequestWithQuery<InQueryPostModel>,
                                         res:ResponseBody<OutGetAllPosts>) => {

@@ -5,7 +5,7 @@ import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/inpu
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {CommentsDbRepository} from "../../repositories/comments/comments-db-repository";
-import {ResultStatus} from "../../models/errors/errors-type";
+import {ResultStatus} from "../../models/common/errors/errors-type";
 
 export const postsService = {
     async createPost(post: InCreatePostModel, blog: OutBlogModel): Promise<string | null> {

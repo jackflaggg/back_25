@@ -1,5 +1,5 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
-import {ErrorsType} from "../../models/errors/errors-type";
+import {ErrorsType} from "../../models/common/errors/errors-type";
 
 export const errorsUnique =  async (email: string, login: string) => {
     const errors: ErrorsType = {

@@ -1,5 +1,5 @@
-import {OutBlogModel} from "../blog/output/output-type-blogs";
-import {OutPostModel} from "../post/output/output-type-posts";
+import {OutBlogModel} from "../../blog/output/output-type-blogs";
+import {OutPostModel} from "../../post/output/output-type-posts";
 
 export type ErrorsMessageType = {
     message: string | FieldNamesType,

@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
 import {authService} from "../../domain/auth/auth-service";
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {ResultSuccess} from "../../models/errors/errors-type";
+import {ResultSuccess} from "../../models/common/errors/errors-type";
 
 export const registrationController = async (req: Request, res: Response) => {
     const checkRegistrationUser = await authService.registrationUser(req.body);
