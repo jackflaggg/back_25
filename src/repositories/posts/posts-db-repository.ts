@@ -1,10 +1,9 @@
 import {postsCollections} from "../../db/db";
 import {ObjectId} from "mongodb";
-import {PostCreateType} from "../../models/db/db.models";
-import {InUpdatePostModel} from "../../models/post/input/input-type-posts";
+import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/input-type-posts";
 
 export const postsRepository = {
-    async createPost(post: PostCreateType): Promise<string | null> {
+    async createPost(post: InCreatePostModel): Promise<string | null> {
         const newPost = await postsCollections.insertOne(post);
         if (!newPost || !newPost.insertedId) {
             return null;
