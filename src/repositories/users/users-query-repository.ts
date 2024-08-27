@@ -2,9 +2,10 @@ import {usersCollection} from "../../db/db";
 import {loginUserMapper, userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {ObjectId} from "mongodb";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
+import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user";
 
 export const usersQueryRepository = {
-    async getAllUsers(query: any): Promise<any> {
+    async getAllUsers(query: InQueryUserModel): Promise<any> {
         const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = queryHelperToUser(query);
 
         const filter = {

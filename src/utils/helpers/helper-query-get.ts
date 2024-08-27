@@ -2,6 +2,7 @@ import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
 import {QueryHelperBlog} from "../../models/blog/helper-query-blog/helper-blog";
 import {InQueryPostModel} from "../../models/post/input/input-type-posts";
 import {QueryHelperPost} from "../../models/post/helper-query-post/helper-post";
+import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user";
 
 export const queryHelperToBlog = (queryBlog: InQueryBlogModel): QueryHelperBlog => {
     return {
@@ -22,7 +23,7 @@ export const queryHelperToPost = (queryPost: InQueryPostModel): QueryHelperPost 
     }
 }
 
-export const queryHelperToUser = (queryUser: any) => {
+export const queryHelperToUser = (queryUser: InQueryUserModel) => {
     return {
         sortBy: queryUser.sortBy ?? 'createdAt',
         sortDirection: queryUser.sortDirection ?? 'desc',
