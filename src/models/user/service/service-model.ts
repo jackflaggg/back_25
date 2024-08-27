@@ -1,4 +1,4 @@
-import {OutputBlogModel} from "../../blog/output/output-type-blogs";
+import {OutBlogModel} from "../../blog/output/output-type-blogs";
 
 
-export type NewBlogModel = Omit<OutputBlogModel, 'id'>;
+export type NewBlogModel = Omit<OutBlogModel, 'id'>;
