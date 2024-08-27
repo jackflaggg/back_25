@@ -41,15 +41,6 @@ export const blogIdValidator = body('blogId')
     })
     .withMessage('no blog');
 
-export const createCommentValidator = body('content')
-    .isString()
-    .withMessage('not string')
-    .trim()
-    .notEmpty()
-    .withMessage('empty')
-    .isLength({min: 20, max: 300})
-    .withMessage('more then 300 or min 20');
-
 export const blogIdParamsValidator = param('id')
     .isString()
     .trim()
