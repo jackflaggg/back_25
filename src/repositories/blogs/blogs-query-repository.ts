@@ -1,7 +1,7 @@
 import {blogsCollections, postsCollections} from "../../db/db";
 import {blogMapper} from "../../utils/mappers/blog-mapper";
 import {postMapper} from "../../utils/mappers/post-mapper";
-import {OutGetAllBlogsModel, OutputBlogModel} from "../../models/blog/output/output-type-blogs";
+import {OutGetAllBlogsModel, OutBlogModel} from "../../models/blog/output/output-type-blogs";
 import {ObjectId} from "mongodb";
 import {queryHelperToBlog, queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
