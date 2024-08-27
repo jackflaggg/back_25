@@ -11,6 +11,7 @@ import {HTTP_STATUSES} from "../../models/common/common-types";
 export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
                                         res:ResponseBody<OutBlogModel>) => {
     const { id} = req.params;
+
     if (!validateId(id)){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
