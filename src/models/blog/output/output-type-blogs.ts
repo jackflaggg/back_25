@@ -8,7 +8,7 @@ export interface OutputBlogModel {
 }
 
 
-export interface OutGetAllBlogs {
+export interface OutGetAllBlogsModel {
     pagesCount: number,
     page: number,
     pageSize: number,
