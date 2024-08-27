@@ -1,8 +1,7 @@
 import {Request, Response} from 'express';
-import {HTTP_STATUSES, ResultSuccess} from "../../models/common/common-types";
-import {emailAdapter} from "../../utils/adapters/email-adapter";
-import {emailManagers} from "../../managers/email-managers";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 import {authService} from "../../domain/auth/auth-service";
+import {ResultSuccess} from "../../models/errors/errors-type";
 
 export const registrationEmailController = async (req: Request, res: Response) => {
     const findEmail = await authService.registrationEmailResending(req.body.email);
