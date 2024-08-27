@@ -9,8 +9,9 @@ import {
     RequestWithParamsAndQuery, ResponseBody
 } from "../../models/common/req_res_params/request-response-params";
 import {InQueryPostModel} from "../../models/post/input/input-type-posts";
+import {OutGetAllCommentsModel} from "../../models/comments/output/output-type-comments";
 
-export const getCommentsToPostId = async (req: RequestWithParamsAndQuery<BlogParamsToPostModel, InQueryPostModel>, res: ResponseBody<any>) => {
+export const getCommentsToPostId = async (req: RequestWithParamsAndQuery<BlogParamsToPostModel, InQueryPostModel>, res: ResponseBody<OutGetAllCommentsModel>) => {
 
     const { postId } = req.params
 

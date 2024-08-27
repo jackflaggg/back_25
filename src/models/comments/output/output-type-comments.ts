@@ -1,17 +1,15 @@
-export interface OutBlogModel {
+import {CommentatorInfo} from "../../db/db.models";
+
+export interface OutCommentModel {
     id: string,
-    name: string,
-    description: string,
-    websiteUrl: string,
+    content: string,
+    commentatorInfo: CommentatorInfo,
     createdAt: string,
-    isMembership: boolean
 }
-
-
-export interface OutGetAllBlogsModel {
+export interface OutGetAllCommentsModel {
     pagesCount: number,
     page: number,
     pageSize: number,
     totalCount: number,
-    items: OutBlogModel[],
+    items: OutCommentModel[],
 }
