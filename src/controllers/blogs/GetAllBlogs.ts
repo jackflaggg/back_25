@@ -11,4 +11,5 @@ export const AllBlogController = async (req: RequestWithQuery<InQueryBlogModel>,
     const allBlogs = await blogsQueryRepositories.getAllBlog(sortData)
 
     res.status(HTTP_STATUSES.OK_200).send(allBlogs);
+    return;
 }
