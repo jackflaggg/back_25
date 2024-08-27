@@ -1,12 +1,11 @@
 import {
     AccessToken,
     HTTP_STATUSES,
-    RequestWithBody,
-    ResponseBody
 } from "../../models/common/common-types";
 import {InLoginModels} from "../../models/auth/input/login-post-controller";
 import {authService} from "../../domain/auth/auth-service";
 import {ResultSuccess} from "../../models/errors/errors-type";
+import {RequestWithBody, ResponseBody} from "../../models/req_res_params/request-response-params";
 
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
 
