@@ -1,4 +1,4 @@
-import {Request, Response} from "express"
+import {Request} from "express"
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
 import {postsService} from "../../domain/post/post-service";
