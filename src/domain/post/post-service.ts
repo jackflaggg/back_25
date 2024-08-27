@@ -49,7 +49,7 @@ export const postsService = {
         if (!findPost) {
             return {
                 status: ResultStatus.NotFound,
-                extensions: [{field: 'post', message: 'The post not found'}],
+                extensions: [{message: 'The post not found', field: 'post'}],
                 data: null
             }
         }
