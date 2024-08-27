@@ -1,7 +1,8 @@
 import {Request, Response} from "express"
-import {HTTP_STATUSES, ResultStatus} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
 import {postsService} from "../../domain/post/post-service";
+import {ResultStatus} from "../../models/common/errors/errors-type";
 
 export const createCommentByPostIdController = async (req: Request, res: Response) => {
     const createComment = await postsService.createCommentToPost(req.params.postId, req.body.content, req.userId as string, )
