@@ -12,6 +12,10 @@ export type BlogParamsModel = {
     id: string
 }
 
+export type BlogParamsToPostModel = {
+    postId: string
+}
+
 export type PostParamsId = {
     id: string
 }

@@ -4,11 +4,16 @@ import {validateId} from "../../utils/helpers/helper-validate-id";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
+import {
+    BlogParamsToPostModel,
+    RequestWithParamsAndQuery
+} from "../../models/common/req_res_params/request-response-params";
+import {InQueryPostModel} from "../../models/post/input/input-type-posts";
 
-export const getCommentsToPostId = async (req: Request/*RequestWithParamsAndQuery<BlogParamsModel, InQueryPostModel>*/, res: Response) => {
+export const getCommentsToPostId = async (req: RequestWithParamsAndQuery<BlogParamsToPostModel, InQueryPostModel>, res: Response) => {
 
     const { postId } = req.params
-    console.log(postId)
+
     if(!validateId(postId)){
         console.log('рухнула валидация!')
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
@@ -16,7 +21,6 @@ export const getCommentsToPostId = async (req: Request/*RequestWithParamsAndQuer
     }
 
     const existingPost = await postsQueryRepository.giveOneToIdPost(postId);
-    console.log(existingPost)
     if(!existingPost){
         console.log('нет поста!')
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
