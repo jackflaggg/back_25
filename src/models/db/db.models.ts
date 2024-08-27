@@ -54,14 +54,6 @@ export interface APICollection {
     date:Date
 }
 
-export interface BlogCreateType {
-    name: string,
-    description: string,
-    websiteUrl: string
-    createdAt: string,
-    isMembership: boolean
-}
-
 export interface PostCreateType {
     title: string,
     shortDescription: string,
