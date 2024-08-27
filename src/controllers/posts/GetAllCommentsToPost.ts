@@ -6,11 +6,11 @@ import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
 import {
     BlogParamsToPostModel,
-    RequestWithParamsAndQuery
+    RequestWithParamsAndQuery, ResponseBody
 } from "../../models/common/req_res_params/request-response-params";
 import {InQueryPostModel} from "../../models/post/input/input-type-posts";
 
-export const getCommentsToPostId = async (req: RequestWithParamsAndQuery<BlogParamsToPostModel, InQueryPostModel>, res: Response) => {
+export const getCommentsToPostId = async (req: RequestWithParamsAndQuery<BlogParamsToPostModel, InQueryPostModel>, res: ResponseBody<any>) => {
 
     const { postId } = req.params
 
