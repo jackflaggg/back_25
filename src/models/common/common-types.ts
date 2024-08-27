@@ -1,7 +1,3 @@
-import {Request, Response} from "express";
-import {OutBlogModel} from "../blog/output/output-type-blogs";
-import {OutPostModel} from "../post/output/output-type-posts";
-
 export enum HTTP_STATUSES {
     OK_200 = 200,
     CREATED_201 = 201,
