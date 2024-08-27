@@ -23,4 +23,5 @@ export const deleteBlogController = async (req: RequestWithParams<BlogParamsMode
     const deleteBlog = await blogsService.delBlog(id);
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
+    return;
 }
