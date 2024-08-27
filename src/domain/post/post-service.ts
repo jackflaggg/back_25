@@ -3,9 +3,9 @@ import {postsRepository} from "../../repositories/posts/posts-db-repository";
 import {OutBlogModel} from "../../models/blog/output/output-type-blogs";
 import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/input-type-posts";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
-import {ResultStatus} from "../../models/common/common-types";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {CommentsDbRepository} from "../../repositories/comments/comments-db-repository";
+import {ResultStatus} from "../../models/errors/errors-type";
 
 export const postsService = {
     async createPost(post: InCreatePostModel, blog: OutBlogModel): Promise<string | null> {
