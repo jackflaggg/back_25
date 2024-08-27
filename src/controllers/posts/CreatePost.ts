@@ -1,5 +1,4 @@
 import {HTTP_STATUSES, RequestWithBody, ResponseBody} from "../../models/common/common-types";
-import {PostCreateType} from "../../models/db/db.models";
 import {postsService} from "../../domain/post/post-service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
@@ -21,7 +20,7 @@ export const createPostController = async (req: RequestWithBody<Omit<InCreatePos
         return
     }
 
-    const createdPost = await postsService.createPost(req.body as PostCreateType, blog);
+    const createdPost = await postsService.createPost(req.body as InCreatePostModel, blog);
     if(!createdPost){
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
