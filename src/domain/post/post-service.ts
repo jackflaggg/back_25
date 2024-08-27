@@ -1,14 +1,14 @@
 import {CommentDbType, PostCreateType, PostUpdateType} from "../../models/db/db.models";
 import {postsRepository} from "../../repositories/posts/posts-db-repository";
 import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
-import {InUpdatePostModel} from "../../models/post/input/input-type-posts";
+import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/input-type-posts";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {ResultStatus} from "../../models/common/common-types";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {CommentsDbRepository} from "../../repositories/comments/comments-db-repository";
 
 export const postsService = {
-    async createPost(post: PostCreateType, blog: OutputBlogModel): Promise<string | null> {
+    async createPost(post: InCreatePostModel, blog: OutputBlogModel): Promise<string | null> {
         const { title, shortDescription, content, blogId} = post;
 
         const newPost: PostCreateType = {
