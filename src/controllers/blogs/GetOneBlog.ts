@@ -1,7 +1,12 @@
-import {BlogParamsModel, HTTP_STATUSES, RequestWithParams, ResponseBody} from "../../models/common/common-types";
 import {OutBlogModel} from "../../models/blog/output/output-type-blogs";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
+import {
+    BlogParamsModel,
+    RequestWithParams,
+    ResponseBody
+} from "../../models/common/req_res_params/request-response-params";
+import {HTTP_STATUSES} from "../../models/common/common-types";
 
 export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
                                         res:ResponseBody<OutBlogModel>) => {
