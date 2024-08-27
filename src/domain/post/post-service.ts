@@ -24,7 +24,7 @@ export const postsService = {
     async putPost(post: Omit<InUpdatePostModel, 'blogName'>, blog: OutputBlogModel, id: string): Promise<boolean> {
         const { title, shortDescription, content, blogId} = post;
 
-        const upPost: PostUpdateType = {
+        const upPost: InUpdatePostModel = {
             title, shortDescription, content, blogId, blogName: blog!.name
         }
         return await postsRepository.putPost(upPost, id)
