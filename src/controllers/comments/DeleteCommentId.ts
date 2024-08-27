@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import {commentService} from "../../domain/comment/comment-service";
-import {HTTP_STATUSES, ResultStatus, ResultStatusType} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common-types";
+import {ResultStatus, ResultStatusType} from "../../models/common/errors/errors-type";
 
 export const deleteCommentController = async (req: Request, res: Response) => {
     const { commentId } = req.params;
