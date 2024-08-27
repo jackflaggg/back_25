@@ -5,11 +5,20 @@ export type ErrorsMessageType = {
     message: string | FieldNamesType,
     field: string
 }
+
+export type ErrorsMessageToResponseType = {
+    message: string,
+    field: string
+}
 export type FieldNamesType = keyof OutBlogModel | keyof OutPostModel
 
 export type ErrorsType = {
     errorsMessages: ErrorsMessageType[]
 }
+export type ErrorsMessageResponse = {
+    errorsMessages: ErrorsMessageToResponseType[];
+};
+
 export const ResultStatus = {
     BadRequest: 'BadRequest',
     Forbidden: 'Forbidden',
