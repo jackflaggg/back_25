@@ -15,6 +15,7 @@ export const postsCollections = database.collection<PostDbType>(SETTINGS.COLLECT
 export const usersCollection = database.collection<UserDbType>(SETTINGS.COLLECTION_USERS!);
 export const commentsCollection = database.collection<CommentDbType>(SETTINGS.COLLECTION_COMMENTS!);
 export const blackListTokenCollection = database.collection<BlackListDbType>(SETTINGS.COLLECTION_TOKEN!)
+export const callToAPICollections = database.collection(SETTINGS.COLLECTION_BLOGS!);
 
 export const connectToDB = async (port: number) => {
     try {

@@ -48,6 +48,14 @@ export interface BlackListDbType {
   // maxAge: Date
 }
 
+export interface APICollection {
+    name: string,
+    description: string,
+    websiteUrl: string
+    createdAt: string,
+    isMembership: boolean
+}
+
 export interface BlogCreateType {
     name: string,
     description: string,
