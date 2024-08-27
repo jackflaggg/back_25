@@ -5,6 +5,6 @@ export type InQueryUserModel = {
     sortDirection?: SortDirection,
     pageNumber?: number,
     pageSize?: number,
-    searchLoginTerm?: string,
-    searchEmailTerm?: string,
+    searchLoginTerm?: string | null,
+    searchEmailTerm?: string | null,
 }
