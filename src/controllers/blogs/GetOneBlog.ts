@@ -1,10 +1,10 @@
 import {BlogParamsModel, HTTP_STATUSES, RequestWithParams, ResponseBody} from "../../models/common/common-types";
-import {OutputBlogModel} from "../../models/blog/output/output-type-blogs";
+import {OutBlogModel} from "../../models/blog/output/output-type-blogs";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 
 export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
-                                        res:ResponseBody<OutputBlogModel>) => {
+                                        res:ResponseBody<OutBlogModel>) => {
     const { id} = req.params;
     if (!validateId(id)){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
