@@ -49,11 +49,9 @@ export interface BlackListDbType {
 }
 
 export interface APICollection {
-    name: string,
-    description: string,
-    websiteUrl: string
-    createdAt: string,
-    isMembership: boolean
+    IP: string,
+    URL: string,
+    date:Date
 }
 
 export interface BlogCreateType {
