@@ -42,10 +42,8 @@ export interface CommentDbType {
     postId: string;
 }
 
-// TODO: в блэк листе обычно хранятся refresh токены, но эт момент надо уточнить!
 export interface BlackListDbType {
     token: string
-  // maxAge: Date
 }
 
 export interface APICollection {
