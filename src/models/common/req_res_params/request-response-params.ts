@@ -23,3 +23,7 @@ export type PostParamsId = {
 export type UserParamsIdDeleteModel = {
     id: string
 }
+
+export type CommentParamsId = {
+    commentId: string
+}
