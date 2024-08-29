@@ -9,7 +9,7 @@ import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/
 import {ResultError} from "../../models/common/errors/errors-type";
 
 export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
-                                           res:ResponseBody<ResultError| void | any>) => {
+                                           res:ResponseBody<ResultError>) => {
     const createdUserId = await userService.createUser(req.body);
 
     if (typeof createdUserId !== "string" && createdUserId !== null && +createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
