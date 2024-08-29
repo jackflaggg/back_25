@@ -50,8 +50,6 @@ export const usersQueryRepository = {
     },
 
     async LoginMapByUser(userId: string) {
-        console.log('ID пользователя при входе:', userId);
-        console.log('ID валидация:', ObjectId.isValid(userId));
         const loginUser = await this.getUserById(userId);
         if (!loginUser) {
             return null;
