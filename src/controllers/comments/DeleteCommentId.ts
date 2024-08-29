@@ -7,6 +7,8 @@ import {
     RequestWithParams,
     ResponseBody
 } from "../../models/common/req_res_params/request-response-params";
+import {helperError} from "../../utils/helpers/helper-error";
+import {errorsMessages} from "../../utils/features/errorsMessages";
 
 export const deleteCommentController = async (req: RequestWithParams<CommentParamsId>, res: ResponseBody<ErrorsType>) => {
     const { commentId } = req.params;
@@ -25,7 +27,7 @@ export const deleteCommentController = async (req: RequestWithParams<CommentPara
     const statusCode = statusMap[deleteComment.status];
 
     if (statusCode && deleteComment.extensions) {
-        res.status(statusCode).send({ errorsMessages: deleteComment.extensions });
+        res.status(statusCode).send(errorsMessages(deleteComment.extensions));
         return
     }
 
