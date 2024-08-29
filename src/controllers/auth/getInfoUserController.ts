@@ -3,7 +3,6 @@ import { Request, Response} from 'express';
 import {HTTP_STATUSES} from "../../models/common/common-types";
 
 export const getInfoUserController = async (req: Request, res: Response) => {
-    console.log('я вошел в контроллер ми: ' + req.userId, typeof req.userId)
     const existingId = req.userId;
 
     if (!existingId) {
