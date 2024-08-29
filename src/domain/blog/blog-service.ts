@@ -1,5 +1,5 @@
 import {blogsRepositories} from "../../repositories/blogs/blogs-db-repository";
-import {InCreateBlogModel, InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
+import {InCreateBlogModel, InCreateToBlogModel, InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
 import {NewBlogModel} from "../../models/blog/service/service-model";
 import {InCreatePostToBlogInputModel} from "../../models/post/input/input-type-posts";
 
@@ -17,7 +17,7 @@ export const blogsService = {
 
         return await blogsRepositories.createBlog(newBlog);
     },
-    async createPostToBlogInputModel(blog: any, post: InCreatePostToBlogInputModel): Promise<string | null> {
+    async createPostToBlogInputModel(blog: InCreateToBlogModel, post: InCreatePostToBlogInputModel): Promise<string | null> {
         const { title, shortDescription, content } = post;
         const newPost = {
             title,

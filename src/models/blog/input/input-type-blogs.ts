@@ -36,3 +36,8 @@ export interface InCreatePostToBlogModel {
     blogName: string,
     createdAt: string,
 }
+
+export interface InCreateToBlogModel {
+    id: string,
+    name: string,
+}
