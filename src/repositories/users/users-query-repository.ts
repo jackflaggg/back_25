@@ -36,7 +36,7 @@ export const usersQueryRepository = {
     },
 
     async getUserById(id: string): Promise<any> {
-        // Проверяем, является ли id валидным ObjectId
+
         if (!ObjectId.isValid(id)) {
             console.log('Ошибка: Неверный формат ObjectId', id);
             return null;
