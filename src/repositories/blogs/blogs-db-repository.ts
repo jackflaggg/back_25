@@ -27,7 +27,7 @@ export const blogsRepositories = {
         return deleteBlog.acknowledged;
     },
 
-    async createPostToBlogID(blogId: string, bodyPost: any): Promise<any> {
+    async createPostToBlogID(blogId: string, bodyPost: any): Promise<null | string> {
         const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
 
         if (!blog){
