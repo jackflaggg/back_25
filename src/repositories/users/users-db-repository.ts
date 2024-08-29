@@ -1,5 +1,5 @@
 import {usersCollection} from "../../db/db";
-import {ObjectId} from "mongodb";
+import {ObjectId, WithId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
 import {OutUserFindLoginOrEmail, OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 
@@ -23,7 +23,7 @@ export const UsersDbRepository = {
         }
         return searchUser;
     },
-    async findByEmailUser(email: string): Promise<any | null> {
+    async findByEmailUser(email: string): Promise<WithId<UserDbType> | null> {
         const searchEmail =  await usersCollection.findOne({ email: email });
 
         if (!searchEmail || !searchEmail._id) {
