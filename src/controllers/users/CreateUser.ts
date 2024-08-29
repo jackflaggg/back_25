@@ -7,9 +7,10 @@ import {InCreateUserModel} from "../../models/user/input/input-type-users";
 import {helperError} from "../../utils/helpers/helper-error";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";
 import {ResultError} from "../../models/common/errors/errors-type";
+import {OutUserById} from "../../models/user/ouput/output-type-users";
 
 export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
-                                           res:ResponseBody<ResultError>) => {
+                                           res:ResponseBody<ResultError | OutUserById>) => {
     const createdUserId = await userService.createUser(req.body);
 
     if (typeof createdUserId !== "string" && createdUserId !== null && +createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
