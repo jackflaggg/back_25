@@ -8,6 +8,12 @@ export interface OutCreateUserModel {
     createdAt: string,
 }
 
+export interface OutLoginMapByUser {
+    login: string,
+    email: string,
+    userId: string
+}
+
 export interface OutUserById {
     id: string,
     login: string,

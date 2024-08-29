@@ -3,7 +3,12 @@ import {loginUserMapper, userMapperToOutput} from "../../utils/mappers/user-mapp
 import {ObjectId} from "mongodb";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
 import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user";
-import {OutQueryCreateUsersModel, OutUserById} from "../../models/user/ouput/output-type-users";
+import {
+    OutCreateUserModel,
+    OutLoginMapByUser,
+    OutQueryCreateUsersModel,
+    OutUserById
+} from "../../models/user/ouput/output-type-users";
 
 export const usersQueryRepository = {
     async getAllUsers(query: InQueryUserModel): Promise<OutQueryCreateUsersModel> {
@@ -50,7 +55,7 @@ export const usersQueryRepository = {
         return userMapperToOutput(user);
     },
 
-    async LoginMapByUser(userId: string) {
+    async LoginMapByUser(userId: string): Promise<OutLoginMapByUser | null> {
         const loginUser = await this.getUserById(userId);
         if (!loginUser) {
             return null;
