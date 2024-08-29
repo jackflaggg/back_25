@@ -27,3 +27,7 @@ export type UserParamsIdDeleteModel = {
 export type CommentParamsId = {
     commentId: string
 }
+
+export type EmailBodyModel = {
+    email: string
+}
