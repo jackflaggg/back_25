@@ -1,6 +1,7 @@
 import {emailConfirmation} from "../features/emailConfirmation";
 import {WithId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
+import {OutUserById} from "../../models/user/ouput/output-type-users";
 
 
 // export const userMapper = (user: any)=> {
@@ -37,11 +38,11 @@ export const userMapperToOutput = (user: any)=> {
         login: user.login,
         email: user.email,
         createdAt: user.createdAt,
-        emailConfirmation: emailConfirmation
+        emailConfirmation: emailConfirmation()
     }
 }
 
-export const loginUserMapper = (user: WithId<UserDbType>) => {
+export const loginUserMapper = (user: OutUserById) => {
     return {
         email: user.email,
         login: user.login,

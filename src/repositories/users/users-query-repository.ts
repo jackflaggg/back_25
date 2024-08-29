@@ -3,7 +3,7 @@ import {loginUserMapper, userMapperToOutput} from "../../utils/mappers/user-mapp
 import {ObjectId} from "mongodb";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
 import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user";
-import {OutQueryCreateUsersModel} from "../../models/user/ouput/output-type-users";
+import {OutQueryCreateUsersModel, OutUserById} from "../../models/user/ouput/output-type-users";
 
 export const usersQueryRepository = {
     async getAllUsers(query: InQueryUserModel): Promise<OutQueryCreateUsersModel> {
@@ -36,7 +36,7 @@ export const usersQueryRepository = {
         };
     },
 
-    async getUserById(id: string): Promise<any> {
+    async getUserById(id: string): Promise<OutUserById | null> {
 
         if (!ObjectId.isValid(id)) {
             console.log('Ошибка: Неверный формат ObjectId', id);

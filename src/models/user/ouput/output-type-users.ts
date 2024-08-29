@@ -8,6 +8,14 @@ export interface OutCreateUserModel {
     createdAt: string,
 }
 
+export interface OutUserById {
+    id: string,
+    login: string,
+    email: string,
+    createdAt: string,
+    emailConfirmation: emailInfo
+}
+
 export interface OutQueryCreateUsersModel {
     pagesCount: number,
     page: number,
