@@ -11,6 +11,7 @@ import {OutUserById} from "../../models/user/ouput/output-type-users";
 
 export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
                                            res:ResponseBody<ErrorsType | OutUserById>) => {
+
     const createdUserId = await userService.createUser(req.body);
 
     if (typeof createdUserId !== "string" && createdUserId !== null && +createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
