@@ -1,7 +1,7 @@
 import {blogsCollections, postsCollections} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {BlogDbType} from "../../models/db/db.models";
-import {InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
+import {InCreatePostToBlogModel, InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
 
 export const blogsRepositories = {
     async createBlog(blog: BlogDbType): Promise<string | null>{
@@ -27,7 +27,7 @@ export const blogsRepositories = {
         return deleteBlog.acknowledged;
     },
 
-    async createPostToBlogID(blogId: string, bodyPost: any): Promise<null | string> {
+    async createPostToBlogID(blogId: string, bodyPost: InCreatePostToBlogModel): Promise<null | string> {
         const blog = await blogsCollections.findOne({_id: new ObjectId(blogId)});
 
         if (!blog){

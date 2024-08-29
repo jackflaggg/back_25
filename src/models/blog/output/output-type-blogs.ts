@@ -15,3 +15,4 @@ export interface OutGetAllBlogsModel {
     totalCount: number,
     items: OutBlogModel[],
 }
+

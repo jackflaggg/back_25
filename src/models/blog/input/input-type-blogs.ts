@@ -27,3 +27,12 @@ export interface InUpdateBlogModel {
     description: string
     websiteUrl: string
 }
+
+export interface InCreatePostToBlogModel {
+    title: string,
+    shortDescription: string,
+    content: string,
+    blogId: string,
+    blogName: string,
+    createdAt: string,
+}
