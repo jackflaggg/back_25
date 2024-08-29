@@ -1,5 +1,4 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {Response} from "express";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
 import {RequestWithQuery, ResponseBody} from "../../models/common/req_res_params/request-response-params";
