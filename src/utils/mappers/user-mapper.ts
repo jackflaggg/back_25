@@ -1,14 +1,6 @@
 import {emailConfirmation} from "../features/emailConfirmation";
 import {OutUserById} from "../../models/user/ouput/output-type-users";
 
-export const userMapToCreateAdmin = (login: string, email: string, password: string) => {
-    return {
-        login,
-        email,
-        password
-    }
-}
-
 export const userMapperToOutput = (user: any)=> {
     return {
         id: user._id.toString(),
