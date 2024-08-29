@@ -91,7 +91,7 @@ export const authService = {
             if (!value) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {errorsMessages: [{ field: key, message: `${key} is required` }]},
+                    extensions: { message: `${key} is required`, field: `${key}`},
                     data: null
                 }
             }
@@ -133,7 +133,7 @@ export const authService = {
             if (!existingSendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {field: existingSendEmail, message: `${existingSendEmail} is error`},
+                    extensions: {field: `${existingSendEmail}`, message: `${existingSendEmail} is error`},
                     data: null
                 }
             }
@@ -143,7 +143,7 @@ export const authService = {
 
             return {
                 status: ResultSuccess.Success,
-                extensions: {field: e, message: `Delete user`},
+                extensions: {field: 'user', message: `Delete user`},
                 data: deleteUser
             }
         }
