@@ -1,4 +1,3 @@
-import {Request, Response} from "express";
 import {commentService} from "../../domain/comment/comment-service";
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {ErrorsType, ResultStatus, ResultStatusType} from "../../models/common/errors/errors-type";
@@ -7,7 +6,6 @@ import {
     RequestWithParams,
     ResponseBody
 } from "../../models/common/req_res_params/request-response-params";
-import {helperError} from "../../utils/helpers/helper-error";
 import {errorsMessages} from "../../utils/features/errorsMessages";
 
 export const deleteCommentController = async (req: RequestWithParams<CommentParamsId>, res: ResponseBody<ErrorsType>) => {
