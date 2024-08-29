@@ -4,7 +4,6 @@ import {ObjectId} from "mongodb";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
 import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user";
 import {
-    OutCreateUserModel,
     OutLoginMapByUser,
     OutQueryCreateUsersModel,
     OutUserById
