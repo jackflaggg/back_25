@@ -20,7 +20,7 @@ export const CommentsDbRepository = {
         }
         return updateComment.upsertedId.toString();
     },
-    async deleteComment(id: string): Promise<any> {
+    async deleteComment(id: string): Promise<boolean> {
         const deleteComment = await commentsCollection.deleteOne({_id: new ObjectId(id)});
 
         return deleteComment.acknowledged;
