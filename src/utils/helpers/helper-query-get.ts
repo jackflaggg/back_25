@@ -23,7 +23,7 @@ export const queryHelperToPost = (queryPost: InQueryPostModel): QueryHelperPost 
     }
 }
 
-export const queryHelperToUser = (queryUser: InQueryUserModel) => {
+export const queryHelperToUser = (queryUser: InQueryUserModel): InQueryUserModel => {
     return {
         sortBy: queryUser.sortBy ?? 'createdAt',
         sortDirection: queryUser.sortDirection ?? 'desc',
