@@ -13,7 +13,6 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
     const createdUserId = await userService.createUser(req.body);
 
     if (typeof createdUserId !== "string" && createdUserId !== null && +createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
-
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
             .send(helperError(createdUserId.data));
