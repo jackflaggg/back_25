@@ -1,6 +1,4 @@
 import {emailConfirmation} from "../features/emailConfirmation";
-import {WithId} from "mongodb";
-import {UserDbType} from "../../models/db/db.models";
 import {OutUserById} from "../../models/user/ouput/output-type-users";
 
 
