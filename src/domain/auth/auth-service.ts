@@ -22,7 +22,7 @@ export const authService = {
         if (!credentialLoginOrEmail) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{field: 'user', message: 'Пользователь не найден!'}]},
+                extensions: {field: 'user', message: 'Пользователь не найден!'},
                 data: null
             }
         }
@@ -32,7 +32,7 @@ export const authService = {
         if (!checkPassword) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{field: 'hashService', message: 'Пароль не прошел проверку!'}]},
+                extensions: {field: 'hashService', message: 'Пароль не прошел проверку!'},
                 data: null
             }
         }
@@ -48,7 +48,7 @@ export const authService = {
         if (userId.status !== ResultSuccess.Success || userId.extensions) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{field: 'userId', message: 'Аутентификация рухнула!'}]},
+                extensions: {field: 'userId', message: 'Аутентификация рухнула!'},
                 data: null
             }
         }
@@ -58,7 +58,7 @@ export const authService = {
         if (!generateAccessToken) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{field: 'jwt', message: 'Проблема при генерации Access токена!'}]},
+                extensions: {field: 'jwt', message: 'Проблема при генерации Access токена!'},
                 data: null
             }
         }
@@ -68,7 +68,7 @@ export const authService = {
         if (!generateRefreshToken) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{field: 'refresh', message: 'Проблема при генерации Refresh токена!'}]},
+                extensions: {field: 'refresh', message: 'Проблема при генерации Refresh токена!'},
                 data: null
             }
         }
@@ -133,7 +133,7 @@ export const authService = {
             if (!existingSendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions:  {errorsMessages: [{field: existingSendEmail, message: `${existingSendEmail} is error`}]},
+                    extensions: {field: existingSendEmail, message: `${existingSendEmail} is error`},
                     data: null
                 }
             }
@@ -143,7 +143,7 @@ export const authService = {
 
             return {
                 status: ResultSuccess.Success,
-                extensions: {errorsMessages: [{field: e, message: `Delete user`}]},
+                extensions: {field: e, message: `Delete user`},
                 data: deleteUser
             }
         }
@@ -158,7 +158,7 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'code 1', field: 'code'}]},
+                extensions: {message: 'code 1', field: 'code'},
                 data: null
             }
         }
@@ -166,7 +166,7 @@ export const authService = {
         if (user.emailConfirmation.confirmationCode !== code) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'confirmationCode', field: 'confirmationCode'}]},
+                extensions: {message: 'confirmationCode', field: 'confirmationCode'},
                 data: null
             }
         }
@@ -174,7 +174,7 @@ export const authService = {
         if (user.emailConfirmation.expirationDate < new Date()) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'expirationDate', field: 'expirationDate'}]},
+                extensions: {message: 'expirationDate', field: 'expirationDate'},
                 data: null
             }
         }
@@ -182,7 +182,7 @@ export const authService = {
         if (user.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: { errorsMessages: [{message: 'isConfirmed is true!', field: 'code'}]},
+                extensions: {message: 'isConfirmed is true!', field: 'code'},
                 data: null
             }
         }
@@ -207,7 +207,7 @@ export const authService = {
         if (!searchEmail) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: `${searchEmail} error find`, field: 'email'}]},
+                extensions: {message: `${searchEmail} error find`, field: 'email'},
                 data: searchEmail
             }
         }
@@ -215,7 +215,7 @@ export const authService = {
         if (searchEmail.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'The account has already been confirmed', field: 'email'}]},
+                extensions: {message: 'The account has already been confirmed', field: 'email'},
                 data: searchEmail
             }
         }
@@ -232,7 +232,7 @@ export const authService = {
             if (!sendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {errorsMessages: [{message: 'error on sendEmail', field: 'email'}]},
+                    extensions: {message: 'error on sendEmail', field: 'email'},
                     data: null
                 }
             }
@@ -240,7 +240,7 @@ export const authService = {
             console.error(e);
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: e, field: 'email grock!!!!'}]},
+                extensions: {message: 'emailManagers', field: 'email grock!!!!'},
                 data: null
             }
         }

@@ -3,12 +3,13 @@ import {HTTP_STATUSES} from "../../models/common/common-types";
 import {authService} from "../../domain/auth/auth-service";
 import {ResultSuccess} from "../../models/common/errors/errors-type";
 import {EmailBodyModel, RequestWithBody} from "../../models/common/req_res_params/request-response-params";
+import {errorsMessages} from "../../utils/features/errorsMessages";
 
 export const registrationEmailController = async (req: RequestWithBody<EmailBodyModel>, res: Response) => {
     const findEmail = await authService.registrationEmailResending(req.body.email);
 
-    if (findEmail.status !== ResultSuccess.Success) {
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send(JSON.parse(JSON.stringify(findEmail.extensions)));
+    if (findEmail.status !== ResultSuccess.Success && findEmail.extensions) {
+        res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(findEmail.extensions));
         return;
     }
 
