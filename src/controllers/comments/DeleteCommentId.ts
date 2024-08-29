@@ -1,10 +1,14 @@
 import {Request, Response} from "express";
 import {commentService} from "../../domain/comment/comment-service";
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {ResultStatus, ResultStatusType} from "../../models/common/errors/errors-type";
-import {CommentParamsId, RequestWithParams} from "../../models/common/req_res_params/request-response-params";
+import {ErrorsType, ResultStatus, ResultStatusType} from "../../models/common/errors/errors-type";
+import {
+    CommentParamsId,
+    RequestWithParams,
+    ResponseBody
+} from "../../models/common/req_res_params/request-response-params";
 
-export const deleteCommentController = async (req: RequestWithParams<CommentParamsId>, res: Response) => {
+export const deleteCommentController = async (req: RequestWithParams<CommentParamsId>, res: ResponseBody<ErrorsType>) => {
     const { commentId } = req.params;
 
     const { userId } = req;
