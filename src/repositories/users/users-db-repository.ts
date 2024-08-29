@@ -12,7 +12,7 @@ export const UsersDbRepository = {
         }
         return newUser.insertedId.toString();
     },
-    async deleteUser(id: string): Promise<any> {
+    async deleteUser(id: string): Promise<boolean> {
         const deleteUser = await usersCollection.deleteOne({_id: new ObjectId(id)});
         return deleteUser.acknowledged;
     },
