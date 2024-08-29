@@ -20,7 +20,6 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     }
 
     const existingUserId = await jwtService.getUserIdByToken(token);
-    console.log('Полученный айди: ', existingUserId);
 
     if (!existingUserId) {
         handleError(res, 'проблема с айди пользователем, мб невалиден: ' + existingUserId);
@@ -33,7 +32,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     }
 
     const user = await usersQueryRepository.getUserById(existingUserId)
-    console.log('че пришло в пользователе: ' + JSON.stringify(user))
+
     if (!user) {
         handleError(res, 'Пользователь не найден.');
         return;
