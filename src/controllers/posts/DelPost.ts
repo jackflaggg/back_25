@@ -10,7 +10,7 @@ export const deletePostController = async (req: RequestWithParams<PostParamsId>,
     const { id: PostId } = req.params;
     if (!validateId(PostId)) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
-        return;
+        return
     }
 
     const post = await postsQueryRepository.giveOneToIdPost(PostId);
