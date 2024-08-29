@@ -24,12 +24,12 @@ export const UsersDbRepository = {
         return searchUser;
     },
     async findByEmailUser(email: string): Promise<any | null> {
-        console.log(email);
         const searchEmail =  await usersCollection.findOne({ email: email });
-        console.log(searchEmail)
+
         if (!searchEmail || !searchEmail._id) {
             return null;
         }
+
         return searchEmail;
     },
     async findUserByLoginOrEmail(loginOrEmail: string): Promise<null | OutUserFindLoginOrEmail> {
