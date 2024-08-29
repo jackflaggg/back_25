@@ -3,9 +3,9 @@ import {HTTP_STATUSES} from "../../models/common/common-types";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {userService} from "../../domain/user/user-service";
 import {validateId} from "../../utils/helpers/helper-validate-id";
-import {RequestWithParams} from "../../models/common/req_res_params/request-response-params";
+import {RequestWithParams, UserParamsIdDeleteModel} from "../../models/common/req_res_params/request-response-params";
 
-export const deleteUserController = async (req: RequestWithParams<{id: string}>, res: Response): Promise<void> => {
+export const deleteUserController = async (req: RequestWithParams<UserParamsIdDeleteModel>, res: Response) => {
     const { id } = req.params;
 
     if (!validateId(id)){

@@ -19,3 +19,7 @@ export type BlogParamsToPostModel = {
 export type PostParamsId = {
     id: string
 }
+
+export type UserParamsIdDeleteModel = {
+    id: string
+}
