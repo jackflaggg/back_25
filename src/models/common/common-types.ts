@@ -15,5 +15,4 @@ export type AccessToken = {
     accessToken: string
 }
 
-export type AsyncVoid = Promise<void>
 
