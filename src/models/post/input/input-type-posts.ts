@@ -1,13 +1,13 @@
 import {SortDirection} from "mongodb";
 
-export type InQueryPostModel = {
+export interface InQueryPostModel {
     sortBy?: string,
     sortDirection?: SortDirection,
     pageNumber?: number,
     pageSize?: number,
 }
 
-export type InUpdatePostModel = {
+export interface InUpdatePostModel {
     title: string,
     shortDescription: string,
     content: string,
