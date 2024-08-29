@@ -23,3 +23,9 @@ export interface InCreatePostModel {
     blogName: string,
     createdAt: string
 }
+
+export interface InCreatePostToBlogInputModel {
+    title: string,
+    shortDescription: string,
+    content: string
+}
