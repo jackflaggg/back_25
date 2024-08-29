@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import {commentService} from "../../domain/comment/comment-service";
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {ResultStatus, ResultStatusType} from "../../models/common/errors/errors-type";
 import {
     CommentParamsId,
-    RequestWithParams,
     RequestWithParamsAndBody
 } from "../../models/common/req_res_params/request-response-params";
+import {errorsMessages} from "../../utils/features/errorsMessages";
 
 export const updateCommentController = async (req: RequestWithParamsAndBody<CommentParamsId, {content: string}>, res: Response) => {
     const { commentId } = req.params;
@@ -27,8 +27,7 @@ export const updateCommentController = async (req: RequestWithParamsAndBody<Comm
     const statusCode = statusMap[updateComment.status];
 
     if (statusCode && updateComment.extensions) {
-        console.log('вошел в плохой статус! ' + statusCode)
-        res.status(statusCode).send({ errorsMessages: updateComment.extensions });
+        res.status(statusCode).send(errorsMessages(updateComment.extensions));
         return
     }
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);

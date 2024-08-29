@@ -9,7 +9,7 @@ export const commentService = {
         if (!validateId(commentId)){
             return {
                 status: ResultStatus.BadRequest,
-                extensions: [{field: 'commentId', message: 'The comment is invalid'}],
+                extensions: {message: 'The comment is invalid', field: 'commentId'},
                 data: null
             }
         }
@@ -18,7 +18,7 @@ export const commentService = {
         if (!comment) {
             return {
                 status: ResultStatus.NotFound,
-                extensions: [{field: 'comment', message: 'The comment not found'}],
+                extensions: {message: 'The comment not found', field: 'comment'},
                 data: null
             }
         }
@@ -26,7 +26,7 @@ export const commentService = {
         if (comment.commentatorInfo.userId !== userId){
             return {
                 status: ResultStatus.Forbidden,
-                extensions: [{field: 'comment', message: 'The comment not user'}],
+                extensions: {message: 'The comment not user', field: 'comment'},
                 data: null
             }
         }
