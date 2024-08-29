@@ -8,6 +8,7 @@ import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user"
 export const AllUsersController = async (req: RequestWithQuery<InQueryUserModel>,
                                         res:Response) => {
     const queryUser = queryHelperToUser(req.query);
+
     const getAllUsers = await usersQueryRepository.getAllUsers(queryUser)
 
     res.status(HTTP_STATUSES.OK_200).send(getAllUsers);
