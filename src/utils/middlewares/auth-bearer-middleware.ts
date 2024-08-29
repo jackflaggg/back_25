@@ -39,6 +39,6 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         return;
     }
 
-    req.userId = user;
+    req.userId = user.id;
     next();
 }
