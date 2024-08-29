@@ -20,7 +20,7 @@ export const deleteUserController = async (req: RequestWithParams<{id: string}>,
         return
     }
 
-    const deleteBlog = await userService.delUser(user);
+    const deleteBlog = await userService.delUser(user.id);
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     return;
