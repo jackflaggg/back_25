@@ -12,7 +12,7 @@ import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 
 export const authService = {
-    async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<null | any> {
+    async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<any> {
 
         const {loginOrEmail, password} = inputDataUser;
 
