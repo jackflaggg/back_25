@@ -192,7 +192,7 @@ export const authService = {
         if (!updateUser) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {errorsMessages: [{message: 'error code 2', field: 'code'}]},
+                extensions: {message: 'error code 2', field: 'code'},
                 data: updateUser
             }
         }
