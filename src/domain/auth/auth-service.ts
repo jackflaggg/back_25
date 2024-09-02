@@ -91,7 +91,7 @@ export const authService = {
             if (!value) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: { message: `${key} is required`, field: `${key}`},
+                    extensions: {message: `${key} is required`, field: `${key}`},
                     data: null
                 }
             }
