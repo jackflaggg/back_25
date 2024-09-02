@@ -1,8 +1,8 @@
 import {SETTINGS} from "../../src/settings";
-import {req} from "../helpers/agent";
+import {req} from "../helpers-e2e/agent";
 import {HTTP_STATUSES} from "../../src/models/common/common-types";
-import {codedAuth, createString, inCodedAuth} from "../helpers/datatests";
-import {connect, disconnect} from "../helpers/mongodb.memory.test.helper";
+import {codedAuth, createString, inCodedAuth} from "../helpers-e2e/datatests";
+import {connect, disconnect} from "../helpers-e2e/mongodb.memory.test.helper";
 import {ObjectId} from "mongodb";
 import {InCreateBlogModel, InUpdateBlogModel} from "../../src/models/blog/input/input-type-blogs";
 
