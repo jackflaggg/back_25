@@ -6,7 +6,7 @@ import {usersQueryRepository} from "../../repositories/users/users-query-reposit
 import {InCreateUserModel} from "../../models/user/input/input-type-users";
 import {helperError} from "../../utils/helpers/helper-error";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";
-import {ErrorsType, ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
+import {ErrorsType} from "../../models/common/errors/errors-type";
 import {OutUserById} from "../../models/user/ouput/output-type-users";
 
 export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
