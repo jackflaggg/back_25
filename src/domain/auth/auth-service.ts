@@ -98,12 +98,12 @@ export const authService = {
         }
 
         // проверка уникальности
-        const errors = await errorsUnique( email, login );
+        const uniqueErrors = await errorsUnique( email, login );
 
-        if (errors){
+        if (uniqueErrors){
             return {
                 status: ResultStatus.BadRequest,
-                errors: helperError(errors),
+                errors: helperError(uniqueErrors),
                 data: null
             }
         }
