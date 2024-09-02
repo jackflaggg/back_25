@@ -142,7 +142,7 @@ export const authService = {
             const deleteUser = await UsersDbRepository.deleteUser(createUser as string);
 
             return {
-                status: ResultSuccess.Success,
+                status: ResultStatus.BadRequest,
                 extensions: {message: `Delete user`, field: 'user'},
                 data: deleteUser
             }
