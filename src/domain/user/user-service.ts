@@ -10,12 +10,12 @@ export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<any/*string | ResultError | null*/> {
         const { login, password, email} = user;
 
-        const errors = await errorsUnique( email, login );
+        const uniqueErrors = await errorsUnique( email, login );
 
-        if (errors){
+        if (uniqueErrors){
             return {
                 status: ResultStatus.BadRequest,
-                extensions: errors,
+                extensions: uniqueErrors,
                 data: null
             }
         }
