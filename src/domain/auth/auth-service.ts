@@ -143,7 +143,7 @@ export const authService = {
 
             return {
                 status: ResultSuccess.Success,
-                extensions: {field: 'user', message: `Delete user`},
+                extensions: {message: `Delete user`, field: 'user'},
                 data: deleteUser
             }
         }
