@@ -14,8 +14,10 @@ export const registrationController = async (req: RequestWithBody<InRegistration
             res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.errors));
             return;
         }
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.extensions ? checkRegistrationUser.extensions : {message: 'error', field: 'extension'}));
-        return;
+        if (checkRegistrationUser.extensions) {
+            res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.extensions));
+            return;
+        }
     }
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
