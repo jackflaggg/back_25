@@ -133,7 +133,7 @@ export const authService = {
             if (!existingSendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {field: `${existingSendEmail}`, message: `${existingSendEmail} is error`},
+                    extensions: {message: `${existingSendEmail} is error`, field: `${existingSendEmail}`},
                     data: null
                 }
             }

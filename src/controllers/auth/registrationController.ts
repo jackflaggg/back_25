@@ -10,7 +10,11 @@ export const registrationController = async (req: RequestWithBody<InRegistration
     const checkRegistrationUser = await authService.registrationUser(req.body);
 
     if (checkRegistrationUser.status !== ResultSuccess.Success) {
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.extensions || checkRegistrationUser.errors));
+        if (checkRegistrationUser.errors) {
+            res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.errors));
+            return;
+        }
+        res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.extensions))
         return;
     }
 
