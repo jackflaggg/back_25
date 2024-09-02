@@ -6,7 +6,7 @@ import {usersQueryRepository} from "../../repositories/users/users-query-reposit
 import {InCreateUserModel} from "../../models/user/input/input-type-users";
 import {helperError} from "../../utils/helpers/helper-error";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";
-import {ErrorsType} from "../../models/common/errors/errors-type";
+import {ErrorsType, ResultSuccess} from "../../models/common/errors/errors-type";
 import {OutUserById} from "../../models/user/ouput/output-type-users";
 
 export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
@@ -14,7 +14,7 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
 
     const createdUserId = await userService.createUser(req.body);
 
-    if (typeof createdUserId !== "string" && createdUserId !== null && +createdUserId.status === HTTP_STATUSES.BAD_REQUEST_400) {
+    if (createdUserId.status !== ResultSuccess.Success) {
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
             .send(helperError(createdUserId.data));

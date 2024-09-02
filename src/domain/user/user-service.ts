@@ -15,8 +15,9 @@ export const userService = {
         if (errors){
             return {
                 status: ResultStatus.BadRequest,
-                data: errors
-            } as ResultError
+                extensions: errors,
+                data: null
+            }
         }
 
         const passwordHash = await hashService._generateHash(password);
