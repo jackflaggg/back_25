@@ -4,7 +4,7 @@ import {hashService} from "../../utils/application/hash-service";
 import {errorsUnique} from "../../utils/features/errors-validate";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 import {emailConfirmation} from "../../utils/features/emailConfirmation";
-import {ResultError} from "../../models/common/errors/errors-type";
+import {ResultError, ResultStatus} from "../../models/common/errors/errors-type";
 
 export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<string | ResultError | null> {
@@ -14,7 +14,7 @@ export const userService = {
 
         if (errors){
             return {
-                status: String(HTTP_STATUSES.BAD_REQUEST_400),
+                status: ResultStatus.BadRequest,
                 data: errors
             } as ResultError
         }
