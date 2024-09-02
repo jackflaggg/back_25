@@ -4,10 +4,10 @@ import {hashService} from "../../utils/application/hash-service";
 import {errorsUnique} from "../../utils/features/errors-validate";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 import {emailConfirmation} from "../../utils/features/emailConfirmation";
-import {ResultError, ResultStatus} from "../../models/common/errors/errors-type";
+import {ResultError, ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 
 export const userService = {
-    async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<string | ResultError | null> {
+    async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<any/*string | ResultError | null*/> {
         const { login, password, email} = user;
 
         const errors = await errorsUnique( email, login );
@@ -29,7 +29,11 @@ export const userService = {
             emailConfirmation: emailConfirmation()
         }
 
-        return await UsersDbRepository.createUser(newUser);
+        const createUser = await UsersDbRepository.createUser(newUser);
+        return {
+            status: ResultSuccess.Success,
+            data: createUser
+        }
 
     },
     async delUser(idUser: string): Promise<boolean> {
