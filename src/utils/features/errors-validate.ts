@@ -1,7 +1,7 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {ErrorsType} from "../../models/common/errors/errors-type";
 
-export const errorsUnique =  async (email: string, login: string) => {
+export const errorsUnique =  async (email: string, login: string): Promise<ErrorsType | false> => {
     const errors: ErrorsType = {
         errorsMessages: []
     }

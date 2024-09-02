@@ -14,7 +14,7 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
 
     const createdUserId = await userService.createUser(req.body);
 
-    if (createdUserId.status !== ResultSuccess.Success && createdUserId.extensions) {
+    if (createdUserId.extensions) {
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
             .send(helperError(createdUserId.extensions));
