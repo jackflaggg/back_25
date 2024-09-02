@@ -5,6 +5,7 @@ import {errorsUnique} from "../../utils/features/errors-validate";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 import {emailConfirmation} from "../../utils/features/emailConfirmation";
 import {ResultError, ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
+import {helperError} from "../../utils/helpers/helper-error";
 
 export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<any/*string | ResultError | null*/> {
@@ -15,7 +16,7 @@ export const userService = {
         if (uniqueErrors){
             return {
                 status: ResultStatus.BadRequest,
-                extensions: uniqueErrors,
+                extensions: helperError(uniqueErrors),
                 data: null
             }
         }
