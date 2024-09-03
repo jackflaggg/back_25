@@ -49,14 +49,13 @@ export const jwtService = {
         }
     },
 
-    async verifyRefreshToken(refreshToken: string): Promise<string | JwtPayload | null | any>  {
+    async verifyRefreshToken(refreshToken: string): Promise<any>  {
         try {
             return jwt.verify(refreshToken, SETTINGS.SECRET_KEY)
         } catch (e: unknown) {
             if (e instanceof jwt.TokenExpiredError) {
                 return { expired: true };
             }
-            console.log(e);
             return null
         }
     },
