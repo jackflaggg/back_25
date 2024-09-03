@@ -12,7 +12,7 @@ export const userService = {
         const { login, password, email} = user;
 
         const uniqueErrors = await errorsUnique( email, login );
-        const ts: any = 0;
+        const js: any = '1212'
         if (uniqueErrors){
             return {
                 status: ResultStatus.BadRequest,
