@@ -25,7 +25,9 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
     const user = await usersQueryRepository.getUserById(createdUserId.data)
 
     if (!user) {
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+        res
+            .status(HTTP_STATUSES.NOT_FOUND_404)
+            .send(errorsMessages({field: 'error', message: 'непредвиденная ошибка, такого никогда не должно было произойти'}));
         return
     }
 
