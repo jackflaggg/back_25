@@ -49,7 +49,7 @@ export const jwtService = {
         }
     },
 
-    async verifyRefreshToken(refreshToken: string): Promise<any>  {
+    async verifyRefreshToken(refreshToken: string): Promise<JwtPayload | string | null>  {
         try {
             return jwt.verify(refreshToken, SETTINGS.SECRET_KEY)
         } catch (e: unknown) {
