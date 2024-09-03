@@ -38,7 +38,7 @@ export const authService = {
         }
         return {
             status: ResultSuccess.Success,
-            data: credentialLoginOrEmail._id
+            data: String(credentialLoginOrEmail._id)
         };
     },
 
