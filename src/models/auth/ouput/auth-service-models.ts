@@ -1,8 +1,10 @@
-import {ErrorsMessageToResponseType} from "../../common/errors/errors-type";
-
+type errorsResponse = {
+    field: string,
+    message: string,
+}
 export interface loginError {
     status: string,
-    extensions?: ErrorsMessageToResponseType,
+    extensions?: errorsResponse,
     data: null
 }
 
