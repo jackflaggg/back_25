@@ -6,13 +6,14 @@ import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 import {emailConfirmation} from "../../utils/features/emailConfirmation";
 import {ResultError, ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {helperError} from "../../utils/helpers/helper-error";
+import any = jasmine.any;
 
 export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<any> {
         const { login, password, email} = user;
 
         const uniqueErrors = await errorsUnique( email, login );
-        const js: any = '1212'
+
         if (uniqueErrors){
             return {
                 status: ResultStatus.BadRequest,
