@@ -1,8 +1,13 @@
 import {ErrorsMessageToResponseType, ResultStatus} from "../../common/errors/errors-type";
 import {ObjectId} from "mongodb";
 
-export interface authenticationUserToLogin {
+export interface authenticationUserToLoginError {
     status: string,
     extensions?: ErrorsMessageToResponseType,
-    data: ObjectId | null
+    data: null
+}
+
+export interface authenticationUserToLogin {
+    status: string,
+    data: string | ObjectId
 }
