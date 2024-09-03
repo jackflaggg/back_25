@@ -15,4 +15,12 @@ export type AccessToken = {
     accessToken: string
 }
 
+export interface VerifiedToken {
+    userId: string;
+    // другие поля, если нужно
+}
 
+export interface TokenVerificationResult {
+    expired?: boolean;
+    token?: VerifiedToken;
+}

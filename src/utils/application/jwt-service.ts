@@ -2,7 +2,7 @@ import {SETTINGS} from "../../settings";
 import jwt, {JwtPayload} from "jsonwebtoken";
 import {config} from 'dotenv'
 import {secretErrorCheck} from "../features/secret-error";
-import {ObjectId} from "mongodb";
+import {TokenVerificationResult, VerifiedToken} from "../../models/common/common-types";
 config()
 
 export const jwtService = {
@@ -49,9 +49,10 @@ export const jwtService = {
         }
     },
 
-    async verifyRefreshToken(refreshToken: string): Promise<JwtPayload | string | null>  {
+    async verifyRefreshToken(refreshToken: string): Promise<TokenVerificationResult | null>  {
         try {
-            return jwt.verify(refreshToken, SETTINGS.SECRET_KEY)
+            const decoded =  jwt.verify(refreshToken, SETTINGS.SECRET_KEY) as VerifiedToken;
+            return { token: decoded }
         } catch (e: unknown) {
             if (e instanceof jwt.TokenExpiredError) {
                 return { expired: true };
