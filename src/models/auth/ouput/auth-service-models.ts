@@ -1,4 +1,4 @@
-import {ErrorsMessageToResponseType, ResultStatus} from "../../common/errors/errors-type";
+import {ErrorsMessageToResponseType} from "../../common/errors/errors-type";
 import {ObjectId} from "mongodb";
 
 export interface authenticationUserToLoginError {
