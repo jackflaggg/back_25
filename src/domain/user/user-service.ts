@@ -1,26 +1,24 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
-import {HTTP_STATUSES} from "../../models/common/common-types";
 import {hashService} from "../../utils/application/hash-service";
 import {errorsUnique} from "../../utils/features/errors-validate";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
 import {emailConfirmation} from "../../utils/features/emailConfirmation";
-import {ResultError, ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
+import { ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {helperError} from "../../utils/helpers/helper-error";
-import any = jasmine.any;
+import {OutCreateUserError, OutCreateUserSuccess} from "../../models/user/ouput/user-service-models";
 
 export const userService = {
-    async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<any> {
+    async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<OutCreateUserSuccess | OutCreateUserError> {
         const { login, password, email} = user;
 
         const uniqueErrors = await errorsUnique( email, login );
 
         if (uniqueErrors){
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: helperError(uniqueErrors),
-                data: null
-            }
-        }
+            return new OutCreateUserError(
+                ResultStatus.BadRequest,
+                helperError(uniqueErrors),
+                null
+            )}
 
         const passwordHash = await hashService._generateHash(password);
 
@@ -33,12 +31,17 @@ export const userService = {
         }
 
         const createUser = await UsersDbRepository.createUser(newUser);
-        return {
-            status: ResultSuccess.Success,
-            data: createUser
+        if (!createUser){
+            return new OutCreateUserError(
+                ResultStatus.BadRequest,
+                {field: 'user', message: 'error create user'},
+                null)
         }
 
-    },
+        return new OutCreateUserSuccess(
+            ResultSuccess.Success,
+            createUser
+    )},
     async delUser(idUser: string): Promise<boolean> {
         return await UsersDbRepository.deleteUser(idUser);
     }
