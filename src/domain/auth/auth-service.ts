@@ -10,9 +10,10 @@ import {helperError} from "../../utils/helpers/helper-error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
+import {authenticationUserToLogin} from "../../models/auth/ouput/auth-service-models";
 
 export const authService = {
-    async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<any> {
+    async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<authenticationUserToLogin> {
 
         const {loginOrEmail, password} = inputDataUser;
 
@@ -139,6 +140,7 @@ export const authService = {
             }
         } catch( e: unknown) {
             console.error('Send email error', e);
+
             const deleteUser = await UsersDbRepository.deleteUser(createUser as string);
 
             return {
