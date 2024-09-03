@@ -8,11 +8,11 @@ import {ResultError, ResultStatus, ResultSuccess} from "../../models/common/erro
 import {helperError} from "../../utils/helpers/helper-error";
 
 export const userService = {
-    async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<any/*string | ResultError | null*/> {
+    async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<any> {
         const { login, password, email} = user;
 
         const uniqueErrors = await errorsUnique( email, login );
-
+        const ts: any = 0;
         if (uniqueErrors){
             return {
                 status: ResultStatus.BadRequest,
