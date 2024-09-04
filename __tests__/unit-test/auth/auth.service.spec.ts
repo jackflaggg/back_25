@@ -3,11 +3,6 @@ import {authService} from "../../../src/domain/auth/auth-service";
 import {ResultStatus, ResultSuccess} from "../../../src/models/common/errors/errors-type";
 import {hashService} from "../../../src/utils/application/hash-service";
 import {jwtService} from "../../../src/utils/application/jwt-service";
-import {connect, disconnect} from "../../helpers-e2e/mongodb.memory.test.helper";
-import {req} from "../../helpers-e2e/agent";
-import {SETTINGS} from "../../../src/settings";
-import {codedAuth} from "../../helpers-e2e/datatests";
-import {HTTP_STATUSES} from "../../../src/models/common/common-types";
 
 jest.mock('../../../src/repositories/users/users-db-repository');
 jest.mock('../../../src/utils/application/hash-service');
@@ -15,14 +10,6 @@ jest.mock('../../../src/utils/application/jwt-service');
 jest.mock('../../../src/managers/email-managers');
 
 describe('authService', () => {
-    beforeAll(connect);
-    afterAll(disconnect);
-
-    beforeAll(async () => {
-        await req.delete(`${SETTINGS.PATH.TESTING}/all-data`)
-            .set({ 'Authorization': 'Basic ' + codedAuth })
-            .expect(HTTP_STATUSES.NO_CONTENT_204);
-    });
 
     describe('authenticationUserToLogin', () => {
         it('should return error if user not found', async () => {
@@ -97,5 +84,14 @@ describe('authService', () => {
         // Добавьте дополнительные тесты для проверки уникальности, успешного создания пользователя и т.д.
     });
 
-    // Аналогично добавьте тесты для других методов (confirmationEmailByCode, registrationEmailResending и т.д.)
+    describe('confirmationEmailByCode', () => {
+        it('should return error if required bad code', async () => {
+            const response = await authService.confirmationEmailByCode('bad code');
+            expect(response.status).toEqual(ResultStatus.BadRequest);
+            expect(response.extensions).toMatch('{message: \'code 1\', field: \'code\'}');
+            expect(response.data).toEqual(null)
+        });
+
+        // Добавьте дополнительные тесты для проверки уникальности, успешного создания пользователя и т.д.
+    });
 });
