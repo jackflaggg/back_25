@@ -10,6 +10,9 @@ jest.mock('../../../src/utils/application/jwt-service');
 jest.mock('../../../src/managers/email-managers');
 
 describe('authService', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
 
     describe('authenticationUserToLogin', () => {
         it('should return error if user not found', async () => {
@@ -51,6 +54,12 @@ describe('authService', () => {
 
     describe('loginUser', () => {
         it('should return error if authentication fails', async () => {
+            (authService.authenticationUserToLogin as jest.Mock).mockResolvedValueOnce({
+                status: ResultStatus.BadRequest,
+                extensions: { field: 'userId', message: 'Аутентификация рухнула!' },
+                data: null
+            });
+
             const response = await authService.loginUser({ loginOrEmail: 'test', password: 'password' });
             expect(response).toEqual({
                 status: ResultStatus.BadRequest,
@@ -60,16 +69,17 @@ describe('authService', () => {
         });
 
         it('should return tokens on successful login', async () => {
-            (authService.authenticationUserToLogin as jest.Mock).mockResolvedValue({
+            (authService.authenticationUserToLogin as jest.Mock).mockResolvedValueOnce({
                 status: ResultSuccess.Success,
                 data: 'userId'
             });
-            (jwtService.createAnyToken as jest.Mock).mockResolvedValue('token');
+            (jwtService.createAnyToken as jest.Mock).mockResolvedValueOnce('token');
+            (jwtService.createAnyToken as jest.Mock).mockResolvedValueOnce('token');
 
             const response = await authService.loginUser({ loginOrEmail: 'test', password: 'password' });
             expect(response).toEqual({
                 status: ResultSuccess.Success,
-                data: ['token', 'token'] // В зависимости от реализации добавьте правильные токены
+                data: ['token', 'token']
             });
         });
     });
@@ -89,7 +99,7 @@ describe('authService', () => {
             const response = await authService.confirmationEmailByCode('bad code');
             expect(response.status).toEqual(ResultStatus.BadRequest);
             //expect(response.extensions).toMatch('{message: \'code 1\', field: \'code\'}');
-            expect(response.data).toBe(null)
+            expect(response.data).toBeNull()
         });
 
         // Добавьте дополнительные тесты для проверки уникальности, успешного создания пользователя и т.д.
