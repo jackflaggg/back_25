@@ -85,7 +85,7 @@ export const authService = {
 
         const { login, password, email } = inputData;
 
-        const requiredFields = new Object([login, password, email]);
+        const requiredFields = { login, password, email };
 
         // проверяю на тело
         for (const [key, value] of Object.entries(requiredFields)) {

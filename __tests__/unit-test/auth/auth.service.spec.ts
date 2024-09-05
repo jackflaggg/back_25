@@ -163,4 +163,16 @@ describe('authService', () => {
             });
         });
     });
+    describe('registrationUser', () => {
+        it('⛔ если некорректные введенные данные, то верни ошибку', async () => {
+            const inputData = { login: 'correct', password: 'correct', email: 'incorrect'};
+
+            const response = await authService.registrationUser(inputData);
+            expect(response).toEqual({
+                status: ResultStatus.BadRequest,
+                extensions: {message: `${inputData.email} is required`, field: `${inputData.email}`},
+                data: null
+            })
+        });
+    })
 });
