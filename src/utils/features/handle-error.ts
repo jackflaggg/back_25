@@ -1,6 +1,6 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import { Response} from "express";
 
-export const handleError = (res: Response, message: string) => {
+export const handleError = (res: Response) => {
     return  res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
 };

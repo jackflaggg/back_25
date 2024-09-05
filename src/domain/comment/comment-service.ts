@@ -71,5 +71,5 @@ export const commentService = {
             status: ResultStatus.NotContent,
             data: deleteComment
         }
-    },
+    }
 }

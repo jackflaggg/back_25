@@ -21,22 +21,13 @@ let createBlogData = {
     isMembership: false
 }
 
-let createPostToBlogModel = {
-    title: createString(10),
-    shortDescription: createString(10),
-    content: createString(10),
-    blogId: createBlogData.id,
-    blogName: createBlogData.name,
-    createdAt: new Date().toISOString(),
-}
-
 describe('blogsService', () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
     describe('createBlog', () => {
-        it('creates blog success', async() => {
+        it('✅ создание блога', async() => {
             (blogsRepositories.createBlog as jest.Mock).mockResolvedValueOnce(createBlogData.id);
 
             const response = await blogsService.createBlog({
@@ -46,10 +37,21 @@ describe('blogsService', () => {
 
             expect(response).toBe(createBlogData.id)
         });
+
+        it('⛔ null при создании', async() => {
+            (blogsRepositories.createBlog as jest.Mock).mockResolvedValueOnce(null);
+
+            const response = await blogsService.createBlog({
+                name: createString(10),
+                description: createString(10),
+                websiteUrl: createString(10)});
+
+            expect(response).toBe(null)
+        });
     });
 
     describe('createPostToBlogInputModel', () => {
-        it('creates post to blog success', async() => {
+        it('✅ создание поста для блога', async() => {
             const expectedId = new ObjectId().toString();
             (blogsRepositories.createPostToBlogID as jest.Mock).mockResolvedValueOnce(expectedId);
 
@@ -68,10 +70,30 @@ describe('blogsService', () => {
 
             expect(response).toBe(expectedId)
         });
+
+        it('⛔ null при создании поста для блога', async() => {
+
+            (blogsRepositories.createPostToBlogID as jest.Mock).mockResolvedValueOnce(null);
+
+            let InCreateToBlogModel = {
+                id: new ObjectId().toString(),
+                name: createString(10),
+            }
+
+            let InCreatePostToBlogInputModel = {
+                title: createString(10),
+                shortDescription: createString(10),
+                content: createString(10)
+            }
+
+            const response = await blogsService.createPostToBlogInputModel(InCreateToBlogModel,InCreatePostToBlogInputModel);
+
+            expect(response).toBe(null)
+        });
     });
 
     describe('putBlog', () => {
-        it('put blog success', async() => {
+        it('✅ обновление блога', async() => {
 
             const updateBlog = {
                 id: new ObjectId().toString(),
@@ -88,16 +110,43 @@ describe('blogsService', () => {
 
             expect(response).toBe(true)
         });
+
+        it('⛔ false при обнове', async() => {
+
+            const updateBlog = {
+                id: new ObjectId().toString(),
+                name: createString(11),
+                description: createString(11),
+                websiteUrl: createString(11),
+            };
+
+            const {id, ...blogUpdate} = updateBlog;
+
+            (blogsRepositories.putBlog as jest.Mock).mockResolvedValueOnce(false);
+
+            const response = await blogsService.putBlog(updateBlog.id, blogUpdate);
+
+            expect(response).toBe(false)
+        });
     });
 
     describe('delBlog', () => {
-        it('del blog success', async() => {
+        it('✅ удаление блога', async() => {
 
             (blogsRepositories.delBlog as jest.Mock).mockResolvedValueOnce(true);
 
             const response = await blogsService.delBlog(createBlogData.id);
 
             expect(response).toBe(true)
+        });
+
+        it('⛔ false при удаление блога', async() => {
+
+            (blogsRepositories.delBlog as jest.Mock).mockResolvedValueOnce(false);
+
+            const response = await blogsService.delBlog(createBlogData.id);
+
+            expect(response).toBe(false)
         });
     });
 })
