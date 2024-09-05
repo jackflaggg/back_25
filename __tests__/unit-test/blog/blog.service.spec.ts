@@ -2,7 +2,6 @@ import {blogsRepositories} from "../../../src/repositories/blogs/blogs-db-reposi
 import {createString} from "../../helpers-e2e/datatests";
 import {ObjectId} from "mongodb";
 import {blogsService} from "../../../src/domain/blog/blog-service";
-import {InCreatePostToBlogInputModel} from "../../../src/models/post/input/input-type-posts";
 
 jest.mock('../../../src/repositories/blogs/blogs-db-repository', () => ({
     blogsRepositories: {
@@ -71,29 +70,34 @@ describe('blogsService', () => {
         });
     });
 
-    // describe('createBlog', () => {
-    //     it('creates blog success', async() => {
-    //         (blogsRepositories.createBlog as jest.Mock).mockResolvedValueOnce(createBlogData.id);
-    //
-    //         const response = await blogsService.createBlog({
-    //             name: createString(10),
-    //             description: createString(10),
-    //             websiteUrl: createString(10)});
-    //
-    //         expect(response).toBe(createBlogData.id)
-    //     });
-    // });
-    //
-    // describe('createBlog', () => {
-    //     it('creates blog success', async() => {
-    //         (blogsRepositories.createBlog as jest.Mock).mockResolvedValueOnce(createBlogData.id);
-    //
-    //         const response = await blogsService.createBlog({
-    //             name: createString(10),
-    //             description: createString(10),
-    //             websiteUrl: createString(10)});
-    //
-    //         expect(response).toBe(createBlogData.id)
-    //     });
-    // });
+    describe('putBlog', () => {
+        it('put blog success', async() => {
+
+            const updateBlog = {
+                id: new ObjectId().toString(),
+                name: createString(11),
+                description: createString(11),
+                websiteUrl: createString(11),
+            };
+
+            const {id, ...blogUpdate} = updateBlog;
+
+            (blogsRepositories.putBlog as jest.Mock).mockResolvedValueOnce(true);
+
+            const response = await blogsService.putBlog(updateBlog.id, blogUpdate);
+
+            expect(response).toBe(true)
+        });
+    });
+
+    describe('delBlog', () => {
+        it('del blog success', async() => {
+
+            (blogsRepositories.delBlog as jest.Mock).mockResolvedValueOnce(true);
+
+            const response = await blogsService.delBlog(createBlogData.id);
+
+            expect(response).toBe(true)
+        });
+    });
 })
