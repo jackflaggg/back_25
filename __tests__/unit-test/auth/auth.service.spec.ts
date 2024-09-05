@@ -18,6 +18,14 @@ let outUser : OutUserFindLoginOrEmail ={
     createdAt: new Date().toISOString()
 }
 
+let outUser2 : OutUserFindLoginOrEmail ={
+    //_id: new ObjectId(),
+    login: createString(10),
+    email: 'success2@example.com',
+    password: createString(12),
+    createdAt: new Date().toISOString()
+}
+
 let UserDbType = {
     id: new ObjectId().toString(),
     login: createString(10),
@@ -132,7 +140,7 @@ describe('authService', () => {
 
         it('⛔ возвращает ошибку, если в access токене null', async () => {
 
-            (UsersDbRepository.findUserByLoginOrEmail as jest.Mock).mockResolvedValueOnce(outUser);
+            (UsersDbRepository.findUserByLoginOrEmail as jest.Mock).mockResolvedValueOnce(outUser2);
 
             (hashService.comparePassword as jest.Mock).mockResolvedValueOnce(true);
 
@@ -230,7 +238,7 @@ describe('authService', () => {
 
             expect(response).toEqual({
                 status: ResultStatus.BadRequest,
-                errors: {message: `not unique ${UserDbType.login}`, field: `login`},
+                errors: {message: `not unique ${UserDbType.login}`, field: `email`},
                 data: null
             })
         });
