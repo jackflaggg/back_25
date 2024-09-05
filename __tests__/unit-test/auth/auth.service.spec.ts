@@ -2,10 +2,11 @@ import { UsersDbRepository } from '../../../src/repositories/users/users-db-repo
 import { authService } from '../../../src/domain/auth/auth-service';
 import { ResultStatus, ResultSuccess } from '../../../src/models/common/errors/errors-type';
 import { hashService } from '../../../src/utils/application/hash-service';
-import {OutUserFindLoginOrEmail} from "../../../src/models/user/ouput/output-type-users";
+import {emailInfo, OutUserFindLoginOrEmail} from "../../../src/models/user/ouput/output-type-users";
 import {ObjectId} from "mongodb";
 import {createString} from "../../helpers-e2e/datatests";
 import {jwtService} from "../../../src/utils/application/jwt-service";
+import {randomUUID, UUID} from "node:crypto";
 
 let outUser : OutUserFindLoginOrEmail ={
     _id: new ObjectId(),
@@ -15,10 +16,25 @@ let outUser : OutUserFindLoginOrEmail ={
     createdAt: new Date().toISOString()
 }
 
+let UserDbType = {
+    id: new ObjectId().toString(),
+    login: createString(10),
+    password: createString(10),
+    email: createString(10),
+    createdAt: createString(10),
+    emailConfirmation: {
+        confirmationCode: randomUUID(),
+        expirationDate: new Date(),
+        isConfirmed: false
+    }
+}
+
 jest.mock('../../../src/repositories/users/users-db-repository', () => ({
     UsersDbRepository: {
         findUserByLoginOrEmail: jest.fn(),
         createUser: jest.fn(),
+        findByEmailUser: jest.fn(),
+        findByLoginUser: jest.fn(),
     },
 }));
 
@@ -165,12 +181,26 @@ describe('authService', () => {
     });
     describe('registrationUser', () => {
         it('⛔ если некорректные введенные данные, то верни ошибку', async () => {
-            const inputData = { login: 'correct', password: 'correct', email: 'incorrect'};
+            const inputData = { login: 'correct', password: 'correct', email: ''};
 
             const response = await authService.registrationUser(inputData);
             expect(response).toEqual({
                 status: ResultStatus.BadRequest,
-                extensions: {message: `${inputData.email} is required`, field: `${inputData.email}`},
+                extensions: {message: `email is required`, field: `email`},
+                data: null
+            })
+        });
+
+        it('⛔ если данные неуникальны, то верни ошибку', async () => {
+            const inputData = { login: 'not_unique', password: 'correct', email: 'correct@email.com' };
+
+            (UsersDbRepository.findByEmailUser as jest.Mock).mockResolvedValueOnce(null);
+            (UsersDbRepository.findByLoginUser as jest.Mock).mockResolvedValueOnce(UserDbType);
+
+            const response = await authService.registrationUser(inputData);
+            expect(response).toEqual({
+                status: ResultStatus.BadRequest,
+                errors: {message: `not unique ${UserDbType.login}`, field: `login`},
                 data: null
             })
         });
