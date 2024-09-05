@@ -7,6 +7,8 @@ import {ObjectId} from "mongodb";
 import {createString} from "../../helpers-e2e/datatests";
 import {jwtService} from "../../../src/utils/application/jwt-service";
 import {randomUUID} from "node:crypto";
+import {emailManagers} from "../../../src/managers/email-managers";
+import {emailAdapter} from "../../../src/utils/adapters/email-adapter";
 
 let outUser : OutUserFindLoginOrEmail ={
     _id: new ObjectId(),
@@ -54,6 +56,12 @@ jest.mock('../../../src/utils/application/jwt-service', () => ({
 jest.mock('../../../src/managers/email-managers', () => ({
     emailManagers: {
         sendEmailRecoveryMessage: jest.fn()
+    },
+}));
+
+jest.mock('../../../src/utils/adapters/email-adapter', () => ({
+    emailAdapter: {
+        sendEmail: jest.fn()
     },
 }));
 
@@ -198,6 +206,28 @@ describe('authService', () => {
             (UsersDbRepository.findByLoginUser as jest.Mock).mockResolvedValueOnce(UserDbType);
 
             const response = await authService.registrationUser(inputData);
+            expect(response).toEqual({
+                status: ResultStatus.BadRequest,
+                errors: {message: `not unique ${UserDbType.login}`, field: `login`},
+                data: null
+            })
+        });
+
+        it('⛔ если данные неуникальны, то верни ошибку', async () => {
+            const inputData = { login: 'correct', password: 'correct', email: 'correct@email.com' };
+
+            (UsersDbRepository.findByEmailUser as jest.Mock).mockResolvedValueOnce(UserDbType);
+
+            (UsersDbRepository.findByLoginUser as jest.Mock).mockResolvedValueOnce(UserDbType);
+
+            (UsersDbRepository.createUser as jest.Mock).mockResolvedValueOnce(null);
+
+            // (emailManagers.sendEmailRecoveryMessage as jest.Mock).mockResolvedValueOnce()
+            //
+            // (emailAdapter.sendEmail as jest.Mock).mockResolvedValueOnce();
+
+            const response = await authService.registrationUser(inputData);
+
             expect(response).toEqual({
                 status: ResultStatus.BadRequest,
                 errors: {message: `not unique ${UserDbType.login}`, field: `login`},
