@@ -44,7 +44,8 @@ describe('blogsService', () => {
             const response = await blogsService.createBlog({
                 name: createString(10),
                 description: createString(10),
-                websiteUrl: createString(10)});
+                websiteUrl: createString(10)
+            });
 
             expect(response).toBe(null)
         });

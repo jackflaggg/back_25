@@ -37,6 +37,7 @@ export const authService = {
                 data: null
             }
         }
+
         return {
             status: ResultSuccess.Success,
             data: String(credentialLoginOrEmail._id)
