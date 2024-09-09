@@ -1,10 +1,5 @@
-import { UsersDbRepository } from '../../../src/repositories/users/users-db-repository';
-import { authService } from '../../../src/domain/auth/auth-service';
-import { ResultStatus, ResultSuccess } from '../../../src/models/common/errors/errors-type';
-import { hashService } from '../../../src/utils/application/hash-service';
 import {ObjectId} from "mongodb";
 import {createString} from "../../helpers-e2e/datatests";
-import {jwtService} from "../../../src/utils/application/jwt-service";
 import {postsRepository} from "../../../src/repositories/posts/posts-db-repository";
 import {postsService} from "../../../src/domain/post/post-service";
 
@@ -38,9 +33,8 @@ describe('postsService', () => {
         it('⛔ возвращает ошибку, если Некорректный объект, Серверная ошибка, Ошибка при вставке', async () => {
             (postsRepository.createPost as jest.Mock).mockResolvedValue(null);
 
-            const {blogName, ...mutatePost} = realPost;
             const existingPost = {
-                ...mutatePost,
+                ...realPost,
                 createdAt: new Date().toISOString(),
             }
 
