@@ -9,7 +9,7 @@ export const commentService = {
         if (!validateId(commentId)){
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'The comment is invalid', field: 'commentId'},
+                extensions: {message: 'The comment to update is invalid', field: 'commentId'},
                 data: null
             }
         }
@@ -36,14 +36,13 @@ export const commentService = {
             status: ResultStatus.NotContent,
             data: updateComment
         }
-
     },
     async deleteComment(commentId: string, userId: string){
 
         if (!validateId(commentId)){
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'The comment is invalid', field: 'commentId'},
+                extensions: {message: 'The comment to delete is invalid', field: 'commentId'},
                 data: null
             }
         }
