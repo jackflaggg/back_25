@@ -1,11 +1,9 @@
-import {createString} from "../../helpers-e2e/datatests";
 import {CommentsQueryRepository} from "../../../src/repositories/comments/comments-query-repository";
 import {CommentsDbRepository} from "../../../src/repositories/comments/comments-db-repository";
 import {validateId} from "../../../src/utils/helpers/helper-validate-id";
 import {inCreateUser, upComment} from "../helper-unit/comment.service.helper";
 import {commentService} from "../../../src/domain/comment/comment-service";
 import {ResultStatus} from "../../../src/models/common/errors/errors-type";
-import {ObjectId} from "mongodb";
 
 jest.mock('../../../src/utils/helpers/helper-validate-id', () => ({
     validateId: jest.fn(),
