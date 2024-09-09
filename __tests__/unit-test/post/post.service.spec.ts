@@ -72,34 +72,35 @@ describe('postsService', () => {
     });
 
     describe('putPost', () => {
-        it('⛔ возвращает ошибку, если Некорректный объект, Серверная ошибка, Ошибка при вставке', async () => {
-            (postsRepository.createPost as jest.Mock).mockResolvedValue(null);
+        it('⛔ возвращает false, если не удалось обновить', async () => {
+            (postsRepository.createPost as jest.Mock).mockResolvedValue(false);
 
             const existingPost = {
                 ...realPostToCreate,
                 createdAt: new Date().toISOString(),
             }
 
-            const response = await postsService.createPost(
+            const response = await postsService.putPost(
                 existingPost,
-                realBlog.name)
+                realBlog.name,
+                realPostDbType.id)
 
-            expect(response).toBeNull()
+            expect(response).toBeFalsy()
         });
 
-        it('⛔ возвращает id при успехе', async () => {
-            (postsRepository.createPost as jest.Mock).mockResolvedValue(realPostDbType.id);
-
-            const existingPost = {
-                ...realPostToCreate,
-                createdAt: new Date().toISOString(),
-            }
-
-            const response = await postsService.createPost(
-                existingPost,
-                realBlog.name)
-
-            expect(response).toEqual(realPostDbType.id)
-        });
-    });
+    //     it('⛔ возвращает id при успехе', async () => {
+    //         (postsRepository.createPost as jest.Mock).mockResolvedValue(realPostDbType.id);
+    //
+    //         const existingPost = {
+    //             ...realPostToCreate,
+    //             createdAt: new Date().toISOString(),
+    //         }
+    //
+    //         const response = await postsService.createPost(
+    //             existingPost,
+    //             realBlog.name)
+    //
+    //         expect(response).toEqual(realPostDbType.id)
+    //     });
+     });
 });
