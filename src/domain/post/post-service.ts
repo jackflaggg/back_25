@@ -8,7 +8,7 @@ import {CommentsDbRepository} from "../../repositories/comments/comments-db-repo
 import {ResultStatus} from "../../models/common/errors/errors-type";
 
 export const postsService = {
-    async createPost(post: InCreatePostModel, blogName: string): Promise<string | null> {
+    async createPost(post: Omit<InCreatePostModel, 'createdAt'>, blogName: string): Promise<string | null> {
         const { title, shortDescription, content, blogId} = post;
 
         const newPost: InCreatePostModel = {

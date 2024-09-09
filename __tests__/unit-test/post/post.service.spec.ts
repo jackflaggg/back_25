@@ -16,6 +16,18 @@ jest.mock('../../../src/repositories/posts/posts-db-repository', () => ({
     },
 }));
 
+let realBlog = {
+    id: new ObjectId().toString(),
+    name: createString(10),
+}
+
+let realPost = {
+    title: createString(10),
+    shortDescription: createString(10),
+    content: createString(10),
+    blogId: realBlog.id,
+    blogName: realBlog.name,
+}
 
 describe('postsService', () => {
     beforeEach(() => {
@@ -26,9 +38,15 @@ describe('postsService', () => {
         it('⛔ возвращает ошибку, если Некорректный объект, Серверная ошибка, Ошибка при вставке', async () => {
             (postsRepository.createPost as jest.Mock).mockResolvedValue(null);
 
+            const { blogName, ...mutatePost} = realPost;
+            const existingPost = {
+                ...mutatePost,
+                createdAt: new Date().toISOString(),
+            }
+
             const response = await postsService.createPost(
-                { title: 'new title', shortDescription: 'описание', content: 'новый контент', blogId: new ObjectId().toString(), blogName:},
-                { id: new ObjectId().toString(), name: 'blog'})
+                existingPost,
+                realBlog.name)
 
             expect(response).toBeNull()
         });

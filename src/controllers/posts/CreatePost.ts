@@ -22,7 +22,7 @@ export const createPostController = async (req: RequestWithBody<Omit<InCreatePos
         return
     }
 
-    const createdPost = await postsService.createPost(req.body as InCreatePostModel, blog.name);
+    const createdPost = await postsService.createPost(req.body as Omit<InCreatePostModel, 'createdAt'>, blog.name);
     if(!createdPost){
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
