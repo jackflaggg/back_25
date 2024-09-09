@@ -73,7 +73,7 @@ describe('postsService', () => {
 
     describe('putPost', () => {
         it('⛔ возвращает false, если не удалось обновить', async () => {
-            (postsRepository.createPost as jest.Mock).mockResolvedValue(false);
+            (postsRepository.putPost as jest.Mock).mockResolvedValue(false);
 
             const existingPost = {
                 ...realPostToCreate,
@@ -88,19 +88,20 @@ describe('postsService', () => {
             expect(response).toBeFalsy()
         });
 
-    //     it('⛔ возвращает id при успехе', async () => {
-    //         (postsRepository.createPost as jest.Mock).mockResolvedValue(realPostDbType.id);
-    //
-    //         const existingPost = {
-    //             ...realPostToCreate,
-    //             createdAt: new Date().toISOString(),
-    //         }
-    //
-    //         const response = await postsService.createPost(
-    //             existingPost,
-    //             realBlog.name)
-    //
-    //         expect(response).toEqual(realPostDbType.id)
-    //     });
+        it('⛔ возвращает true, если успех', async () => {
+            (postsRepository.putPost as jest.Mock).mockResolvedValue(true);
+
+            const existingPost = {
+                ...realPostToCreate,
+                createdAt: new Date().toISOString(),
+            }
+
+            const response = await postsService.putPost(
+                existingPost,
+                realBlog.name,
+                realPostDbType.id)
+
+            expect(response).toBeTruthy()
+        });
      });
 });
