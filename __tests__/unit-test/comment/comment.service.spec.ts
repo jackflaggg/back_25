@@ -5,16 +5,17 @@ import {validateId} from "../../../src/utils/helpers/helper-validate-id";
 import {inCreateUser, upComment} from "../helper-unit/comment.service.helper";
 import {commentService} from "../../../src/domain/comment/comment-service";
 import {ResultStatus} from "../../../src/models/common/errors/errors-type";
+import {ObjectId} from "mongodb";
+
+jest.mock('../../../src/utils/helpers/helper-validate-id', () => ({
+    validateId: jest.fn(),
+}));
 
 jest.mock('../../../src/repositories/comments/comments-db-repository', () => ({
     CommentsDbRepository: {
         UpdateComment: jest.fn(),
         deleteComment: jest.fn(),
     }
-}));
-
-jest.mock('../../../src/utils/helpers/helper-validate-id', () => ({
-    validateId: jest.fn(),
 }));
 
 jest.mock('../../../src/repositories/comments/comments-query-repository', () => ({
@@ -32,7 +33,6 @@ describe('commentService', () => {
         it('⛔ null, если невалиден коммент айди', async() => {
             const user = inCreateUser();
 
-            console.log(validateId('createString'));
             (validateId as jest.Mock).mockResolvedValueOnce(false);
 
             const response = await commentService.updateComment(user.commentId, user.id, user.inputComment);
