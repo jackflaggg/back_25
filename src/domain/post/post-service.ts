@@ -8,7 +8,7 @@ import {CommentsDbRepository} from "../../repositories/comments/comments-db-repo
 import {ResultStatus} from "../../models/common/errors/errors-type";
 
 export const postsService = {
-    async createPost(post: InCreatePostModel, blog: OutBlogModel): Promise<string | null> {
+    async createPost(post: InCreatePostModel, blogName: string): Promise<string | null> {
         const { title, shortDescription, content, blogId} = post;
 
         const newPost: InCreatePostModel = {
@@ -16,11 +16,13 @@ export const postsService = {
             shortDescription,
             content,
             blogId,
-            blogName: blog.name,
+            blogName,
             createdAt: new Date().toISOString()
         }
+
         return await postsRepository.createPost(newPost);
     },
+
     async putPost(post: Omit<InUpdatePostModel, 'blogName'>, blog: OutBlogModel, id: string): Promise<boolean> {
         const { title, shortDescription, content, blogId} = post;
 
@@ -29,9 +31,11 @@ export const postsService = {
         }
         return await postsRepository.putPost(upPost, id)
     },
+
     async delPost(id: string): Promise<boolean> {
         return await postsRepository.delPost(id);
     },
+
     async createCommentToPost(postId: string, inputData: string, userId: string) {
 
         const findUser = await usersQueryRepository.getUserById(userId);

@@ -10,6 +10,7 @@ import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/
 export const createPostController = async (req: RequestWithBody<Omit<InCreatePostModel, 'blogName' | 'createdAt'>>,
                                            res:ResponseBody<OutPostModel>) => {
     const { blogId} = req.body
+
     if (!validateId(blogId)) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return
@@ -21,7 +22,7 @@ export const createPostController = async (req: RequestWithBody<Omit<InCreatePos
         return
     }
 
-    const createdPost = await postsService.createPost(req.body as InCreatePostModel, blog);
+    const createdPost = await postsService.createPost(req.body as InCreatePostModel, blog.name);
     if(!createdPost){
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
@@ -32,6 +33,7 @@ export const createPostController = async (req: RequestWithBody<Omit<InCreatePos
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
+
     res.status(HTTP_STATUSES.CREATED_201).send(findCreatePost);
     return;
 }

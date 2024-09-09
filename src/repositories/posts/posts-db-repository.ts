@@ -5,9 +5,11 @@ import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/inpu
 export const postsRepository = {
     async createPost(post: InCreatePostModel): Promise<string | null> {
         const newPost = await postsCollections.insertOne(post);
+
         if (!newPost || !newPost.insertedId) {
             return null;
         }
+
         return newPost.insertedId.toString();
     },
     async putPost(post: InUpdatePostModel, id: string): Promise<boolean> {
@@ -19,6 +21,7 @@ export const postsRepository = {
                 blogId: post.blogId
             }
         }, {upsert: true});
+
         return updatePost.acknowledged;
     },
     async delPost(id: string): Promise<boolean> {
