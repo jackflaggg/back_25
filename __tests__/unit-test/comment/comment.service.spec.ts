@@ -33,7 +33,7 @@ describe('commentService', () => {
         it('⛔ null, если невалиден коммент айди', async() => {
             const user = inCreateUser();
 
-            (validateId as jest.Mock).mockResolvedValueOnce(false);
+            (validateId as jest.Mock).mockResolvedValue(false);
 
             const response = await commentService.updateComment(user.commentId, user.id, user.inputComment);
 
