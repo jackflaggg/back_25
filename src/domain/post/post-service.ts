@@ -23,13 +23,13 @@ export const postsService = {
         return await postsRepository.createPost(newPost);
     },
 
-    async putPost(post: Omit<InUpdatePostModel, 'blogName'>, blog: OutBlogModel, id: string): Promise<boolean> {
+    async putPost(post: Omit<InUpdatePostModel, 'blogName'>, blogName: string, postId: string): Promise<boolean> {
         const { title, shortDescription, content, blogId} = post;
 
         const upPost: InUpdatePostModel = {
-            title, shortDescription, content, blogId, blogName: blog!.name
+            title, shortDescription, content, blogId, blogName: blogName
         }
-        return await postsRepository.putPost(upPost, id)
+        return await postsRepository.putPost(upPost, postId)
     },
 
     async delPost(id: string): Promise<boolean> {

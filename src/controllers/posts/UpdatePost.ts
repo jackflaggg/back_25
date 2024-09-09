@@ -9,14 +9,14 @@ import {PostParamsId, RequestWithParamsAndBody} from "../../models/common/req_re
 
 export const updatePostController = async (req: RequestWithParamsAndBody<PostParamsId, InUpdatePostModel>,
                                            res:Response) => {
-    const { id } = req.params;
+    const { id : postId } = req.params;
 
-    if (!validateId(id)) {
+    if (!validateId(postId)) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
 
-    const post = await postsQueryRepository.giveOneToIdPost(id);
+    const post = await postsQueryRepository.giveOneToIdPost(postId);
     if (!post){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
@@ -28,7 +28,7 @@ export const updatePostController = async (req: RequestWithParamsAndBody<PostPar
         return;
     }
 
-    const isUpdatedPost = await postsService.putPost(req.body, blog, id);
+    const isUpdatedPost = await postsService.putPost(req.body, blog.name, postId);
     if (!isUpdatedPost) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;

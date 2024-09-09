@@ -2,6 +2,7 @@ import {ObjectId} from "mongodb";
 import {createString} from "../../helpers-e2e/datatests";
 import {postsRepository} from "../../../src/repositories/posts/posts-db-repository";
 import {postsService} from "../../../src/domain/post/post-service";
+import {InCreatePostModel} from "../../../src/models/post/input/input-type-posts";
 
 jest.mock('../../../src/repositories/posts/posts-db-repository', () => ({
     postsRepository: {
@@ -16,7 +17,16 @@ let realBlog = {
     name: createString(10),
 }
 
-let realPost = {
+let realPostToCreate: Omit<InCreatePostModel, 'createdAt'> = {
+    title: createString(10),
+    shortDescription: createString(10),
+    content: createString(10),
+    blogId: realBlog.id,
+    blogName: realBlog.name,
+}
+
+let realPostDbType = {
+    id: new ObjectId().toString(),
     title: createString(10),
     shortDescription: createString(10),
     content: createString(10),
@@ -34,7 +44,7 @@ describe('postsService', () => {
             (postsRepository.createPost as jest.Mock).mockResolvedValue(null);
 
             const existingPost = {
-                ...realPost,
+                ...realPostToCreate,
                 createdAt: new Date().toISOString(),
             }
 
@@ -43,6 +53,53 @@ describe('postsService', () => {
                 realBlog.name)
 
             expect(response).toBeNull()
+        });
+
+        it('⛔ возвращает id при успехе', async () => {
+            (postsRepository.createPost as jest.Mock).mockResolvedValue(realPostDbType.id);
+
+            const existingPost = {
+                ...realPostToCreate,
+                createdAt: new Date().toISOString(),
+            }
+
+            const response = await postsService.createPost(
+                existingPost,
+                realBlog.name)
+
+            expect(response).toEqual(realPostDbType.id)
+        });
+    });
+
+    describe('putPost', () => {
+        it('⛔ возвращает ошибку, если Некорректный объект, Серверная ошибка, Ошибка при вставке', async () => {
+            (postsRepository.createPost as jest.Mock).mockResolvedValue(null);
+
+            const existingPost = {
+                ...realPostToCreate,
+                createdAt: new Date().toISOString(),
+            }
+
+            const response = await postsService.createPost(
+                existingPost,
+                realBlog.name)
+
+            expect(response).toBeNull()
+        });
+
+        it('⛔ возвращает id при успехе', async () => {
+            (postsRepository.createPost as jest.Mock).mockResolvedValue(realPostDbType.id);
+
+            const existingPost = {
+                ...realPostToCreate,
+                createdAt: new Date().toISOString(),
+            }
+
+            const response = await postsService.createPost(
+                existingPost,
+                realBlog.name)
+
+            expect(response).toEqual(realPostDbType.id)
         });
     });
 });
