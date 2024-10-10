@@ -13,14 +13,14 @@ export const OneBlogController = async (req: RequestWithParams<BlogParamsModel>,
     const { id} = req.params;
 
     if (!validateId(id)){
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
-        return
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
     }
 
     const blogId = await blogsQueryRepositories.giveOneToIdBlog(id);
     if (!blogId){
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
-        return
+        return;
     }
     res.status(HTTP_STATUSES.OK_200).send(blogId);
     return;
