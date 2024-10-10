@@ -1,10 +1,11 @@
 import {body} from "express-validator";
 
-export const contentValidator  = body('content')
+export const contentValidator  =
+    body('content')
     .isString()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('пустота')
     .isLength({min: 20, max: 300})
-    .withMessage('more then 300 or min 20')
+    .withMessage('больше 300 символов и меньше 20 символов')
