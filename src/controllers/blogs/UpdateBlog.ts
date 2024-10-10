@@ -9,19 +9,23 @@ import {BlogParamsModel, RequestWithParamsAndBody} from "../../models/common/req
 export const updateBlogController = async (req: RequestWithParamsAndBody<BlogParamsModel, InUpdateBlogModel>,
                                            res:Response) => {
     const {id} = req.params;
+
     if (!validateId(id)) {
+        console.log(`[id] блога не валиден`);
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
 
     const blog = await blogsQueryRepositories.giveOneToIdBlog(id);
     if (!blog) {
+        console.log(`[blog] не в репозитории не найден`);
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
 
     const isBlogUpdated = await blogsService.putBlog(id, req.body);
     if (!isBlogUpdated) {
+        console.log(`[isBlogUpdated] не получилось обновить`);
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
