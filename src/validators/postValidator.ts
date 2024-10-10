@@ -43,7 +43,7 @@ export const blogIdValidator =
         }
         return !!blog;
     })
-    .withMessage('no blog');
+    .withMessage('это не блог');
 
 export const blogIdParamsValidator =
     param('id')
@@ -51,7 +51,7 @@ export const blogIdParamsValidator =
     .trim()
     .withMessage('это не строка')
     .isLength({max: 500})
-    .withMessage('more then 500');
+    .withMessage('больше 500 символов');
 
 export const postValidator: ValidationChain[] = [
     titleValidator,
