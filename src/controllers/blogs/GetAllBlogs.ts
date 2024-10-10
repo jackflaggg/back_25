@@ -8,7 +8,7 @@ import {RequestWithQuery, ResponseBody} from "../../models/common/req_res_params
 export const AllBlogController = async (req: RequestWithQuery<InQueryBlogModel>,
                                         res:ResponseBody<OutGetAllBlogsModel>) => {
     const sortData = queryHelperToBlog(req.query);
-    const allBlogs = await blogsQueryRepositories.getAllBlog(sortData)
+    const allBlogs = await blogsQueryRepositories.getAllBlog(sortData);
 
     res.status(HTTP_STATUSES.OK_200).send(allBlogs);
     return;
