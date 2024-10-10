@@ -9,6 +9,7 @@ export const registrationEmailController = async (req: RequestWithBody<EmailBody
     const findEmail = await authService.registrationEmailResending(req.body.email);
 
     if (findEmail.status !== ResultSuccess.Success && findEmail.extensions) {
+        console.log(`[]`);
         res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(findEmail.extensions));
         return;
     }

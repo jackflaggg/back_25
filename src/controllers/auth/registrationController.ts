@@ -11,10 +11,12 @@ export const registrationController = async (req: RequestWithBody<InRegistration
 
     if (checkRegistrationUser.status !== ResultSuccess.Success) {
         if (checkRegistrationUser.errors) {
+            console.log(`[]`);
             res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.errors));
             return;
         }
         if (checkRegistrationUser.extensions) {
+            console.log(`[]`);
             res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.extensions));
             return;
         }

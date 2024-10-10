@@ -8,6 +8,7 @@ export const getInfoUserController = async (req: Request, res: ResponseBody<OutL
     const existingId = req.userId;
 
     if (!existingId) {
+        console.log(`[existingId] не прошел авторизацию`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return
     }
@@ -15,6 +16,7 @@ export const getInfoUserController = async (req: Request, res: ResponseBody<OutL
     const user = await usersQueryRepository.LoginMapByUser(existingId as string);
 
     if (!user) {
+        console.log(`[user] не был найден в репозитории`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
