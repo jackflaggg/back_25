@@ -2,35 +2,35 @@ import {body, ValidationChain} from "express-validator";
 
 export const loginValidator  = body('login')
     .isString()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('пустота')
     .isLength({min: 3, max: 10})
-    .withMessage('more then 10 or min 3')
+    .withMessage('больше 10 символов или меньше 3 символов')
     .matches(/^[a-zA-Z0-9_-]*$/)
-    .withMessage('login length should be from 3 to 10 symbols');
+    .withMessage('логин не прошел валидацию');
 
 export const passwordValidator  = body('password')
     .isString()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('пустота')
     .isLength({min: 6, max: 20})
-    .withMessage('password length should be from 6 to 20 symbols');
+    .withMessage('больше 20 символов или меньше 6 символов');
 
 export const emailValidator  = body('email')
     .isString()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('пустота')
     .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
-    .withMessage('email should follow the pattern: example@example.com');
+    .withMessage('email не прошел валидацию: example@example.com');
 
 export const userCreateValidator: ValidationChain[] = [
     loginValidator,
     passwordValidator,
     emailValidator
-]
+];
