@@ -6,10 +6,10 @@ import {EmailBodyModel, RequestWithBody} from "../../models/common/req_res_param
 import {errorsMessages} from "../../utils/features/errorsMessages";
 
 export const registrationEmailController = async (req: RequestWithBody<EmailBodyModel>, res: Response) => {
-    const findEmail = await authService.registrationEmailResending(req.body.email);
+    const findEmail= await authService.registrationEmailResending(req.body.email);
 
     if (findEmail.status !== ResultSuccess.Success && findEmail.extensions) {
-        console.log(`[]`);
+        console.log(`[findEmail] либо истек, либо статус не совпал`);
         res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(findEmail.extensions));
         return;
     }
