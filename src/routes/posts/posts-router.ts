@@ -18,7 +18,7 @@ postRouter.get("/", AllPostController);
 postRouter.get("/:id", blogIdValidator, OnePostController);
 postRouter.get('/:postId/comments', getCommentsToPostId);
 
-postRouter.post("/", adminMiddlewares, [...postValidator, inputCheckErrorsMiddleware],createPostController);
+postRouter.post("/", adminMiddlewares, [...postValidator, inputCheckErrorsMiddleware], createPostController);
 postRouter.post('/:postId/comments', authBearerMiddlewares, contentValidator, inputCheckErrorsMiddleware, createCommentByPostIdController);
 
 postRouter.put("/:id", adminMiddlewares, [...postValidator, inputCheckErrorsMiddleware], updatePostController);
