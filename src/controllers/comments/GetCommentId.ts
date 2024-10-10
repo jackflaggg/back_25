@@ -8,15 +8,17 @@ export const getCommentIdController = async (req: Request,
     const {id} = req.params;
 
     if (!validateId(id)){
-        res.sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403)
-        return
+        console.log(`[id] не прошел валидацию`);
+        res.sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403);
+        return;
     }
 
     const comment = await CommentsQueryRepository.getComment(id);
 
     if (!comment) {
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
-        return
+        console.log(`[comment] в репозитории не вернул данные`);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
     }
 
     res.status(HTTP_STATUSES.OK_200).send(comment);
