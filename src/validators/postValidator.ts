@@ -4,17 +4,17 @@ import {blogsQueryRepositories} from "../repositories/blogs/blogs-query-reposito
 export const titleValidator =
     body('title')
     .isString()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('пусто')
     .isLength({max: 30})
     .withMessage('more then 30');
 
 export const shortDescriptionValidator =
     body('shortDescription')
     .isString()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .trim()
     .notEmpty()
     .withMessage('empty')
@@ -24,7 +24,7 @@ export const shortDescriptionValidator =
 export const contentValidator =
     body('content')
     .isString()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .trim()
     .notEmpty()
     .withMessage('empty')
@@ -34,14 +34,14 @@ export const contentValidator =
 export const blogIdValidator =
     body('blogId')
     .isString()
-    .withMessage('not string')
+    .withMessage('это не строка')
     .trim()
     .custom(async blogId => {
         const blog = await blogsQueryRepositories.giveOneToIdBlog(blogId);
         if (!blog) {
-            throw Error('Incorrect blogId')
+            throw Error('Incorrect blogId');
         }
-        return !!blog
+        return !!blog;
     })
     .withMessage('no blog');
 
@@ -49,7 +49,7 @@ export const blogIdParamsValidator =
     param('id')
     .isString()
     .trim()
-    .withMessage('this is not string')
+    .withMessage('это не строка')
     .isLength({max: 500})
     .withMessage('more then 500');
 
