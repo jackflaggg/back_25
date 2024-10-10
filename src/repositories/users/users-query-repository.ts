@@ -32,10 +32,10 @@ export const usersQueryRepository = {
         const pagesCount = Math.ceil(totalCountsUsers / Number(pageSize));
 
         return {
-            pagesCount: +pagesCount,
-            page: +pageNumber,
-            pageSize: +pageSize,
-            totalCount: +totalCountsUsers,
+            pagesCount: Number(pagesCount),
+            page: Number(pageNumber),
+            pageSize: Number(pageSize),
+            totalCount: Number(totalCountsUsers),
             items: AllUsers.map(user => userMapperToOutput(user)),
         };
     },
