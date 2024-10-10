@@ -39,7 +39,7 @@ export const blogIdValidator =
     .custom(async blogId => {
         const blog = await blogsQueryRepositories.giveOneToIdBlog(blogId);
         if (!blog) {
-            throw Error('некорректный blogId');
+            throw Error('[blogId] некорректный');
         }
         return !!blog;
     })
