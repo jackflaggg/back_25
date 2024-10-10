@@ -12,7 +12,7 @@ export const queryHelperToBlog = (queryBlog: InQueryBlogModel): QueryHelperBlog 
         sortDirection: queryBlog.sortDirection ?? 'desc',
         searchNameTerm: queryBlog.searchNameTerm ?? null,
     }
-}
+};
 
 export const queryHelperToPost = (queryPost: InQueryPostModel): QueryHelperPost => {
     return {
@@ -21,7 +21,7 @@ export const queryHelperToPost = (queryPost: InQueryPostModel): QueryHelperPost 
         sortBy: queryPost.sortBy ?? 'createdAt',
         sortDirection: queryPost.sortDirection ?? 'desc',
     }
-}
+};
 
 export const queryHelperToUser = (queryUser: InQueryUserModel) => {
     return {
@@ -32,4 +32,4 @@ export const queryHelperToUser = (queryUser: InQueryUserModel) => {
         searchLoginTerm: queryUser.searchLoginTerm ?? null,
         searchEmailTerm: queryUser.searchEmailTerm ?? null,
     }
-}
+};
