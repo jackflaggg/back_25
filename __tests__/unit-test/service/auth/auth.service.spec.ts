@@ -1,14 +1,13 @@
-import { UsersDbRepository } from '../../../src/repositories/users/users-db-repository';
-import { authService } from '../../../src/domain/auth/auth-service';
-import { ResultStatus, ResultSuccess } from '../../../src/models/common/errors/errors-type';
-import { hashService } from '../../../src/utils/application/hash-service';
-import {OutUserFindLoginOrEmail} from "../../../src/models/user/ouput/output-type-users";
 import {ObjectId} from "mongodb";
-import {createString} from "../../helpers-e2e/datatests";
-import {jwtService} from "../../../src/utils/application/jwt-service";
+import {OutUserFindLoginOrEmail} from "../../../../src/models/user/ouput/output-type-users";
+import {createString} from "../../../helpers-e2e/datatests";
 import {randomUUID} from "node:crypto";
-import {emailManagers} from "../../../src/managers/email-managers";
-import {emailAdapter} from "../../../src/utils/adapters/email-adapter";
+import {UsersDbRepository} from "../../../../src/repositories/users/users-db-repository";
+import {authService} from "../../../../src/domain/auth/auth-service";
+import {ResultStatus, ResultSuccess} from "../../../../src/models/common/errors/errors-type";
+import {hashService} from "../../../../src/utils/application/hash-service";
+import {jwtService} from "../../../../src/utils/application/jwt-service";
+
 
 let outUser : OutUserFindLoginOrEmail ={
     _id: new ObjectId(),
