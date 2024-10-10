@@ -13,18 +13,20 @@ import {InCreateCommentModel} from "../../models/comments/input/input-type-comme
 
 export const createCommentByPostIdController = async (req: RequestWithParamsAndBody<BlogParamsToPostModel, InCreateCommentModel>, res: ResponseBody<OutCommentModel | ErrorsMessageResponse>) => {
 
-    const createComment = await postsService.createCommentToPost(req.params.postId, req.body.content, req.userId as string)
+    const createComment = await postsService.createCommentToPost(req.params.postId, req.body.content, req.userId as string);
 
     if (createComment.status === ResultStatus.NotFound){
+        console.log(`[createComment] не удалось найти в сервисе`);
         res.status(HTTP_STATUSES.NOT_FOUND_404).send(errorsMessages(createComment.extensions));
-        return
+        return;
     }
 
     const findCreateComment = await CommentsQueryRepository.getComment(createComment.data as string);
 
     if (!findCreateComment) {
-        res.status(HTTP_STATUSES.NOT_FOUND_404).send(errorsMessages({message: 'not found comment', field: 'comment'}));
-        return
+        console.log(`[findCreateComment] не был найден в репозитории`);
+        res.status(HTTP_STATUSES.NOT_FOUND_404).send(errorsMessages({message: 'не найден комментарий', field: 'comment'}));
+        return;
     }
 
     res.status(HTTP_STATUSES.CREATED_201).send(findCreateComment);
