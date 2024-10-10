@@ -8,33 +8,33 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     const authHeaders = req.headers.authorization;
 
     if(!authHeaders){
-        handleError(res, 'Что то с заголовком: ' + authHeaders);
+        handleError(res, `Что то с заголовком: ${authHeaders}`);
         return;
     }
 
     const token = authHeaders.split(' ')[1];
 
     if (!token) {
-        handleError(res, 'Нет токена: ' + token);
+        handleError(res, `Нет токена: ${token}`);
         return;
     }
 
     const existingUserId = await jwtService.getUserIdByToken(token);
 
     if (!existingUserId) {
-        handleError(res, 'проблема с айди пользователем, мб невалиден: ' + existingUserId);
+        handleError(res, `проблема с айди пользователем, мб невалиден: ${existingUserId}`);
         return;
     }
 
     if (!isValidObjectIdToVerifyToken(existingUserId)) {
-        handleError(res, 'Неверный формат userId: ' + existingUserId);
+        handleError(res, `Неверный формат userId: ${existingUserId}`);
         return;
     }
 
     const user = await usersQueryRepository.getUserById(existingUserId)
 
     if (!user) {
-        handleError(res, 'Пользователь не найден.');
+        handleError(res, `Пользователь не найден: ${user}`);
         return;
     }
 
