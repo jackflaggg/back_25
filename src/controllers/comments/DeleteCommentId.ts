@@ -13,7 +13,7 @@ export const deleteCommentController = async (req: RequestWithParams<CommentPara
 
     const { userId } = req;
 
-    const deleteComment = await commentService.deleteComment(commentId, userId as string)
+    const deleteComment = await commentService.deleteComment(commentId, userId as string);
 
     const statusMap: Record<ResultStatusType, HTTP_STATUSES> = {
         [ResultStatus.BadRequest]: HTTP_STATUSES.BAD_REQUEST_400,
