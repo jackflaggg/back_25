@@ -10,6 +10,7 @@ export const logoutController = async (req: Request, res: Response) => {
 
     //TODO: Непонятно с датой
     if (!token){
+        console.log(`[token] не прошел верификацию`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
