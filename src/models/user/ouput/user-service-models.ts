@@ -5,5 +5,8 @@ export class OutCreateUserSuccess {
 }
 
 export class OutCreateUserError {
-    constructor(public status: string, public extensions: {message: string | FieldNamesType, field: string}, public data: null) {}
+    constructor(
+        public status: string,
+        public extensions: {message: string | FieldNamesType, field: string},
+        public data: null) {}
 }
