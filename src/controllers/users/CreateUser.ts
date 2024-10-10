@@ -16,7 +16,7 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
     const createdUserId = await userService.createUser(req.body);
 
     if (createdUserId instanceof OutCreateUserError) {
-        console.log(`[createdUserId]`);
+        console.log(`[createdUserId] в сервисе вернул непредвиденные данные`);
         res
             .status(HTTP_STATUSES.BAD_REQUEST_400)
             .send(errorsMessages(createdUserId.extensions));
@@ -29,7 +29,7 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
         console.log(`[user] не был найден в репозитории`);
         res
             .status(HTTP_STATUSES.NOT_FOUND_404)
-            .send(errorsMessages({field: 'error', message: 'непредвиденная ошибка, такого никогда не должно было произойти'}));
+            .send(errorsMessages({field: `error`, message: `непредвиденная ошибка, такого никогда не должно было произойти`}));
         return
     }
 
