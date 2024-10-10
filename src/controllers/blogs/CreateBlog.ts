@@ -9,10 +9,16 @@ export const createBlogController = async (req: RequestWithBody<InCreateBlogMode
                                            res:ResponseBody<OutBlogModel>) => {
     const createdBlogId = await blogsService.createBlog(req.body);
 
+    if (!createdBlogId) {
+        console.log(`[createdBlogId] в сервисе по созданию блога что-то пошло не так!`)
+        res.sendStatus(HTTP_STATUSES.INTERNAL_SERVER_ERROR_500);
+        return;
+    }
     const blog = await blogsQueryRepositories.giveOneToIdBlog(createdBlogId!);
 
     if (!blog) {
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+        console.log(`[blog] в репозитории вернул null!`)
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return
     }
 

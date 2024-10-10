@@ -1,5 +1,4 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {Response} from "express";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
