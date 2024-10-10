@@ -9,7 +9,7 @@ export const titleValidator =
     .notEmpty()
     .withMessage('пусто')
     .isLength({max: 30})
-    .withMessage('more then 30');
+    .withMessage('больше 30 символов');
 
 export const shortDescriptionValidator =
     body('shortDescription')
@@ -17,9 +17,9 @@ export const shortDescriptionValidator =
     .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('пусто')
     .isLength({max: 100})
-    .withMessage('more then 100');
+    .withMessage('больше 100 символов');
 
 export const contentValidator =
     body('content')
@@ -27,9 +27,9 @@ export const contentValidator =
     .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('пусто')
     .isLength({max: 1000})
-    .withMessage('more then 1000');
+    .withMessage('больше 1000 символов');
 
 export const blogIdValidator =
     body('blogId')
