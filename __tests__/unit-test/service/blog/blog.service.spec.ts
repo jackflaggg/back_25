@@ -4,7 +4,7 @@ import {blogsRepositories} from "../../../../src/repositories/blogs/blogs-db-rep
 import {blogsService} from "../../../../src/domain/blog/blog-service";
 
 
-jest.mock('../src/repositories/blogs/blogs-db-repository', () => ({
+jest.mock('../../../../src/repositories/blogs/blogs-db-repository', () => ({
     blogsRepositories: {
         createBlog: jest.fn(),
         putBlog: jest.fn(),
