@@ -27,7 +27,7 @@ export const updateCommentController = async (req: RequestWithParamsAndBody<Comm
     const statusCode = statusMap[updateComment.status];
 
     if (statusCode && updateComment.extensions) {
-        console.log(`[]`);
+        console.log(`[updateComment] возникла ошибка в сервисе`);
         res.status(statusCode).send(errorsMessages(updateComment.extensions));
         return
     }
