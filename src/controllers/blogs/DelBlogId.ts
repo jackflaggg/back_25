@@ -10,12 +10,14 @@ export const deleteBlogController = async (req: RequestWithParams<BlogParamsMode
     const {id} = req.params;
 
     if (!validateId(id)){
+        console.log(`[id] не валиден`);
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
 
     const blog = await blogsQueryRepositories.giveOneToIdBlog(id)
     if (!blog){
+        console.log(`[blog] не в репозитории не найден`);
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
