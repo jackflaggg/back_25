@@ -1,7 +1,8 @@
 import {body, param, ValidationChain} from "express-validator";
 import {blogsQueryRepositories} from "../repositories/blogs/blogs-query-repository";
 
-export const titleValidator = body('title')
+export const titleValidator =
+    body('title')
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -10,7 +11,8 @@ export const titleValidator = body('title')
     .isLength({max: 30})
     .withMessage('more then 30');
 
-export const shortDescriptionValidator = body('shortDescription')
+export const shortDescriptionValidator =
+    body('shortDescription')
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -19,7 +21,8 @@ export const shortDescriptionValidator = body('shortDescription')
     .isLength({max: 100})
     .withMessage('more then 100');
 
-export const contentValidator = body('content')
+export const contentValidator =
+    body('content')
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -28,7 +31,8 @@ export const contentValidator = body('content')
     .isLength({max: 1000})
     .withMessage('more then 1000');
 
-export const blogIdValidator = body('blogId')
+export const blogIdValidator =
+    body('blogId')
     .isString()
     .withMessage('not string')
     .trim()
@@ -41,7 +45,8 @@ export const blogIdValidator = body('blogId')
     })
     .withMessage('no blog');
 
-export const blogIdParamsValidator = param('id')
+export const blogIdParamsValidator =
+    param('id')
     .isString()
     .trim()
     .withMessage('this is not string')
@@ -53,11 +58,11 @@ export const postValidator: ValidationChain[] = [
     shortDescriptionValidator,
     contentValidator,
     blogIdValidator
-]
+];
 
 export const postCreateWithBlogIdValidator: ValidationChain[] = [
     titleValidator,
     shortDescriptionValidator,
     contentValidator,
     blogIdParamsValidator
-]
+];
