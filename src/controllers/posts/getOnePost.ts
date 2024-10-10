@@ -13,6 +13,7 @@ export const OnePostController = async (req: RequestWithParams<PostParamsId>,
     const { id: postId } = req.params;
 
     if (!validateId(postId)) {
+        console.log(`[postId] не валиден`);
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
@@ -20,6 +21,7 @@ export const OnePostController = async (req: RequestWithParams<PostParamsId>,
     const getPostId = await postsQueryRepository.giveOneToIdPost(postId);
 
     if (!getPostId) {
+        console.log(`[getPostId] не был найден в репозитории`);
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
