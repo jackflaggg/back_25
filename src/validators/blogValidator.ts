@@ -1,6 +1,7 @@
 import {body, ValidationChain} from "express-validator";
 
-export const nameValidator = body('name')
+export const nameValidator =
+    body('name')
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -9,7 +10,8 @@ export const nameValidator = body('name')
     .isLength({max: 15})
     .withMessage('more then 15');
 
-export const descriptionValidator = body('description')
+export const descriptionValidator =
+    body('description')
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -18,7 +20,8 @@ export const descriptionValidator = body('description')
     .isLength({max: 500})
     .withMessage('more then 500');
 
-export const urlValidator = body('websiteUrl')
+export const urlValidator =
+    body('websiteUrl')
     .isString()
     .withMessage('this is not string')
     .trim()
@@ -33,4 +36,4 @@ export const blogValidator: ValidationChain[] = [
     nameValidator,
     descriptionValidator,
     urlValidator
-]
+];
