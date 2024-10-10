@@ -1,6 +1,5 @@
 import {CommentDbType} from "../../models/db/db.models";
 import {postsRepository} from "../../repositories/posts/posts-db-repository";
-import {OutBlogModel} from "../../models/blog/output/output-type-blogs";
 import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/input-type-posts";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
@@ -43,7 +42,7 @@ export const postsService = {
         if (!findUser) {
             return {
                 status: ResultStatus.NotFound,
-                extensions: {message: 'The user not found', field: 'user'},
+                extensions: {message: 'пользователь не был найден', field: 'user'},
                 data: null
             }
         }
@@ -53,7 +52,7 @@ export const postsService = {
         if (!findPost) {
             return {
                 status: ResultStatus.NotFound,
-                extensions: {message: 'The post not found', field: 'post'},
+                extensions: {message: 'пост не был найден', field: 'post'},
                 data: null
             }
         }
