@@ -6,7 +6,7 @@ export const nameValidator =
     .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('сущность')
     .isLength({max: 15})
     .withMessage('больше 15 символов');
 
@@ -16,7 +16,7 @@ export const descriptionValidator =
     .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('сущность')
     .isLength({max: 500})
     .withMessage('больше 500 символов');
 
@@ -26,7 +26,7 @@ export const urlValidator =
     .withMessage('это не строка')
     .trim()
     .notEmpty()
-    .withMessage('empty')
+    .withMessage('сущность')
     .isLength({max: 100})
     .withMessage('больше 100 символов')
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
