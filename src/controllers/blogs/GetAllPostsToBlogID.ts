@@ -15,6 +15,7 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
     const blogId = req.params.id;
 
     if (!validateId(blogId)){
+        console.log(`[blogId] не валиден`);
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
         return
     }
@@ -22,18 +23,20 @@ export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogPar
     const blogPost = await blogsQueryRepositories.giveOneToIdBlog(blogId);
 
     if(!blogPost){
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
-        return
+        console.log(`[blogPost] вернул null`);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
     }
 
     const sortDataQuery = queryHelperToPost(req.query);
 
     const allPosts = await blogsQueryRepositories.getPostsToBlogID(blogId, sortDataQuery);
     if (!allPosts){
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
-        return
+        console.log(`[allPosts] вернул хрень`);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
     }
 
     res.status(HTTP_STATUSES.OK_200).send(allPosts);
-    return
+    return;
 }
