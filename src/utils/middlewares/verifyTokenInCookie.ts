@@ -7,7 +7,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     const {refreshToken} = req.cookies;
 
     if(!refreshToken){
-        console.log(`[refreshToken]`);
+        console.log(`[refreshToken] неверные куки`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
@@ -15,10 +15,10 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     try {
         const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
 
-        console.log('проверяем че пришло в верифай токен: ' + JSON.stringify(verifyToken));
+        console.log(`проверяем че пришло в верифай токен: ${JSON.stringify(verifyToken)}`);
 
         if (verifyToken && verifyToken.expired){
-            console.log(`[verifyToken]`);
+            console.log(`[verifyToken] походу истек`);
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
             return;
         }
@@ -26,7 +26,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
         const tokenExists = await blackListTokenCollection.findOne({ token: refreshToken });
 
         if (tokenExists) {
-            console.log(`[tokenExists]`);
+            console.log(`[tokenExists] не прошел авторизацию`);
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
             return;
         }
@@ -34,9 +34,8 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
         next();
 
     } catch (error) {
-        console.log(`[error]`);
-        console.error('Error verifying token: ', error);
-        res.status(HTTP_STATUSES.NOT_AUTHORIZATION_401).send({errorsMessages: [{field: 'middleware refresh', message: 'Refresh token'}]});
+        console.error(`Error verifying token: `, error);
+        res.status(HTTP_STATUSES.NOT_AUTHORIZATION_401).send({errorsMessages: [{field: `middleware refresh`, message: `Refresh token`}]});
         return;
     }
 }
