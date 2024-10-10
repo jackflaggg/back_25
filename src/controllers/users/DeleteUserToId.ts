@@ -9,15 +9,17 @@ export const deleteUserController = async (req: RequestWithParams<UserParamsIdDe
     const { id } = req.params;
 
     if (!validateId(id)){
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
-        return
+        console.log(`[id] не прошел валидацию`);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
     }
 
     const user = await usersQueryRepository.getUserById(id)
 
     if (!user){
-        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
-        return
+        console.log(`[user] не был найден в репозитории`);
+        res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+        return;
     }
 
     const deleteBlog = await userService.delUser(user.id);
