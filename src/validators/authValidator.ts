@@ -9,7 +9,7 @@ export const passwordValidator  = body('password')
     .notEmpty()
     .withMessage('пустота')
     .isLength({min: 6, max: 20})
-    .withMessage('password length should be from 6 to 20 symbols');
+    .withMessage('длина больше 20 символов или меньше 6 символов');
 
 export const loginValidator  = body('login')
     .isString()
@@ -18,7 +18,7 @@ export const loginValidator  = body('login')
     .notEmpty()
     .withMessage('пустота')
     .isLength({min: 3, max: 10})
-    .withMessage('password length should be from 3 to 10 symbols');
+    .withMessage('длина больше 10 символов или меньше 3 символов');
 
 export const emailValidator  = body('email')
     .isString()
@@ -27,7 +27,7 @@ export const emailValidator  = body('email')
     .notEmpty()
     .withMessage('пустота')
     .matches(emailRegex)
-    .withMessage('email should follow the pattern: example@example.com')
+    .withMessage('email не прошел валидацию: example@example.com')
 
 export const loginOrEmailValidator = body('loginOrEmail')
     .optional({ nullable: true })
@@ -45,7 +45,7 @@ export const loginOrEmailValidator = body('loginOrEmail')
                 .notEmpty()
                 .withMessage('пустота')
                 .matches(emailRegex)
-                .withMessage('email should follow the pattern: example@example.com')
+                .withMessage('email не прошел валидацию: example@example.com')
                 .run(req);
         } else {
             // Ввод логина, применяем проверки для логина
@@ -56,9 +56,9 @@ export const loginOrEmailValidator = body('loginOrEmail')
                 .notEmpty()
                 .withMessage('пустота')
                 .isLength({ min: 3, max: 10 })
-                .withMessage('length login should be between 3 and 10 characters')
+                .withMessage('длина больше 10 символов или меньше 3 символов')
                 .matches(/^[a-zA-Z0-9_-]*$/)
-                .withMessage('login can only contain alphanumeric characters, underscores, and dashes')
+                .withMessage('логин не прошел валидацию')
                 .run(req);
         }
     });
@@ -70,7 +70,7 @@ export const codeValidator  = body('code')
     .notEmpty()
     .withMessage('пустота')
     .isLength({min: 6, max: 50})
-    .withMessage('password length should be from 6 to 50 symbols');
+    .withMessage('длина больше 50 символов или меньше 6 символов');
 
 export const loginPostValidator: ValidationChain[] = [
     loginOrEmailValidator,
