@@ -10,7 +10,7 @@ export const createBlogController = async (req: RequestWithBody<InCreateBlogMode
     const createdBlogId = await blogsService.createBlog(req.body);
 
     if (!createdBlogId) {
-        console.log(`[createdBlogId] в сервисе по созданию блога что-то пошло не так!`)
+        console.log(`[createdBlogId] в сервисе по созданию блога что-то пошло не так!`);
         res.sendStatus(HTTP_STATUSES.INTERNAL_SERVER_ERROR_500);
         return;
     }
