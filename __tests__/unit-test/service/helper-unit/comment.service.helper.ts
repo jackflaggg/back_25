@@ -1,7 +1,6 @@
 import {ObjectId} from "mongodb";
 import {createString} from "../../../helpers-e2e/datatests";
 
-
 export const inCreateUser = () => ({
     commentId: new ObjectId().toString(),
     id: new ObjectId().toString(),
