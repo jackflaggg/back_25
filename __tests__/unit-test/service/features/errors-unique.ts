@@ -35,11 +35,6 @@ describe('errors-unique', () => {
     });
 
     it('возвращает ошибку, если юзер найден по мэйлу', async () => {
-        const { id, ...rest } = testUserDbType; // Исключаем id
-        const withObject = { id, ...rest }; // Возвращаем новый объект
-        console.log(rest)
-        console.log(id)
-        console.log(withObject);
         (UsersDbRepository.findByEmailUser as jest.Mock).mockResolvedValueOnce(testUserDbType);
         (UsersDbRepository.findByLoginUser as jest.Mock).mockResolvedValueOnce(null);
         const res = await errorsUnique(createString(10), createString(10));
