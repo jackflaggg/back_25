@@ -10,7 +10,7 @@ import {helperError} from "../../utils/helpers/helper-error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
-import {loginError, loginSuccess} from "../../models/auth/ouput/auth-service-models";
+import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth-service-models";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
@@ -47,7 +47,7 @@ export const authService = {
     async loginUser(inputDataUser: InLoginModels) {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
-        if (userId.data === null) {
+        if (userId instanceof LoginErrorTwo || userId.data === null ) {
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {field: 'userId', message: 'Аутентификация рухнула!'},
