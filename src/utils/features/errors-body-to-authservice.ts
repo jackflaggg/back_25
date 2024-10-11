@@ -1,14 +1,8 @@
-import {ResultStatus} from "../../models/common/errors/errors-type";
-
-export const errorsBodyToAuthService = (body: any) => {
+export const errorsBodyToAuthService = (body: {login: string, password: string, email: string}): string | null => {
     for (const [key, value] of Object.entries(body)) {
         if (!value) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {message: `${key} is required`, field: `${key}`},
-                data: null
-            }
+            return key;
         }
     }
-    return;
+    return null;
 }

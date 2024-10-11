@@ -11,6 +11,8 @@ import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth-service-models";
+import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
+import {isNull} from "node:util";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
@@ -89,13 +91,13 @@ export const authService = {
         const requiredFields = { login, password, email };
 
         // проверяю на тело
-        for (const [key, value] of Object.entries(requiredFields)) {
-            if (!value) {
-                return {
-                    status: ResultStatus.BadRequest,
-                    extensions: {message: `${key} is required`, field: `${key}`},
-                    data: null
-                }
+        const errField = errorsBodyToAuthService(requiredFields);
+        //TODO: проверка на isnull
+        if (errField !== null){
+            return {
+                status: ResultStatus.BadRequest,
+                extensions: {message: `${errField} is required`, field: `${errField}`},
+                data: null
             }
         }
 
