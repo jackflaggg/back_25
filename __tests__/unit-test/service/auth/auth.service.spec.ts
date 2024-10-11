@@ -7,6 +7,7 @@ import {authService} from "../../../../src/domain/auth/auth-service";
 import {ResultStatus, ResultSuccess} from "../../../../src/models/common/errors/errors-type";
 import {hashService} from "../../../../src/utils/application/hash-service";
 import {jwtService} from "../../../../src/utils/application/jwt-service";
+import {loginSuccess} from "../../../../src/models/auth/ouput/auth-service-models";
 
 
 let outUser : OutUserFindLoginOrEmail ={
@@ -18,7 +19,6 @@ let outUser : OutUserFindLoginOrEmail ={
 }
 
 let outUser2 : OutUserFindLoginOrEmail ={
-    //_id: new ObjectId(),
     login: createString(10),
     email: 'success2@example.com',
     password: createString(12),
@@ -38,7 +38,17 @@ let UserDbType = {
     }
 }
 
-jest.mock('../../../src/repositories/users/users-db-repository', () => ({
+let dataAuthService: loginSuccess = {
+    status: 'Success',
+    data: createString(10)
+}
+
+// jest.mock('../../../../src/domain/auth/auth-service', () => ({
+//     authService: {
+//         authenticationUserToLogin: jest.fn(),
+//     },
+// }))
+jest.mock('../../../../src/repositories/users/users-db-repository', () => ({
     UsersDbRepository: {
         findUserByLoginOrEmail: jest.fn(),
         createUser: jest.fn(),
@@ -47,26 +57,26 @@ jest.mock('../../../src/repositories/users/users-db-repository', () => ({
     },
 }));
 
-jest.mock('../../../src/utils/application/hash-service', () => ({
+jest.mock('../../../../src/utils/application/hash-service', () => ({
     hashService: {
         comparePassword: jest.fn(),
         _generateHash: jest.fn(),
     }
 }));
 
-jest.mock('../../../src/utils/application/jwt-service', () => ({
+jest.mock('../../../../src/utils/application/jwt-service', () => ({
     jwtService: {
         createAnyToken: jest.fn(),
     }
 }));
 
-jest.mock('../../../src/managers/email-managers', () => ({
+jest.mock('../../../../src/managers/email-managers', () => ({
     emailManagers: {
         sendEmailRecoveryMessage: jest.fn()
     },
 }));
 
-jest.mock('../../../src/utils/adapters/email-adapter', () => ({
+jest.mock('../../../../src/utils/adapters/email-adapter', () => ({
     emailAdapter: {
         sendEmail: jest.fn()
     },
@@ -139,11 +149,16 @@ describe('authService', () => {
 
         it('⛔ возвращает ошибку, если в access токене null', async () => {
 
-            (UsersDbRepository.findUserByLoginOrEmail as jest.Mock).mockResolvedValueOnce(outUser2);
+            // (UsersDbRepository.findUserByLoginOrEmail as jest.Mock).mockResolvedValueOnce(outUser2);
+            //
+            // (hashService.comparePassword as jest.Mock).mockResolvedValueOnce(true);
 
-            (hashService.comparePassword as jest.Mock).mockResolvedValueOnce(true);
+            jest.spyOn(authService, 'authenticationUserToLogin').mockResolvedValueOnce({
+                status: ResultSuccess.Success,
+                data: createString(10), // или ваше значение
+            });
 
-            (jwtService.createAnyToken as jest.Mock).mockResolvedValueOnce(null)
+            (jwtService.createAnyToken as jest.Mock).mockResolvedValueOnce(null);
 
             const response = await authService.loginUser({
                 loginOrEmail: createString(10), password: createString(11)
@@ -158,9 +173,10 @@ describe('authService', () => {
 
         it('⛔ возвращает ошибку, если в refresh токене null', async () => {
 
-            (UsersDbRepository.findUserByLoginOrEmail as jest.Mock).mockResolvedValueOnce(outUser);
-
-            (hashService.comparePassword as jest.Mock).mockResolvedValueOnce(true);
+            jest.spyOn(authService, 'authenticationUserToLogin').mockResolvedValueOnce({
+                status: ResultSuccess.Success,
+                data: createString(10), // или ваше значение
+            });
 
             (jwtService.createAnyToken as jest.Mock)
                 .mockResolvedValueOnce('accessToken')
@@ -172,25 +188,24 @@ describe('authService', () => {
 
             expect(response).toEqual({
                 status: ResultStatus.BadRequest,
-                extensions: {field: 'jwt', message: 'Проблема при генерации Refresh токена!'},
+                extensions: {field: 'refresh', message: 'Проблема при генерации Refresh токена!'},
                 data: null
             });
         });
 
         it('✅ проходит успешно', async () => {
 
-            (UsersDbRepository.findUserByLoginOrEmail as jest.Mock).mockResolvedValue(outUser);
+            jest.spyOn(authService, 'authenticationUserToLogin').mockResolvedValueOnce({
+                status: ResultSuccess.Success,
+                data: String(outUser._id), // или ваше значение
+            });
 
-            (hashService.comparePassword as jest.Mock).mockResolvedValue(true);
+            (jwtService.createAnyToken as jest.Mock).mockResolvedValueOnce('access').mockResolvedValueOnce('refresh')
 
-            (jwtService.createAnyToken as jest.Mock)
-                .mockResolvedValue('access')
-                .mockResolvedValue('refresh')
-
-            const response = await authService.authenticationUserToLogin({ loginOrEmail: 'success', password: 'success_password' });
+            const response = await authService.loginUser({ loginOrEmail: 'success', password: 'success_password' });
             expect(response).toEqual({
                 status: ResultSuccess.Success,
-                data: [createString(17), createString(16)]
+                data: ['access', 'refresh']
             });
         });
     });
