@@ -43,11 +43,6 @@ let dataAuthService: loginSuccess = {
     data: createString(10)
 }
 
-// jest.mock('../../../../src/domain/auth/auth-service', () => ({
-//     authService: {
-//         authenticationUserToLogin: jest.fn(),
-//     },
-// }))
 jest.mock('../../../../src/repositories/users/users-db-repository', () => ({
     UsersDbRepository: {
         findUserByLoginOrEmail: jest.fn(),

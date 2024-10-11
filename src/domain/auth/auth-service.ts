@@ -137,18 +137,18 @@ export const authService = {
             if (!existingSendEmail) {
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {message: `${existingSendEmail} is error`, field: `${existingSendEmail}`},
+                    extensions: {message: `${existingSendEmail} это ошибка`, field: `${existingSendEmail}`},
                     data: null
                 }
             }
         } catch( e: unknown) {
-            console.error('Send email error', e);
+            console.error('Отправка сообщения произошла с ошибкой', e);
 
             const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
 
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: `Delete user`, field: 'user'},
+                extensions: {message: `Удаление юзера`, field: 'user'},
                 data: deleteUser
             }
         }

@@ -1,6 +1,6 @@
-import { Response } from 'express';
-import {handleError} from "../../../src/utils/features/handle-error";
-import {HTTP_STATUSES} from "../../../src/models/common/common-types";
+import {HTTP_STATUSES} from "../../../../src/models/common/common-types";
+import {handleError} from "../../../../src/utils/features/handle-error";
+import {Response} from "express"
 
 describe('handleError', () => {
     let res: Partial<Response>;
