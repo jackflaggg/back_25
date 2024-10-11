@@ -1,8 +1,7 @@
 import {errorsUnique} from "../../../../src/utils/features/errors-validate";
 import {createString} from "../../../helpers-e2e/datatests";
 import {UsersDbRepository} from "../../../../src/repositories/users/users-db-repository";
-import {emailInfo} from "../../../../src/models/user/ouput/output-type-users";
-import {randomUUID, UUID} from "node:crypto";
+import {randomUUID} from "node:crypto";
 import {ObjectId} from "mongodb";
 
 jest.mock('../../../../src/repositories/users/users-db-repository', () => ({
@@ -35,13 +34,28 @@ describe('errors-unique', () => {
         expect(res).toBeFalsy();
     });
 
-    // it('should return an error if the user doesn\'t exist', async () => {
-    //     const res = await errorsUnique();
-    //     expect(res).toEqual()
-    // });
-    //
-    // it('should return an error if the user doesn\'t exist', async () => {
-    //     const res = await errorsUnique();
-    //     expect(res).toEqual()
-    // });
+    it('возвращает ошибку, если юзер найден по мэйлу', async () => {
+        (UsersDbRepository.findByEmailUser as jest.Mock).mockResolvedValueOnce(testUserDbType);
+        (UsersDbRepository.findByLoginUser as jest.Mock).mockResolvedValueOnce(null);
+        const res = await errorsUnique(createString(10), createString(10));
+        expect(res).toEqual({errorsMessages: [
+                {
+                    field: "email",
+                    message: `not unique ${testUserDbType.email}`
+                }
+            ]})
+    });
+
+    it('возвращает ошибку, если юзер найден по логину', async () => {
+        const {id, ...withObjectUser} = testUserDbType;
+        (UsersDbRepository.findByEmailUser as jest.Mock).mockResolvedValueOnce(null);
+        (UsersDbRepository.findByLoginUser as jest.Mock).mockResolvedValueOnce(withObjectUser);
+        const res = await errorsUnique(createString(10), createString(10));
+        expect(res).toEqual({errorsMessages: [
+                {
+                    field: "login",
+                    message: `not unique ${testUserDbType.login}`
+                }
+            ]})
+    });
 })
