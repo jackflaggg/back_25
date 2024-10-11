@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb';
-import {createString} from "../../helpers-e2e/datatests";
+import {createString} from "../../../helpers-e2e/datatests";
+
 
 export const createBlog = () => ({
     id: new ObjectId().toString(),

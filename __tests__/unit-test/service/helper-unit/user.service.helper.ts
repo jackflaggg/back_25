@@ -1,4 +1,5 @@
-import {createString} from "../../helpers-e2e/datatests";
+import {createString} from "../../../helpers-e2e/datatests";
+
 
 export const inCreateUser = () => ({
     login: createString(10),

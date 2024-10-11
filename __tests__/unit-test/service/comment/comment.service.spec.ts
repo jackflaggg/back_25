@@ -1,9 +1,10 @@
-import {CommentsQueryRepository} from "../../../src/repositories/comments/comments-query-repository";
-import {CommentsDbRepository} from "../../../src/repositories/comments/comments-db-repository";
-import {validateId} from "../../../src/utils/helpers/helper-validate-id";
+import {CommentsQueryRepository} from "../../../../src/repositories/comments/comments-query-repository";
 import {inCreateUser, upComment} from "../helper-unit/comment.service.helper";
-import {commentService} from "../../../src/domain/comment/comment-service";
-import {ResultStatus} from "../../../src/models/common/errors/errors-type";
+import {validateId} from "../../../../src/utils/helpers/helper-validate-id";
+import {commentService} from "../../../../src/domain/comment/comment-service";
+import {ResultStatus} from "../../../../src/models/common/errors/errors-type";
+import {CommentsDbRepository} from "../../../../src/repositories/comments/comments-db-repository";
+
 
 jest.mock('../../../src/utils/helpers/helper-validate-id', () => ({
     validateId: jest.fn(),

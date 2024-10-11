@@ -69,7 +69,7 @@ async function connectToDatabase() {
     try {
         await client.connect();
         console.log("Соединение с базой данных успешно установлено.");
-        return client.db('yourDatabaseName'); // замените на имя вашей базы данных
+        return client.db('yourDatabaseName');
     } catch (error) {
         console.error('Ошибка при подключении к базе данных:', error);
         throw error; // пробросьте ошибку дальше
@@ -91,5 +91,4 @@ async function getCollections() {
     }
 }
 
-// Пример использования
 getCollections();
