@@ -144,7 +144,7 @@ export const authService = {
         } catch( e: unknown) {
             console.error('Send email error', e);
 
-            const deleteUser = await UsersDbRepository.deleteUser(createUser as string);
+            const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
 
             return {
                 status: ResultStatus.BadRequest,
