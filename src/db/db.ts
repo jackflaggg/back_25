@@ -30,7 +30,8 @@ export const connectToDB = async (port: number) => {
         console.log('connected to db')
         console.log(`App listening on port ${port}`)
     } catch (err) {
-        console.log(err)
-        await client.close()
+        console.error('Failed to connect to DB', err);
+        process.exit(1);
+        //await client.close()
     }
 }

@@ -12,12 +12,12 @@ describe(SETTINGS.PATH.BLOGS, () => {
     beforeAll(connect);
     afterAll(disconnect);
 
-    beforeAll(async () => {
-        await req.delete(`${SETTINGS.PATH.TESTING}/all-data`)
-            .set({ 'Authorization': 'Basic ' + codedAuth })
-            .expect(HTTP_STATUSES.NO_CONTENT_204);
-    });
-    it.skip
+    // beforeAll(async () => {
+    //     await req.delete(`${SETTINGS.PATH.TESTING}/all-data`)
+    //         .set({ 'Authorization': 'Basic ' + codedAuth })
+    //         .expect(HTTP_STATUSES.NO_CONTENT_204);
+    // });
+    // it.skip
     it('+Get method: return status 200 and all videos', async () => {
         const response = await req
             .get(`${SETTINGS.PATH.BLOGS}`)
