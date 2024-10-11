@@ -193,7 +193,7 @@ describe('authService', () => {
 
             jest.spyOn(authService, 'authenticationUserToLogin').mockResolvedValueOnce({
                 status: ResultSuccess.Success,
-                data: String(outUser._id), // или ваше значение
+                data: String(outUser._id),
             });
 
             (jwtService.createAnyToken as jest.Mock).mockResolvedValueOnce('access').mockResolvedValueOnce('refresh')
