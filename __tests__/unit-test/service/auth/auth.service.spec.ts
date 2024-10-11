@@ -149,10 +149,6 @@ describe('authService', () => {
 
         it('⛔ возвращает ошибку, если в access токене null', async () => {
 
-            // (UsersDbRepository.findUserByLoginOrEmail as jest.Mock).mockResolvedValueOnce(outUser2);
-            //
-            // (hashService.comparePassword as jest.Mock).mockResolvedValueOnce(true);
-
             jest.spyOn(authService, 'authenticationUserToLogin').mockResolvedValueOnce({
                 status: ResultSuccess.Success,
                 data: createString(10), // или ваше значение
@@ -243,10 +239,6 @@ describe('authService', () => {
             (UsersDbRepository.findByLoginUser as jest.Mock).mockResolvedValueOnce(UserDbType);
 
             (UsersDbRepository.createUser as jest.Mock).mockResolvedValueOnce(null);
-
-            // (emailManagers.sendEmailRecoveryMessage as jest.Mock).mockResolvedValueOnce()
-            //
-            // (emailAdapter.sendEmail as jest.Mock).mockResolvedValueOnce();
 
             const response = await authService.registrationUser(inputData);
 
