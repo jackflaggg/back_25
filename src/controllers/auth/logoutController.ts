@@ -8,7 +8,6 @@ export const logoutController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
     const token = await jwtService.verifyRefreshToken(refreshToken);
 
-    //TODO: Непонятно с датой
     if (!token){
         console.log(`[token] не прошел верификацию`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);

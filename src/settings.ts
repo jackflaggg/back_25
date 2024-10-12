@@ -28,4 +28,6 @@ export const SETTINGS = {
     NAME_SUBJECT: process.env.NAME_SUBJECT || '',
     EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '10s',
     EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '20s',
+
+    DB_URI_TEST: process.env.DB_URI_TEST || 'mongodb://localhost:27017/testunit',
 }

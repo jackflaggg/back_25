@@ -22,7 +22,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
             return;
         }
-        // TODO: должен ли проверять ее срок? нужно ли проверять в блэк листе?
+
         const tokenExists = await blackListTokenCollection.findOne({ token: refreshToken });
 
         if (tokenExists) {

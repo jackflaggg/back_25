@@ -21,7 +21,6 @@ export const authService = {
 
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
 
-        //TODO: Вернись сюда и сделай проверку isConfirmed!
         if (!credentialLoginOrEmail) {
             return {
                 status: ResultStatus.BadRequest,

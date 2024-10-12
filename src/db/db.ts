@@ -9,10 +9,12 @@ import {
     UserDbType
 } from "../models/db/db.models";
 import {SETTINGS} from "../settings";
+import {superConfig} from "../config";
+
 
 dotenv.config()
 
-export const mongoURI = process.env.MONGO_URL;
+export const mongoURI = superConfig.databaseUrl;
 const client: MongoClient = new MongoClient(mongoURI!);
 
 export const database: Db = client.db(SETTINGS.DB_NAME);
