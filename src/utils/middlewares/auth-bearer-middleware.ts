@@ -20,7 +20,7 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
     // }
 
     const existingUserId = await jwtService.getUserIdByToken(token);
-    console.log(1)
+
     if (!existingUserId) {
         handleError(res, `проблема с айди пользователем, мб невалиден: ${existingUserId}`);
         return;
