@@ -17,7 +17,7 @@ export const SETTINGS = {
     COLLECTION_BLOGS: process.env.BLOG_COLLECTION_NAME || 'blogs',
     COLLECTION_USERS: process.env.COLLECTION_USERS || 'users',
     COLLECTION_COMMENTS: process.env.COMMENTS_COLLECTION_NAME || 'comments',
-    COLLECTION_TOKEN: process.env.BLACK_LIST_COLLECTION_NAME || 'black_list',
+    COLLECTION_TOKEN: process.env.REFRESH_TOKEN || 'refresh_token',
     COLLECTION_API: process.env.COLLECTION_API || 'api',
     ADMIN: process.env.ADMIN || 'admin:qwerty',
     SECRET_KEY: process.env.SECRET_KEY || '',
