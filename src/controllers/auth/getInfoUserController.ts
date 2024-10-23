@@ -13,7 +13,7 @@ export const getInfoUserController = async (req: Request, res: ResponseBody<OutL
         return
     }
 
-    const user = await usersQueryRepository.LoginMapByUser(existingId as string);
+    const user = await usersQueryRepository.LoginMapByUser(String(existingId));
 
     if (!user) {
         console.log(`[user] не был найден в репозитории`);

@@ -25,19 +25,20 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
         handleError(res, `проблема с айди пользователем, мб невалиден: ${existingUserId}`);
         return;
     }
-    console.log(2)
+
     if (!isValidObjectIdToVerifyToken(existingUserId)) {
         handleError(res, `Неверный формат userId: ${existingUserId}`);
         return;
     }
-    console.log(3)
+
     const user = await usersQueryRepository.getUserById(existingUserId)
-    console.log(4)
+
     if (!user) {
         handleError(res, `Пользователь не найден: ${user}`);
         return;
     }
 
     req.userId = user.id;
+
     next();
 }
