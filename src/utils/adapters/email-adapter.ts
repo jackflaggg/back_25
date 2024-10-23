@@ -6,11 +6,12 @@ export const emailAdapter = {
     async sendEmail(emailFrom: string, messageCode: string) {
         // TODO: изменить логику, ибо пароль тогда нужен от разных почт!
         try {
+            // создание транспортера
             let transporter = nodemailer.createTransport({
                 service: 'Mail.ru',
                 auth: {
                     user: SETTINGS.EMAIL_NAME,
-                    pass: SETTINGS.PASS,
+                    pass: '1' + SETTINGS.PASS,
                 },
                 tls: {
                     rejectUnauthorized: false,
@@ -26,9 +27,9 @@ export const emailAdapter = {
 
             return result;
 
-        } catch (err) {
-            console.error(err);
-            return err
+        } catch (err: unknown) {
+            console.log(JSON.stringify(err));
+            return null
         }
     }
 }

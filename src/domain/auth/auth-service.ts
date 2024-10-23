@@ -135,8 +135,10 @@ export const authService = {
             const {email, emailConfirmation: { confirmationCode } } = newUser;
 
             const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(email, confirmationCode);
-
+            console.log('че пришло в намеренной ошибке? ' + existingSendEmail);
             if (!existingSendEmail) {
+                const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
+
                 return {
                     status: ResultStatus.BadRequest,
                     extensions: {message: `${existingSendEmail} это ошибка`, field: `${existingSendEmail}`},
