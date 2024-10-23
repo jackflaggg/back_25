@@ -15,7 +15,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     try {
         const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
 
-        console.log(`проверяем че пришло в верифай токен: ${JSON.stringify(verifyToken)}`);
+        console.log(`проверяем че пришло в верифай-REFRESH токен: ${JSON.stringify(verifyToken)}`);
 
         if (verifyToken && verifyToken.expired){
             console.log(`[verifyToken] походу истек`);

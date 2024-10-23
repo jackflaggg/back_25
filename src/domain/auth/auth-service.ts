@@ -90,9 +90,8 @@ export const authService = {
 
         const requiredFields = { login, password, email };
 
-        // проверяю на тело
+
         const errField = errorsBodyToAuthService(requiredFields);
-        //TODO: проверка на isnull
         if (errField !== null){
             return {
                 status: ResultStatus.BadRequest,
@@ -101,7 +100,6 @@ export const authService = {
             }
         }
 
-        // проверка уникальности
         const uniqueErrors = await errorsUnique( email, login );
 
         if (uniqueErrors){
@@ -122,8 +120,9 @@ export const authService = {
             emailConfirmation: {
                 confirmationCode: randomUUID(),
                 expirationDate: add(new Date(), {
-                    hours: 1,
-                    minutes: 30,
+                    // TODO: верни обратно на час и 30 минут
+                    //hours: 1,
+                    minutes: 1,
                 }),
                 isConfirmed: false
             }
@@ -135,7 +134,7 @@ export const authService = {
             const {email, emailConfirmation: { confirmationCode } } = newUser;
 
             const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(email, confirmationCode);
-            console.log('че пришло в намеренной ошибке? ' + existingSendEmail);
+
             if (!existingSendEmail) {
                 const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
 
