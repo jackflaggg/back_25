@@ -132,7 +132,9 @@ export const authService = {
         const createUser = await UsersDbRepository.createUser(newUser);
 
         try {
-            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(newUser.email, newUser.emailConfirmation.confirmationCode);
+            const {email, emailConfirmation: { confirmationCode } } = newUser;
+
+            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(email, confirmationCode);
 
             if (!existingSendEmail) {
                 return {
