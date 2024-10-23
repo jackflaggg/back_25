@@ -139,7 +139,7 @@ export const authService = {
 
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {message: `${existingSendEmail} это ошибка`, field: `${existingSendEmail}`},
+                    extensions: {message: `${existingSendEmail} это ошибка`, field: `email`},
                     data: null
                 }
             }
@@ -165,7 +165,7 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'code 1', field: 'code'},
+                extensions: {message: 'отсутсвует код у юзера или не найден юзер', field: 'code'},
                 data: null
             }
         }

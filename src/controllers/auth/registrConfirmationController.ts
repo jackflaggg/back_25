@@ -7,7 +7,7 @@ export const registrationConfirmationController = async (req: Request, res: Resp
     const registrationConfirmation = await authService.confirmationEmailByCode(req.body.code);
 
     if (registrationConfirmation.status !== ResultSuccess.Success) {
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send(JSON.parse(JSON.stringify(registrationConfirmation.extensions)));
+        res.status(HTTP_STATUSES.BAD_REQUEST_400).send({errorsMessages: [registrationConfirmation.data]});
         return;
     }
 
