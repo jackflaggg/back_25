@@ -11,7 +11,7 @@ export const emailAdapter = {
                 service: 'Mail.ru',
                 auth: {
                     user: SETTINGS.EMAIL_NAME,
-                    pass: 1 + SETTINGS.PASS,
+                    pass: SETTINGS.PASS,
                 },
                 tls: {
                     rejectUnauthorized: false,
