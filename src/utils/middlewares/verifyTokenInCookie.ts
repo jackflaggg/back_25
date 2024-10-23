@@ -5,7 +5,7 @@ import {jwtService} from "../application/jwt-service";
 
 export const verifyTokenInCookie = async (req: Request, res: Response, next: NextFunction) => {
     const {refreshToken} = req.cookies;
-
+    console.log(refreshToken);
     if(!refreshToken){
         console.log(`[refreshToken] неверные куки`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
@@ -34,7 +34,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
         next();
 
     } catch (error) {
-        console.error(`Error verifying token: `, error);
+        console.log(`Error verifying token: `, JSON.stringify(error));
         res.status(HTTP_STATUSES.NOT_AUTHORIZATION_401).send({errorsMessages: [{field: `middleware refresh`, message: `Refresh token`}]});
         return;
     }
