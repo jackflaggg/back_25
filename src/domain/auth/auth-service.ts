@@ -111,7 +111,7 @@ export const authService = {
         }
 
         const passUser = await hashService._generateHash(password);
-
+        //TODO: Разные конфирмаэйшн код
         const newUser = {
             login,
             email,
