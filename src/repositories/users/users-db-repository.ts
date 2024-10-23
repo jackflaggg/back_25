@@ -47,11 +47,11 @@ export const UsersDbRepository = {
         return findUser;
     },
     async findCodeUser(code: string) {
-
+        console.log(code)
         const findUser = await usersCollection.findOne({
             'emailConfirmation.confirmationCode': code
         });
-
+        console.log(findUser)
         if (!findUser || !findUser._id){
             return null;
         }

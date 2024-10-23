@@ -165,7 +165,7 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'отсутсвует код у юзера или не найден юзер', field: 'code'},
+                extensions: {message: 'отсутствует код у юзера или не найден юзер', field: 'code'},
                 data: null
             }
         }
