@@ -75,10 +75,12 @@ export const authService = {
             }
         }
 
-        console.log([generateAccessToken, generateRefreshToken])
+        console.log(['это jwt: ' + generateAccessToken, 'это refresh: ' + generateRefreshToken])
         return {
             status: ResultSuccess.Success,
-            data: [generateAccessToken, generateRefreshToken]
+            data: {
+                jwt: generateAccessToken,
+                refresh: generateRefreshToken}
         }
     },
 
