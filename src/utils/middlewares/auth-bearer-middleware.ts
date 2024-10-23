@@ -14,25 +14,25 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
 
     const token = authHeaders.split(' ')[1];
 
-    if (!token) {
-        handleError(res, `Нет токена: ${token}`);
-        return;
-    }
+    // if (!token) {
+    //     handleError(res, `Нет токена: ${token}`);
+    //     return;
+    // }
 
     const existingUserId = await jwtService.getUserIdByToken(token);
-
+    console.log(1)
     if (!existingUserId) {
         handleError(res, `проблема с айди пользователем, мб невалиден: ${existingUserId}`);
         return;
     }
-
+    console.log(2)
     if (!isValidObjectIdToVerifyToken(existingUserId)) {
         handleError(res, `Неверный формат userId: ${existingUserId}`);
         return;
     }
-
+    console.log(3)
     const user = await usersQueryRepository.getUserById(existingUserId)
-
+    console.log(4)
     if (!user) {
         handleError(res, `Пользователь не найден: ${user}`);
         return;
