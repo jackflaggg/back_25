@@ -48,6 +48,6 @@ export interface RefreshTokenType {
 
 export interface SessionCollection {
     ip: string,
-    URL: string,
-    date:Date
+    websiteUrl: string,
+    date: string
 }
