@@ -46,8 +46,8 @@ export interface RefreshTokenType {
     refreshToken: string
 }
 
-export interface APICollection {
-    IP: string,
+export interface SessionCollection {
+    ip: string,
     URL: string,
     date:Date
 }
