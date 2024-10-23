@@ -200,7 +200,7 @@ export const authService = {
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {message: 'error code 2', field: 'code'},
-                data: updateUser
+                data: null
             }
         }
 
