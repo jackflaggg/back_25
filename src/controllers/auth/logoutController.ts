@@ -13,7 +13,7 @@ export const logoutController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    const blackListToken = await refreshTokenCollection.insertOne({ refreshToken});
+    await refreshTokenCollection.insertOne({ refreshToken});
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     return;
 }
