@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {blackListTokenCollection} from "../../db/db";
+import {refreshTokenCollection} from "../../db/db";
 import {jwtService} from "../application/jwt-service";
 
 export const verifyTokenInCookie = async (req: Request, res: Response, next: NextFunction) => {
@@ -23,7 +23,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
             return;
         }
 
-        const tokenExists = await blackListTokenCollection.findOne({ token: refreshToken });
+        const tokenExists = await refreshTokenCollection.findOne({ refreshToken });
 
         if (tokenExists) {
             console.log(`[tokenExists] не прошел авторизацию`);

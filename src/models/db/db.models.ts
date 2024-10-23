@@ -42,8 +42,8 @@ export interface CommentDbType {
     postId: string;
 }
 
-export interface BlackListDbType {
-    token: string
+export interface RefreshTokenType {
+    refreshToken: string
 }
 
 export interface APICollection {

@@ -1,6 +1,6 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {Request, Response} from "express";
-import {blackListTokenCollection} from "../../db/db";
+import {refreshTokenCollection} from "../../db/db";
 import {jwtService} from "../../utils/application/jwt-service";
 
 export const refreshTokenController = async (req: Request, res: Response) => {
@@ -18,7 +18,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
+    const blackListToken = await refreshTokenCollection.insertOne({ refreshToken});
 
     const newAccessToken = await jwtService.createAnyToken(userId, '10s');
     const newRefreshToken = await jwtService.createAnyToken(userId, '20s');

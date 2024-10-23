@@ -2,10 +2,9 @@ import {Db, MongoClient} from "mongodb";
 import dotenv from 'dotenv'
 import {
     APICollection,
-    BlackListDbType,
     BlogDbType,
     CommentDbType,
-    PostDbType,
+    PostDbType, RefreshTokenType,
     UserDbType
 } from "../models/db/db.models";
 import {SETTINGS} from "../settings";
@@ -23,7 +22,7 @@ export const blogsCollections = database.collection<BlogDbType>(SETTINGS.COLLECT
 export const postsCollections = database.collection<PostDbType>(SETTINGS.COLLECTION_POSTS!);
 export const usersCollection = database.collection<UserDbType>(SETTINGS.COLLECTION_USERS!);
 export const commentsCollection = database.collection<CommentDbType>(SETTINGS.COLLECTION_COMMENTS!);
-export const blackListTokenCollection = database.collection<BlackListDbType>(SETTINGS.COLLECTION_TOKEN!)
+export const refreshTokenCollection = database.collection<RefreshTokenType>(SETTINGS.COLLECTION_TOKEN!)
 export const callToAPICollections = database.collection<APICollection>(SETTINGS.COLLECTION_API!);
 
 export const connectToDB = async (port: number) => {

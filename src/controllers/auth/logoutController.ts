@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {blackListTokenCollection} from "../../db/db";
+import {refreshTokenCollection} from "../../db/db";
 import {jwtService} from "../../utils/application/jwt-service";
 
 export const logoutController = async (req: Request, res: Response) => {
@@ -13,7 +13,7 @@ export const logoutController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    const blackListToken = await blackListTokenCollection.insertOne({ token: refreshToken});
+    const blackListToken = await refreshTokenCollection.insertOne({ refreshToken});
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     return;
 }
