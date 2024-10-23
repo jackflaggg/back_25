@@ -120,9 +120,8 @@ export const authService = {
             emailConfirmation: {
                 confirmationCode: randomUUID(),
                 expirationDate: add(new Date(), {
-                    // TODO: верни обратно на час и 30 минут
-                    //hours: 1,
-                    minutes: 1,
+                    hours: 1,
+                    minutes: 30,
                 }),
                 isConfirmed: false
             }
@@ -215,7 +214,7 @@ export const authService = {
         if (!searchEmail) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: `${searchEmail} error find`, field: 'email'},
+                extensions: {message: `${searchEmail} не был найден `, field: 'email'},
                 data: searchEmail
             }
         }
@@ -223,7 +222,7 @@ export const authService = {
         if (searchEmail.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'The account has already been confirmed', field: 'email'},
+                extensions: {message: 'аккаунт уже был активирован, в повторной ссылке нет нужды', field: 'email'},
                 data: searchEmail
             }
         }
@@ -238,17 +237,18 @@ export const authService = {
         try {
             const sendEmail = await emailManagers.sendEmailRecoveryMessage(email, newCode);
             if (!sendEmail) {
+                const deleteUser = await UsersDbRepository.deleteUser(String(searchEmail.id))
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {message: 'error on sendEmail', field: 'email'},
+                    extensions: {message: '[authService] ошибка при повторной отправке письма', field: 'email'},
                     data: null
                 }
             }
         } catch (e: unknown){
-            console.error(e);
+            console.log(JSON.stringify(e));
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'emailManagers', field: 'email grock!!!!'},
+                extensions: {message: '[emailManagers]', field: 'email Resending'},
                 data: null
             }
         }
