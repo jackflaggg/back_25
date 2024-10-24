@@ -7,7 +7,7 @@ export const verifyTokenInCookie = async (req: Request, res: Response, next: Nex
     const {refreshToken} = req.cookies;
 
     if(!refreshToken){
-        console.log(`[refreshToken] неверные куки`);
+        console.log(`[refreshToken] токен отсутствует в куке`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
