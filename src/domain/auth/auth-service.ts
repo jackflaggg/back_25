@@ -12,7 +12,6 @@ import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth-service-models";
 import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
-import {emailConfirmation} from "../../utils/features/emailConfirmation";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
@@ -132,7 +131,7 @@ export const authService = {
             const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(email, confirmationCode);
 
             if (!existingSendEmail) {
-                const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
+                await UsersDbRepository.deleteUser(String(createUser));
 
                 return {
                     status: ResultStatus.BadRequest,
@@ -234,7 +233,7 @@ export const authService = {
         try {
             const sendEmail = await emailManagers.sendEmailRecoveryMessage(email, newCode);
             if (!sendEmail) {
-                const deleteUser = await UsersDbRepository.deleteUser(String(searchEmail.id))
+                await UsersDbRepository.deleteUser(String(searchEmail.id));
                 return {
                     status: ResultStatus.BadRequest,
                     extensions: {message: '[authService] ошибка при повторной отправке письма', field: 'email'},
