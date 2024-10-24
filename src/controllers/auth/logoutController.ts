@@ -14,6 +14,6 @@ export const logoutController = async (req: Request, res: Response) => {
         return;
     }
     await refreshTokenCollection.insertOne({ refreshToken});
-    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     return;
 }
