@@ -27,6 +27,7 @@ export const userService = {
             email,
             password: passwordHash,
             createdAt: new Date().toISOString(),
+            //TODO: ТУТ ВОЗМОЖНО НАДО БУДЕТ УДАЛИТЬ
             emailConfirmation: emailConfirmation()
         }
 

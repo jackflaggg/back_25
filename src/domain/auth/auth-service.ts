@@ -165,7 +165,7 @@ export const authService = {
         if (!user) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'отсутствует код у юзера или не найден юзер', field: 'code'},
+                extensions: {message: 'не найден юзер', field: 'code'},
                 data: null
             }
         }
@@ -173,7 +173,7 @@ export const authService = {
         if (user.emailConfirmation.confirmationCode !== code) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'confirmationCode', field: 'confirmationCode'},
+                extensions: {message: 'отсутствует код', field: 'confirmationCode'},
                 data: null
             }
         }
@@ -181,7 +181,7 @@ export const authService = {
         if (user.emailConfirmation.expirationDate < new Date()) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'expirationDate', field: 'expirationDate'},
+                extensions: {message: 'прошло время, обновись', field: 'expirationDate'},
                 data: null
             }
         }
@@ -189,7 +189,7 @@ export const authService = {
         if (user.emailConfirmation.isConfirmed) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'isConfirmed is true!', field: 'code'},
+                extensions: {message: 'подтверждение уже было', field: 'code'},
                 data: null
             }
         }
@@ -199,7 +199,7 @@ export const authService = {
         if (!updateUser) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'error code 2', field: 'code'},
+                extensions: {message: 'произошла ошибка при обновлении кода', field: 'code'},
                 data: null
             }
         }

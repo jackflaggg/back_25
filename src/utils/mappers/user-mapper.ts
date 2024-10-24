@@ -7,7 +7,7 @@ export const userMapperToOutput = (user: any)=> {
         login: user.login,
         email: user.email,
         createdAt: user.createdAt,
-        //emailConfirmation: emailConfirmation()
+        emailConfirmation: emailConfirmation()
     }
 }
 
