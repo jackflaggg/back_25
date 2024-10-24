@@ -5,7 +5,6 @@ import {randomUUID} from "node:crypto";
 import {ObjectId} from "mongodb";
 
 jest.mock('../../../../src/repositories/users/users-db-repository', () => ({
-    //TODO: Зачем оборачиваем в () объект
     UsersDbRepository: {
             findByEmailUser: jest.fn(),
             findByLoginUser: jest.fn(),

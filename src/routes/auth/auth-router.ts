@@ -14,7 +14,7 @@ import {loginLimiter} from "../../utils/middlewares/registration-limiter";
 
 
 export const authRouter: Router = Router();
-
+//TODO: Куда запихнуть лимитеры
 authRouter.post('/login', loginLimiter, [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
 authRouter.post('/refresh-token', verifyTokenInCookie, refreshTokenController)
 authRouter.post('/logout', verifyTokenInCookie, logoutController)

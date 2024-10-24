@@ -19,8 +19,6 @@ export interface OutUserById {
     login: string,
     email: string,
     createdAt: string,
-    //TODO: ЗАКОММЕНТИЛ ИНФУ
-    //emailConfirmation: emailInfo
 }
 
 export interface OutQueryCreateUsersModel {
