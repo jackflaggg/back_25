@@ -61,7 +61,7 @@ export const UsersDbRepository = {
     async updateEmailConfirmation(id: string): Promise<boolean> {
         const updateEmail = await usersCollection.updateOne(
             {_id: new ObjectId(id)},
-            {$set: {'emailConfirmationCode.confirmationCode': null, 'emailConfirmation.expirationDate': null, 'emailConfirmation.isConfirmed': true}});
+            {$set: {'emailConfirmation.confirmationCode': null, 'emailConfirmation.expirationDate': null, 'emailConfirmation.isConfirmed': true}});
 
         return updateEmail.modifiedCount === 1;
     },
