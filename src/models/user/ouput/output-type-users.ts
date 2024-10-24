@@ -20,7 +20,7 @@ export interface OutUserById {
     email: string,
     createdAt: string,
     //TODO: ЗАКОММЕНТИЛ ИНФУ
-    emailConfirmation: emailInfo
+    //emailConfirmation: emailInfo
 }
 
 export interface OutQueryCreateUsersModel {

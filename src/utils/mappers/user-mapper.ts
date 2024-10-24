@@ -1,4 +1,3 @@
-import {emailConfirmation} from "../features/emailConfirmation";
 import {OutUserById} from "../../models/user/ouput/output-type-users";
 
 export const userMapperToOutput = (user: any)=> {
@@ -7,7 +6,6 @@ export const userMapperToOutput = (user: any)=> {
         login: user.login,
         email: user.email,
         createdAt: user.createdAt,
-        emailConfirmation: emailConfirmation()
     }
 }
 

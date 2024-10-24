@@ -10,7 +10,7 @@ import {
 } from "../../models/user/ouput/output-type-users";
 
 export const usersQueryRepository = {
-    async getAllUsers(query: InQueryUserModel): Promise<OutQueryCreateUsersModel> {
+    async getAllUsers(query: InQueryUserModel): Promise<Omit<OutQueryCreateUsersModel, 'items.emailConfirmation'>> {
         const {pageNumber, pageSize, sortBy, sortDirection, searchLoginTerm, searchEmailTerm} = queryHelperToUser(query);
 
         const filter = {

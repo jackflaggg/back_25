@@ -12,6 +12,7 @@ import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth-service-models";
 import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
+import {emailConfirmation} from "../../utils/features/emailConfirmation";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
@@ -111,7 +112,7 @@ export const authService = {
         }
 
         const passUser = await hashService._generateHash(password);
-        //TODO: Разные конфирмаэйшн код
+
         const newUser = {
             login,
             email,
@@ -119,13 +120,11 @@ export const authService = {
             createdAt: new Date().toISOString(),
             emailConfirmation: {
                 confirmationCode: randomUUID(),
-                expirationDate: add(new Date(), {
-                    hours: 1,
-                    minutes: 30,
-                }),
+                expirationDate: add(new Date(), {hours: 1, minutes: 30}),
                 isConfirmed: false
             }
         }
+        console.log('это информация об отправке письма: ' + newUser.emailConfirmation)
 
         const createUser = await UsersDbRepository.createUser(newUser);
 
@@ -178,7 +177,7 @@ export const authService = {
             }
         }
 
-        if (user.emailConfirmation.expirationDate < new Date()) {
+        if (user.emailConfirmation.expirationDate && user.emailConfirmation.expirationDate < new Date()) {
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {message: 'прошло время, обновись', field: 'expirationDate'},

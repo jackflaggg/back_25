@@ -28,7 +28,11 @@ export const userService = {
             password: passwordHash,
             createdAt: new Date().toISOString(),
             //TODO: ТУТ ВОЗМОЖНО НАДО БУДЕТ УДАЛИТЬ
-            emailConfirmation: emailConfirmation()
+            emailConfirmation: {
+                confirmationCode: null,
+                expirationDate: null,
+                isConfirmed: true
+            }
         }
 
         const createUser = await UsersDbRepository.createUser(newUser);
