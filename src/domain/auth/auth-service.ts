@@ -28,7 +28,7 @@ export const authService = {
                 data: null
             }
         }
-        console.log(password, credentialLoginOrEmail.password);
+
         const checkPassword = await hashService.comparePassword(password, String(credentialLoginOrEmail.password));
 
         if (!checkPassword) {
@@ -76,7 +76,6 @@ export const authService = {
             }
         }
 
-        console.log(['это jwt: ' + generateAccessToken, 'это refresh: ' + generateRefreshToken])
         return {
             status: ResultSuccess.Success,
             data: {

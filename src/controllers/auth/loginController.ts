@@ -8,7 +8,7 @@ import {ResultSuccess} from "../../models/common/errors/errors-type";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";
 
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
-    console.log(req.ip)
+    console.log('вот твой ip: ' + req.ip)
     const loginUser = await authService.loginUser(req.body);
 
     if (loginUser.status !== ResultSuccess.Success || loginUser.extensions) {
