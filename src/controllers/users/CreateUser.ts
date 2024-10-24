@@ -32,6 +32,6 @@ export const createUserController = async (req: RequestWithBody<InCreateUserMode
             .send(errorsMessages({field: `error`, message: `непредвиденная ошибка, такого никогда не должно было произойти`}));
         return
     }
-    res.sendStatus(HTTP_STATUSES.CREATED_201).send(user);
+    res.status(HTTP_STATUSES.CREATED_201).send(user);
     return;
 }
