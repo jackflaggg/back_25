@@ -10,11 +10,12 @@ import {registrationEmailController} from "../../controllers/auth/registrationEm
 import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
 import {refreshTokenController} from "../../controllers/auth/refreshTokenController";
 import {logoutController} from "../../controllers/auth/logoutController";
+import {loginLimiter} from "../../utils/middlewares/registration-limiter";
 
 
 export const authRouter: Router = Router();
 
-authRouter.post('/login', [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
+authRouter.post('/login', loginLimiter, [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
 authRouter.post('/refresh-token', verifyTokenInCookie, refreshTokenController)
 authRouter.post('/logout', verifyTokenInCookie, logoutController)
 
