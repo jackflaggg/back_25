@@ -124,7 +124,6 @@ export const authService = {
                 isConfirmed: false
             }
         }
-        console.log('это информация об отправке письма: ' + newUser.emailConfirmation)
 
         const createUser = await UsersDbRepository.createUser(newUser);
 

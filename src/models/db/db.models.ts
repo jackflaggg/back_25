@@ -43,6 +43,7 @@ export interface CommentDbType {
 }
 
 export interface RefreshTokenType {
+    userId: string;
     refreshToken: string
 }
 

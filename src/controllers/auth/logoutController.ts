@@ -13,7 +13,13 @@ export const logoutController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    await refreshTokenCollection.insertOne({ refreshToken});
+    const userId = JSON.stringify(token.token?.userId)
+    if (!userId){
+        console.log(`[userId] не существует`)
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+        return;
+    }
+    await refreshTokenCollection.insertOne({userId, refreshToken});
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     return;
 }

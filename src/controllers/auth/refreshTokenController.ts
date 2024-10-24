@@ -20,7 +20,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
         return;
     }
     // отзываем старый рефрештокен
-    await refreshTokenCollection.insertOne({ refreshToken});
+    await refreshTokenCollection.insertOne({userId, refreshToken});
 
     const newAccessToken = await jwtService.createAnyToken(userId, '10s');
     const newRefreshToken = await jwtService.createAnyToken(userId, '20s');
