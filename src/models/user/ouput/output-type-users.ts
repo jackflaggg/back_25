@@ -19,7 +19,7 @@ export interface OutUserById {
     login: string,
     email: string,
     createdAt: string,
-    emailConfirmation: emailInfo
+    //emailConfirmation: emailInfo
 }
 
 export interface OutQueryCreateUsersModel {
