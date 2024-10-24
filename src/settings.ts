@@ -10,6 +10,7 @@ export const SETTINGS = {
         AUTH: '/auth',
         COMMENTS: '/comments',
         TESTING: '/testing',
+        SECURITY_DEVICES: '/security',
         VERCEL: '/'
     },
     DB_NAME: 'hometask',

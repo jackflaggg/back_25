@@ -24,3 +24,4 @@ app.use(SETTINGS.PATH.POSTS, postRouter);
 app.use(SETTINGS.PATH.USERS, userRouter);
 app.use(SETTINGS.PATH.AUTH, authRouter);
 app.use(SETTINGS.PATH.COMMENTS, commentsRouter);
+app.use(SETTINGS.PATH.SECURITY_DEVICES, )
