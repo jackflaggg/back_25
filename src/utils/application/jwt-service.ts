@@ -62,7 +62,6 @@ export const jwtService = {
     },
 
     async getUserIdByToken(token: string) {
-        // TODO: ошибка с которой можно столкнуться:
         // может вернуть объект типа JwtPayload, если токен валиден, или строку, если токен недействителен
         try {
             const user = jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload;

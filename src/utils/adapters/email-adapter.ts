@@ -4,7 +4,6 @@ import {emailTemplates} from "../templates/email-templates";
 
 export const emailAdapter = {
     async sendEmail(emailFrom: string, messageCode: string) {
-        // TODO: изменить логику, ибо пароль тогда нужен от разных почт!
         try {
             // создание транспортера
             let transporter = nodemailer.createTransport({
