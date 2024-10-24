@@ -5,7 +5,7 @@ import {jwtService} from "../../utils/application/jwt-service";
 
 export const logoutController = async (req: Request, res: Response) => {
 
-    const {refreshToken} = req.cookies;
+    const { refreshToken } = req.cookies;
     const token = await jwtService.verifyRefreshToken(refreshToken);
 
     if (!token){
