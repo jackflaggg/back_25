@@ -10,7 +10,7 @@ import {registrationEmailController} from "../../controllers/auth/registrationEm
 import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
 import {refreshTokenController} from "../../controllers/auth/refreshTokenController";
 import {logoutController} from "../../controllers/auth/logoutController";
-import {loginLimiter} from "../../utils/middlewares/registration-limiter";
+import {emailLimiter, loginLimiter, registrationLimiter} from "../../utils/middlewares/registration-limiter";
 
 
 export const authRouter: Router = Router();
@@ -19,8 +19,8 @@ authRouter.post('/login', loginLimiter, [...loginPostValidator, inputCheckErrors
 authRouter.post('/refresh-token', verifyTokenInCookie, refreshTokenController)
 authRouter.post('/logout', verifyTokenInCookie, logoutController)
 
-authRouter.post('/registration-confirmation', codeValidator, inputCheckErrorsMiddleware, registrationConfirmationController);
-authRouter.post('/registration', [...registrationPostValidator, inputCheckErrorsMiddleware], registrationController);
-authRouter.post('/registration-email-resending', emailValidator, inputCheckErrorsMiddleware, registrationEmailController);
+authRouter.post('/registration-confirmation', registrationLimiter, codeValidator, inputCheckErrorsMiddleware, registrationConfirmationController);
+authRouter.post('/registration', registrationLimiter, [...registrationPostValidator, inputCheckErrorsMiddleware], registrationController);
+authRouter.post('/registration-email-resending', emailLimiter, emailValidator, inputCheckErrorsMiddleware, registrationEmailController);
 
 authRouter.get('/me', authBearerMiddlewares, getInfoUserController);
