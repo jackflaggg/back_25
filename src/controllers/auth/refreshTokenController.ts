@@ -15,6 +15,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     const userId = verifiedRefreshToken.token?.userId;
 
     if (!userId) {
+        console.log('[userId] в токене отсутствует')
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
