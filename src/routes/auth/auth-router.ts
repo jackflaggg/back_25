@@ -8,7 +8,7 @@ import {registrationConfirmationController} from "../../controllers/auth/registr
 import {registrationController} from "../../controllers/auth/registrationController";
 import {registrationEmailController} from "../../controllers/auth/registrationEmailController";
 import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
-import {refreshTokenController} from "../../controllers/auth/refreshToken";
+import {refreshTokenController} from "../../controllers/auth/refreshTokenController";
 import {logoutController} from "../../controllers/auth/logoutController";
 
 
