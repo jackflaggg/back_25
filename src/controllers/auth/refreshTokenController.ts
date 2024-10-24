@@ -11,14 +11,15 @@ export const refreshTokenController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-
+    console.log(verifiedRefreshToken);
     const userId = verifiedRefreshToken.token?.userId;
 
     if (!userId) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    const blackListToken = await refreshTokenCollection.insertOne({ refreshToken});
+    // отзываем старый рефрештокен
+    await refreshTokenCollection.insertOne({ refreshToken});
 
     const newAccessToken = await jwtService.createAnyToken(userId, '10s');
     const newRefreshToken = await jwtService.createAnyToken(userId, '20s');

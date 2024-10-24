@@ -12,7 +12,7 @@ export const jwtService = {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
-                {userId: userId},
+                {userId},
                 SETTINGS.SECRET_KEY,
                 {expiresIn: expiresInData}
             )
