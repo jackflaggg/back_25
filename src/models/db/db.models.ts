@@ -48,7 +48,9 @@ export interface RefreshTokenType {
 }
 
 export interface SessionCollection {
-    ip: string,
-    websiteUrl: string,
-    date: string
+    issuedAt: string;
+    deviceId: string;
+    ip: string;
+    deviceName: string;
+    refreshToken: string;
 }
