@@ -14,11 +14,6 @@ export const authBearerMiddlewares = async (req: Request, res: Response, next:Ne
 
     const token = authHeaders.split(' ')[1];
 
-    // if (!token) {
-    //     handleError(res, `Нет токена: ${token}`);
-    //     return;
-    // }
-
     const existingUserId = await jwtService.getUserIdByToken(token);
 
     if (!existingUserId) {
