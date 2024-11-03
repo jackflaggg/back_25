@@ -2,7 +2,6 @@ import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {hashService} from "../../utils/application/hash-service";
 import {errorsUnique} from "../../utils/features/errors-validate";
 import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
-import {emailConfirmation} from "../../utils/features/emailConfirmation";
 import { ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {helperError} from "../../utils/helpers/helper-error";
 import {OutCreateUserError, OutCreateUserSuccess} from "../../models/user/ouput/user-service-models";

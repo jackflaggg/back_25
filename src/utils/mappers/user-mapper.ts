@@ -1,6 +1,8 @@
 import {OutUserById} from "../../models/user/ouput/output-type-users";
+import {WithId} from "mongodb";
+import {UserDbType} from "../../models/db/db.models";
 
-export const userMapperToOutput = (user: any)=> {
+export const userMapperToOutput = (user: WithId<UserDbType>)=> {
     return {
         id: user._id.toString(),
         login: user.login,
