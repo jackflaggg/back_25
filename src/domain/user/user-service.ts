@@ -37,7 +37,7 @@ export const userService = {
         if (!createUser){
             return new OutCreateUserError(
                 ResultStatus.BadRequest,
-                {field: 'user', message: 'error create user'},
+                {field: 'user', message: 'ошибка при создании юзера'},
                 null)
         }
 
