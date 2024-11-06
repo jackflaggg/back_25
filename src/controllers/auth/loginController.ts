@@ -6,6 +6,8 @@ import {InLoginModels} from "../../models/auth/input/login-post-controller";
 import {authService} from "../../domain/auth/auth-service";
 import {ResultSuccess} from "../../models/common/errors/errors-type";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";
+import {refreshTokenCollection} from "../../db/db";
+import {jwtService} from "../../utils/application/jwt-service";
 
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
 
@@ -17,6 +19,11 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         return;
     }
 
+    //TODO: Вернуть на место!
+    const {jwt, refresh} = loginUser.data
+    const decodedAccessToken = await jwtService.decodeToken(jwt);
+    const decodedRefreshToken = await jwtService.decodeToken(refresh);
+    console.log('декодированные данные: ' + {access: decodedAccessToken, refresh: decodedRefreshToken});
     console.log('пришедшие данные, перед записью в куку: ' + loginUser.data)
 
     res.cookie('refreshToken', loginUser.data.refresh, {httpOnly: true, secure: true});
