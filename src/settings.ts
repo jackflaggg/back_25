@@ -27,8 +27,9 @@ export const SETTINGS = {
     PASS: process.env.PASS_USER_ACCOUNT || '',
     HOST: process.env.HOST || '',
     NAME_SUBJECT: process.env.NAME_SUBJECT || '',
-    EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '10s',
-    EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '20s',
+    //TODO: Я временно изменил время жизни токенов , верни на 10 и 20 сек
+    EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '100s',
+    EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '200s',
 
     DB_URI_TEST: process.env.DB_URI_TEST || 'mongodb://localhost:27017/testunit',
 }
