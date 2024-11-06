@@ -22,8 +22,8 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
     const {jwt, refresh} = loginUser.data
     const decodedAccessToken = await jwtService.decodeToken(jwt);
     const decodedRefreshToken = await jwtService.decodeToken(refresh);
-    console.log('декодированные данные: ' + {access: decodedAccessToken, refresh: decodedRefreshToken});
-    console.log('пришедшие данные, перед записью в куку: ' + loginUser.data)
+    console.log('декодированные данные: ' + JSON.stringify({access: decodedAccessToken, refresh: decodedRefreshToken}));
+    console.log('пришедшие данные, перед записью в куку: ' + JSON.stringify(loginUser.data))
 
     res.cookie('refreshToken', loginUser.data.refresh, {httpOnly: true, secure: true});
     res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data.jwt});
