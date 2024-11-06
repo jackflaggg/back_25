@@ -11,7 +11,7 @@ export const jwtService = {
     //TODO: Порядок аргументов с необязательным параметром!
     // const token = await jwtService.createAnyToken('672bb3560fc74718033b1cd2', undefined, '1h');
     // лучше сюда подкинуть интерфейс!
-    async createAnyToken(userId: string, deviceId?: string, expiresInData: string = SETTINGS.TOKEN_DURATION): Promise<null | string> {
+    async createAnyToken(userId: string, expiresInData: string): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
