@@ -17,7 +17,7 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         return;
     }
 
-    console.log(loginUser.data)
+    console.log('пришедшие данные, перед записью в куку: ' + loginUser.data)
 
     res.cookie('refreshToken', loginUser.data.refresh, {httpOnly: true, secure: true});
     res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data.jwt});
