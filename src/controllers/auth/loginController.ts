@@ -11,7 +11,7 @@ import {jwtService} from "../../utils/application/jwt-service";
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
 
     const loginUser = await authService.loginUser(req.body);
-
+    console.log('че пришло: ' + JSON.stringify(loginUser.data));
     if (loginUser.status !== ResultSuccess.Success || loginUser.extensions) {
         console.log(`[loginUser] не прошел авторизацию`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
