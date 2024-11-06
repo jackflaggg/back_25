@@ -2,7 +2,7 @@ import {Router} from "express";
 import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
 import {getAllActiveSessionsController} from "../../controllers/devices/get-all-active-sessions-controller";
 
-export const devicesRouter = Router();
+export const devicesRouter: Router = Router();
 
 devicesRouter.get("/devices", verifyTokenInCookie, getAllActiveSessionsController)
 devicesRouter.delete("/devices", verifyTokenInCookie)
