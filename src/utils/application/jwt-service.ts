@@ -39,7 +39,7 @@ export const jwtService = {
     async verifyAccessToken(token: string): Promise<string | JwtPayload | null>  {
         console.log('тип токена: ' + typeof token + ': сам токен: ' + token)
         try {
-            return jwt.verify(String(token), SETTINGS.SECRET_KEY)// as JwtPayload | null
+            return jwt.verify(token, SETTINGS.SECRET_KEY)// as JwtPayload | null
         } catch (error: unknown) {
             if (error instanceof jwt.TokenExpiredError) {
                 return { expired: true };
