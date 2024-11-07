@@ -62,7 +62,7 @@ export const jwtService = {
         }
     },
 
-    async getUserIdByToken(token: string) {
+    async getUserIdByRefreshToken(token: string) {
         // может вернуть объект типа JwtPayload, если токен валиден, или строку, если токен недействителен
         try {
             const user = jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload;
