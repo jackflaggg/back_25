@@ -78,9 +78,7 @@ export const jwtService = {
                 console.log('токен протух: ' + JSON.stringify({ expired: true }))
                 return null// { expired: true };
             }
-
             console.log('ошибка: ' + String(error));
-
             return null
         }
     }
