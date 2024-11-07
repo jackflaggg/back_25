@@ -22,8 +22,8 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     // отзываем старый рефрештокен
     await refreshTokenCollection.insertOne({userId, refreshToken});
 
-    const newAccessToken = await jwtService.createAnyToken(userId, '10s');
-    const newRefreshToken = await jwtService.createAnyToken(userId, '20s');
+    const newAccessToken = await jwtService.createAccessToken(userId, '10s');
+    const newRefreshToken = await jwtService.createRefreshToken(userId, '20s');
 
     res.cookie('refreshToken', newRefreshToken, {httpOnly: true, secure: true});
 

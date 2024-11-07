@@ -55,7 +55,7 @@ export const authService = {
             }
         }
 
-        const generateAccessToken = await jwtService.createAnyToken(userId.data, SETTINGS.EXPIRES_IN_ACCESS_TOKEN);
+        const generateAccessToken = await jwtService.createAccessToken(userId.data, SETTINGS.EXPIRES_IN_ACCESS_TOKEN);
 
         if (!generateAccessToken) {
             return {
@@ -65,7 +65,7 @@ export const authService = {
             }
         }
 
-        const generateRefreshToken = await jwtService.createAnyToken(userId.data, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
+        const generateRefreshToken = await jwtService.createRefreshToken(userId.data, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
 
         if (!generateRefreshToken) {
             return {
