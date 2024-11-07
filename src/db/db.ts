@@ -32,6 +32,5 @@ export const connectToDB = async (port: number) => {
     } catch (err) {
         console.error('Failed to connect to DB', err);
         process.exit(1);
-        //await client.close()
     }
 }
