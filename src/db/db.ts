@@ -22,7 +22,7 @@ export const postsCollections = database.collection<PostDbType>(SETTINGS.COLLECT
 export const usersCollection = database.collection<UserDbType>(SETTINGS.COLLECTION_USERS!);
 export const commentsCollection = database.collection<CommentDbType>(SETTINGS.COLLECTION_COMMENTS!);
 export const refreshTokenCollection = database.collection<RefreshTokenType>(SETTINGS.COLLECTION_TOKEN!)
-export const sessionCollections = database.collection<SessionCollection>(SETTINGS.COLLECTION_API!);
+export const sessionCollection = database.collection<SessionCollection>(SETTINGS.COLLECTION_API!);
 
 export const connectToDB = async (port: number) => {
     try {
