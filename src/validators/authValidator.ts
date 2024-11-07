@@ -1,6 +1,5 @@
 import {body, ValidationChain} from "express-validator";
-
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+import {emailRegex} from "../utils/features/email.regex";
 
 export const passwordValidator  = body('password')
     .isString()
@@ -37,7 +36,6 @@ export const loginOrEmailValidator = body('loginOrEmail')
         }
 
         if (emailRegex.test(value)) {
-            // Ввод email, применяем проверки для email
             return body('loginOrEmail')
                 .isString()
                 .withMessage('это не строка')
@@ -48,7 +46,6 @@ export const loginOrEmailValidator = body('loginOrEmail')
                 .withMessage('email не прошел валидацию: example@example.com')
                 .run(req);
         } else {
-            // Ввод логина, применяем проверки для логина
             return body('loginOrEmail')
                 .isString()
                 .withMessage('это не строка')
