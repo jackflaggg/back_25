@@ -1,5 +1,3 @@
-// инициализация типов при создании данных (блогов, постов, бд)
-
 import {emailInfo} from "../user/ouput/output-type-users";
 
 export interface BlogDbType {
@@ -37,7 +35,7 @@ export interface CommentatorInfo {
 export interface CommentDbType {
     id?: string;
     content: string;
-    commentatorInfo: CommentatorInfo; // Используем новый интерфейс
+    commentatorInfo: CommentatorInfo;
     createdAt: string;
     postId: string;
 }
