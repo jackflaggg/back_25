@@ -25,11 +25,11 @@ export const jwtService = {
         }
     },
 
-    async createRefreshToken(userId: string, expiresInData: string): Promise<null | string> {
+    async createRefreshToken(userId: string, deviceId: string, expiresInData: string): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
-                {userId},
+                {userId, deviceId},
                 SETTINGS.SECRET_KEY,
                 {expiresIn: expiresInData}
             )

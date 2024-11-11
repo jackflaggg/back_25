@@ -2,6 +2,7 @@ import {HTTP_STATUSES} from "../../models/common/common-types";
 import {Request, Response} from "express";
 import {refreshTokenCollection} from "../../db/db";
 import {jwtService} from "../../utils/application/jwt-service";
+import {randomUUID} from "node:crypto";
 
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
@@ -21,9 +22,12 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     }
     // отзываем старый рефрештокен
     await refreshTokenCollection.insertOne({userId, refreshToken});
+    //TODO: Временно изменяю expires
+    const newAccessToken = await jwtService.createAccessToken(userId, '1000s');
 
-    const newAccessToken = await jwtService.createAccessToken(userId, '10s');
-    const newRefreshToken = await jwtService.createRefreshToken(userId, '20s');
+    const deviceId = String(randomUUID());
+
+    const newRefreshToken = await jwtService.createRefreshToken(userId, deviceId, '2000s');
 
     res.cookie('refreshToken', newRefreshToken, {httpOnly: true, secure: true});
 

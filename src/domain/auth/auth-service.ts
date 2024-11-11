@@ -64,8 +64,8 @@ export const authService = {
                 data: null
             }
         }
-
-        const generateRefreshToken = await jwtService.createRefreshToken(userId.data, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
+        const deviceId = String(randomUUID());
+        const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
 
         if (!generateRefreshToken) {
             return {
