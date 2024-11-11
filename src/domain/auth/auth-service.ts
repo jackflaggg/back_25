@@ -12,6 +12,7 @@ import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth-service-models";
 import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
+import {devicesService} from "../security/security-service";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
@@ -44,7 +45,7 @@ export const authService = {
         };
     },
 
-    async loginUser(inputDataUser: InLoginModels) {
+    async loginUser(inputDataUser: InLoginModels, ipDevices: string, titleDevice: string = 'Chrome') {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
         if (userId instanceof LoginErrorTwo || userId.data === null ) {
@@ -64,6 +65,9 @@ export const authService = {
                 data: null
             }
         }
+
+        //TODO: Где то тут будет идти запись в бд сервиса
+        const devices = await devicesService.writeData()
         const deviceId = String(randomUUID());
         const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
 
