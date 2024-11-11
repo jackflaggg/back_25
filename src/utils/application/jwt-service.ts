@@ -19,7 +19,7 @@ export const jwtService = {
                 SETTINGS.SECRET_KEY,
                 {expiresIn: expiresInData}
             )
-        }catch (error: unknown) {
+        } catch (error: unknown) {
             console.error('Ошибка при создании токена:', error);
             return null;
         }

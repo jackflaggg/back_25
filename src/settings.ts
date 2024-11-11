@@ -28,8 +28,8 @@ export const SETTINGS = {
     HOST: process.env.HOST || '',
     NAME_SUBJECT: process.env.NAME_SUBJECT || '',
     //TODO: Я временно изменил время жизни токенов , верни на 10 и 20 сек
-    EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '10s',
-    EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '20s',
+    EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '1000s',
+    EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '2000s',
 
     DB_URI_TEST: process.env.DB_URI_TEST || 'mongodb://localhost:27017/testunit',
 }
