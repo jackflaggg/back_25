@@ -67,18 +67,19 @@ export const authService = {
         }
 
         //TODO: Где то тут будет идти запись в бд сервиса
-        const devices = await devicesService.writeData()
+
         const deviceId = String(randomUUID());
         const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
+        const lastActivateRefreshToken = await jwtService.decodeToken(generateRefreshToken!);
 
-        if (!generateRefreshToken) {
+        if (!generateRefreshToken || !lastActivateRefreshToken) {
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {field: 'refresh', message: 'Проблема при генерации Refresh токена!'},
                 data: null
             }
         }
-
+        const devices = await devicesService.writeData(ipDevices, titleDevice, deviceId, String(lastActivateRefreshToken.iat), generateRefreshToken)
         return {
             status: ResultSuccess.Success,
             data: {
