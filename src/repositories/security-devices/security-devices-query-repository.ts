@@ -1,4 +1,6 @@
 export const securityDevicesQueryRepository = {
-    async getSession(deviceId: string): Promise<any> {
-    }
+    async getAllDevices(model: any): Promise<any> {
+
+    },
+    async getDeviceById(deviceId: string): Promise<any> {}
 }
