@@ -13,6 +13,7 @@ import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-typ
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth-service-models";
 import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
 import {devicesService} from "../security/security-service";
+import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security-devices-db-repository";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
@@ -79,7 +80,7 @@ export const authService = {
                 data: null
             }
         }
-        const devices = await devicesService.writeData(ipDevices, titleDevice, deviceId, String(lastActivateRefreshToken.iat), generateRefreshToken)
+        const devices = await devicesService.writeData(ipDevices, titleDevice, deviceId, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken)
 
         if (devices instanceof LoginErrorTwo || devices.data === null) {
             return devices
@@ -166,6 +167,7 @@ export const authService = {
             data: createUser
         }
     },
+
     async confirmationEmailByCode(code: string) {
         const user = await UsersDbRepository.findCodeUser(code);
 
@@ -216,6 +218,7 @@ export const authService = {
             data: updateUser
         }
     },
+
     async registrationEmailResending(email: string) {
         const searchEmail = await UsersDbRepository.findByEmailUser(email);
         if (!searchEmail) {
@@ -255,7 +258,7 @@ export const authService = {
             console.log(JSON.stringify(e));
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: '[emailManagers]', field: 'email Resending'},
+                extensions: {message: '[emailManagers]', field: 'ошибка email'},
                 data: null
             }
         }
@@ -263,6 +266,19 @@ export const authService = {
         return {
             status: ResultSuccess.Success,
             data: updateInfoUser
+        }
+    },
+
+    async revokeRefreshToken(userId: string, refreshToken: string) {
+        const revoke = await SecurityDevicesDbRepository.revokeToken(userId, refreshToken);
+        const {acknowledged, insertedId} = revoke;
+
+        if (!acknowledged) {
+            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
+        }
+        return {
+            status: ResultSuccess.Success,
+            data: String(insertedId)
         }
     }
 }

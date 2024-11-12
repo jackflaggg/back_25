@@ -1,8 +1,9 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {Request, Response} from "express";
-import {refreshTokenCollection} from "../../db/db";
 import {jwtService} from "../../utils/application/jwt-service";
 import {randomUUID} from "node:crypto";
+import {authService} from "../../domain/auth/auth-service";
+import {LoginErrorTwo} from "../../models/auth/ouput/auth-service-models";
 
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
@@ -12,7 +13,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    console.log(verifiedRefreshToken);
+
     const userId = verifiedRefreshToken.token?.userId;
 
     if (!userId) {
@@ -21,7 +22,13 @@ export const refreshTokenController = async (req: Request, res: Response) => {
         return;
     }
     // отзываем старый рефрештокен
-    await refreshTokenCollection.insertOne({userId, refreshToken});
+    const revokeRefreshToken = await authService.revokeRefreshToken(userId, refreshToken);
+
+    if (revokeRefreshToken instanceof LoginErrorTwo || revokeRefreshToken.data === null) {
+        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+        return;
+    }
+
     //TODO: Временно изменяю expires
     const newAccessToken = await jwtService.createAccessToken(userId, '1000s');
 
