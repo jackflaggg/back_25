@@ -3,9 +3,9 @@ import cors from 'cors'
 import {SETTINGS} from "./settings";
 import {blogsRouter} from "./routes/blogs/blogs.router";
 import {postRouter} from "./routes/posts/posts.router";
-import {testingRouter} from "./routes/testing/testing.routes";
+import {testingRouter} from "./routes/testing/testing.router";
 import {vercelRouter} from "./routes/vercel/vercel.router";
-import {userRouter} from "./routes/users/users.routes";
+import {userRouter} from "./routes/users/users.router";
 import {authRouter} from "./routes/auth/auth.router";
 import {commentsRouter} from "./routes/comments/comments.router";
 import cookieParser from "cookie-parser";
