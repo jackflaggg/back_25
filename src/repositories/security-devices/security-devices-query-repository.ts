@@ -1,6 +1,9 @@
 export const securityDevicesQueryRepository = {
-    async getAllDevices(userId: string): Promise<any> {
+    async getAllDevicesToRefreshToken(userId: string): Promise<any> {
+        try {
 
-    },
-    async getDeviceById(deviceId: string): Promise<any | null> {}
+        } catch (error: unknown) {
+
+        }
+    }
 }
