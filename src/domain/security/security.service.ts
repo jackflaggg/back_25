@@ -15,11 +15,7 @@ export const devicesService = {
         const session =  await SecurityDevicesDbRepository.createSession(deviceData);
 
         if (!session){
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {field: 'SecurityDevicesDbRepository', message: 'ошибка при создании сессии'},
-                data: session
-            }
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при создании сессии'})
         }
 
         return {
