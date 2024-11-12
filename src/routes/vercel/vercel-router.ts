@@ -1,4 +1,4 @@
-import {testVercelRouter} from "../../controllers/vercel/getVersion";
+import {testVercelRouter} from "../../controllers/vercel/get.version.app";
 import {Router} from "express";
 
 export const vercelRouter = Router()
