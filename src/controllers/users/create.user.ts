@@ -1,7 +1,7 @@
 import {
     HTTP_STATUSES,
 } from "../../models/common/common-types";
-import {userService} from "../../domain/user/user-service";
+import {userService} from "../../domain/user/user.service";
 import {usersQueryRepository} from "../../repositories/users/users-query-repository";
 import {InCreateUserModel} from "../../models/user/input/input-type-users";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";

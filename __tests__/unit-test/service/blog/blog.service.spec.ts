@@ -1,7 +1,7 @@
 import {ObjectId} from "mongodb";
 import {createString} from "../../../helpers-e2e/datatests";
 import {blogsRepositories} from "../../../../src/repositories/blogs/blogs-db-repository";
-import {blogsService} from "../../../../src/domain/blog/blog-service";
+import {blogsService} from "../../../../src/domain/blog/blog.service";
 
 jest.mock('../../../../src/repositories/blogs/blogs-db-repository', () => ({
     blogsRepositories: {

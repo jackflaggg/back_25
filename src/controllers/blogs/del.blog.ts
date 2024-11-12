@@ -1,5 +1,5 @@
 import {Response} from "express";
-import {blogsService} from "../../domain/blog/blog-service";
+import {blogsService} from "../../domain/blog/blog.service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {BlogParamsModel, RequestWithParams} from "../../models/common/req_res_params/request-response-params";

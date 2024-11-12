@@ -2,7 +2,7 @@ import {HTTP_STATUSES} from "../../models/common/common-types";
 import {Request, Response} from "express";
 import {jwtService} from "../../utils/application/jwt-service";
 import {randomUUID} from "node:crypto";
-import {authService} from "../../domain/auth/auth-service";
+import {authService} from "../../domain/auth/auth.service";
 import {LoginErrorTwo} from "../../models/auth/ouput/auth-service-models";
 
 export const refreshTokenController = async (req: Request, res: Response) => {

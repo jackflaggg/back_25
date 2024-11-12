@@ -1,5 +1,5 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {postsService} from "../../domain/post/post-service";
+import {postsService} from "../../domain/post/post.service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";

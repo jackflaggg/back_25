@@ -3,7 +3,7 @@ import {
     HTTP_STATUSES,
 } from "../../models/common/common-types";
 import {InLoginModels} from "../../models/auth/input/login-post-controller";
-import {authService} from "../../domain/auth/auth-service";
+import {authService} from "../../domain/auth/auth.service";
 import {ResultSuccess} from "../../models/common/errors/errors-type";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request-response-params";
 import {jwtService} from "../../utils/application/jwt-service";

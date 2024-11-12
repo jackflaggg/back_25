@@ -1,6 +1,6 @@
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
-import {postsService} from "../../domain/post/post-service";
+import {postsService} from "../../domain/post/post.service";
 import {ErrorsMessageResponse, ResultStatus} from "../../models/common/errors/errors-type";
 import {
     BlogParamsToPostModel,

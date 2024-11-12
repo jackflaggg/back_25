@@ -1,7 +1,7 @@
 import {OutPostModel} from "../../models/post/output/output-type-posts";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
-import {blogsService} from "../../domain/blog/blog-service";
+import {blogsService} from "../../domain/blog/blog.service";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {InCreatePostToBlogInputModel} from "../../models/blog/input/input-type-blogs";
 import {

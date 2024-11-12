@@ -1,6 +1,6 @@
 import {Response} from "express";
 import {HTTP_STATUSES} from "../../models/common/common-types";
-import {postsService} from "../../domain/post/post-service";
+import {postsService} from "../../domain/post/post.service";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {PostParamsId, RequestWithParams} from "../../models/common/req_res_params/request-response-params";

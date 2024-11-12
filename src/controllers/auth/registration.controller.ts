@@ -1,5 +1,5 @@
 import {Response} from 'express';
-import {authService} from "../../domain/auth/auth-service";
+import {authService} from "../../domain/auth/auth.service";
 import {HTTP_STATUSES} from "../../models/common/common-types";
 import {ResultSuccess} from "../../models/common/errors/errors-type";
 import {RequestWithBody} from "../../models/common/req_res_params/request-response-params";

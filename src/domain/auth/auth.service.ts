@@ -12,7 +12,7 @@ import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth-service-models";
 import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
-import {devicesService} from "../security/security-service";
+import {devicesService} from "../security/security.service";
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security-devices-db-repository";
 
 export const authService = {
