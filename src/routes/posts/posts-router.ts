@@ -1,16 +1,16 @@
 import {Router} from "express";
 import {adminMiddlewares} from "../../utils/middlewares/admin-middleware";
-import {createPostController} from "../../controllers/posts/CreatePost";
-import {AllPostController} from "../../controllers/posts/getAllPosts";
-import {OnePostController} from "../../controllers/posts/getOnePost";
-import {updatePostController} from "../../controllers/posts/UpdatePost";
-import {deletePostController} from "../../controllers/posts/DelPost";
+import {createPostController} from "../../controllers/posts/create.post";
+import {AllPostController} from "../../controllers/posts/get.all.posts";
+import {OnePostController} from "../../controllers/posts/get.one.post";
+import {updatePostController} from "../../controllers/posts/update.post";
+import {deletePostController} from "../../controllers/posts/del.post";
 import {blogIdValidator, postValidator} from "../../validators/post.validator";
 import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsValidator";
 import {authBearerMiddlewares} from "../../utils/middlewares/auth-bearer-middleware";
 import {contentValidator} from "../../validators/comment.validator";
-import {createCommentByPostIdController} from "../../controllers/posts/CreateCommentsToPost";
-import {getCommentsToPostId} from "../../controllers/posts/GetAllCommentsToPost";
+import {createCommentByPostIdController} from "../../controllers/posts/create.comments.to.post";
+import {getCommentsToPostId} from "../../controllers/posts/get.all.comments.to.post";
 
 export const postRouter: Router = Router();
 
