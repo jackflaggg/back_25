@@ -1,9 +1,9 @@
 import {Router} from "express";
-import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
+import {verifyTokenInCookieMiddleware} from "../../utils/middlewares/verify.token.in.cookie.middleware";
 import {getAllDevicesController} from "../../controllers/devices/get.all.active.sessions.controller";
 
 export const devicesRouter: Router = Router();
 
-devicesRouter.get("/devices", verifyTokenInCookie, getAllDevicesController)
-devicesRouter.delete("/devices", verifyTokenInCookie)
-devicesRouter.delete("/devices/:deviceId", verifyTokenInCookie)
+devicesRouter.get("/devices", verifyTokenInCookieMiddleware, getAllDevicesController)
+devicesRouter.delete("/devices", verifyTokenInCookieMiddleware)
+devicesRouter.delete("/devices/:deviceId", verifyTokenInCookieMiddleware)
