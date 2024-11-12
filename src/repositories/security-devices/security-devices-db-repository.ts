@@ -3,7 +3,7 @@ import {sessionCollection} from "../../db/db";
 import {InDeviceSession} from "../../models/devices/input/create.device.session.model";
 
 export const SecurityDevicesDbRepository = {
-    async createSession(modelDevice: InDeviceSession): Promise<any> {
+    async createSession(modelDevice: InDeviceSession): Promise<string | null> {
         try {
 
             const dateDeviceMap = deviceMapper(modelDevice);
@@ -12,7 +12,7 @@ export const SecurityDevicesDbRepository = {
             if (!createSession) {
                 return null;
             }
-            return createSession.insertedId;
+            return String(createSession.insertedId);
 
         } catch (error: unknown) {
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));

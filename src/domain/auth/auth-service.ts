@@ -96,6 +96,7 @@ export const authService = {
 
 
         const errField = errorsBodyToAuthService(requiredFields);
+
         if (errField !== null){
             return {
                 status: ResultStatus.BadRequest,
