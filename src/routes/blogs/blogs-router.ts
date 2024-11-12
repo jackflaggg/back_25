@@ -5,9 +5,9 @@ import {createBlogController} from "../../controllers/blogs/create.blog";
 import {updateBlogController} from "../../controllers/blogs/update.blog";
 import {deleteBlogController} from "../../controllers/blogs/del.blog";
 import {adminMiddlewares} from "../../utils/middlewares/admin-middleware";
-import {blogValidator} from "../../validators/blogValidator";
+import {blogValidator} from "../../validators/blog.validator";
 import {getAllPostsToBlog} from "../../controllers/blogs/get.all.posts.to.blog";
-import {blogIdParamsValidator, postCreateWithBlogIdValidator} from "../../validators/postValidator";
+import {blogIdParamsValidator, postCreateWithBlogIdValidator} from "../../validators/post.validator";
 import {createNewPostToBlog} from "../../controllers/blogs/create.new.post.to.blog";
 import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsValidator";
 

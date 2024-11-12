@@ -5,10 +5,10 @@ import {AllPostController} from "../../controllers/posts/getAllPosts";
 import {OnePostController} from "../../controllers/posts/getOnePost";
 import {updatePostController} from "../../controllers/posts/UpdatePost";
 import {deletePostController} from "../../controllers/posts/DelPost";
-import {blogIdValidator, postValidator} from "../../validators/postValidator";
+import {blogIdValidator, postValidator} from "../../validators/post.validator";
 import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsValidator";
 import {authBearerMiddlewares} from "../../utils/middlewares/auth-bearer-middleware";
-import {contentValidator} from "../../validators/commentValidator";
+import {contentValidator} from "../../validators/comment.validator";
 import {createCommentByPostIdController} from "../../controllers/posts/CreateCommentsToPost";
 import {getCommentsToPostId} from "../../controllers/posts/GetAllCommentsToPost";
 

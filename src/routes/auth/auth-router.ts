@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {loginController} from "../../controllers/auth/login.controller";
-import {codeValidator, emailValidator, loginPostValidator, registrationPostValidator} from "../../validators/authValidator";
+import {codeValidator, emailValidator, loginPostValidator, registrationPostValidator} from "../../validators/auth.validator";
 import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsValidator";
 import {authBearerMiddlewares} from "../../utils/middlewares/auth-bearer-middleware";
 import {getInfoUserController} from "../../controllers/auth/get.info.user.controller";
