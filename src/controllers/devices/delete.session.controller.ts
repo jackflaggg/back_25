@@ -18,6 +18,14 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     if (!dateUser || !dateUser.userId){
         console.log('[userId] не найден');
         res
+            .sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403);
+        return;
+    }
+
+    const dateDevice = await jwtService.getDeviceIdByRefreshToken(refreshToken);
+    if (!dateDevice || !dateDevice.deviceId){
+        console.log('[userId] не найден');
+        res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }

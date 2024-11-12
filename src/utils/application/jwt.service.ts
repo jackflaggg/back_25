@@ -81,5 +81,24 @@ export const jwtService = {
             console.log('ошибка: ' + String(error));
             return null
         }
+    },
+
+    async getDeviceIdByRefreshToken(refreshToken: string): Promise<any | null> {
+        try {
+            const device = await jwt.verify(refreshToken, SETTINGS.SECRET_KEY) as JwtPayload;
+            if (!device || !device.deviceId){
+                console.log('что то пошло не так при верификации токена ' + JSON.stringify(device))
+                return null;
+            }
+            return device.deviceId;
+
+        } catch (error: unknown) {
+            if (error instanceof jwt.TokenExpiredError) {
+                console.log('токен протух: ' + JSON.stringify({ expired: true }))
+                return null// { expired: true };
+            }
+            console.log('ошибка: ' + String(error));
+            return null
+        }
     }
 }
