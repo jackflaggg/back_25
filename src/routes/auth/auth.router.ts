@@ -14,7 +14,7 @@ import {emailLimiter, loginLimiter, limiterMiddleware} from "../../utils/middlew
 
 
 export const authRouter: Router = Router();
-//TODO: Куда запихнуть лимитеры
+
 authRouter.post('/login', loginLimiter, [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
 authRouter.post('/refresh-token', verifyTokenInCookieMiddleware, refreshTokenController)
 authRouter.post('/logout', verifyTokenInCookieMiddleware, logoutController)
