@@ -20,10 +20,20 @@ export const SecurityDevicesDbRepository = {
         }
     },
     async deleteSession(deviceId: string): Promise<any> {
+        try {
 
+        } catch (error: unknown){
+            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
+            return null;
+        }
     },
     //TODO: нужно сделать: удаление всех сессий, кроме текущей!
     async deleteAllSession(deviceId: string): Promise<any> {
+        try {
 
+        } catch (error: unknown){
+            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
+            return null;
+        }
     }
 }
