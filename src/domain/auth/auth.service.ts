@@ -190,7 +190,7 @@ export const authService = {
         if (user.emailConfirmation.expirationDate && user.emailConfirmation.expirationDate < new Date()) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: 'прошло время, обновись', field: 'expirationDate'},
+                extensions: {message: 'прошло время, переобновись', field: 'expirationDate'},
                 data: null
             }
         }

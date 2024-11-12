@@ -46,13 +46,14 @@ export const UsersDbRepository = {
         }
         return findUser;
     },
-    async findCodeUser(code: string) {
-        console.log(code)
+    async findCodeUser(code: string): Promise<WithId<UserDbType> | null> {
+
         const findUser = await usersCollection.findOne({
             'emailConfirmation.confirmationCode': code
         });
-        console.log(findUser)
+
         if (!findUser || !findUser._id){
+            console.log('[UsersDbRepository] не нашел юзера!')
             return null;
         }
 

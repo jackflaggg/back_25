@@ -66,8 +66,8 @@ export const codeValidator  = body('code')
     .trim()
     .notEmpty()
     .withMessage('пустота')
-    .isLength({min: 6, max: 50})
-    .withMessage('длина больше 50 символов или меньше 6 символов');
+    .isLength({min: 36, max: 50})
+    .withMessage('длина больше 50 символов или меньше 36 символов');
 
 export const loginPostValidator: ValidationChain[] = [
     loginOrEmailValidator,
