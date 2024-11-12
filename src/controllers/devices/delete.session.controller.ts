@@ -4,7 +4,7 @@ import {jwtService} from "../../utils/application/jwt.service";
 
 export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
-    const {deviceId} = req.params;
+    const { deviceId} = req.params;
 
     if (!deviceId){
         console.log('[deviceId] не передан');
@@ -13,6 +13,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
         return;
     }
     const dateUser = await jwtService.getUserIdByRefreshToken(refreshToken);
+
     if (!dateUser || !dateUser.userId){
         console.log('[userId] не найден');
         res
@@ -20,5 +21,8 @@ export const deleteSessionController = async (req: Request, res: Response) => {
         return;
     }
 
-
+    console.log(refreshToken, deviceId)
+    res
+        .sendStatus(HTTP_STATUSES.NO_CONTENT_204);
+    return
 }
