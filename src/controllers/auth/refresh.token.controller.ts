@@ -30,11 +30,11 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     }
 
     //TODO: Временно изменяю expires
-    const newAccessToken = await jwtService.createAccessToken(userId, '1000s');
+    const newAccessToken = await jwtService.createAccessToken(userId, '10s');
 
     const deviceId = String(randomUUID());
 
-    const newRefreshToken = await jwtService.createRefreshToken(userId, deviceId, '2000s');
+    const newRefreshToken = await jwtService.createRefreshToken(userId, deviceId, '20s');
 
     res.cookie('refreshToken', newRefreshToken, {httpOnly: true, secure: true});
 
