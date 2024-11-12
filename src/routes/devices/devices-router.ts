@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
-import {getAllDevicesController} from "../../controllers/devices/get-all-active-sessions-controller";
+import {getAllDevicesController} from "../../controllers/devices/get.all.active.sessions.controller";
 
 export const devicesRouter: Router = Router();
 

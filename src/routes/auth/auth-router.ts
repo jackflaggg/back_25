@@ -1,15 +1,15 @@
 import {Router} from "express";
-import {loginController} from "../../controllers/auth/loginController";
+import {loginController} from "../../controllers/auth/login.controller";
 import {codeValidator, emailValidator, loginPostValidator, registrationPostValidator} from "../../validators/authValidator";
 import {inputCheckErrorsMiddleware} from "../../utils/middlewares/checkErrorsValidator";
 import {authBearerMiddlewares} from "../../utils/middlewares/auth-bearer-middleware";
-import {getInfoUserController} from "../../controllers/auth/getInfoUserController";
-import {registrationConfirmationController} from "../../controllers/auth/registrConfirmationController";
-import {registrationController} from "../../controllers/auth/registrationController";
-import {registrationEmailController} from "../../controllers/auth/registrationEmailController";
+import {getInfoUserController} from "../../controllers/auth/get.info.user.controller";
+import {registrationConfirmationController} from "../../controllers/auth/registration.conf.controller";
+import {registrationController} from "../../controllers/auth/registration.controller";
+import {registrationEmailController} from "../../controllers/auth/registration.email.controller";
 import {verifyTokenInCookie} from "../../utils/middlewares/verifyTokenInCookie";
-import {refreshTokenController} from "../../controllers/auth/refreshTokenController";
-import {logoutController} from "../../controllers/auth/logoutController";
+import {refreshTokenController} from "../../controllers/auth/refresh.token.controller";
+import {logoutController} from "../../controllers/auth/logout.controller";
 import {emailLimiter, loginLimiter, registrationLimiter} from "../../utils/middlewares/registration-limiter";
 
 
