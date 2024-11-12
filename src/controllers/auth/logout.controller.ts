@@ -10,12 +10,15 @@ export const logoutController = async (req: Request, res: Response) => {
 
     const { refreshToken } = req.cookies;
     const userId = await jwtService.getUserIdByRefreshToken(refreshToken);
+
     if (!userId){
         console.log(`[userId] не найден!`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
+
     const revokeRefreshToken = await jwtService.revokeRefreshToken(refreshToken, userId);
+
     if (revokeRefreshToken instanceof LoginErrorTwo || revokeRefreshToken.data === null) {
         console.log(`[authService] не получилось отозвать!`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);

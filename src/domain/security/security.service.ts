@@ -46,6 +46,15 @@ export const devicesService = {
         }
     },
     async deleteSessionByRefreshToken(refreshToken: string){
+        const deleteSession = await SecurityDevicesDbRepository.deleteSessionByRefreshToken(refreshToken);
 
+        if (!deleteSession){
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении всех, кроме текущей, сессии'})
+        }
+        const { acknowledged, deletedCount } = deleteSession;
+        return {
+            status: ResultSuccess.Success,
+            data: deletedCount
+        }
     }
 }

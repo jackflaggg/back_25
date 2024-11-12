@@ -57,5 +57,19 @@ export const SecurityDevicesDbRepository = {
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
         }
+    },
+
+    async deleteSessionByRefreshToken(refreshToken: string) {
+        try {
+            const deleteRefresh =  await sessionCollection.deleteOne({refreshToken});
+            if (!deleteRefresh.acknowledged) {
+                console.log('[SecurityDevicesDbRepository] Не получилось отозвать токен! ');
+                return null;
+            }
+            return deleteRefresh;
+        } catch (error: unknown){
+            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
+            return null;
+        }
     }
 }
