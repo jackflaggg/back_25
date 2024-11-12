@@ -120,6 +120,7 @@ export const jwtService = {
     },
 
     async updateTwoTokens(deviceId: string, refreshToken: string){
-        const findToken = await refreshTokenCollection.findOne({ refreshToken: refreshToken })
+        const findRefreshToken = await SecurityDevicesDbRepository.findRefreshToken(refreshToken);
+
     }
 }

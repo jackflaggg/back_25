@@ -71,5 +71,18 @@ export const SecurityDevicesDbRepository = {
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
         }
+    },
+
+    async findRefreshToken(refreshToken: string){
+        try {
+            const findToken = await refreshTokenCollection.findOne({refreshToken});
+            if (!findToken) {
+                return null;
+            }
+            return findToken
+        } catch (error: unknown) {
+            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
+            return null;
+        }
     }
 }
