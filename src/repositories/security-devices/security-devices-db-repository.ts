@@ -1,8 +1,9 @@
 import {deviceMapper} from "../../utils/mappers/device-mapper";
 import {sessionCollection} from "../../db/db";
+import {InDeviceSession} from "../../models/devices/input/create.device.session.model";
 
 export const SecurityDevicesDbRepository = {
-    async createSession(modelDevice: any): Promise<any> {
+    async createSession(modelDevice: InDeviceSession): Promise<any> {
         try {
 
             const dateDeviceMap = deviceMapper(modelDevice);
@@ -22,5 +23,6 @@ export const SecurityDevicesDbRepository = {
 
     },
     async deleteAllSession(deviceId: string): Promise<any> {
+
     }
 }
