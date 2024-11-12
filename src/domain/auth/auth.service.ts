@@ -271,19 +271,6 @@ export const authService = {
             status: ResultSuccess.Success,
             data: updateInfoUser
         }
-    },
-
-    async revokeRefreshToken(userId: string, refreshToken: string) {
-        const revoke = await SecurityDevicesDbRepository.revokeToken(userId, refreshToken);
-        const {acknowledged, insertedId} = revoke;
-
-        if (!acknowledged) {
-            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
-        }
-        return {
-            status: ResultSuccess.Success,
-            data: String(insertedId)
-        }
     }
 }
 

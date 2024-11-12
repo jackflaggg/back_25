@@ -44,9 +44,9 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async revokeToken(userId: string, refreshToken: string): Promise<any> {
+    async revokeToken(refreshToken: string): Promise<any> {
         try {
-            const revokeToken = await refreshTokenCollection.insertOne({userId, refreshToken});
+            const revokeToken = await refreshTokenCollection.insertOne({refreshToken});
             if (!revokeToken.acknowledged) {
                 console.log('[SecurityDevicesDbRepository] Не получилось отозвать токен! ');
                 return null;

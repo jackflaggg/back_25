@@ -3,6 +3,9 @@ import jwt, {JwtPayload} from "jsonwebtoken";
 import {config} from 'dotenv'
 import {secretErrorCheck} from "../features/secret.error";
 import {TokenVerificationResult, VerifiedToken} from "../../models/common/common.types";
+import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
+import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 config()
 
 export const jwtService = {
@@ -99,6 +102,19 @@ export const jwtService = {
             }
             console.log('ошибка: ' + String(error));
             return null
+        }
+    },
+
+    async revokeRefreshToken(refreshToken: string) {
+        const revoke = await SecurityDevicesDbRepository.revokeToken(refreshToken);
+        const {acknowledged, insertedId} = revoke;
+
+        if (!acknowledged) {
+            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
+        }
+        return {
+            status: ResultSuccess.Success,
+            data: String(insertedId)
         }
     }
 }

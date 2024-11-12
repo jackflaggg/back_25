@@ -1,34 +1,27 @@
 import {Request, Response} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
-import {jwtService} from "../../utils/application/jwt.service";
+
 import {authService} from "../../domain/auth/auth.service";
 import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {jwtService} from "../../utils/application/jwt.service";
+import {devicesService} from "../../domain/security/security.service";
 
 export const logoutController = async (req: Request, res: Response) => {
 
     const { refreshToken } = req.cookies;
-    const token = await jwtService.verifyRefreshToken(refreshToken);
 
-    if (!token){
-        console.log(`[token] не прошел верификацию`)
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
-        return;
-    }
 
-    if (!token.token?.userId) {
-        console.log(`[userId] не существует`)
-        res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
-        return;
-    }
-
-    const {token: {userId}} = token;
-
-    const userIdToString = JSON.stringify(userId);
-
-    const revokeRefreshToken = await authService.revokeRefreshToken(userIdToString, refreshToken);
+    const revokeRefreshToken = await jwtService.revokeRefreshToken(refreshToken);
     if (revokeRefreshToken instanceof LoginErrorTwo || revokeRefreshToken.data === null) {
         console.log(`[authService] не получилось отозвать!`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+        return;
+    }
+
+    const deleteSession = await devicesService.deleteSessionByRefreshToken(refreshToken);
+    if (!deleteSession) {
+        res
+            .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);

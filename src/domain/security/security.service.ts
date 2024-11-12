@@ -44,5 +44,8 @@ export const devicesService = {
             status: ResultSuccess.Success,
             data: deletedCount
         }
+    },
+    async deleteSessionByRefreshToken(refreshToken: string){
+
     }
 }
