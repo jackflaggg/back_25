@@ -187,15 +187,20 @@ export const authService = {
             }
         }
 
-        if (user.emailConfirmation.expirationDate && user.emailConfirmation.expirationDate < new Date()) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {message: 'прошло время, переобновись', field: 'expirationDate'},
-                data: null
+        if (user.emailConfirmation.expirationDate !== null && !user.emailConfirmation.isConfirmed) {
+
+            const currentDate = new Date(); // Текущая дата
+            const expirationDate = new Date(user.emailConfirmation.expirationDate);
+
+            if (expirationDate < currentDate) {
+                return {
+                    status: ResultStatus.BadRequest,
+                    extensions: {message: 'прошло время, переобновись', field: 'expirationDate'},
+                    data: null
+                }
             }
         }
-
-        if (user.emailConfirmation.isConfirmed) {
+        if (user.emailConfirmation.isConfirmed && user.emailConfirmation.confirmationCode === null) {
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {message: 'подтверждение уже было', field: 'code'},
