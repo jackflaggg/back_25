@@ -14,14 +14,18 @@ export const logoutController = async (req: Request, res: Response) => {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    const userId = JSON.stringify(token.token?.userId)
-    if (!userId){
+
+    if (!token.token?.userId) {
         console.log(`[userId] не существует`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
 
-    const revokeRefreshToken = await authService.revokeRefreshToken(userId, refreshToken);
+    const {token: {userId}} = token;
+
+    const userIdToString = JSON.stringify(userId);
+
+    const revokeRefreshToken = await authService.revokeRefreshToken(userIdToString, refreshToken);
     if (revokeRefreshToken instanceof LoginErrorTwo || revokeRefreshToken.data === null) {
         console.log(`[authService] не получилось отозвать!`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
