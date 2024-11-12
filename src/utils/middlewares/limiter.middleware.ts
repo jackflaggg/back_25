@@ -5,19 +5,19 @@ export const limiterMiddleware = rateLimit({
     windowMs: 10 * 1000,
     limit: 5,
     message: 'слишком много запросов, повтори попытку через 10 секунд',
-    statusCode: HTTP_STATUSES.TOO_MANY_REQUESTS
+    statusCode: HTTP_STATUSES.TOO_MANY_REQUESTS_429
 });
 
 export const loginLimiter = rateLimit({
     windowMs: 10 * 1000,
     limit: 5,
     message: 'слишком много запросов, повтори попытку через 10 секунд',
-    statusCode: HTTP_STATUSES.TOO_MANY_REQUESTS
+    statusCode: HTTP_STATUSES.TOO_MANY_REQUESTS_429
 });
 
 export const emailLimiter = rateLimit({
     windowMs: 10 * 1000,
     limit: 5,
     message: 'слишком много запросов, повтори попытку через 10 секунд',
-    statusCode: HTTP_STATUSES.TOO_MANY_REQUESTS
+    statusCode: HTTP_STATUSES.TOO_MANY_REQUESTS_429
 });
