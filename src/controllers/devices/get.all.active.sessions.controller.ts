@@ -13,6 +13,7 @@ export const getAllDevicesController = async (req: Request, res: Response) => {
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return
     }
+    //TODO: Доделать!
     const getAllActivitiesDevices = await securityDevicesQueryRepository.getAllDevicesToRefreshToken(user.userId);
 
     res

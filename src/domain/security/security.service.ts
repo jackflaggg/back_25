@@ -33,5 +33,16 @@ export const devicesService = {
             status: ResultSuccess.Success,
             data: deletedCount
         }
+    },
+    async deleteSessions(userId: string, refreshToken: string): Promise<any> {
+        const deleteSession = await SecurityDevicesDbRepository.deleteAllSession(userId, refreshToken);
+        const { acknowledged, deletedCount } = deleteSession;
+        if (!acknowledged){
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении всех, кроме текущей, сессии'})
+        }
+        return {
+            status: ResultSuccess.Success,
+            data: deletedCount
+        }
     }
 }

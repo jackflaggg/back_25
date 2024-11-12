@@ -30,9 +30,14 @@ export const SecurityDevicesDbRepository = {
     },
 
     //TODO: нужно сделать: удаление всех сессий, кроме текущей!
-    async deleteAllSession(deviceId: string): Promise<any> {
+    async deleteAllSession(userId: string, refreshToken: string): Promise<any> {
         try {
-
+            const deleteSessions = await refreshTokenCollection.deleteMany({userId, refreshToken: {$ne: refreshToken}});
+            if (!deleteSessions.acknowledged) {
+                console.log('[SecurityDevicesDbRepository] Не получилось удалить сессии! ');
+                return null;
+            }
+            return deleteSessions;
         } catch (error: unknown){
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
