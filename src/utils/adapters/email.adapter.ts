@@ -5,6 +5,7 @@ import {emailTemplates} from "../templates/email.templates";
 export const emailAdapter = {
     async sendEmail(emailFrom: string, messageCode: string) {
         try {
+
             // создание транспортера
             let transporter = nodemailer.createTransport({
                 service: 'Mail.ru',
