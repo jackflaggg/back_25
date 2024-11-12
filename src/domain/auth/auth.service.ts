@@ -106,9 +106,8 @@ export const authService = {
         if (errField !== null){
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: `${errField} is required`, field: `${errField}`},
-                data: null
-            }
+                extensions:{ message: `${errField} is required`, field: `${errField}`},
+                data: null}
         }
 
         const uniqueErrors = await errorsUnique( email, login );
