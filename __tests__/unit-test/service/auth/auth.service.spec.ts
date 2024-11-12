@@ -7,7 +7,7 @@ import {authService} from "../../../../src/domain/auth/auth.service";
 import {ResultStatus, ResultSuccess} from "../../../../src/models/common/errors/errors-type";
 import {hashService} from "../../../../src/utils/application/hash-service";
 import {jwtService} from "../../../../src/utils/application/jwt-service";
-import {loginSuccess} from "../../../../src/models/auth/ouput/auth-service-models";
+import {loginSuccess} from "../../../../src/models/auth/ouput/auth.service.models";
 
 
 let outUser : OutUserFindLoginOrEmail ={
@@ -65,7 +65,7 @@ jest.mock('../../../../src/utils/application/jwt-service', () => ({
     }
 }));
 
-jest.mock('../../../../src/managers/email-managers', () => ({
+jest.mock('../../../../src/managers/email.managers', () => ({
     emailManagers: {
         sendEmailRecoveryMessage: jest.fn()
     },
