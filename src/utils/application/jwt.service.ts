@@ -6,6 +6,7 @@ import {TokenVerificationResult, VerifiedToken} from "../../models/common/common
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
+import {refreshTokenCollection} from "../../db/db";
 config()
 
 export const jwtService = {
@@ -116,5 +117,9 @@ export const jwtService = {
             status: ResultSuccess.Success,
             data: String(insertedId)
         }
+    },
+
+    async updateTwoTokens(deviceId: string, refreshToken: string){
+        const findToken = await refreshTokenCollection.find({ refreshToken: refreshToken })
     }
 }
