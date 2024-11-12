@@ -22,7 +22,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
         return;
     }
     // отзываем старый рефрештокен
-    const revokeRefreshToken = await jwtService.revokeRefreshToken(refreshToken);
+    const revokeRefreshToken = await jwtService.revokeRefreshToken(refreshToken, userId);
 
     if (revokeRefreshToken instanceof LoginErrorTwo || revokeRefreshToken.data === null) {
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);

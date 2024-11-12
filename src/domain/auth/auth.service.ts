@@ -259,7 +259,7 @@ export const authService = {
                 }
             }
         } catch (e: unknown){
-            console.log(JSON.stringify(e));
+
             return {
                 status: ResultStatus.BadRequest,
                 extensions: {message: '[emailManagers]', field: 'ошибка email'},

@@ -105,8 +105,8 @@ export const jwtService = {
         }
     },
 
-    async revokeRefreshToken(refreshToken: string) {
-        const revoke = await SecurityDevicesDbRepository.revokeToken(refreshToken);
+    async revokeRefreshToken(refreshToken: string, userId: string) {
+        const revoke = await SecurityDevicesDbRepository.revokeToken(refreshToken, userId);
         const {acknowledged, insertedId} = revoke;
 
         if (!acknowledged) {
