@@ -1,5 +1,5 @@
 import {randomUUID} from "node:crypto";
-import {emailInfo} from "../../models/user/ouput/output-type-users";
+import {emailInfo} from "../../models/user/ouput/output.type.users";
 import {add} from "date-fns/add";
 import {UUID} from "crypto";
 

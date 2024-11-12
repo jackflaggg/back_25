@@ -1,5 +1,5 @@
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security-devices-db-repository";
-import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
+import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 
 export const devicesService = {
     async writeData(ipDevices: string, titleDevice: string, deviceId: string, lastActiveDate: string, refreshToken: string): Promise<any> {

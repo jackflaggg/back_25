@@ -1,15 +1,15 @@
-import {OutPostModel} from "../../models/post/output/output-type-posts";
+import {OutPostModel} from "../../models/post/output/output.type.posts";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {blogsService} from "../../domain/blog/blog.service";
 import {validateId} from "../../utils/helpers/helper-validate-id";
-import {InCreatePostToBlogInputModel} from "../../models/blog/input/input-type-blogs";
+import {InCreatePostToBlogInputModel} from "../../models/blog/input/input.type.blogs";
 import {
     BlogParamsModel,
     RequestWithParamsAndBody,
     ResponseBody
-} from "../../models/common/req_res_params/request-response-params";
-import {HTTP_STATUSES} from "../../models/common/common-types";
+} from "../../models/common/req_res_params/request.response.params";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 
 export const createNewPostToBlog = async(req: RequestWithParamsAndBody<BlogParamsModel, InCreatePostToBlogInputModel>, res: ResponseBody<OutPostModel>) => {
 

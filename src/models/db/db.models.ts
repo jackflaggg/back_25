@@ -1,4 +1,4 @@
-import {emailInfo} from "../user/ouput/output-type-users";
+import {emailInfo} from "../user/ouput/output.type.users";
 
 export interface BlogDbType {
     id?:            string,

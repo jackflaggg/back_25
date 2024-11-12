@@ -1,5 +1,5 @@
 import {SortDirection} from "mongodb";
-import {queryParamsName} from "../input/input-type-blogs";
+import {queryParamsName} from "../input/input.type.blogs";
 
 export interface QueryHelperBlog {
     pageNumber: number,

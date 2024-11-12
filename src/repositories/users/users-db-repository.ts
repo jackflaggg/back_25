@@ -1,7 +1,7 @@
 import {usersCollection} from "../../db/db";
 import {ObjectId, WithId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
-import {OutUserFindLoginOrEmail, OutUserServiceModel} from "../../models/user/ouput/output-type-users";
+import {OutUserFindLoginOrEmail, OutUserServiceModel} from "../../models/user/ouput/output.type.users";
 
 export const UsersDbRepository = {
     async createUser(body: OutUserServiceModel): Promise<string | null> {

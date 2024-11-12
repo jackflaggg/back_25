@@ -2,8 +2,8 @@ import {Response} from "express";
 import {blogsService} from "../../domain/blog/blog.service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
-import {BlogParamsModel, RequestWithParams} from "../../models/common/req_res_params/request-response-params";
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {BlogParamsModel, RequestWithParams} from "../../models/common/req_res_params/request.response.params";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 
 export const deleteBlogController = async (req: RequestWithParams<BlogParamsModel>,
                                            res:Response) => {

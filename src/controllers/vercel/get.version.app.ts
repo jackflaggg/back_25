@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 
 export const testVercelRouter = async (req: Request,
                                           res: Response) => {

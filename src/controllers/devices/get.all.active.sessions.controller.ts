@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 import {jwtService} from "../../utils/application/jwt-service";
 import {securityDevicesQueryRepository} from "../../repositories/security-devices/security-devices-query-repository";
 

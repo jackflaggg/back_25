@@ -9,7 +9,7 @@ import { add } from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper-error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {SETTINGS} from "../../settings";
-import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
+import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth.service.models";
 import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
 import {devicesService} from "../security/security.service";

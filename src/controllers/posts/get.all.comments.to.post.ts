@@ -1,4 +1,4 @@
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
 import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
@@ -6,9 +6,9 @@ import {CommentsQueryRepository} from "../../repositories/comments/comments-quer
 import {
     BlogParamsToPostModel,
     RequestWithParamsAndQuery, ResponseBody
-} from "../../models/common/req_res_params/request-response-params";
-import {InQueryPostModel} from "../../models/post/input/input-type-posts";
-import {OutGetAllCommentsModel} from "../../models/comments/output/output-type-comments";
+} from "../../models/common/req_res_params/request.response.params";
+import {InQueryPostModel} from "../../models/post/input/input.type.posts";
+import {OutGetAllCommentsModel} from "../../models/comments/output/output.type.comments";
 
 export const getCommentsToPostId = async (req: RequestWithParamsAndQuery<BlogParamsToPostModel, InQueryPostModel>, res: ResponseBody<OutGetAllCommentsModel>) => {
 

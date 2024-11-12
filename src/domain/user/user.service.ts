@@ -1,10 +1,10 @@
 import {UsersDbRepository} from "../../repositories/users/users-db-repository";
 import {hashService} from "../../utils/application/hash-service";
 import {errorsUnique} from "../../utils/features/errors-validate";
-import {OutUserServiceModel} from "../../models/user/ouput/output-type-users";
-import { ResultStatus, ResultSuccess} from "../../models/common/errors/errors-type";
+import {OutUserServiceModel} from "../../models/user/ouput/output.type.users";
+import { ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 import {helperError} from "../../utils/helpers/helper-error";
-import {OutCreateUserError, OutCreateUserSuccess} from "../../models/user/ouput/user-service-models";
+import {OutCreateUserError, OutCreateUserSuccess} from "../../models/user/ouput/user.service.models";
 
 export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<OutCreateUserSuccess | OutCreateUserError> {

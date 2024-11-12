@@ -1,5 +1,5 @@
 import { rateLimit } from 'express-rate-limit'
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 
 export const registrationLimiter = rateLimit({
     windowMs: 10 * 1000,

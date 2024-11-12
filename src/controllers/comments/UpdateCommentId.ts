@@ -1,11 +1,11 @@
 import { Response } from "express";
 import {commentService} from "../../domain/comment/comment.service";
-import {HTTP_STATUSES} from "../../models/common/common-types";
-import {ResultStatus, ResultStatusType} from "../../models/common/errors/errors-type";
+import {HTTP_STATUSES} from "../../models/common/common.types";
+import {ResultStatus, ResultStatusType} from "../../models/common/errors/errors.type";
 import {
     CommentParamsId,
     RequestWithParamsAndBody
-} from "../../models/common/req_res_params/request-response-params";
+} from "../../models/common/req_res_params/request.response.params";
 import {errorsMessages} from "../../utils/features/errorsMessages";
 
 export const updateCommentController = async (req: RequestWithParamsAndBody<CommentParamsId, {content: string}>, res: Response) => {

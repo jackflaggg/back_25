@@ -1,8 +1,8 @@
-import {InQueryBlogModel} from "../../models/blog/input/input-type-blogs";
-import {QueryHelperBlog} from "../../models/blog/helper-query-blog/helper-blog";
-import {InQueryPostModel} from "../../models/post/input/input-type-posts";
-import {QueryHelperPost} from "../../models/post/helper-query-post/helper-post";
-import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user";
+import {InQueryBlogModel} from "../../models/blog/input/input.type.blogs";
+import {QueryHelperBlog} from "../../models/blog/helper-query-blog/helper.blog";
+import {InQueryPostModel} from "../../models/post/input/input.type.posts";
+import {QueryHelperPost} from "../../models/post/helper-query-post/helper.post";
+import {InQueryUserModel} from "../../models/user/helper-query-user/helper.user";
 
 export const queryHelperToBlog = (queryBlog: InQueryBlogModel): QueryHelperBlog => ({
         pageNumber: queryBlog.pageNumber ?? 1,

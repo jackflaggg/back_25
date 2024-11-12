@@ -1,8 +1,8 @@
 import {Response} from 'express';
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 import {authService} from "../../domain/auth/auth.service";
-import {ResultSuccess} from "../../models/common/errors/errors-type";
-import {EmailBodyModel, RequestWithBody} from "../../models/common/req_res_params/request-response-params";
+import {ResultSuccess} from "../../models/common/errors/errors.type";
+import {EmailBodyModel, RequestWithBody} from "../../models/common/req_res_params/request.response.params";
 import {errorsMessages} from "../../utils/features/errorsMessages";
 
 export const registrationEmailController = async (req: RequestWithBody<EmailBodyModel>, res: Response) => {

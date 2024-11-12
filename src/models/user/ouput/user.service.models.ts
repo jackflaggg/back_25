@@ -1,4 +1,4 @@
-import {FieldNamesType} from "../../common/errors/errors-type";
+import {FieldNamesType} from "../../common/errors/errors.type";
 
 export class OutCreateUserSuccess {
     constructor(public status: string, public data: string) {}

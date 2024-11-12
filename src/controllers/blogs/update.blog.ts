@@ -1,10 +1,10 @@
 import {Response} from "express";
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 import {blogsService} from "../../domain/blog/blog.service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
-import {InUpdateBlogModel} from "../../models/blog/input/input-type-blogs";
-import {BlogParamsModel, RequestWithParamsAndBody} from "../../models/common/req_res_params/request-response-params";
+import {InUpdateBlogModel} from "../../models/blog/input/input.type.blogs";
+import {BlogParamsModel, RequestWithParamsAndBody} from "../../models/common/req_res_params/request.response.params";
 
 export const updateBlogController = async (req: RequestWithParamsAndBody<BlogParamsModel, InUpdateBlogModel>,
                                            res:Response) => {

@@ -1,15 +1,15 @@
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
 import {postsService} from "../../domain/post/post.service";
-import {ErrorsMessageResponse, ResultStatus} from "../../models/common/errors/errors-type";
+import {ErrorsMessageResponse, ResultStatus} from "../../models/common/errors/errors.type";
 import {
     BlogParamsToPostModel,
     RequestWithParamsAndBody,
     ResponseBody
-} from "../../models/common/req_res_params/request-response-params";
-import {OutCommentModel} from "../../models/comments/output/output-type-comments";
+} from "../../models/common/req_res_params/request.response.params";
+import {OutCommentModel} from "../../models/comments/output/output.type.comments";
 import {errorsMessages} from "../../utils/features/errorsMessages";
-import {InCreateCommentModel} from "../../models/comments/input/input-type-comments";
+import {InCreateCommentModel} from "../../models/comments/input/input.type.comments";
 
 export const createCommentByPostIdController = async (req: RequestWithParamsAndBody<BlogParamsToPostModel, InCreateCommentModel>, res: ResponseBody<OutCommentModel | ErrorsMessageResponse>) => {
 

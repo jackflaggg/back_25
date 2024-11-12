@@ -2,7 +2,7 @@ import {SETTINGS} from "../../settings";
 import jwt, {JwtPayload} from "jsonwebtoken";
 import {config} from 'dotenv'
 import {secretErrorCheck} from "../features/secret-error";
-import {TokenVerificationResult, VerifiedToken} from "../../models/common/common-types";
+import {TokenVerificationResult, VerifiedToken} from "../../models/common/common.types";
 config()
 
 export const jwtService = {

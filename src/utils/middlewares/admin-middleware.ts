@@ -1,5 +1,5 @@
 import {Request, Response, NextFunction} from "express";
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 import {SETTINGS} from "../../settings";
 import {fromUTF8ToBase64} from "../features/UTF8ToBase64";
 

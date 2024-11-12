@@ -2,12 +2,12 @@ import {usersCollection} from "../../db/db";
 import {loginUserMapper, userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {ObjectId} from "mongodb";
 import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
-import {InQueryUserModel} from "../../models/user/helper-query-user/helper-user";
+import {InQueryUserModel} from "../../models/user/helper-query-user/helper.user";
 import {
     OutLoginMapByUser,
     OutQueryCreateUsersModel,
     OutUserById
-} from "../../models/user/ouput/output-type-users";
+} from "../../models/user/ouput/output.type.users";
 
 export const usersQueryRepository = {
     async getAllUsers(query: InQueryUserModel): Promise<Omit<OutQueryCreateUsersModel, 'items.emailConfirmation'>> {

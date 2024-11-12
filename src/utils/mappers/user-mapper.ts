@@ -1,4 +1,4 @@
-import {OutUserById} from "../../models/user/ouput/output-type-users";
+import {OutUserById} from "../../models/user/ouput/output.type.users";
 import {WithId} from "mongodb";
 import {UserDbType} from "../../models/db/db.models";
 

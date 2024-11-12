@@ -1,4 +1,4 @@
-import {HTTP_STATUSES} from "../../models/common/common-types";
+import {HTTP_STATUSES} from "../../models/common/common.types";
 import {Request, Response} from "express";
 import {jwtService} from "../../utils/application/jwt-service";
 import {randomUUID} from "node:crypto";
