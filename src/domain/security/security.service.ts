@@ -1,4 +1,4 @@
-import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security-devices-db-repository";
+import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 
 export const devicesService = {

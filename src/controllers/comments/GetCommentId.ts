@@ -1,7 +1,7 @@
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {Request, Response} from "express";
 import {validateId} from "../../utils/helpers/helper-validate-id";
-import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
+import {CommentsQueryRepository} from "../../repositories/comments/comments.query.repository";
 
 export const getCommentIdController = async (req: Request,
                                            res: Response) => {

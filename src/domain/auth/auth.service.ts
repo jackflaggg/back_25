@@ -13,7 +13,7 @@ import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.typ
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth.service.models";
 import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
 import {devicesService} from "../security/security.service";
-import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security-devices-db-repository";
+import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {

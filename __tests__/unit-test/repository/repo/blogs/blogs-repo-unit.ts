@@ -1,5 +1,5 @@
 import {BlogDbType} from "../../../../../src/models/db/db.models";
-import {blogsRepositories} from "../../../../../src/repositories/blogs/blogs-db-repository";
+import {blogsRepositories} from "../../../../../src/repositories/blogs/blogs.db.repository";
 import {createString} from "../../../../helpers-e2e/datatests";
 import {Collection, Db, MongoClient, ObjectId} from "mongodb";
 import {blogsCollections, postsCollections} from "../../../../../src/db/db";

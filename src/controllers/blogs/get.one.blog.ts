@@ -1,5 +1,5 @@
 import {OutBlogModel} from "../../models/blog/output/output.type.blogs";
-import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
+import {blogsQueryRepositories} from "../../repositories/blogs/blogs.query.repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {
     BlogParamsModel,

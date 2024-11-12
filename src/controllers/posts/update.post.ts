@@ -1,8 +1,8 @@
 import {Response} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {postsService} from "../../domain/post/post.service";
-import {postsQueryRepository} from "../../repositories/posts/posts-query-repository";
-import {blogsQueryRepositories} from "../../repositories/blogs/blogs-query-repository";
+import {postsQueryRepository} from "../../repositories/posts/posts.query.repository";
+import {blogsQueryRepositories} from "../../repositories/blogs/blogs.query.repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
 import {InUpdatePostModel} from "../../models/post/input/input.type.posts";
 import {PostParamsId, RequestWithParamsAndBody} from "../../models/common/req_res_params/request.response.params";

@@ -1,6 +1,6 @@
-import {CommentsQueryRepository} from "../../repositories/comments/comments-query-repository";
+import {CommentsQueryRepository} from "../../repositories/comments/comments.query.repository";
 import {validateId} from "../../utils/helpers/helper-validate-id";
-import {CommentsDbRepository} from "../../repositories/comments/comments-db-repository";
+import {CommentsDbRepository} from "../../repositories/comments/comments.db.repository";
 import {ResultStatus} from "../../models/common/errors/errors.type";
 
 export const commentService = {
