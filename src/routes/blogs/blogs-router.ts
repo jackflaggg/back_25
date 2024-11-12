@@ -2,7 +2,7 @@ import {Router} from "express";
 import {AllBlogController} from "../../controllers/blogs/get.all.blogs";
 import {OneBlogController} from "../../controllers/blogs/get.one.blog";
 import {createBlogController} from "../../controllers/blogs/create.blog";
-import {updateBlogController} from "../../controllers/blogs/UpdateBlog";
+import {updateBlogController} from "../../controllers/blogs/update.blog";
 import {deleteBlogController} from "../../controllers/blogs/del.blog";
 import {adminMiddlewares} from "../../utils/middlewares/admin-middleware";
 import {blogValidator} from "../../validators/blogValidator";
