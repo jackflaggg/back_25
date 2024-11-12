@@ -80,6 +80,11 @@ export const authService = {
             }
         }
         const devices = await devicesService.writeData(ipDevices, titleDevice, deviceId, String(lastActivateRefreshToken.iat), generateRefreshToken)
+
+        if (devices instanceof LoginErrorTwo || devices.data === null) {
+            return devices
+        }
+
         return {
             status: ResultSuccess.Success,
             data: {
