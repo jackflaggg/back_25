@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import {SETTINGS} from "../../settings";
-import {emailTemplates} from "../templates/email-templates";
+import {emailTemplates} from "../templates/email.templates";
 
 export const emailAdapter = {
     async sendEmail(emailFrom: string, messageCode: string) {

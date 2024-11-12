@@ -1,7 +1,7 @@
 import { rateLimit } from 'express-rate-limit'
 import {HTTP_STATUSES} from "../../models/common/common.types";
 
-export const registrationLimiter = rateLimit({
+export const limiterMiddleware = rateLimit({
     windowMs: 10 * 1000,
     limit: 5,
     message: 'слишком много запросов, повтори попытку через 10 секунд',

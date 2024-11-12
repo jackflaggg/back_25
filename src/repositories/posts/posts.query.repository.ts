@@ -1,5 +1,5 @@
 import {postsCollections} from "../../db/db";
-import {postMapper} from "../../utils/mappers/post-mapper";
+import {postMapper} from "../../utils/mappers/post.mapper";
 import {queryHelperToPost} from "../../utils/helpers/helper.query.get";
 import {ObjectId} from "mongodb";
 import {InQueryPostModel} from "../../models/post/input/input.type.posts";

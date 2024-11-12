@@ -1,5 +1,5 @@
 import {usersCollection} from "../../db/db";
-import {loginUserMapper, userMapperToOutput} from "../../utils/mappers/user-mapper";
+import {loginUserMapper, userMapperToOutput} from "../../utils/mappers/user.mapper";
 import {ObjectId} from "mongodb";
 import {queryHelperToUser} from "../../utils/helpers/helper.query.get";
 import {InQueryUserModel} from "../../models/user/helper-query-user/helper.user";
