@@ -12,7 +12,6 @@ import {refreshTokenController} from "../../controllers/auth/refresh.token.contr
 import {logoutController} from "../../controllers/auth/logout.controller";
 import {emailLimiter, loginLimiter, limiterMiddleware} from "../../utils/middlewares/limiter.middleware";
 
-
 export const authRouter: Router = Router();
 
 authRouter.post('/login', loginLimiter, [...loginPostValidator, inputCheckErrorsMiddleware], loginController);
