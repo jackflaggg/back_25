@@ -203,7 +203,7 @@ export const authService = {
             }
         }
 
-        const updateUser = await UsersDbRepository.updateEmailConfirmation(userMapperToOutput(user).id);
+        const updateUser = await UsersDbRepository.updateEmailConfirmation(userMapperToOutput(user).id, user.emailConfirmation.confirmationCode);
 
         if (!updateUser) {
             return {
