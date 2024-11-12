@@ -15,7 +15,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
 
     const dateUser = await jwtService.getUserIdByRefreshToken(refreshToken);
 
-    if (!dateUser || !dateUser.userId){
+    if (!dateUser){
         console.log('[userId] не найден');
         res
             .sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403);
@@ -23,14 +23,14 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     }
 
     const dateDevice = await jwtService.getDeviceIdByRefreshToken(refreshToken);
-    if (!dateDevice || !dateDevice.deviceId){
+    if (!dateDevice){
         console.log('[userId] не найден');
         res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
-
-    console.log(refreshToken, deviceId)
+    console.log(dateDevice, dateUser);
+    console.log(refreshToken, deviceId);
     res
         .sendStatus(HTTP_STATUSES.NO_CONTENT_204);
     return
