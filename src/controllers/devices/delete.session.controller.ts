@@ -5,6 +5,7 @@ import {jwtService} from "../../utils/application/jwt.service";
 export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
     const {deviceId} = req.params;
+
     if (!deviceId){
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
