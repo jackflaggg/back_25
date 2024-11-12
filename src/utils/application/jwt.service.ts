@@ -62,7 +62,7 @@ export const jwtService = {
         }
     },
 
-    async getUserIdByRefreshToken(token: string) {
+    async getUserIdByRefreshToken(token: string): Promise<any | null> {
         // может вернуть объект типа JwtPayload, если токен валиден, или строку, если токен недействителен
         try {
             const user = jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload;
@@ -72,7 +72,7 @@ export const jwtService = {
                 return null;
             }
 
-            return user.userId
+            return user.userId;
         } catch (error: unknown){
             if (error instanceof jwt.TokenExpiredError) {
                 console.log('токен протух: ' + JSON.stringify({ expired: true }))
