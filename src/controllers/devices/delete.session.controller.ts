@@ -2,7 +2,7 @@ import {Request, Response} from 'express';
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {jwtService} from "../../utils/application/jwt.service";
 
-export const deleteSession = async (req: Request, res: Response) => {
+export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
     const {deviceId} = req.params;
     if (!deviceId){
