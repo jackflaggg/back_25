@@ -7,15 +7,18 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     const {deviceId} = req.params;
 
     if (!deviceId){
+        console.log('[deviceId] не передан');
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
     const dateUser = await jwtService.getUserIdByRefreshToken(refreshToken);
     if (!dateUser || !dateUser.userId){
+        console.log('[userId] не найден');
         res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
+
 
 }

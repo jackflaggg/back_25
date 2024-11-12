@@ -12,16 +12,18 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
 
     const {ip: ipDevices} = req;
     const {'user-agent': userAgent} = req.headers;
+
     if (!ipDevices || !userAgent) {
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401)
         return;
     }
+
     const loginUser = await authService.loginUser(req.body, String(ipDevices), String(userAgent));
 
 
     if (loginUser.status !== ResultSuccess.Success || loginUser.extensions) {
-        console.log(`[loginUser] не прошел авторизацию`);
+        console.log(`[loginUser] не прошел авторизацию, либо его вовсе не существует`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
