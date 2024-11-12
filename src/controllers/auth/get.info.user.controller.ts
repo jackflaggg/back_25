@@ -1,4 +1,4 @@
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {usersQueryRepository} from "../../repositories/users/users.query.repository";
 import { Request } from 'express';
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {ResponseBody} from "../../models/common/req_res_params/request.response.params";

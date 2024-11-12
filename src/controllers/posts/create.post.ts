@@ -2,7 +2,7 @@ import {HTTP_STATUSES} from "../../models/common/common.types";
 import {postsService} from "../../domain/post/post.service";
 import {blogsQueryRepositories} from "../../repositories/blogs/blogs.query.repository";
 import {postsQueryRepository} from "../../repositories/posts/posts.query.repository";
-import {validateId} from "../../utils/helpers/helper-validate-id";
+import {validateId} from "../../utils/helpers/helper.validate.id";
 import {OutPostModel} from "../../models/post/output/output.type.posts";
 import {InCreatePostModel} from "../../models/post/input/input.type.posts";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request.response.params";

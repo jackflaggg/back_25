@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {SETTINGS} from "../../settings";
-import {fromUTF8ToBase64} from "../features/UTF8ToBase64";
+import {fromUTF8ToBase64} from "../features/UTF8.to.Base64";
 
 export const adminMiddlewares = (req: Request, res: Response, next:NextFunction) => {
     const {authorization: auth} = req.headers;

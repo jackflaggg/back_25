@@ -4,7 +4,7 @@ import {HTTP_STATUSES} from "../../models/common/common.types";
 import {ResultSuccess} from "../../models/common/errors/errors.type";
 import {RequestWithBody} from "../../models/common/req_res_params/request.response.params";
 import {InRegistrationModels} from "../../models/auth/input/login.post.controller";
-import {errorsMessages} from "../../utils/features/errorsMessages";
+import {errorsMessages} from "../../utils/features/errors.messages";
 
 export const registrationController = async (req: RequestWithBody<InRegistrationModels>, res: Response) => {
     const checkRegistrationUser = await authService.registrationUser(req.body);

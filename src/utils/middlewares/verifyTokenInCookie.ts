@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {refreshTokenCollection} from "../../db/db";
-import {jwtService} from "../application/jwt-service";
+import {jwtService} from "../application/jwt.service";
 
 export const verifyTokenInCookie = async (req: Request, res: Response, next: NextFunction) => {
     const {refreshToken} = req.cookies;

@@ -8,7 +8,7 @@ import {
     ResponseBody
 } from "../../models/common/req_res_params/request.response.params";
 import {OutCommentModel} from "../../models/comments/output/output.type.comments";
-import {errorsMessages} from "../../utils/features/errorsMessages";
+import {errorsMessages} from "../../utils/features/errors.messages";
 import {InCreateCommentModel} from "../../models/comments/input/input.type.comments";
 
 export const createCommentByPostIdController = async (req: RequestWithParamsAndBody<BlogParamsToPostModel, InCreateCommentModel>, res: ResponseBody<OutCommentModel | ErrorsMessageResponse>) => {

@@ -1,7 +1,7 @@
 import {commentsCollection} from "../../db/db";
 import {ObjectId} from "mongodb";
 import {InQueryPostModel} from "../../models/post/input/input.type.posts";
-import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
+import {queryHelperToPost} from "../../utils/helpers/helper.query.get";
 import {commentMapper} from "../../utils/mappers/comment-mapper";
 
 export const CommentsQueryRepository = {

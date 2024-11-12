@@ -1,8 +1,8 @@
 import {NextFunction, Request, Response} from "express";
-import {jwtService} from "../application/jwt-service";
-import {handleError} from "../features/handle-error";
-import {isValidObjectIdToVerifyToken} from "../features/formatUserIdToAuth";
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {jwtService} from "../application/jwt.service";
+import {handleError} from "../features/handle.error";
+import {isValidObjectIdToVerifyToken} from "../features/format.user.to.auth";
+import {usersQueryRepository} from "../../repositories/users/users.query.repository";
 
 export const authBearerMiddlewares = async (req: Request, res: Response, next:NextFunction) => {
     const authHeaders = req.headers.authorization;

@@ -1,7 +1,7 @@
 import {HTTP_STATUSES} from "../../models/common/common.types";
-import {validateId} from "../../utils/helpers/helper-validate-id";
+import {validateId} from "../../utils/helpers/helper.validate.id";
 import {postsQueryRepository} from "../../repositories/posts/posts.query.repository";
-import {queryHelperToPost} from "../../utils/helpers/helper-query-get";
+import {queryHelperToPost} from "../../utils/helpers/helper.query.get";
 import {CommentsQueryRepository} from "../../repositories/comments/comments.query.repository";
 import {
     BlogParamsToPostModel,

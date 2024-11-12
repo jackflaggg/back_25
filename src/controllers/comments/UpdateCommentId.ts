@@ -6,7 +6,7 @@ import {
     CommentParamsId,
     RequestWithParamsAndBody
 } from "../../models/common/req_res_params/request.response.params";
-import {errorsMessages} from "../../utils/features/errorsMessages";
+import {errorsMessages} from "../../utils/features/errors.messages";
 
 export const updateCommentController = async (req: RequestWithParamsAndBody<CommentParamsId, {content: string}>, res: Response) => {
     const { commentId } = req.params;

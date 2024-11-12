@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {refreshTokenCollection} from "../../db/db";
-import {jwtService} from "../../utils/application/jwt-service";
+import {jwtService} from "../../utils/application/jwt.service";
 
 export const logoutController = async (req: Request, res: Response) => {
 

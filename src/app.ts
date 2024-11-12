@@ -1,15 +1,15 @@
 import express, {Express} from 'express'
 import cors from 'cors'
 import {SETTINGS} from "./settings";
-import {blogsRouter} from "./routes/blogs/blogs-router";
-import {postRouter} from "./routes/posts/posts-router";
-import {testingRouter} from "./routes/testing/testing-routes";
-import {vercelRouter} from "./routes/vercel/vercel-router";
-import {userRouter} from "./routes/users/users-routes";
-import {authRouter} from "./routes/auth/auth-router";
-import {commentsRouter} from "./routes/comments/comments-router";
+import {blogsRouter} from "./routes/blogs/blogs.router";
+import {postRouter} from "./routes/posts/posts.router";
+import {testingRouter} from "./routes/testing/testing.routes";
+import {vercelRouter} from "./routes/vercel/vercel.router";
+import {userRouter} from "./routes/users/users.routes";
+import {authRouter} from "./routes/auth/auth.router";
+import {commentsRouter} from "./routes/comments/comments.router";
 import cookieParser from "cookie-parser";
-import {devicesRouter} from "./routes/devices/devices-router";
+import {devicesRouter} from "./routes/devices/devices.router";
 
 export const app: Express = express();
 

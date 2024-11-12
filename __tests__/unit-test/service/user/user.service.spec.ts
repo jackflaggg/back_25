@@ -1,6 +1,6 @@
 import {ResultStatus, ResultSuccess} from "../../../../src/models/common/errors/errors.type";
 import {userService} from "../../../../src/domain/user/user.service";
-import {errorsUnique} from "../../../../src/utils/features/errors-validate";
+import {errorsUnique} from "../../../../src/utils/features/errors.validate";
 import {inCreateUser} from "../helper-unit/user.service.helper";
 import {errorsMessages} from "../../../src/utils/features/errorsMessages";
 import {createString} from "../../helpers-e2e/datatests";

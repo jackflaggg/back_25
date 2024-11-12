@@ -2,13 +2,13 @@ import {
     HTTP_STATUSES,
 } from "../../models/common/common.types";
 import {userService} from "../../domain/user/user.service";
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {usersQueryRepository} from "../../repositories/users/users.query.repository";
 import {InCreateUserModel} from "../../models/user/input/input.type.users";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request.response.params";
 import {ErrorsType} from "../../models/common/errors/errors.type";
 import {OutUserById} from "../../models/user/ouput/output.type.users";
 import {OutCreateUserError} from "../../models/user/ouput/user.service.models";
-import {errorsMessages} from "../../utils/features/errorsMessages";
+import {errorsMessages} from "../../utils/features/errors.messages";
 
 export const createUserController = async (req: RequestWithBody<InCreateUserModel>,
                                            res:ResponseBody<ErrorsType | OutUserById>) => {

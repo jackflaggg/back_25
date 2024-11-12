@@ -1,4 +1,4 @@
-import {helperError} from "../../../../src/utils/helpers/helper-error";
+import {helperError} from "../../../../src/utils/helpers/helper.error";
 
 describe('helperError', () => {
     it('', () => {

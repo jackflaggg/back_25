@@ -1,7 +1,7 @@
 import {CommentDbType} from "../../models/db/db.models";
 import {postsRepository} from "../../repositories/posts/posts.db.repository";
 import {InCreatePostModel, InUpdatePostModel} from "../../models/post/input/input.type.posts";
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
+import {usersQueryRepository} from "../../repositories/users/users.query.repository";
 import {postsQueryRepository} from "../../repositories/posts/posts.query.repository";
 import {CommentsDbRepository} from "../../repositories/comments/comments.db.repository";
 import {ResultStatus} from "../../models/common/errors/errors.type";

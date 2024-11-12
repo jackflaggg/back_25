@@ -1,10 +1,10 @@
-import {errorsUnique} from "../../../../src/utils/features/errors-validate";
+import {errorsUnique} from "../../../../src/utils/features/errors.validate";
 import {createString} from "../../../helpers-e2e/datatests";
-import {UsersDbRepository} from "../../../../src/repositories/users/users-db-repository";
+import {UsersDbRepository} from "../../../../src/repositories/users/users.db.repository";
 import {randomUUID} from "node:crypto";
 import {ObjectId} from "mongodb";
 
-jest.mock('../../../../src/repositories/users/users-db-repository', () => ({
+jest.mock('../../../../src/repositories/users/users.db.repository', () => ({
     UsersDbRepository: {
             findByEmailUser: jest.fn(),
             findByLoginUser: jest.fn(),

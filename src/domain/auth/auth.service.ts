@@ -1,17 +1,17 @@
-import {UsersDbRepository} from "../../repositories/users/users-db-repository";
-import {hashService} from "../../utils/application/hash-service";
-import {jwtService} from "../../utils/application/jwt-service";
+import {UsersDbRepository} from "../../repositories/users/users.db.repository";
+import {hashService} from "../../utils/application/hash.service";
+import {jwtService} from "../../utils/application/jwt.service";
 import {InLoginModels, InRegistrationModels} from "../../models/auth/input/login.post.controller";
 import {randomUUID} from "node:crypto";
 import {emailManagers} from "../../managers/email.managers";
-import {errorsUnique} from "../../utils/features/errors-validate";
+import {errorsUnique} from "../../utils/features/errors.validate";
 import { add } from "date-fns/add";
-import {helperError} from "../../utils/helpers/helper-error";
+import {helperError} from "../../utils/helpers/helper.error";
 import {userMapperToOutput} from "../../utils/mappers/user-mapper";
 import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth.service.models";
-import {errorsBodyToAuthService} from "../../utils/features/errors-body-to-authservice";
+import {errorsBodyToAuthService} from "../../utils/features/errors.body.to.auth.service";
 import {devicesService} from "../security/security.service";
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 

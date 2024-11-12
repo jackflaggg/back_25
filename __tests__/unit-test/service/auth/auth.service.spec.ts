@@ -2,11 +2,11 @@ import {ObjectId} from "mongodb";
 import {OutUserFindLoginOrEmail} from "../../../../src/models/user/ouput/output.type.users";
 import {createString} from "../../../helpers-e2e/datatests";
 import {randomUUID} from "node:crypto";
-import {UsersDbRepository} from "../../../../src/repositories/users/users-db-repository";
+import {UsersDbRepository} from "../../../../src/repositories/users/users.db.repository";
 import {authService} from "../../../../src/domain/auth/auth.service";
 import {ResultStatus, ResultSuccess} from "../../../../src/models/common/errors/errors.type";
-import {hashService} from "../../../../src/utils/application/hash-service";
-import {jwtService} from "../../../../src/utils/application/jwt-service";
+import {hashService} from "../../../../src/utils/application/hash.service";
+import {jwtService} from "../../../../src/utils/application/jwt.service";
 import {loginSuccess} from "../../../../src/models/auth/ouput/auth.service.models";
 
 
@@ -43,7 +43,7 @@ let dataAuthService: loginSuccess = {
     data: createString(10)
 }
 
-jest.mock('../../../../src/repositories/users/users-db-repository', () => ({
+jest.mock('../../../../src/repositories/users/users.db.repository', () => ({
     UsersDbRepository: {
         findUserByLoginOrEmail: jest.fn(),
         createUser: jest.fn(),
@@ -52,14 +52,14 @@ jest.mock('../../../../src/repositories/users/users-db-repository', () => ({
     },
 }));
 
-jest.mock('../../../../src/utils/application/hash-service', () => ({
+jest.mock('../../../../src/utils/application/hash.service', () => ({
     hashService: {
         comparePassword: jest.fn(),
         _generateHash: jest.fn(),
     }
 }));
 
-jest.mock('../../../../src/utils/application/jwt-service', () => ({
+jest.mock('../../../../src/utils/application/jwt.service', () => ({
     jwtService: {
         createAnyToken: jest.fn(),
     }
@@ -71,7 +71,7 @@ jest.mock('../../../../src/managers/email.managers', () => ({
     },
 }));
 
-jest.mock('../../../../src/utils/adapters/email-adapter', () => ({
+jest.mock('../../../../src/utils/adapters/email.adapter', () => ({
     emailAdapter: {
         sendEmail: jest.fn()
     },

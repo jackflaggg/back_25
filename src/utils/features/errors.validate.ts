@@ -1,4 +1,4 @@
-import {UsersDbRepository} from "../../repositories/users/users-db-repository";
+import {UsersDbRepository} from "../../repositories/users/users.db.repository";
 import {ErrorsType} from "../../models/common/errors/errors.type";
 
 export const errorsUnique =  async (email: string, login: string): Promise<ErrorsType | false> => {

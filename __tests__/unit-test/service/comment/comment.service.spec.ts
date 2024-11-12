@@ -1,6 +1,6 @@
 import {CommentsQueryRepository} from "../../../../src/repositories/comments/comments.query.repository";
 import {inCreateUser, upComment} from "../helper-unit/comment.service.helper";
-import {validateId} from "../../../../src/utils/helpers/helper-validate-id";
+import {validateId} from "../../../../src/utils/helpers/helper.validate.id";
 import {commentService} from "../../../../src/domain/comment/comment.service";
 import {ResultStatus} from "../../../../src/models/common/errors/errors.type";
 import {CommentsDbRepository} from "../../../../src/repositories/comments/comments.db.repository";

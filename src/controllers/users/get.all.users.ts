@@ -1,6 +1,6 @@
 import {HTTP_STATUSES} from "../../models/common/common.types";
-import {usersQueryRepository} from "../../repositories/users/users-query-repository";
-import {queryHelperToUser} from "../../utils/helpers/helper-query-get";
+import {usersQueryRepository} from "../../repositories/users/users.query.repository";
+import {queryHelperToUser} from "../../utils/helpers/helper.query.get";
 import {RequestWithQuery, ResponseBody} from "../../models/common/req_res_params/request.response.params";
 import {InQueryUserModel} from "../../models/user/helper-query-user/helper.user";
 import {OutQueryCreateUsersModel} from "../../models/user/ouput/output.type.users";

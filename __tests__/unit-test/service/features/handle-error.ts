@@ -1,5 +1,5 @@
 import {HTTP_STATUSES} from "../../../../src/models/common/common.types";
-import {handleError} from "../../../../src/utils/features/handle-error";
+import {handleError} from "../../../../src/utils/features/handle.error";
 import {Response} from "express"
 
 describe('handleError', () => {

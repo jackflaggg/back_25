@@ -1,4 +1,4 @@
-import {errorsBodyToAuthService} from "../../../../src/utils/features/errors-body-to-authservice";
+import {errorsBodyToAuthService} from "../../../../src/utils/features/errors.body.to.auth.service";
 
 describe('errorsBodyToAuthService', () => {
     it('должен вернуть null, когда все поля заполнены', () => {

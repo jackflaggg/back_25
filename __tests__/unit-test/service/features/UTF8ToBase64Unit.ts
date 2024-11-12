@@ -1,4 +1,4 @@
-import {fromHexToBase64, fromUTF8ToBase64} from "../../../../src/utils/features/UTF8ToBase64";
+import {fromHexToBase64, fromUTF8ToBase64} from "../../../../src/utils/features/UTF8.to.Base64";
 
 
 describe('fromUTF8ToBase64', () => {
