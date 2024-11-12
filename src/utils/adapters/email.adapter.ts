@@ -27,7 +27,7 @@ export const emailAdapter = {
             return result;
 
         } catch (err: unknown) {
-            console.log(JSON.stringify(err));
+            console.log('ошибка при отправке сообщения: ' + String(err));
             return null
         }
     }
