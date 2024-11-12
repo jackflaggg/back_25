@@ -12,6 +12,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
+
     const dateUser = await jwtService.getUserIdByRefreshToken(refreshToken);
 
     if (!dateUser || !dateUser.userId){
