@@ -10,7 +10,7 @@ import {
 } from "../../models/common/req_res_params/request-response-params";
 import {OutGetAllPosts} from "../../models/post/output/output-type-posts";
 
-export const getAllPostsToBlogID = async (req: RequestWithParamsAndQuery<BlogParamsModel, InQueryBlogModel>, res: ResponseBody<OutGetAllPosts>) => {
+export const getAllPostsToBlog = async (req: RequestWithParamsAndQuery<BlogParamsModel, InQueryBlogModel>, res: ResponseBody<OutGetAllPosts>) => {
     const blogId = req.params.id;
 
     if (!validateId(blogId)){

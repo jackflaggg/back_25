@@ -11,7 +11,7 @@ import {
 } from "../../models/common/req_res_params/request-response-params";
 import {HTTP_STATUSES} from "../../models/common/common-types";
 
-export const createNewPostToBlogID = async(req: RequestWithParamsAndBody<BlogParamsModel, InCreatePostToBlogInputModel>, res: ResponseBody<OutPostModel>) => {
+export const createNewPostToBlog = async(req: RequestWithParamsAndBody<BlogParamsModel, InCreatePostToBlogInputModel>, res: ResponseBody<OutPostModel>) => {
 
     const {id} = req.params;
 
