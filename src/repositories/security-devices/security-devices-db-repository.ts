@@ -22,6 +22,7 @@ export const SecurityDevicesDbRepository = {
     async deleteSession(deviceId: string): Promise<any> {
 
     },
+    //TODO: нужно сделать: удаление всех сессий, кроме текущей!
     async deleteAllSession(deviceId: string): Promise<any> {
 
     }
