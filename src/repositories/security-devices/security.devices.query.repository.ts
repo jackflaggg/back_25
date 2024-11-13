@@ -7,7 +7,7 @@ export const securityDevicesQueryRepository = {
             if (!oneSession) {
                 return null;
             }
-            return (oneSession);
+            return oneSession;
         } catch (error: unknown) {
             return null
         }
