@@ -11,7 +11,7 @@ import {SecurityDevicesDbRepository} from "../../repositories/security-devices/s
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
 
     const userAgent = req.headers["user-agent"] || "new device"
-    const ipDevice = req.ip || "no ip"
+    const ipDevice = req.ip || "228.228.228.228"
 
 
     const loginUser = await authService.loginUser(req.body, String(ipDevice), String(userAgent));
@@ -28,7 +28,8 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         deviceName: userAgent,
         refreshToken: '1'
     }
-    await SecurityDevicesDbRepository.createSession(dateSession)
+    await SecurityDevicesDbRepository.createSession(dateSession);
+
     res.cookie('refreshToken', loginUser.data.refresh, {httpOnly: true, secure: true});
     res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data.jwt});
     return;
