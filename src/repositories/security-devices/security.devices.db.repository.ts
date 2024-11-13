@@ -5,8 +5,17 @@ import {InDeviceSession} from "../../models/devices/input/create.device.session.
 export const SecurityDevicesDbRepository = {
     async createSession(modelDevice: InDeviceSession): Promise<string | null> {
         try {
-            const dateDeviceMap = deviceMapper(modelDevice);
-            const createSession = await sessionCollection.insertOne(dateDeviceMap);
+            const lastActiveDate = new Date().toISOString();
+            const session = {
+                deviceId: modelDevice.deviceId,
+                userId: modelDevice.userId,
+                ip: modelDevice.ip,
+                deviceName: modelDevice.deviceName,
+                refreshToken: modelDevice.refreshToken,
+                lastActiveDate,
+                issuedAt: lastActiveDate,
+            }
+            const createSession = await sessionCollection.insertOne(session);
 
             if (!createSession) {
                 return null;
