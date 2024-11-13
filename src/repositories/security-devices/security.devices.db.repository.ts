@@ -5,7 +5,6 @@ import {InDeviceSession} from "../../models/devices/input/create.device.session.
 export const SecurityDevicesDbRepository = {
     async createSession(modelDevice: InDeviceSession): Promise<string | null> {
         try {
-
             const dateDeviceMap = deviceMapper(modelDevice);
             const createSession = await sessionCollection.insertOne(dateDeviceMap);
 
@@ -84,5 +83,17 @@ export const SecurityDevicesDbRepository = {
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
         }
+    },
+
+    async getSessionByRefreshToken(refreshToken: string) {
+        const dateSession = await sessionCollection.findOne({refreshToken});
+        if (!dateSession) {
+            return null
+        }
+        return dateSession;
+    },
+
+    async updateSession(ip: string, issuedAt: string, deviceId: string, deviceName: string, userId: string, oldRefreshToken: string, newRefreshToken: string) {
+
     }
 }

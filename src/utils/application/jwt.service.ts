@@ -121,7 +121,8 @@ export const jwtService = {
 
     async updateRefreshToken(refreshToken: string){
         //TODO: сделать новую db
-        const findRefreshToken = await SecurityDevicesDbRepository.findRefreshToken(refreshToken);
+        const findRefreshToken = await refreshTokenCollection.findOne({refreshToken});
+        //SecurityDevicesDbRepository.findRefreshToken(refreshToken);
 
         if (!findRefreshToken){
             return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});
@@ -138,6 +139,14 @@ export const jwtService = {
             const newAccessToken = await jwtService.createAccessToken(userIdToken, '10s');
             const newRefreshToken = await jwtService.createRefreshToken(userIdToken, deviceToken, '20s');
 
+            const deleteOldToken = await refreshTokenCollection.deleteOne({refreshToken});
+            if (!deleteOldToken.acknowledged){
+                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[refreshTokenCollection]', field: 'ошибка при удалении'});
+            }
+            const session = await SecurityDevicesDbRepository.getSessionByRefreshToken(refreshToken);
+            if (!session){
+                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при получении сессии'});
+            }
 
         } catch (error: unknown) {
             console.log('[jwtService] что то пошло не так!!!!', String(error));
