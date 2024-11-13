@@ -16,7 +16,7 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
     const loginUser = await authService.loginUser(req.body, ipDevice, userAgent);
 
     if (loginUser instanceof LoginErrorTwo || loginUser.data === null) {
-        console.log(`[loginUser] не прошел авторизацию, либо его вовсе не существует`);
+        console.log('[loginUser] не прошел авторизацию, либо его вовсе не существует');
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }

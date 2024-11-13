@@ -41,7 +41,7 @@ export const authService = {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
         if (userId instanceof LoginErrorTwo || userId.data === null ) {
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'userId', message: 'Аутентификация рухнула!'})
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'userId', message: 'Аутентификация рухнула!'});
         }
 
         const deviceId = String(randomUUID());
@@ -56,8 +56,9 @@ export const authService = {
         const lastActivateRefreshToken = await jwtService.decodeToken(generateRefreshToken!);
 
         if (!generateRefreshToken || !lastActivateRefreshToken) {
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'refresh', message: 'Проблема при генерации Refresh токена!'})
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'refresh', message: 'Проблема при генерации Refresh токена!'});
         }
+
         const devices = await devicesService.createSessionToDevice(ipDevices, titleDevice, deviceId, userId.data, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken,)
 
         if (devices instanceof LoginErrorTwo || devices.data === null) {
