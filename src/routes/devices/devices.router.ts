@@ -6,6 +6,6 @@ import {deleteAllSessionsController} from "../../controllers/devices/delete.all.
 
 export const devicesRouter: Router = Router();
 
-devicesRouter.get("/devices", verifyTokenInCookieMiddleware, getAllDevicesController)
-devicesRouter.delete("/devices", verifyTokenInCookieMiddleware, deleteAllSessionsController)
-devicesRouter.delete("/devices/:deviceId", verifyTokenInCookieMiddleware, deleteSessionController)
+devicesRouter.get("/devices",/* verifyTokenInCookieMiddleware*/ getAllDevicesController)
+devicesRouter.delete("/devices", /*verifyTokenInCookieMiddleware,*/ deleteAllSessionsController)
+devicesRouter.delete("/devices/:deviceId", /*verifyTokenInCookieMiddleware,*/ deleteSessionController)
