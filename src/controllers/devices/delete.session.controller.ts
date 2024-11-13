@@ -6,7 +6,7 @@ import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 
 export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
-    const { deviceId} = req.params;
+    const deviceId = req.params.id;
 
     if (!deviceId){
         console.log('[deviceId] не передан');
