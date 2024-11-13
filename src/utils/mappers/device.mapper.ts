@@ -4,6 +4,7 @@ export const deviceMapper = (model: InDeviceSession) => {
     return {
         issuedAt: model.issuedAt,
         deviceId: model.deviceId,
+        userId: model.userId,
         ip: model.ip,
         lastActiveDate: model.lastActiveDate,
         deviceName: model.deviceName,
