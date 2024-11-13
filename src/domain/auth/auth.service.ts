@@ -59,7 +59,7 @@ export const authService = {
             return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'refresh', message: 'Проблема при генерации Refresh токена!'});
         }
 
-        const devices = await devicesService.createSessionToDevice(ipDevices, titleDevice, deviceId, userId.data, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken,)
+        const devices = await devicesService.createSessionToDevice(ipDevices, titleDevice, deviceId, userId.data, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken);
 
         if (devices instanceof LoginErrorTwo || devices.data === null) {
             return devices

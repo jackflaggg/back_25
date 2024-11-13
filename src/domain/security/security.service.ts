@@ -3,9 +3,9 @@ import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.typ
 import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 
 export const devicesService = {
-    async createSessionToDevice(ipDevices: string, titleDevice: string, deviceId: string, userId: string, lastActiveDate: string, refreshToken: string) {
+    async createSessionToDevice(ipDevices: string, titleDevice: string, deviceId: string, userId: string, iat: string, refreshToken: string) {
         const deviceData = {
-            issuedAt: lastActiveDate,
+            issuedAt: iat,
             deviceId,
             userId,
             ip: ipDevices,
