@@ -1,15 +1,15 @@
 import {sessionCollection} from "../../db/db";
 
 export const securityDevicesQueryRepository = {
-    async getSessionToDeviceId(deviceId: string): Promise<any> {
+    async getSessionToUserId(userId: string): Promise<any> {
         try {
-            const oneSession = await sessionCollection.findOne({deviceId});
+            const oneSession = await sessionCollection.findOne({userId});
             if (!oneSession) {
                 return null;
             }
             return oneSession
         } catch (error: unknown) {
-
+            return null
         }
     }
 }
