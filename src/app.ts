@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 //TODO: КУДА СОВАТЬ
-app.set('trust proxy', false);
+//app.set('trust proxy', false);
 
 app.use(SETTINGS.PATH.VERCEL,           vercelRouter);
 
