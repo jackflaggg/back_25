@@ -80,7 +80,7 @@ export const authService = {
                 data: null
             }
         }
-        const devices = await devicesService.writeData(ipDevices, titleDevice, deviceId, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken)
+        const devices = await devicesService.createSessionToDevice(ipDevices, titleDevice, deviceId, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken, lastActivateRefreshToken.userId)
 
         if (devices instanceof LoginErrorTwo || devices.data === null) {
             return devices
