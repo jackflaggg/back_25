@@ -6,6 +6,7 @@ import {InLoginModels} from "../../models/auth/input/login.post.controller";
 import {authService} from "../../domain/auth/auth.service";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request.response.params";
 import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
 
@@ -20,7 +21,7 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-
+    await SecurityDevicesDbRepository.createSession({})
     res.cookie('refreshToken', loginUser.data.refresh, {httpOnly: true, secure: true});
     res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data.jwt});
     return;
