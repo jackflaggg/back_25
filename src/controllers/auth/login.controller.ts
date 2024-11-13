@@ -21,7 +21,14 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    await SecurityDevicesDbRepository.createSession({})
+    const dateSession = {
+        deviceId: '1',
+        userId: '1',
+        ip: ipDevice,
+        deviceName: userAgent,
+        refreshToken: '1'
+    }
+    await SecurityDevicesDbRepository.createSession(dateSession)
     res.cookie('refreshToken', loginUser.data.refresh, {httpOnly: true, secure: true});
     res.status(HTTP_STATUSES.OK_200).send({accessToken: loginUser.data.jwt});
     return;
