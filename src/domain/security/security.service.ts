@@ -4,6 +4,7 @@ import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 
 export const devicesService = {
     async createSessionToDevice(ipDevices: string, titleDevice: string, deviceId: string, userId: string, iat: string, refreshToken: string) {
+        // TODO: сделать общий result
         const deviceData = {
             issuedAt: iat,
             deviceId,
@@ -24,7 +25,8 @@ export const devicesService = {
             data: session
         }
     },
-    async deleteSessionToId(deviceId: string): Promise<any> {
+
+    async deleteSessionToId(deviceId: string) {
         const deleteDevice = await SecurityDevicesDbRepository.deleteSession(deviceId);
         const { acknowledged, deletedCount } = deleteDevice;
         if (!acknowledged){
@@ -35,6 +37,7 @@ export const devicesService = {
             data: deletedCount
         }
     },
+
     async deleteAllSessions(userId: string, refreshToken: string): Promise<any> {
         const deleteSession = await SecurityDevicesDbRepository.deleteAllSession(userId, refreshToken);
         const { acknowledged, deletedCount } = deleteSession;
@@ -46,6 +49,7 @@ export const devicesService = {
             data: deletedCount
         }
     },
+
     async deleteSessionByRefreshToken(refreshToken: string){
         const deleteSession = await SecurityDevicesDbRepository.deleteSessionByRefreshToken(refreshToken);
 

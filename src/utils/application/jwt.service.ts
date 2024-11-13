@@ -31,12 +31,13 @@ export const jwtService = {
 
     async createRefreshToken(userId: string, deviceId: string, expiresInData: string): Promise<null | string> {
         try {
-            if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
+            //if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
                 {userId, deviceId},
                 SETTINGS.SECRET_KEY,
                 {expiresIn: expiresInData}
             )
+            //TODO: null не надо возвращать
         }catch (error: unknown) {
             console.error('Ошибка при создании токена:', error);
             return null;
