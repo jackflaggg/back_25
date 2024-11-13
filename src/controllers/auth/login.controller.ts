@@ -6,6 +6,7 @@ import {InLoginModels} from "../../models/auth/input/login.post.controller";
 import {authService} from "../../domain/auth/auth.service";
 import {ResultSuccess} from "../../models/common/errors/errors.type";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request.response.params";
+import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
 
@@ -20,8 +21,7 @@ export const loginController = async (req: RequestWithBody<InLoginModels>, res: 
 
     const loginUser = await authService.loginUser(req.body, String(ipDevices), String(userAgent));
 
-
-    if (loginUser.status !== ResultSuccess.Success || loginUser.extensions) {
+    if (loginUser instanceof LoginErrorTwo || loginUser.data === null) {
         console.log(`[loginUser] не прошел авторизацию, либо его вовсе не существует`);
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;

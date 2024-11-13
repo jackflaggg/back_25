@@ -23,21 +23,13 @@ export const authService = {
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
 
         if (!credentialLoginOrEmail) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {field: 'user', message: 'Пользователь не найден!'},
-                data: null
-            }
+            return new LoginErrorTwo(ResultStatus.BadRequest,{field: 'user', message: 'Пользователь не найден!'})
         }
 
         const checkPassword = await hashService.comparePassword(password, String(credentialLoginOrEmail.password));
 
         if (!checkPassword) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {field: 'hashService', message: 'Пароль не прошел проверку!'},
-                data: null
-            }
+            return new LoginErrorTwo(ResultStatus.BadRequest,{field: 'hashService', message: 'Пароль не прошел проверку!'});
         }
 
         return {
@@ -50,21 +42,13 @@ export const authService = {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
         if (userId instanceof LoginErrorTwo || userId.data === null ) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {field: 'userId', message: 'Аутентификация рухнула!'},
-                data: null
-            }
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'userId', message: 'Аутентификация рухнула!'})
         }
 
         const generateAccessToken = await jwtService.createAccessToken(userId.data, SETTINGS.EXPIRES_IN_ACCESS_TOKEN);
 
         if (!generateAccessToken) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {field: 'jwt', message: 'Проблема при генерации Access токена!'},
-                data: null
-            }
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'jwt', message: 'Проблема при генерации Access токена!'});
         }
 
         //TODO: Где то тут будет идти запись в бд сервиса
@@ -74,11 +58,7 @@ export const authService = {
         const lastActivateRefreshToken = await jwtService.decodeToken(generateRefreshToken!);
 
         if (!generateRefreshToken || !lastActivateRefreshToken) {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {field: 'refresh', message: 'Проблема при генерации Refresh токена!'},
-                data: null
-            }
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'refresh', message: 'Проблема при генерации Refresh токена!'})
         }
         const devices = await devicesService.createSessionToDevice(ipDevices, titleDevice, deviceId, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken,)
 
