@@ -119,8 +119,29 @@ export const jwtService = {
         }
     },
 
-    async updateTwoTokens(deviceId: string, refreshToken: string){
+    async updateRefreshToken(refreshToken: string){
+        //TODO: сделать новую db
         const findRefreshToken = await SecurityDevicesDbRepository.findRefreshToken(refreshToken);
 
+        if (!findRefreshToken){
+            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});
+        }
+
+        const deviceToken = await jwtService.getDeviceIdByRefreshToken(refreshToken);
+        const userIdToken = await jwtService.getUserIdByRefreshToken(refreshToken);
+
+        if (!deviceToken || !userIdToken){
+            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'отсутствует deviceId или userId'});
+        }
+
+        try {
+            const newAccessToken = await jwtService.createAccessToken(userIdToken, '10s');
+            const newRefreshToken = await jwtService.createRefreshToken(userIdToken, deviceToken, '20s');
+
+
+        } catch (error: unknown) {
+            console.log('[jwtService] что то пошло не так!!!!', String(error));
+            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'крах создания токенов'});
+        }
     }
 }
