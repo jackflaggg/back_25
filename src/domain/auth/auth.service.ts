@@ -44,16 +44,15 @@ export const authService = {
             return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'userId', message: 'Аутентификация рухнула!'})
         }
 
-        const generateAccessToken = await jwtService.createAccessToken(userId.data, SETTINGS.EXPIRES_IN_ACCESS_TOKEN);
+        const deviceId = String(randomUUID());
 
-        if (!generateAccessToken) {
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'jwt', message: 'Проблема при генерации Access токена!'});
+        const generateAccessToken = await jwtService.createAccessToken(userId.data, SETTINGS.EXPIRES_IN_ACCESS_TOKEN);
+        const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
+
+        if (!generateAccessToken || !generateRefreshToken) {
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при генерации токена!'});
         }
 
-        //TODO: Где то тут будет идти запись в бд сервиса
-
-        const deviceId = String(randomUUID());
-        const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
         const lastActivateRefreshToken = await jwtService.decodeToken(generateRefreshToken!);
 
         if (!generateRefreshToken || !lastActivateRefreshToken) {

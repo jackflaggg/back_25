@@ -30,6 +30,8 @@ export const SETTINGS = {
     //TODO: Я временно изменил время жизни токенов , верни на 10 и 20 сек
     EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '1000s',
     EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '2000s',
+    userAgent: process.env.USER_AGENT,
+    ipTest: process.env.IP_TEST,
 
     DB_URI_TEST: process.env.DB_URI_TEST || 'mongodb://localhost:27017/testunit',
 }
