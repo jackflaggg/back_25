@@ -6,15 +6,15 @@ import {securityDevicesQueryRepository} from "../../repositories/security-device
 export const getAllDevicesController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
 
-    const {userId} = await jwtService.getUserIdByRefreshToken(refreshToken);
+    const ult = await jwtService.getUserIdByRefreshToken(refreshToken);
 
-    if (!userId){
+    if (!ult){
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return
     }
 
-    const activeSessions = await securityDevicesQueryRepository.getSessionToUserId(userId);
+    const activeSessions = await securityDevicesQueryRepository.getSessionToUserId(ult);
 
     res
         .status(HTTP_STATUSES.OK_200)
