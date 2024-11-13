@@ -1,4 +1,3 @@
-import {deviceMapper} from "../../utils/mappers/device.mapper";
 import {refreshTokenCollection, sessionCollection} from "../../db/db";
 import {InDeviceSession} from "../../models/devices/input/create.device.session.model";
 
