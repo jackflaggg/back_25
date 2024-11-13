@@ -13,7 +13,7 @@ export const deleteAllSessionsController = async (req: Request, res: Response) =
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
     }
-    const device = await jwtService.getUserIdByRefreshToken(refreshToken);
+    const device = await jwtService.getDeviceIdByRefreshToken(refreshToken);
 
     if (!device){
         res
