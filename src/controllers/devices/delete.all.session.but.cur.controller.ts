@@ -21,7 +21,8 @@ export const deleteAllSessionsController = async (req: Request, res: Response) =
         return;
     }
 
-    const deleteSessions = await devicesService.deleteSessions(userDate, refreshToken);
+    const deleteSessions = await devicesService.deleteAllSessions(userDate, refreshToken);
+
     if (deleteSessions instanceof LoginErrorTwo){
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);

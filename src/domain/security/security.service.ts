@@ -24,7 +24,7 @@ export const devicesService = {
             data: session
         }
     },
-    async deleteDevice(deviceId: string): Promise<any> {
+    async deleteSessionToId(deviceId: string): Promise<any> {
         const deleteDevice = await SecurityDevicesDbRepository.deleteSession(deviceId);
         const { acknowledged, deletedCount } = deleteDevice;
         if (!acknowledged){
@@ -35,7 +35,7 @@ export const devicesService = {
             data: deletedCount
         }
     },
-    async deleteSessions(userId: string, refreshToken: string): Promise<any> {
+    async deleteAllSessions(userId: string, refreshToken: string): Promise<any> {
         const deleteSession = await SecurityDevicesDbRepository.deleteAllSession(userId, refreshToken);
         const { acknowledged, deletedCount } = deleteSession;
         if (!acknowledged){
