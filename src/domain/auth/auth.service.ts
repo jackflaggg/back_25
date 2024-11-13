@@ -69,7 +69,8 @@ export const authService = {
             status: ResultSuccess.Success,
             data: {
                 jwt: generateAccessToken,
-                refresh: generateRefreshToken}
+                refresh: generateRefreshToken
+            }
         }
     },
 
