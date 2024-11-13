@@ -1,15 +1,21 @@
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {Request, Response} from "express";
 import {jwtService} from "../../utils/application/jwt.service";
+import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
 
     const device = await jwtService.getDeviceIdByRefreshToken(refreshToken);
 
-    const updateTokens = jwtService
-    res.cookie('refreshToken', refreshToken, {httpOnly: true, secure: true});
+    const updateTokens = await jwtService.updateRefreshToken(refreshToken);
+    if (updateTokens instanceof LoginErrorTwo){
+        res
+            .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401)
+        return;
+    }
+    res.cookie('refreshToken', updateTokens.data[1], {httpOnly: true, secure: true});
 
-    res.status(HTTP_STATUSES.OK_200).send({accessToken: refreshToken});
+    res.status(HTTP_STATUSES.OK_200).send({accessToken: updateTokens.data[0]});
     return;
 }

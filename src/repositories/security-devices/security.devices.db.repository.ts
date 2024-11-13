@@ -93,7 +93,32 @@ export const SecurityDevicesDbRepository = {
         return dateSession;
     },
 
-    async updateSession(ip: string, issuedAt: string, deviceId: string, deviceName: string, userId: string, oldRefreshToken: string, newRefreshToken: string) {
+    async updateSession(ip: string, issuedAt: string, deviceId: string, deviceTitle: string, userId: string, oldRefreshToken: string, newRefreshToken: string) {
+        const lastActiveDate = new Date().toISOString();
+        const deviceName = deviceTitle;
+
+        const session = await SecurityDevicesDbRepository.getSessionByRefreshToken(oldRefreshToken);
+        if (!session){
+            return null
+        }
+
+        const result = await sessionCollection.updateOne({refreshToken: oldRefreshToken},
+            {
+                        $set: {
+                            issuedAt,
+                            lastActiveDate,
+                            deviceId,
+                            ip,
+                            deviceName,
+                            userId,
+                            refreshToken: newRefreshToken
+                        }
+            });
+
+        if (!result.acknowledged){
+            return null
+        }
+        return result
 
     }
 }

@@ -139,6 +139,9 @@ export const jwtService = {
             const newAccessToken = await jwtService.createAccessToken(userIdToken, '10s');
             const newRefreshToken = await jwtService.createRefreshToken(userIdToken, deviceToken, '20s');
 
+            if (!newRefreshToken || !newAccessToken){
+                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'ошибка при создании токенов'});
+            }
             const deleteOldToken = await refreshTokenCollection.deleteOne({refreshToken});
             if (!deleteOldToken.acknowledged){
                 return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[refreshTokenCollection]', field: 'ошибка при удалении'});
@@ -146,6 +149,22 @@ export const jwtService = {
             const session = await SecurityDevicesDbRepository.getSessionByRefreshToken(refreshToken);
             if (!session){
                 return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при получении сессии'});
+            }
+            const updateDate = await SecurityDevicesDbRepository.updateSession(
+                session.ip,
+                session.issuedAt,
+                session.deviceId,
+                session.deviceName,
+                session.userId,
+                refreshToken,
+                newRefreshToken!
+            );
+            if (!updateDate){
+                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при обновлении сессии'});
+            }
+            return {
+                status: ResultSuccess.Success,
+                data: [newAccessToken, newRefreshToken]
             }
 
         } catch (error: unknown) {

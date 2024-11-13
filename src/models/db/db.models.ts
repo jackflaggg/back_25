@@ -48,6 +48,7 @@ export interface RefreshTokenType {
 export interface SessionCollection {
     issuedAt:           string;           // exp refresh token
     deviceId:           string;           // UUID
+    userId:             string
     ip:                 string;           // req.ip
     lastActiveDate:     string;           // iat
     deviceName:         string;          // user.agent
