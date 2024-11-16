@@ -7,7 +7,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
 
     const updateTokens = await jwtService.updateRefreshToken(refreshToken);
-    if (updateTokens instanceof ErrorAuth){
+    if (updateTokens instanceof ErrorAuth || !updateTokens){
         console.log('[updateToken] ошибка при обновлении токена!')
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401)

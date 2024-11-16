@@ -91,10 +91,6 @@ export const jwtService = {
     async getDeviceIdByRefreshToken(refreshToken: string): Promise<any | null> {
         try {
             const device = await jwt.verify(refreshToken, SETTINGS.SECRET_KEY) as JwtPayload;
-            if (!device || !device.deviceId){
-                console.log('что то пошло не так при верификации токена ' + JSON.stringify(device))
-                return null;
-            }
             return device.deviceId;
 
         } catch (error: unknown) {
@@ -143,10 +139,8 @@ export const jwtService = {
             if (!newRefreshToken || !newAccessToken){
                 return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'ошибка при создании токенов'});
             }
-            const deleteOldToken = await refreshTokenCollection.deleteOne({refreshToken});
-            if (!deleteOldToken.acknowledged){
-                return new ErrorAuth(ResultStatus.Forbidden, {message: '[refreshTokenCollection]', field: 'ошибка при удалении'});
-            }
+            await refreshTokenCollection.deleteOne({refreshToken});
+
             const session = await SecurityDevicesDbRepository.getSessionByRefreshToken(refreshToken);
             if (!session){
                 return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при получении сессии'});
@@ -170,7 +164,7 @@ export const jwtService = {
 
         } catch (error: unknown) {
             console.log('[jwtService] что то пошло не так!!!!', String(error));
-            return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'крах создания токенов'});
+            return null
         }
     }
 }
