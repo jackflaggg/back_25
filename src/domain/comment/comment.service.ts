@@ -2,25 +2,18 @@ import {CommentsQueryRepository} from "../../repositories/comments/comments.quer
 import {validateId} from "../../utils/helpers/helper.validate.id";
 import {CommentsDbRepository} from "../../repositories/comments/comments.db.repository";
 import {ResultStatus} from "../../models/common/errors/errors.type";
+import {ErrorAuth, ViewModel} from "../../models/auth/ouput/auth.service.models";
 
 export const commentService = {
-    async updateComment(commentId: string, userId: string, inputComment: string){
+    async updateComment(commentId: string, userId: string, inputComment: string): Promise<ViewModel>{
 
         if (!validateId(commentId)){
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {message: `The comment to update is invalid`, field: `commentId`},
-                data: null
-            }
+            return new ErrorAuth(ResultStatus.BadRequest, {message: `The comment to update is invalid`, field: `commentId`});
         }
 
         const comment = await CommentsQueryRepository.getComment(commentId);
         if (!comment) {
-            return {
-                status: ResultStatus.NotFound,
-                extensions: {message: `The comment not found`, field: `comment`},
-                data: null
-            }
+            return new ErrorAuth(ResultStatus.NotFound, {message: `The comment not found`, field: `comment`});
         }
 
         if (comment.commentatorInfo.userId !== userId){
@@ -37,7 +30,7 @@ export const commentService = {
             data: updateComment
         }
     },
-    async deleteComment(commentId: string, userId: string){
+    async deleteComment(commentId: string, userId: string): Promise<ViewModel>{
 
         if (!validateId(commentId)){
             return {
