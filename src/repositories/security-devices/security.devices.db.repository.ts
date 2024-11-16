@@ -36,7 +36,7 @@ export const SecurityDevicesDbRepository = {
 
     async deleteAllSession(userId: string, refreshToken: string): Promise<DeleteResult | null> {
         try {
-            return await refreshTokenCollection.deleteMany({userId, refreshToken: {$ne: refreshToken}});
+            return await sessionCollection.deleteMany({userId, refreshToken: {$ne: refreshToken}});
         } catch (error: unknown){
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
