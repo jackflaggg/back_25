@@ -5,6 +5,7 @@ import {OutUserServiceModel} from "../../models/user/ouput/output.type.users";
 import { ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 import {helperError} from "../../utils/helpers/helper.error";
 import {OutCreateUserError, OutCreateUserSuccess} from "../../models/user/ouput/user.service.models";
+import {ErrorAuth, ViewModel} from "../../models/auth/ouput/auth.service.models";
 
 export const userService = {
     async createUser(user: Omit<OutUserServiceModel, 'createdAt' | 'emailConfirmation'>): Promise<OutCreateUserSuccess | OutCreateUserError> {
@@ -45,7 +46,14 @@ export const userService = {
             ResultSuccess.Success,
             createUser
     )},
-    async delUser(idUser: string): Promise<boolean> {
-        return await UsersDbRepository.deleteUser(idUser);
+    async delUser(idUser: string): Promise<ViewModel> {
+        const deleteUser = await UsersDbRepository.deleteUser(idUser);
+        if (!deleteUser){
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'UsersDbRepository', message: 'ошибка при удалении'});
+        }
+        return {
+            status: ResultSuccess.Success,
+            data: deleteUser
+        }
     }
 }
