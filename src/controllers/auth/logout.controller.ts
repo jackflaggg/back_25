@@ -17,7 +17,7 @@ export const logoutController = async (req: Request, res: Response) => {
 
     const revokeRefreshToken = await jwtService.revokeRefreshToken(refreshToken, userId);
 
-    if (revokeRefreshToken instanceof LoginErrorTwo || revokeRefreshToken.data === null) {
+    if (revokeRefreshToken instanceof ErrorAuth || revokeRefreshToken.data === null) {
         console.log(`[authService] не получилось отозвать!`)
         res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;
