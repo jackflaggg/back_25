@@ -7,7 +7,6 @@ import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.typ
 import {refreshTokenCollection} from "../../db/db";
 import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 
-
 export const jwtService = {
     async createAccessToken(userId: string): Promise<null | string> {
         try {
