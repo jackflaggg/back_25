@@ -21,7 +21,7 @@ export const registrationController = async (req: RequestWithBody<InRegistration
 
         if (checkRegistrationUser.extensions) {
             console.log('[checkRegistrationUser.extensions] истек');
-            res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.extensions));
+            res.status(429).send(errorsMessages(checkRegistrationUser.extensions));
             return;
         }
     }

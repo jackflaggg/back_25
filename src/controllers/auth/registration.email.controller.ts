@@ -10,7 +10,7 @@ export const registrationEmailController = async (req: RequestWithBody<EmailBody
 
     if (findEmail.status !== ResultSuccess.Success && findEmail.extensions) {
         console.log(`[findEmail] либо истек, либо статус не совпал`);
-        res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(findEmail.extensions));
+        res.status(429).send(errorsMessages(findEmail.extensions));
         return;
     }
 

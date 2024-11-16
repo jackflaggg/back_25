@@ -17,7 +17,6 @@ export type AccessToken = {
 
 export interface VerifiedToken {
     userId: string;
-    // другие поля, если нужно
 }
 
 export interface TokenVerificationResult {
