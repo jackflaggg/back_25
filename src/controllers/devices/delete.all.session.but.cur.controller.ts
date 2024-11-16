@@ -21,7 +21,7 @@ export const deleteAllSessionsController = async (req: Request, res: Response) =
     //     return;
     // }
 
-    await devicesService.deleteAllSessions(userDate, refreshToken);
+    await devicesService.deleteAllSessions(refreshToken);
 
     res
         .sendStatus(HTTP_STATUSES.NO_CONTENT_204)

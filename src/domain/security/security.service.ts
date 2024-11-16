@@ -1,6 +1,7 @@
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 import {ErrorAuth, ViewModel} from "../../models/auth/ouput/auth.service.models";
+import {jwtService} from "../../utils/application/jwt.service";
 
 export const devicesService = {
     async createSessionToDevice(ipDevices: string, titleDevice: string, deviceId: string, userId: string, iat: string, refreshToken: string): Promise<ViewModel> {
@@ -38,7 +39,8 @@ export const devicesService = {
         }
     },
 
-    async deleteAllSessions(userId: string, refreshToken: string): Promise<ViewModel> {
+    async deleteAllSessions(refreshToken: string): Promise<ViewModel> {
+        const userId = await jwtService.getUserIdByRefreshToken(refreshToken);
         const deleteSession = await SecurityDevicesDbRepository.deleteAllSession(userId, refreshToken);
 
         if (!deleteSession){
