@@ -40,10 +40,12 @@ export const devicesService = {
 
     async deleteAllSessions(userId: string, refreshToken: string): Promise<ViewModel> {
         const deleteSession = await SecurityDevicesDbRepository.deleteAllSession(userId, refreshToken);
-        const { acknowledged, deletedCount } = deleteSession;
-        if (!acknowledged){
+
+        if (!deleteSession){
             return new ErrorAuth(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении всех, кроме текущей, сессии'})
         }
+
+        const { acknowledged, deletedCount } = deleteSession;
         return {
             status: ResultSuccess.Success,
             data: deletedCount

@@ -1,5 +1,6 @@
 import {refreshTokenCollection, sessionCollection} from "../../db/db";
 import {InDeviceSession} from "../../models/devices/input/create.device.session.model";
+import {DeleteResult} from "mongodb";
 
 export const SecurityDevicesDbRepository = {
     async createSession(modelDevice: InDeviceSession): Promise<string | null> {
@@ -32,8 +33,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    //TODO: нужно сделать: удаление всех сессий, кроме текущей!
-    async deleteAllSession(userId: string, refreshToken: string): Promise<any> {
+    async deleteAllSession(userId: string, refreshToken: string): Promise<DeleteResult | null> {
         try {
             return await refreshTokenCollection.deleteMany({userId, refreshToken: {$ne: refreshToken}});
         } catch (error: unknown){
