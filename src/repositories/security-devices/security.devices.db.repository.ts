@@ -25,7 +25,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async deleteSession(userId: string, deviceId: string): Promise<DeleteResult | null> {
+    async deleteSession(deviceId: string, userId: string): Promise<DeleteResult | null> {
         try {
             return await sessionCollection.deleteOne({deviceId, userId})
         } catch (error: unknown){
