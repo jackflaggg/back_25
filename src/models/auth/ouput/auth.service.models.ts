@@ -13,7 +13,7 @@ export interface loginSuccess {
     data: string
 }
 
-export class ErrorAuth extends Error implements loginError {
+export class ViewModel extends Error implements loginError {
     status: string;
     extensions?: errorsResponse;
     data: null;
