@@ -15,10 +15,6 @@ export const SecurityDevicesDbRepository = {
                 issuedAt: lastActiveDate,
             }
             const createSession = await sessionCollection.insertOne(session);
-
-            if (!createSession) {
-                return null;
-            }
             return String(createSession.insertedId);
 
         } catch (error: unknown) {
@@ -39,12 +35,7 @@ export const SecurityDevicesDbRepository = {
     //TODO: нужно сделать: удаление всех сессий, кроме текущей!
     async deleteAllSession(userId: string, refreshToken: string): Promise<any> {
         try {
-            const deleteSessions = await refreshTokenCollection.deleteMany({userId, refreshToken: {$ne: refreshToken}});
-            if (!deleteSessions.acknowledged) {
-                console.log('[SecurityDevicesDbRepository] Не получилось удалить сессии! ');
-                return null;
-            }
-            return deleteSessions;
+            return await refreshTokenCollection.deleteMany({userId, refreshToken: {$ne: refreshToken}});
         } catch (error: unknown){
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
@@ -53,13 +44,7 @@ export const SecurityDevicesDbRepository = {
 
     async revokeToken(userId: string, refreshToken: string): Promise<any> {
         try {
-            const revokeToken = await refreshTokenCollection.insertOne({userId, refreshToken});
-            if (!revokeToken.acknowledged) {
-                console.log('[SecurityDevicesDbRepository] Не получилось отозвать токен! ');
-                return null;
-            }
-            return revokeToken;
-
+            return await refreshTokenCollection.insertOne({userId, refreshToken});
         } catch (error: unknown) {
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
@@ -68,12 +53,7 @@ export const SecurityDevicesDbRepository = {
 
     async deleteSessionByRefreshToken(refreshToken: string) {
         try {
-            const deleteRefresh =  await sessionCollection.deleteOne({refreshToken});
-            if (!deleteRefresh.acknowledged) {
-                console.log('[SecurityDevicesDbRepository] Не получилось отозвать токен! ');
-                return null;
-            }
-            return deleteRefresh;
+            return await sessionCollection.deleteOne({refreshToken});
         } catch (error: unknown){
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
