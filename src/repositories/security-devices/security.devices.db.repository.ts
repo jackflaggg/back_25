@@ -43,9 +43,9 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async revokeToken(userId: string, refreshToken: string): Promise<InsertOneResult<RefreshTokenType> | null> {
+    async revokeToken(refreshToken: string): Promise<InsertOneResult<RefreshTokenType> | null> {
         try {
-            return await refreshTokenCollection.insertOne({userId, refreshToken});
+            return await refreshTokenCollection.insertOne({refreshToken});
         } catch (error: unknown) {
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;

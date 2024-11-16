@@ -54,7 +54,7 @@ export const authService = {
             return new ErrorAuth(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при генерации токена!'});
         }
 
-        const existingRefresh = await refreshTokenCollection.insertOne({refreshToken: generateRefreshToken, userId: userId.data});
+        const existingRefresh = await refreshTokenCollection.insertOne({refreshToken: generateRefreshToken});
         if (!existingRefresh.acknowledged) {
             return new ErrorAuth(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при вставке токена!'});
         }

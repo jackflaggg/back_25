@@ -103,8 +103,8 @@ export const jwtService = {
         }
     },
 
-    async revokeRefreshToken(refreshToken: string, userId: string) {
-        const revoke = await SecurityDevicesDbRepository.revokeToken(refreshToken, userId);
+    async revokeRefreshToken(refreshToken: string) {
+        const revoke = await SecurityDevicesDbRepository.revokeToken(refreshToken);
 
         if (!revoke) {
             return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
@@ -128,7 +128,7 @@ export const jwtService = {
         const deviceIdToken = await jwtService.getDeviceIdByRefreshToken(refreshToken);
         const userIdToken = await jwtService.getUserIdByRefreshToken(refreshToken);
 
-        if (!deviceIdToken || !(findRefreshToken.userId !== userIdToken)) {
+        if (!deviceIdToken || !(userIdToken)) {
             return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'отсутствует deviceId или userId'});
         }
 
