@@ -7,7 +7,7 @@ export const deviceMapper = (model: InDeviceSession) => {
         deviceId: model.deviceId,
         userId: model.userId,
         ip: model.ip,
-        deviceName: model.deviceName,
+        title: model.deviceName,
         refreshToken: model.refreshToken,
     }
 }

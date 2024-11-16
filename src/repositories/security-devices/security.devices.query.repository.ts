@@ -1,5 +1,5 @@
 import {sessionCollection} from "../../db/db";
-import {deviceMapper} from "../../utils/mappers/device.mapper";
+import {outDeviceMapper} from "../../utils/mappers/device.mapper";
 
 export const securityDevicesQueryRepository = {
     async getSessionToUserId(userId: string) {
@@ -8,7 +8,7 @@ export const securityDevicesQueryRepository = {
             if (!oneSession) {
                 return null;
             }
-            return oneSession.map(elem => deviceMapper(elem));
+            return oneSession.map(elem => outDeviceMapper(elem));
         } catch (error: unknown) {
             return null
         }
