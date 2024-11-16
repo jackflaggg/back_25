@@ -9,7 +9,6 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
     const deviceId = req.params.id;
 
-
     const existingDevice = await SecurityDevicesDbRepository.getSessionByDeviceId(deviceId);
 
     if (!existingDevice){
