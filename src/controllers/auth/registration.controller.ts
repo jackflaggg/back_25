@@ -13,12 +13,12 @@ export const registrationController = async (req: RequestWithBody<InRegistration
 
         if (checkRegistrationUser.errors) {
             console.log('[checkRegistrationUser.errors] возникли ошибки');
-            res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.errors));
+            res.status(204).send(errorsMessages(checkRegistrationUser.errors));
             return;
         }
         if (checkRegistrationUser.extensions) {
             console.log('[checkRegistrationUser.extensions] истек');
-            res.status(HTTP_STATUSES.BAD_REQUEST_400).send(errorsMessages(checkRegistrationUser.extensions));
+            res.status(204).send(errorsMessages(checkRegistrationUser.extensions));
             return;
         }
     }

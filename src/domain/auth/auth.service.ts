@@ -126,7 +126,7 @@ export const authService = {
 
                 return {
                     status: ResultStatus.BadRequest,
-                    extensions: {message: `${existingSendEmail} это ошибка`, field: `email`},
+                    extensions: {message: `${existingSendEmail} не получилось отправить сообщение`, field: `email`},
                     data: null
                 }
             }
