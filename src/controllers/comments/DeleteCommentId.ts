@@ -7,13 +7,14 @@ import {
     RequestWithParams,
 } from "../../models/common/req_res_params/request.response.params";
 import {errorsMessages} from "../../utils/features/errors.messages";
+import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 
 export const deleteCommentController = async (req: RequestWithParams<CommentParamsId>, res: Response) => {
     const { commentId } = req.params;
 
     const { userId } = req;
 
-    const deleteComment= await commentService.deleteComment(commentId, userId as string);
+    const deleteComment= await commentService.deleteComment(commentId, String(userId));
 
     const statusMap: Record<ResultStatusType, HTTP_STATUSES> = {
         [ResultStatus.BadRequest]: HTTP_STATUSES.BAD_REQUEST_400,
@@ -23,6 +24,7 @@ export const deleteCommentController = async (req: RequestWithParams<CommentPara
     };
 
     const statusCode = statusMap[deleteComment.status];
+
 
     if (statusCode && deleteComment.extensions) {
         console.log(`[deleteComment] возникла ошибка в сервисе`);
