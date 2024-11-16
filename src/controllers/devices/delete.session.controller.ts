@@ -19,16 +19,16 @@ export const deleteSessionController = async (req: Request, res: Response) => {
         return;
     }
 
-    const existingUser = await jwtService.getUserIdByRefreshToken(refreshToken);
+    const userToRefresh = await jwtService.getUserIdByRefreshToken(refreshToken);
 
-    if (existingUser.userId !== existingUser.userId){
+    if (String(userToRefresh.userId) !== String(existingDevice.userId)){
         console.log('[userId] не найден');
         res
             .sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403);
         return;
     }
 
-    const deleteSessionOrDevice = await devicesService.deleteSessionToId(existingDevice.deviceId, existingUser.userId);
+    const deleteSessionOrDevice = await devicesService.deleteSessionToId(existingDevice.deviceId, userToRefresh.userId);
 
     if (deleteSessionOrDevice instanceof ErrorAuth || deleteSessionOrDevice.data === null){
         res
