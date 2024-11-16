@@ -124,7 +124,7 @@ export const jwtService = {
         //TODO: сделать новую db
         const findRefreshToken = await refreshTokenCollection.findOne({refreshToken});
         //SecurityDevicesDbRepository.findRefreshToken(refreshToken);
-
+        console.log(findRefreshToken)
         if (!findRefreshToken){
             console.log('ошибка1')
             return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});

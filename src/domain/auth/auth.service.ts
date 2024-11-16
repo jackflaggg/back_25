@@ -13,6 +13,7 @@ import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.typ
 import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth.service.models";
 import {errorsBodyToAuthService} from "../../utils/features/errors.body.to.auth.service";
 import {devicesService} from "../security/security.service";
+import {refreshTokenCollection} from "../../db/db";
 
 export const authService = {
     async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
@@ -53,6 +54,10 @@ export const authService = {
             return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при генерации токена!'});
         }
 
+        const existingRefresh = await refreshTokenCollection.insertOne({refreshToken: generateRefreshToken, userId: userId.data});
+        if (!existingRefresh.acknowledged) {
+            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при вставке токена!'});
+        }
         const lastActivateRefreshToken = await jwtService.decodeToken(generateRefreshToken!);
 
         if (!generateRefreshToken || !lastActivateRefreshToken) {
