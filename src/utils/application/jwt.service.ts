@@ -15,13 +15,13 @@ export const jwtService = {
     //TODO: Порядок аргументов с необязательным параметром!
     // const token = await jwtService.createAnyToken('672bb3560fc74718033b1cd2', undefined, '1h');
     // лучше сюда подкинуть интерфейс!
-    async createAccessToken(userId: string, expiresInData: string): Promise<null | string> {
+    async createAccessToken(userId: string): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
                 {userId},
                 SETTINGS.SECRET_KEY,
-                {expiresIn: expiresInData}
+                {expiresIn: '10s'}
             )
         } catch (error: unknown) {
             console.error('Ошибка при создании токена:', error);
@@ -29,13 +29,13 @@ export const jwtService = {
         }
     },
 
-    async createRefreshToken(userId: string, deviceId: string, expiresInData: string): Promise<null | string> {
+    async createRefreshToken(userId: string, deviceId: string): Promise<null | string> {
         try {
             //if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
                 {userId, deviceId},
                 SETTINGS.SECRET_KEY,
-                {expiresIn: expiresInData}
+                {expiresIn: '20s'}
             )
             //TODO: null не надо возвращать
         }catch (error: unknown) {
@@ -125,16 +125,16 @@ export const jwtService = {
             return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});
         }
 
-        const deviceToken = await jwtService.getDeviceIdByRefreshToken(refreshToken);
+        const deviceIdToken = await jwtService.getDeviceIdByRefreshToken(refreshToken);
         const userIdToken = await jwtService.getUserIdByRefreshToken(refreshToken);
 
-        if (!deviceToken || !userIdToken){
+        if (!deviceIdToken || !(findRefreshToken.userId !== userIdToken)) {
             return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'отсутствует deviceId или userId'});
         }
 
         try {
-            const newAccessToken = await jwtService.createAccessToken(userIdToken, '10s');
-            const newRefreshToken = await jwtService.createRefreshToken(userIdToken, deviceToken, '20s');
+            const newAccessToken = await jwtService.createAccessToken(userIdToken);
+            const newRefreshToken = await jwtService.createRefreshToken(userIdToken, deviceIdToken);
 
             if (!newRefreshToken || !newAccessToken){
                 return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'ошибка при создании токенов'});

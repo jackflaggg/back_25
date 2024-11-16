@@ -47,8 +47,8 @@ export const authService = {
 
         const deviceId = String(randomUUID());
 
-        const generateAccessToken = await jwtService.createAccessToken(userId.data, SETTINGS.EXPIRES_IN_ACCESS_TOKEN);
-        const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
+        const generateAccessToken = await jwtService.createAccessToken(userId.data);
+        const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId);
 
         if (!generateAccessToken || !generateRefreshToken) {
             return new ErrorAuth(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при генерации токена!'});
