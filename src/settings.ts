@@ -19,7 +19,7 @@ export const SETTINGS = {
     COLLECTION_USERS: process.env.COLLECTION_USERS || 'users',
     COLLECTION_COMMENTS: process.env.COMMENTS_COLLECTION_NAME || 'comments',
     COLLECTION_TOKEN: process.env.REFRESH_TOKEN || 'refresh_token',
-    COLLECTION_API: process.env.COLLECTION_API || 'api',
+    COLLECTION_API: process.env.COLLECTION_API || 'security_devices',
     ADMIN: process.env.ADMIN || 'admin:qwerty',
     SECRET_KEY: process.env.SECRET_KEY || '',
     TOKEN_DURATION: process.env.TOKEN_DURATION || '',
@@ -28,8 +28,8 @@ export const SETTINGS = {
     HOST: process.env.HOST || '',
     NAME_SUBJECT: process.env.NAME_SUBJECT || '',
     //TODO: Я временно изменил время жизни токенов , верни на 10 и 20 сек
-    EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '1000s',
-    EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '2000s',
+    EXPIRES_IN_ACCESS_TOKEN: process.env.EXPIRES_IN_ACCESS_TOKEN || '10s',
+    EXPIRES_IN_REFRESH_TOKEN: process.env.EXPIRES_IN_REFRESH_TOKEN || '20s',
     userAgent: process.env.USER_AGENT,
     ipTest: process.env.IP_TEST,
 
