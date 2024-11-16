@@ -25,9 +25,9 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async deleteSession(deviceId: string): Promise<DeleteResult | null> {
+    async deleteSession(userId: string, deviceId: string): Promise<DeleteResult | null> {
         try {
-            return await sessionCollection.deleteOne({deviceId})
+            return await sessionCollection.deleteOne({deviceId, userId})
         } catch (error: unknown){
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;

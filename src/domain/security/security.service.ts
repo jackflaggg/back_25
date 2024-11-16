@@ -26,8 +26,8 @@ export const devicesService = {
         }
     },
 
-    async deleteSessionToId(deviceId: string): Promise<ViewModel> {
-        const deleteDevice = await SecurityDevicesDbRepository.deleteSession(deviceId);
+    async deleteSessionToId(deviceId: string, userId: string): Promise<ViewModel> {
+        const deleteDevice = await SecurityDevicesDbRepository.deleteSession(deviceId, userId);
         if (!deleteDevice){
             return new ErrorAuth(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении сессии'})
         }
