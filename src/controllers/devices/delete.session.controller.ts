@@ -8,13 +8,6 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
     const deviceId = req.params.id;
 
-    if (!deviceId){
-        console.log('[deviceId] не передан');
-        res
-            .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
-        return;
-    }
-
     const dateUser = await jwtService.getUserIdByRefreshToken(refreshToken);
 
     if (!dateUser){
@@ -37,7 +30,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
 
     if (deleteDevice instanceof ErrorAuth || deleteDevice.data === null){
         res
-            .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+            .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
 
