@@ -21,7 +21,7 @@ export const jwtService = {
             return jwt.sign(
                 {userId},
                 SETTINGS.SECRET_KEY,
-                {expiresIn: '10s'}
+                {expiresIn: SETTINGS.EXPIRES_IN_ACCESS_TOKEN}
             )
         } catch (error: unknown) {
             console.error('Ошибка при создании токена:', error);
@@ -31,11 +31,10 @@ export const jwtService = {
 
     async createRefreshToken(userId: string, deviceId: string): Promise<null | string> {
         try {
-            //if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
             return jwt.sign(
                 {userId, deviceId},
                 SETTINGS.SECRET_KEY,
-                {expiresIn: '20s'}
+                {expiresIn: SETTINGS.EXPIRES_IN_REFRESH_TOKEN}
             )
             //TODO: null не надо возвращать
         }catch (error: unknown) {
@@ -44,8 +43,6 @@ export const jwtService = {
         }
     },
 
-    // Этот метод просто декодирует JWT. Он не проверяет его действительность или подпись
-    // Извлекает и возвращает полезные данные
     async decodeToken(token: string): Promise<null | JwtPayload>  {
         try {
             return jwt.decode(String(token)) as JwtPayload | null
@@ -68,7 +65,6 @@ export const jwtService = {
     },
 
     async getUserIdByRefreshToken(token: string): Promise<any | null> {
-        // может вернуть объект типа JwtPayload, если токен валиден, или строку, если токен недействителен
         try {
             const user = jwt.verify(token, SETTINGS.SECRET_KEY) as JwtPayload;
 
@@ -128,9 +124,8 @@ export const jwtService = {
     },
 
     async updateRefreshToken(refreshToken: string){
-        //TODO: сделать новую db
+
         const findRefreshToken = await refreshTokenCollection.findOne({refreshToken});
-        //SecurityDevicesDbRepository.findRefreshToken(refreshToken);
 
         if (!findRefreshToken){
             return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});
