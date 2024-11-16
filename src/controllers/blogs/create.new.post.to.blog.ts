@@ -31,12 +31,12 @@ export const createNewPostToBlog = async(req: RequestWithParamsAndBody<BlogParam
 
     const createdNewPost = await blogsService.createPostToBlogInputModel(blog, req.body)
 
-    if (!createdNewPost) {
+    if (createdNewPost.extensions) {
         res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);
         return;
     }
 
-    const searchPostToId = await postsQueryRepository.giveOneToIdPost(createdNewPost);
+    const searchPostToId = await postsQueryRepository.giveOneToIdPost(createdNewPost.data);
 
     if(!searchPostToId){
         console.log('not search create post!')
