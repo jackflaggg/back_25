@@ -13,7 +13,7 @@ export const SETTINGS = {
         SECURITY_DEVICES: '/security',
         VERCEL: '/'
     },
-    DB_NAME: 'hometask',
+    DB_NAME: 'back',
     COLLECTION_POSTS: process.env.POST_COLLECTION_NAME || 'posts',
     COLLECTION_BLOGS: process.env.BLOG_COLLECTION_NAME || 'blogs',
     COLLECTION_USERS: process.env.COLLECTION_USERS || 'users',
