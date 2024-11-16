@@ -28,10 +28,10 @@ export const devicesService = {
 
     async deleteSessionToId(deviceId: string): Promise<ViewModel> {
         const deleteDevice = await SecurityDevicesDbRepository.deleteSession(deviceId);
-        const { acknowledged, deletedCount } = deleteDevice;
-        if (!acknowledged){
+        if (!deleteDevice){
             return new ErrorAuth(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении сессии'})
         }
+        const { acknowledged, deletedCount } = deleteDevice;
         return {
             status: ResultSuccess.Success,
             data: deletedCount

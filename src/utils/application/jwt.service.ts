@@ -109,11 +109,11 @@ export const jwtService = {
 
     async revokeRefreshToken(refreshToken: string, userId: string) {
         const revoke = await SecurityDevicesDbRepository.revokeToken(refreshToken, userId);
-        const {acknowledged, insertedId} = revoke;
 
-        if (!acknowledged) {
+        if (!revoke) {
             return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
         }
+        const {acknowledged, insertedId} = revoke;
         return {
             status: ResultSuccess.Success,
             data: String(insertedId)
