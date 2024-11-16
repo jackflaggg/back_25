@@ -61,15 +61,6 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async findRefreshToken(refreshToken: string): Promise<WithId<RefreshTokenType> | null>{
-        try {
-            return await refreshTokenCollection.findOne({refreshToken});
-        } catch (error: unknown) {
-            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
-            return null;
-        }
-    },
-
     async getSessionByRefreshToken(refreshToken: string): Promise<WithId<SessionCollection> | null> {
         try {
             return await sessionCollection.findOne({refreshToken});
