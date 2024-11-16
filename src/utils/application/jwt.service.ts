@@ -126,6 +126,7 @@ export const jwtService = {
         //SecurityDevicesDbRepository.findRefreshToken(refreshToken);
 
         if (!findRefreshToken){
+            console.log('ошибка1')
             return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});
         }
 
@@ -133,6 +134,7 @@ export const jwtService = {
         const userIdToken = await jwtService.getUserIdByRefreshToken(refreshToken);
 
         if (!deviceToken || !userIdToken){
+            console.log('ошибка2')
             return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'отсутствует deviceId или userId'});
         }
 
@@ -141,14 +143,17 @@ export const jwtService = {
             const newRefreshToken = await jwtService.createRefreshToken(userIdToken, deviceToken, '20s');
 
             if (!newRefreshToken || !newAccessToken){
+                console.log('ошибка3')
                 return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'ошибка при создании токенов'});
             }
             const deleteOldToken = await refreshTokenCollection.deleteOne({refreshToken});
             if (!deleteOldToken.acknowledged){
+                console.log('ошибка4')
                 return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[refreshTokenCollection]', field: 'ошибка при удалении'});
             }
             const session = await SecurityDevicesDbRepository.getSessionByRefreshToken(refreshToken);
             if (!session){
+                console.log('ошибка5')
                 return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при получении сессии'});
             }
             const updateDate = await SecurityDevicesDbRepository.updateSession(
@@ -161,6 +166,7 @@ export const jwtService = {
                 newRefreshToken!
             );
             if (!updateDate){
+                console.log('ошибка6')
                 return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при обновлении сессии'});
             }
             return {
