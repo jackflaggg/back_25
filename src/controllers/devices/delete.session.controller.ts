@@ -27,7 +27,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
         return;
     }
 
-    const deleteSessionOrDevice = await devicesService.deleteSessionToId(existingDevice.deviceId, userToRefresh.userId);
+    const deleteSessionOrDevice = await devicesService.deleteSessionToId(existingDevice.deviceId, userToRefresh);
 
     if (deleteSessionOrDevice instanceof ErrorAuth || deleteSessionOrDevice.data === null){
         res
