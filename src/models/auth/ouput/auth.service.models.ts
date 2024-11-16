@@ -13,7 +13,7 @@ export interface loginSuccess {
     data: string
 }
 
-export class LoginErrorTwo extends Error implements loginError {
+export class ErrorAuth extends Error implements loginError {
     status: string;
     extensions?: errorsResponse;
     data: null;

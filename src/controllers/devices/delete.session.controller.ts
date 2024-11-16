@@ -2,7 +2,7 @@ import {Request, Response} from 'express';
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {jwtService} from "../../utils/application/jwt.service";
 import {devicesService} from "../../domain/security/security.service";
-import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 
 export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
@@ -35,7 +35,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
 
     const deleteDevice = await devicesService.deleteSessionToId(dateDevice);
 
-    if (deleteDevice instanceof LoginErrorTwo || deleteDevice.data === null){
+    if (deleteDevice instanceof ErrorAuth || deleteDevice.data === null){
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
         return;

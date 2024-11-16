@@ -4,9 +4,9 @@ import {config} from 'dotenv'
 import {secretErrorCheck} from "../features/secret.error";
 import {TokenVerificationResult, VerifiedToken} from "../../models/common/common.types";
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
-import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 import {refreshTokenCollection} from "../../db/db";
+import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 config()
 
 export const jwtService = {
@@ -112,7 +112,7 @@ export const jwtService = {
         const {acknowledged, insertedId} = revoke;
 
         if (!acknowledged) {
-            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
+            return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
         }
         return {
             status: ResultSuccess.Success,
@@ -127,7 +127,7 @@ export const jwtService = {
         console.log(findRefreshToken)
         if (!findRefreshToken){
             console.log('ошибка1')
-            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});
+            return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'отсутствует токен'});
         }
 
         const deviceToken = await jwtService.getDeviceIdByRefreshToken(refreshToken);
@@ -135,7 +135,7 @@ export const jwtService = {
 
         if (!deviceToken || !userIdToken){
             console.log('ошибка2')
-            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'отсутствует deviceId или userId'});
+            return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'отсутствует deviceId или userId'});
         }
 
         try {
@@ -144,17 +144,17 @@ export const jwtService = {
 
             if (!newRefreshToken || !newAccessToken){
                 console.log('ошибка3')
-                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'ошибка при создании токенов'});
+                return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'ошибка при создании токенов'});
             }
             const deleteOldToken = await refreshTokenCollection.deleteOne({refreshToken});
             if (!deleteOldToken.acknowledged){
                 console.log('ошибка4')
-                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[refreshTokenCollection]', field: 'ошибка при удалении'});
+                return new ErrorAuth(ResultStatus.Forbidden, {message: '[refreshTokenCollection]', field: 'ошибка при удалении'});
             }
             const session = await SecurityDevicesDbRepository.getSessionByRefreshToken(refreshToken);
             if (!session){
                 console.log('ошибка5')
-                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при получении сессии'});
+                return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при получении сессии'});
             }
             const updateDate = await SecurityDevicesDbRepository.updateSession(
                 session.ip,
@@ -167,7 +167,7 @@ export const jwtService = {
             );
             if (!updateDate){
                 console.log('ошибка6')
-                return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при обновлении сессии'});
+                return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка при обновлении сессии'});
             }
             return {
                 status: ResultSuccess.Success,
@@ -176,7 +176,7 @@ export const jwtService = {
 
         } catch (error: unknown) {
             console.log('[jwtService] что то пошло не так!!!!', String(error));
-            return new LoginErrorTwo(ResultStatus.Forbidden, {message: '[jwtService]', field: 'крах создания токенов'});
+            return new ErrorAuth(ResultStatus.Forbidden, {message: '[jwtService]', field: 'крах создания токенов'});
         }
     }
 }

@@ -10,7 +10,7 @@ import {helperError} from "../../utils/helpers/helper.error";
 import {userMapperToOutput} from "../../utils/mappers/user.mapper";
 import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
-import {loginError, LoginErrorTwo, loginSuccess} from "../../models/auth/ouput/auth.service.models";
+import {loginError, ErrorAuth, loginSuccess} from "../../models/auth/ouput/auth.service.models";
 import {errorsBodyToAuthService} from "../../utils/features/errors.body.to.auth.service";
 import {devicesService} from "../security/security.service";
 import {refreshTokenCollection} from "../../db/db";
@@ -23,13 +23,13 @@ export const authService = {
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
 
         if (!credentialLoginOrEmail) {
-            return new LoginErrorTwo(ResultStatus.BadRequest,{field: 'user', message: 'Пользователь не найден!'})
+            return new ErrorAuth(ResultStatus.BadRequest,{field: 'user', message: 'Пользователь не найден!'})
         }
 
         const checkPassword = await hashService.comparePassword(password, String(credentialLoginOrEmail.password));
 
         if (!checkPassword) {
-            return new LoginErrorTwo(ResultStatus.BadRequest,{field: 'hashService', message: 'Пароль не прошел проверку!'});
+            return new ErrorAuth(ResultStatus.BadRequest,{field: 'hashService', message: 'Пароль не прошел проверку!'});
         }
 
         return {
@@ -41,8 +41,8 @@ export const authService = {
     async loginUser(inputDataUser: InLoginModels, ipDevices: string, titleDevice: string = 'Chrome') {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
-        if (userId instanceof LoginErrorTwo || userId.data === null ) {
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'userId', message: 'Аутентификация рухнула!'});
+        if (userId instanceof ErrorAuth || userId.data === null ) {
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'userId', message: 'Аутентификация рухнула!'});
         }
 
         const deviceId = String(randomUUID());
@@ -51,22 +51,22 @@ export const authService = {
         const generateRefreshToken = await jwtService.createRefreshToken(userId.data, deviceId, SETTINGS.EXPIRES_IN_REFRESH_TOKEN);
 
         if (!generateAccessToken || !generateRefreshToken) {
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при генерации токена!'});
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при генерации токена!'});
         }
 
         const existingRefresh = await refreshTokenCollection.insertOne({refreshToken: generateRefreshToken, userId: userId.data});
         if (!existingRefresh.acknowledged) {
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при вставке токена!'});
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'token', message: 'Проблема при вставке токена!'});
         }
         const lastActivateRefreshToken = await jwtService.decodeToken(generateRefreshToken!);
 
         if (!generateRefreshToken || !lastActivateRefreshToken) {
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'refresh', message: 'Проблема при генерации Refresh токена!'});
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'refresh', message: 'Проблема при генерации Refresh токена!'});
         }
 
         const devices = await devicesService.createSessionToDevice(ipDevices, titleDevice, deviceId, userId.data, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken);
 
-        if (devices instanceof LoginErrorTwo || devices.data === null) {
+        if (devices instanceof ErrorAuth || devices.data === null) {
             return devices
         }
 

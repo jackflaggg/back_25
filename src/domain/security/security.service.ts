@@ -1,6 +1,6 @@
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
-import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 
 export const devicesService = {
     async createSessionToDevice(ipDevices: string, titleDevice: string, deviceId: string, userId: string, iat: string, refreshToken: string) {
@@ -17,7 +17,7 @@ export const devicesService = {
         const session =  await SecurityDevicesDbRepository.createSession(deviceData);
 
         if (!session){
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при создании сессии'})
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при создании сессии'})
         }
 
         return {
@@ -30,7 +30,7 @@ export const devicesService = {
         const deleteDevice = await SecurityDevicesDbRepository.deleteSession(deviceId);
         const { acknowledged, deletedCount } = deleteDevice;
         if (!acknowledged){
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении сессии'})
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении сессии'})
         }
         return {
             status: ResultSuccess.Success,
@@ -42,7 +42,7 @@ export const devicesService = {
         const deleteSession = await SecurityDevicesDbRepository.deleteAllSession(userId, refreshToken);
         const { acknowledged, deletedCount } = deleteSession;
         if (!acknowledged){
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении всех, кроме текущей, сессии'})
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении всех, кроме текущей, сессии'})
         }
         return {
             status: ResultSuccess.Success,
@@ -54,7 +54,7 @@ export const devicesService = {
         const deleteSession = await SecurityDevicesDbRepository.deleteSessionByRefreshToken(refreshToken);
 
         if (!deleteSession){
-            return new LoginErrorTwo(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении всех, кроме текущей, сессии'})
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'SecurityDevicesDbRepository', message: 'ошибка при удалении всех, кроме текущей, сессии'})
         }
         const { acknowledged, deletedCount } = deleteSession;
         return {

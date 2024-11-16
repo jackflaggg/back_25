@@ -1,13 +1,13 @@
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {Request, Response} from "express";
 import {jwtService} from "../../utils/application/jwt.service";
-import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
 
     const updateTokens = await jwtService.updateRefreshToken(refreshToken);
-    if (updateTokens instanceof LoginErrorTwo){
+    if (updateTokens instanceof ErrorAuth){
         console.log('[updateToken] ошибка при обновлении токена!')
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401)
