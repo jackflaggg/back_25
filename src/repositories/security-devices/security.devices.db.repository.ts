@@ -61,6 +61,15 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
+    async getSessionByDeviceId(deviceId: string): Promise<WithId<SessionCollection> | null> {
+        try {
+            return await sessionCollection.findOne({deviceId});
+        } catch (err: unknown){
+            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(err));
+            return null;
+        }
+    },
+
     async updateSession(ip: string, issuedAt: string, deviceId: string, deviceTitle: string, userId: string, oldRefreshToken: string, newRefreshToken: string): Promise<UpdateResult<SessionCollection> | null> {
         const lastActiveDate = new Date().toISOString();
         const deviceName = deviceTitle;

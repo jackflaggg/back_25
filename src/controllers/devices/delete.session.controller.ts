@@ -3,30 +3,32 @@ import {HTTP_STATUSES} from "../../models/common/common.types";
 import {jwtService} from "../../utils/application/jwt.service";
 import {devicesService} from "../../domain/security/security.service";
 import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
+import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 
 export const deleteSessionController = async (req: Request, res: Response) => {
     const { refreshToken } = req.cookies;
     const deviceId = req.params.id;
 
-    const dateUser = await jwtService.getUserIdByRefreshToken(refreshToken);
 
-    if (!dateUser){
-        console.log('[userId] не найден');
-        res
-            .sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403);
-        return;
-    }
+    const existingDevice = await SecurityDevicesDbRepository.getSessionByDeviceId(deviceId);
 
-    const dateDevice = await jwtService.getDeviceIdByRefreshToken(refreshToken);
-
-    if (dateDevice !== deviceId){
+    if (!existingDevice){
         console.log('[deviceId] не найден');
         res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
 
-    const deleteDevice = await devicesService.deleteSessionToId(dateDevice);
+    const existingUser = await jwtService.getUserIdByRefreshToken(refreshToken);
+
+    if (existingUser.userId !== existingUser.userId){
+        console.log('[userId] не найден');
+        res
+            .sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403);
+        return;
+    }
+
+    const deleteDevice = await devicesService.deleteSessionToId(existingDevice);
 
     if (deleteDevice instanceof ErrorAuth || deleteDevice.data === null){
         res
