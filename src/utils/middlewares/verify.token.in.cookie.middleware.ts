@@ -1,6 +1,5 @@
 import {Request, Response, NextFunction} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
-import {refreshTokenCollection} from "../../db/db";
 import {jwtService} from "../application/jwt.service";
 
 export const verifyTokenInCookieMiddleware = async (req: Request, res: Response, next: NextFunction) => {
@@ -22,14 +21,6 @@ export const verifyTokenInCookieMiddleware = async (req: Request, res: Response,
             res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
             return;
         }
-
-        const tokenExists = await refreshTokenCollection.findOne({ refreshToken });
-
-        // if (tokenExists) {
-        //     console.log(`[tokenExists] такой токен существует`);
-        //     res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
-        //     return;
-        // }
 
         next();
 
