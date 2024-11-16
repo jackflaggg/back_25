@@ -99,7 +99,7 @@ export const authService = {
 
         if (uniqueErrors){
             return {
-                status: ResultStatus.BadRequest,
+                status: ResultStatus.Forbidden,
                 extensions: helperError(uniqueErrors),
                 data: null
             }
