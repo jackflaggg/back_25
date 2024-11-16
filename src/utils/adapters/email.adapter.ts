@@ -8,7 +8,7 @@ export const emailAdapter = {
 
             // создание транспортера
             let transporter = nodemailer.createTransport({
-                service: 'gmail',
+                service: 'Mail.ru',
                 auth: {
                     user: SETTINGS.EMAIL_NAME,
                     pass: SETTINGS.PASS,
