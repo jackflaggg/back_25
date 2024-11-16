@@ -1,6 +1,7 @@
 import {refreshTokenCollection, sessionCollection} from "../../db/db";
 import {InDeviceSession} from "../../models/devices/input/create.device.session.model";
-import {DeleteResult} from "mongodb";
+import {DeleteResult, InsertOneResult, UpdateResult, WithId} from "mongodb";
+import {RefreshTokenType, SessionCollection} from "../../models/db/db.models";
 
 export const SecurityDevicesDbRepository = {
     async createSession(modelDevice: InDeviceSession): Promise<string | null> {
@@ -24,7 +25,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async deleteSession(deviceId: string): Promise<any> {
+    async deleteSession(deviceId: string): Promise<DeleteResult | null> {
         try {
             return await sessionCollection.deleteOne({deviceId})
         } catch (error: unknown){
@@ -42,7 +43,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async revokeToken(userId: string, refreshToken: string): Promise<any> {
+    async revokeToken(userId: string, refreshToken: string): Promise<InsertOneResult<RefreshTokenType> | null> {
         try {
             return await refreshTokenCollection.insertOne({userId, refreshToken});
         } catch (error: unknown) {
@@ -51,7 +52,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async deleteSessionByRefreshToken(refreshToken: string) {
+    async deleteSessionByRefreshToken(refreshToken: string): Promise<DeleteResult | null> {
         try {
             return await sessionCollection.deleteOne({refreshToken});
         } catch (error: unknown){
@@ -60,7 +61,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async findRefreshToken(refreshToken: string){
+    async findRefreshToken(refreshToken: string): Promise<WithId<RefreshTokenType> | null>{
         try {
             return await refreshTokenCollection.findOne({refreshToken});
         } catch (error: unknown) {
@@ -69,7 +70,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async getSessionByRefreshToken(refreshToken: string) {
+    async getSessionByRefreshToken(refreshToken: string): Promise<WithId<SessionCollection> | null> {
         try {
             return await sessionCollection.findOne({refreshToken});
         } catch (err: unknown){
@@ -78,7 +79,7 @@ export const SecurityDevicesDbRepository = {
         }
     },
 
-    async updateSession(ip: string, issuedAt: string, deviceId: string, deviceTitle: string, userId: string, oldRefreshToken: string, newRefreshToken: string) {
+    async updateSession(ip: string, issuedAt: string, deviceId: string, deviceTitle: string, userId: string, oldRefreshToken: string, newRefreshToken: string): Promise<UpdateResult<SessionCollection> | null> {
         const lastActiveDate = new Date().toISOString();
         const deviceName = deviceTitle;
 
