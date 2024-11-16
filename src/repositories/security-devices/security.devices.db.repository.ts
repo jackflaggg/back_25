@@ -87,20 +87,22 @@ export const SecurityDevicesDbRepository = {
             return null
         }
 
-        const result = await sessionCollection.updateOne({refreshToken: oldRefreshToken},
-            {
-                        $set: {
-                            issuedAt,
-                            lastActiveDate,
-                            deviceId,
-                            ip,
-                            deviceName,
-                            userId,
-                            refreshToken: newRefreshToken
-                        }
-            });
-
-        return result
-
+        try {
+            return await sessionCollection.updateOne({refreshToken: oldRefreshToken},
+                {
+                    $set: {
+                        issuedAt,
+                        lastActiveDate,
+                        deviceId,
+                        ip,
+                        deviceName,
+                        userId,
+                        refreshToken: newRefreshToken
+                    }
+                });
+        } catch (err: unknown) {
+            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(err));
+            return null;
+        }
     }
 }
