@@ -10,11 +10,6 @@ import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 config()
 
 export const jwtService = {
-    // Этот метод создает JWT на основе идентификатора пользователя и времени
-    // В случае успеха возвращает созданный токен в виде строки
-    //TODO: Порядок аргументов с необязательным параметром!
-    // const token = await jwtService.createAnyToken('672bb3560fc74718033b1cd2', undefined, '1h');
-    // лучше сюда подкинуть интерфейс!
     async createAccessToken(userId: string): Promise<null | string> {
         try {
             if (!secretErrorCheck(SETTINGS.SECRET_KEY)) return null;
