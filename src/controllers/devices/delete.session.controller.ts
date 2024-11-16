@@ -25,12 +25,14 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     }
 
     const dateDevice = await jwtService.getDeviceIdByRefreshToken(refreshToken);
+
     if (!dateDevice){
-        console.log('[userId] не найден');
+        console.log('[deviceId] не найден');
         res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
+
     const deleteDevice = await devicesService.deleteSessionToId(dateDevice);
 
     if (deleteDevice instanceof LoginErrorTwo || deleteDevice.data === null){
