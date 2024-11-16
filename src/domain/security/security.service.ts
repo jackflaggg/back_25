@@ -1,9 +1,9 @@
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
-import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
+import {ErrorAuth, ViewModel} from "../../models/auth/ouput/auth.service.models";
 
 export const devicesService = {
-    async createSessionToDevice(ipDevices: string, titleDevice: string, deviceId: string, userId: string, iat: string, refreshToken: string) {
+    async createSessionToDevice(ipDevices: string, titleDevice: string, deviceId: string, userId: string, iat: string, refreshToken: string): Promise<ViewModel> {
         // TODO: сделать общий result
         const deviceData = {
             issuedAt: iat,
@@ -26,7 +26,7 @@ export const devicesService = {
         }
     },
 
-    async deleteSessionToId(deviceId: string) {
+    async deleteSessionToId(deviceId: string): Promise<ViewModel> {
         const deleteDevice = await SecurityDevicesDbRepository.deleteSession(deviceId);
         const { acknowledged, deletedCount } = deleteDevice;
         if (!acknowledged){
@@ -38,7 +38,7 @@ export const devicesService = {
         }
     },
 
-    async deleteAllSessions(userId: string, refreshToken: string): Promise<any> {
+    async deleteAllSessions(userId: string, refreshToken: string): Promise<ViewModel> {
         const deleteSession = await SecurityDevicesDbRepository.deleteAllSession(userId, refreshToken);
         const { acknowledged, deletedCount } = deleteSession;
         if (!acknowledged){
@@ -50,7 +50,7 @@ export const devicesService = {
         }
     },
 
-    async deleteSessionByRefreshToken(refreshToken: string){
+    async deleteSessionByRefreshToken(refreshToken: string): Promise<ViewModel>{
         const deleteSession = await SecurityDevicesDbRepository.deleteSessionByRefreshToken(refreshToken);
 
         if (!deleteSession){
