@@ -8,6 +8,7 @@ export const refreshTokenController = async (req: Request, res: Response) => {
 
     const updateTokens = await jwtService.updateRefreshToken(refreshToken);
     if (updateTokens instanceof LoginErrorTwo){
+        console.log('[updateToken] ошибка при обновлении токена!')
         res
             .sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401)
         return;
