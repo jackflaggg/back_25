@@ -62,11 +62,7 @@ export const SecurityDevicesDbRepository = {
 
     async findRefreshToken(refreshToken: string){
         try {
-            const findToken = await refreshTokenCollection.findOne({refreshToken});
-            if (!findToken) {
-                return null;
-            }
-            return findToken
+            return await refreshTokenCollection.findOne({refreshToken});
         } catch (error: unknown) {
             console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(error));
             return null;
@@ -74,11 +70,12 @@ export const SecurityDevicesDbRepository = {
     },
 
     async getSessionByRefreshToken(refreshToken: string) {
-        const dateSession = await sessionCollection.findOne({refreshToken});
-        if (!dateSession) {
-            return null
+        try {
+            return await sessionCollection.findOne({refreshToken});
+        } catch (err: unknown){
+            console.log('[SecurityDevicesDbRepository] Непредвиденная ошибка в бд! ', String(err));
+            return null;
         }
-        return dateSession;
     },
 
     async updateSession(ip: string, issuedAt: string, deviceId: string, deviceTitle: string, userId: string, oldRefreshToken: string, newRefreshToken: string) {
@@ -103,9 +100,6 @@ export const SecurityDevicesDbRepository = {
                         }
             });
 
-        if (!result.acknowledged){
-            return null
-        }
         return result
 
     }
