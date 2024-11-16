@@ -2,10 +2,10 @@ type errorsResponse = {
     field: string,
     message: string,
 }
-export interface loginError {
+export interface ViewModel {
     status: string,
     extensions?: errorsResponse,
-    data: null
+    data: null | any
 }
 
 export interface loginSuccess {
@@ -13,7 +13,7 @@ export interface loginSuccess {
     data: string
 }
 
-export class ViewModel extends Error implements loginError {
+export class ErrorAuth extends Error implements ViewModel {
     status: string;
     extensions?: errorsResponse;
     data: null;

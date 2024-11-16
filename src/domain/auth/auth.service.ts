@@ -10,13 +10,13 @@ import {helperError} from "../../utils/helpers/helper.error";
 import {userMapperToOutput} from "../../utils/mappers/user.mapper";
 import {SETTINGS} from "../../settings";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
-import {loginError, ErrorAuth, loginSuccess} from "../../models/auth/ouput/auth.service.models";
+import {ViewModel, ErrorAuth, loginSuccess} from "../../models/auth/ouput/auth.service.models";
 import {errorsBodyToAuthService} from "../../utils/features/errors.body.to.auth.service";
 import {devicesService} from "../security/security.service";
 import {refreshTokenCollection} from "../../db/db";
 
 export const authService = {
-    async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<loginError | loginSuccess> {
+    async authenticationUserToLogin(inputDataUser: InLoginModels): Promise<ViewModel> {
 
         const {loginOrEmail, password} = inputDataUser;
 
@@ -38,7 +38,7 @@ export const authService = {
         };
     },
 
-    async loginUser(inputDataUser: InLoginModels, ipDevices: string, titleDevice: string = 'Chrome') {
+    async loginUser(inputDataUser: InLoginModels, ipDevices: string, titleDevice: string = 'Chrome'): Promise<ViewModel> {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
         if (userId instanceof ErrorAuth || userId.data === null ) {
@@ -79,7 +79,7 @@ export const authService = {
         }
     },
 
-    async registrationUser(inputData: InRegistrationModels) {
+    async registrationUser(inputData: InRegistrationModels): Promise<ViewModel> {
 
         const { login, password, email } = inputData;
 
@@ -100,7 +100,7 @@ export const authService = {
         if (uniqueErrors){
             return {
                 status: ResultStatus.BadRequest,
-                errors: helperError(uniqueErrors),
+                extensions: helperError(uniqueErrors),
                 data: null
             }
         }
@@ -152,7 +152,7 @@ export const authService = {
         }
     },
 
-    async confirmationEmailByCode(code: string) {
+    async confirmationEmailByCode(code: string): Promise<ViewModel> {
         const user = await UsersDbRepository.findCodeUser(code);
 
         if (!user) {
@@ -208,7 +208,7 @@ export const authService = {
         }
     },
 
-    async registrationEmailResending(email: string) {
+    async registrationEmailResending(email: string): Promise<ViewModel> {
         const searchEmail = await UsersDbRepository.findByEmailUser(email);
         if (!searchEmail) {
             return {
