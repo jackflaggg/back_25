@@ -7,7 +7,6 @@ import {
     RequestWithParams,
 } from "../../models/common/req_res_params/request.response.params";
 import {errorsMessages} from "../../utils/features/errors.messages";
-import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 
 export const deleteCommentController = async (req: RequestWithParams<CommentParamsId>, res: Response) => {
     const { commentId } = req.params;
