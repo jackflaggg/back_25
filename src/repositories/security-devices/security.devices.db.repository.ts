@@ -1,7 +1,7 @@
 import {refreshTokenCollection, sessionCollection} from "../../db/db";
 import {InDeviceSession} from "../../models/devices/input/create.device.session.model";
-import {DeleteResult, InsertOneResult, UpdateResult, WithId} from "mongodb";
-import {RefreshTokenType, SessionCollection} from "../../models/db/db.models";
+import {DeleteResult, UpdateResult, WithId} from "mongodb";
+import {SessionCollection} from "../../models/db/db.models";
 
 export const SecurityDevicesDbRepository = {
     async createSession(modelDevice: InDeviceSession): Promise<string | null> {
