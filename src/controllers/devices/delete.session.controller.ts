@@ -28,9 +28,9 @@ export const deleteSessionController = async (req: Request, res: Response) => {
         return;
     }
 
-    const deleteDevice = await devicesService.deleteSessionToId(existingDevice);
+    const deleteSessionOrDevice = await devicesService.deleteSessionToId(existingDevice.deviceId);
 
-    if (deleteDevice instanceof ErrorAuth || deleteDevice.data === null){
+    if (deleteSessionOrDevice instanceof ErrorAuth || deleteSessionOrDevice.data === null){
         res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
