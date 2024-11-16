@@ -12,7 +12,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     const existingDevice = await SecurityDevicesDbRepository.getSessionByDeviceId(deviceId);
 
     if (!existingDevice){
-        console.log('[deviceId] не найден');
+        console.log('[deviceId] не существует сессии');
         res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
@@ -21,7 +21,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
     const userToRefresh = await jwtService.getUserIdByRefreshToken(refreshToken);
 
     if (String(userToRefresh.userId) !== String(existingDevice.userId)){
-        console.log('[userId] не найден');
+        console.log('[userId] попытка удалить чужую сессию');
         res
             .sendStatus(HTTP_STATUSES.NOT_FORBIDDEN_403);
         return;
