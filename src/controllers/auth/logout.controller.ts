@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
-import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 import {jwtService} from "../../utils/application/jwt.service";
 import {devicesService} from "../../domain/security/security.service";
 
