@@ -91,7 +91,7 @@ export const authService = {
         if (errField !== null){
             return {
                 status: ResultStatus.BadRequest,
-                extensions:{ message: `${errField} is required`, field: `${errField}`},
+                extensions:{ message: `${errField} отсутствует`, field: `${errField}`},
                 data: null}
         }
 
