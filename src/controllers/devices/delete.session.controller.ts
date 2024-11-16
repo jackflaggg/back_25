@@ -26,7 +26,7 @@ export const deleteSessionController = async (req: Request, res: Response) => {
 
     const dateDevice = await jwtService.getDeviceIdByRefreshToken(refreshToken);
 
-    if (!dateDevice){
+    if (dateDevice !== deviceId){
         console.log('[deviceId] не найден');
         res
             .sendStatus(HTTP_STATUSES.NOT_FOUND_404);
