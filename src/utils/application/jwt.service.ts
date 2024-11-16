@@ -104,15 +104,26 @@ export const jwtService = {
     },
 
     async revokeRefreshToken(refreshToken: string) {
-        const revoke = await SecurityDevicesDbRepository.revokeToken(refreshToken);
+        const revoke = await refreshTokenCollection.findOne({refreshToken});
 
         if (!revoke) {
             return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
         }
-        const {acknowledged, insertedId} = revoke;
-        return {
-            status: ResultSuccess.Success,
-            data: String(insertedId)
+        const userId = await this.getUserIdByRefreshToken(refreshToken);
+        if (!userId){
+            return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
+        }
+
+        try {
+            const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
+
+            await refreshTokenCollection.deleteOne({refreshToken});
+            return {
+                status: ResultSuccess.Success,
+                data: String(verifyToken)
+            }
+        } catch (error: unknown) {
+            return new ErrorAuth(ResultStatus.Forbidden, {message: '[SecurityDevicesDbRepository]', field: 'ошибка в бд'})
         }
     },
 
