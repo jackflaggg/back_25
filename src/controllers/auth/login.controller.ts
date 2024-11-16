@@ -5,7 +5,7 @@ import {
 import {InLoginModels} from "../../models/auth/input/login.post.controller";
 import {authService} from "../../domain/auth/auth.service";
 import {RequestWithBody, ResponseBody} from "../../models/common/req_res_params/request.response.params";
-import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
+import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
 import {SETTINGS} from "../../settings";
 
 export const loginController = async (req: RequestWithBody<InLoginModels>, res: ResponseBody<AccessToken>) => {
