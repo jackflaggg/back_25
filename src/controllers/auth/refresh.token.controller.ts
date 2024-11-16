@@ -6,8 +6,6 @@ import {LoginErrorTwo} from "../../models/auth/ouput/auth.service.models";
 export const refreshTokenController = async (req: Request, res: Response) => {
     const {refreshToken} = req.cookies;
 
-    const device = await jwtService.getDeviceIdByRefreshToken(refreshToken);
-
     const updateTokens = await jwtService.updateRefreshToken(refreshToken);
     if (updateTokens instanceof LoginErrorTwo){
         res
