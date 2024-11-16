@@ -25,11 +25,11 @@ export const verifyTokenInCookieMiddleware = async (req: Request, res: Response,
 
         const tokenExists = await refreshTokenCollection.findOne({ refreshToken });
 
-        if (tokenExists) {
-            console.log(`[tokenExists] такой токен существует`);
-            res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
-            return;
-        }
+        // if (tokenExists) {
+        //     console.log(`[tokenExists] такой токен существует`);
+        //     res.sendStatus(HTTP_STATUSES.NOT_AUTHORIZATION_401);
+        //     return;
+        // }
 
         next();
 
