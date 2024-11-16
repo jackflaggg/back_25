@@ -1,6 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import {HTTP_STATUSES} from "../../models/common/common.types";
 import {jwtService} from "../application/jwt.service";
+import {JwtPayload} from "jsonwebtoken";
 
 export const verifyTokenInCookieMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const {refreshToken} = req.cookies;
@@ -13,7 +14,6 @@ export const verifyTokenInCookieMiddleware = async (req: Request, res: Response,
 
     try {
         const verifyToken = await jwtService.verifyRefreshToken(refreshToken);
-
         console.log(`проверяем че пришло в верифай-REFRESH токен: ${JSON.stringify(verifyToken)}`);
 
         if (!verifyToken || verifyToken.expired){
