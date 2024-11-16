@@ -1,13 +1,12 @@
 import {SETTINGS} from "../../settings";
 import jwt, {JwtPayload} from "jsonwebtoken";
-import {config} from 'dotenv'
 import {secretErrorCheck} from "../features/secret.error";
 import {TokenVerificationResult, VerifiedToken} from "../../models/common/common.types";
 import {SecurityDevicesDbRepository} from "../../repositories/security-devices/security.devices.db.repository";
 import {ResultStatus, ResultSuccess} from "../../models/common/errors/errors.type";
 import {refreshTokenCollection} from "../../db/db";
 import {ErrorAuth} from "../../models/auth/ouput/auth.service.models";
-config()
+
 
 export const jwtService = {
     async createAccessToken(userId: string): Promise<null | string> {
