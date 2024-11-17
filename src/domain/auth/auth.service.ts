@@ -130,7 +130,7 @@ export const authService = {
 
 
         const {email: userEmail, emailConfirmation: {confirmationCode}} = newUser;
-        //TODO: Переписать с async await, then..catch()
+
         emailManagers.sendEmailRecoveryMessage(userEmail, confirmationCode)
             .then(async (existingSendEmail) => {
                 if (!existingSendEmail) {
@@ -144,7 +144,7 @@ export const authService = {
             .catch(async (e) => {
                 // console.error('Отправка сообщения произошла с ошибкой', e);
                 //
-                const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
+                await UsersDbRepository.deleteUser(String(createUser));
                 //
                 // return {
                 //     status: ResultStatus.BadRequest,
