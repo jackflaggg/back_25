@@ -1,5 +1,4 @@
 import {Db, MongoClient} from "mongodb";
-import dotenv from 'dotenv'
 import {
     BlogDbType,
     CommentDbType,
@@ -8,9 +7,6 @@ import {
 } from "../models/db/db.models";
 import {SETTINGS} from "../settings";
 import {superConfig} from "../config";
-
-
-dotenv.config()
 
 export const mongoURI = superConfig.databaseUrl;
 const client: MongoClient = new MongoClient(mongoURI!);
