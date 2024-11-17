@@ -251,12 +251,12 @@ export const authService = {
                 //     data: null
                 // }
             }
-        }).catch((e: unknown) => {
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {message: '[emailManagers]', field: 'ошибка email ' + String(e)},
-                data: null
-            }
+        }).catch(async (e: unknown) => {
+            // return {
+            //     status: ResultStatus.BadRequest,
+            //     extensions: {message: '[emailManagers]', field: 'ошибка email ' + String(e)},
+            //     data: null
+            // }
         })
 
         return {
