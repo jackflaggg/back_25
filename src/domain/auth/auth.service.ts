@@ -123,12 +123,12 @@ export const authService = {
 
         try {
             const {email, emailConfirmation: { confirmationCode } } = newUser;
-            console.log(1, 'err')
+
             const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(email, confirmationCode);
-            console.log(2, 'err')
+
             if (!existingSendEmail) {
                 await UsersDbRepository.deleteUser(String(createUser));
-                console.log(3, 'err')
+
                 return {
                     status: ResultStatus.BadRequest,
                     extensions: {message: `${existingSendEmail} не получилось отправить сообщение`, field: `email`},
@@ -136,7 +136,7 @@ export const authService = {
                 }
             }
         } catch( e: unknown) {
-            console.log(4, 'err')
+
             console.error('Отправка сообщения произошла с ошибкой', e);
 
             const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
