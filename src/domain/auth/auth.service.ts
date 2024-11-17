@@ -241,24 +241,23 @@ export const authService = {
         })
 
         const updateInfoUser = await UsersDbRepository.updateCodeAndDateConfirmation(userMapperToOutput(searchEmail).id, newCode, newExpirationDate);
-        try {
-            const sendEmail = await emailManagers.sendEmailRecoveryMessage(email, newCode);
+        emailManagers.sendEmailRecoveryMessage(email, newCode)
+            .then(async (sendEmail) => {
             if (!sendEmail) {
                 await UsersDbRepository.deleteUser(String(searchEmail.id));
-                return {
-                    status: ResultStatus.BadRequest,
-                    extensions: {message: '[authService] ошибка при повторной отправке письма', field: 'email'},
-                    data: null
-                }
+                // return {
+                //     status: ResultStatus.BadRequest,
+                //     extensions: {message: '[authService] ошибка при повторной отправке письма', field: 'email'},
+                //     data: null
+                // }
             }
-        } catch (e: unknown) {
-
+        }).catch((e: unknown) => {
             return {
                 status: ResultStatus.BadRequest,
-                extensions: {message: '[emailManagers]', field: 'ошибка email'},
+                extensions: {message: '[emailManagers]', field: 'ошибка email ' + String(e)},
                 data: null
             }
-        }
+        })
 
         return {
             status: ResultSuccess.Success,
