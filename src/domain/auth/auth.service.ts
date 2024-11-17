@@ -5,7 +5,7 @@ import {InLoginModels, InRegistrationModels} from "../../models/auth/input/login
 import {randomUUID} from "node:crypto";
 import {emailManagers} from "../../managers/email.managers";
 import {errorsUnique} from "../../utils/features/errors.validate";
-import { add } from "date-fns/add";
+import {add} from "date-fns/add";
 import {helperError} from "../../utils/helpers/helper.error";
 import {userMapperToOutput} from "../../utils/mappers/user.mapper";
 import {SETTINGS} from "../../settings";
@@ -23,13 +23,16 @@ export const authService = {
         const credentialLoginOrEmail = await UsersDbRepository.findUserByLoginOrEmail(loginOrEmail);
 
         if (!credentialLoginOrEmail) {
-            return new ErrorAuth(ResultStatus.BadRequest,{field: 'user', message: 'Пользователь не найден!'})
+            return new ErrorAuth(ResultStatus.BadRequest, {field: 'user', message: 'Пользователь не найден!'})
         }
 
         const checkPassword = await hashService.comparePassword(password, String(credentialLoginOrEmail.password));
 
         if (!checkPassword) {
-            return new ErrorAuth(ResultStatus.BadRequest,{field: 'hashService', message: 'Пароль не прошел проверку!'});
+            return new ErrorAuth(ResultStatus.BadRequest, {
+                field: 'hashService',
+                message: 'Пароль не прошел проверку!'
+            });
         }
 
         return {
@@ -41,7 +44,7 @@ export const authService = {
     async loginUser(inputDataUser: InLoginModels, ipDevices: string, titleDevice: string = 'Chrome'): Promise<ViewModel> {
         const userId = await this.authenticationUserToLogin(inputDataUser);
 
-        if (userId instanceof ErrorAuth || userId.data === null ) {
+        if (userId instanceof ErrorAuth || userId.data === null) {
             return new ErrorAuth(ResultStatus.BadRequest, {field: 'userId', message: 'Аутентификация рухнула!'});
         }
 
@@ -61,7 +64,10 @@ export const authService = {
         const lastActivateRefreshToken = await jwtService.decodeToken(generateRefreshToken!);
 
         if (!generateRefreshToken || !lastActivateRefreshToken) {
-            return new ErrorAuth(ResultStatus.BadRequest, {field: 'refresh', message: 'Проблема при генерации Refresh токена!'});
+            return new ErrorAuth(ResultStatus.BadRequest, {
+                field: 'refresh',
+                message: 'Проблема при генерации Refresh токена!'
+            });
         }
 
         const devices = await devicesService.createSessionToDevice(ipDevices, titleDevice, deviceId, userId.data, (new Date(Number(lastActivateRefreshToken.iat) * 1000).toISOString()), generateRefreshToken);
@@ -81,23 +87,24 @@ export const authService = {
 
     async registrationUser(inputData: InRegistrationModels): Promise<ViewModel> {
 
-        const { login, password, email } = inputData;
+        const {login, password, email} = inputData;
 
-        const requiredFields = { login, password, email };
+        const requiredFields = {login, password, email};
 
 
         const errField = errorsBodyToAuthService(requiredFields);
 
-        if (errField !== null){
+        if (errField !== null) {
             return {
                 status: ResultStatus.BadRequest,
-                extensions:{ message: `${errField} отсутствует`, field: `${errField}`},
-                data: null}
+                extensions: {message: `${errField} отсутствует`, field: `${errField}`},
+                data: null
+            }
         }
 
-        const uniqueErrors = await errorsUnique( email, login );
+        const uniqueErrors = await errorsUnique(email, login);
 
-        if (uniqueErrors){
+        if (uniqueErrors) {
             return {
                 status: ResultStatus.Forbidden,
                 extensions: helperError(uniqueErrors),
@@ -121,32 +128,32 @@ export const authService = {
 
         const createUser = await UsersDbRepository.createUser(newUser);
 
-        try {
-            const {email, emailConfirmation: { confirmationCode } } = newUser;
 
-            const existingSendEmail = await emailManagers.sendEmailRecoveryMessage(email, confirmationCode);
-
-            if (!existingSendEmail) {
-                await UsersDbRepository.deleteUser(String(createUser));
-
-                return {
-                    status: ResultStatus.BadRequest,
-                    extensions: {message: `${existingSendEmail} не получилось отправить сообщение`, field: `email`},
-                    data: null
+        const {email: userEmail, emailConfirmation: {confirmationCode}} = newUser;
+        //TODO: Переписать с async await, then..catch()
+        emailManagers.sendEmailRecoveryMessage(userEmail, confirmationCode)
+            .then(async (existingSendEmail) => {
+                if (!existingSendEmail) {
+                    await UsersDbRepository.deleteUser(String(createUser));
                 }
-            }
-        } catch( e: unknown) {
+                // return {
+                //     status: ResultSuccess.Success,
+                //     data: createUser
+                // }
+            })
+            .catch(async (e) => {
+                // console.error('Отправка сообщения произошла с ошибкой', e);
+                //
+                const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
+                //
+                // return {
+                //     status: ResultStatus.BadRequest,
+                //     extensions: {message: `Удаление юзера`, field: 'user'},
+                //     data: deleteUser
+                // }
+            })
 
-            console.error('Отправка сообщения произошла с ошибкой', e);
 
-            const deleteUser = await UsersDbRepository.deleteUser(String(createUser));
-
-            return {
-                status: ResultStatus.BadRequest,
-                extensions: {message: `Удаление юзера`, field: 'user'},
-                data: deleteUser
-            }
-        }
         return {
             status: ResultSuccess.Success,
             data: createUser
@@ -244,7 +251,7 @@ export const authService = {
                     data: null
                 }
             }
-        } catch (e: unknown){
+        } catch (e: unknown) {
 
             return {
                 status: ResultStatus.BadRequest,
