@@ -136,21 +136,9 @@ export const authService = {
                 if (!existingSendEmail) {
                     await UsersDbRepository.deleteUser(String(createUser));
                 }
-                // return {
-                //     status: ResultSuccess.Success,
-                //     data: createUser
-                // }
             })
             .catch(async (e) => {
-                // console.error('Отправка сообщения произошла с ошибкой', e);
-                //
                 await UsersDbRepository.deleteUser(String(createUser));
-                //
-                // return {
-                //     status: ResultStatus.BadRequest,
-                //     extensions: {message: `Удаление юзера`, field: 'user'},
-                //     data: deleteUser
-                // }
             })
 
 
@@ -245,18 +233,8 @@ export const authService = {
             .then(async (sendEmail) => {
             if (!sendEmail) {
                 await UsersDbRepository.deleteUser(String(searchEmail.id));
-                // return {
-                //     status: ResultStatus.BadRequest,
-                //     extensions: {message: '[authService] ошибка при повторной отправке письма', field: 'email'},
-                //     data: null
-                // }
             }
         }).catch(async (e: unknown) => {
-            // return {
-            //     status: ResultStatus.BadRequest,
-            //     extensions: {message: '[emailManagers]', field: 'ошибка email ' + String(e)},
-            //     data: null
-            // }
         })
 
         return {
