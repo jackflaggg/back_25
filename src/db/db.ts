@@ -10,7 +10,7 @@ import {superConfig} from "../config";
 import mongoose from "mongoose";
 
 export const mongoURI = superConfig.databaseUrl;
-// const client: MongoClient = new MongoClient(mongoURI!);
+const client: MongoClient = new MongoClient(mongoURI!);
 
 export const database: Db = client.db(SETTINGS.DB_NAME);
 
@@ -23,7 +23,7 @@ export const sessionCollection = database.collection<SessionCollection>(SETTINGS
 
 export const connectToDB = async (port: number) => {
     try {
-        await mongoose.connect(mongoURI!)
+        await client.connect()
         console.log('connected to db')
     } catch (err) {
         console.error('Failed to connect to DB', err);
